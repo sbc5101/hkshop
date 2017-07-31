@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>商品详情</title>
+		<!--添加移动端的meta-->
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+	</head>
+	<body>
+		<div class="ds_layout">
+			<!--商品头部-->
+			<header class="ds_header">
+				<div class="ds_header_box">
+					<a href="javascript:;" class="icon_return"><img src="img/icon1.png"/></a>
+					<span>商品详情</span>
+					<!--<a href="javaxcript:;" class="icon_shoppingCar"><img src="img/icon2.png"/></a>
+					<a href="javaxsript:;" class="icon_share"><img src="img/icon3.png"/></a>-->
+				</div>
+			</header>
+			<!--轮播图区域-->
+			<div class="swiper-container" id="swiper_container">
+				<div class="swiper-wrapper">
+				      <div class="swiper-slide blue-slide">
+				         <div class="title"><img src="img/pic1.jpg" ></div>
+				      </div>
+				      <div class="swiper-slide red-slide">
+				         <div class="title"><img src="img/pic1.jpg" ></div>
+				      </div>
+				      <div class="swiper-slide orange-slide">
+				         <div class="title"><img src="img/pic1.jpg" ></div>
+				      </div>
+				      <div class="swiper-slide green-slide">
+				         <div class="title"><img src="img/pic1.jpg" ></div>
+				      </div>
+				      <div class="swiper-slide green-slide">
+				         <div class="title"><img src="img/pic1.jpg" ></div>
+				      </div>
+				</div>
+				    <!--分页器-->
+		        <div class="pagination"></div>
+		    </div>
+		    <!--商品描述-->
+		    <div class="goods_desc clearfix">
+		    	<div class="goods_desc_left clearfix">
+		    		<h3><span>【跨境商品】</span> 柏丽艾干红葡萄酒</h3>
+		    		<p>跨境独享价: &yen;<span>234.00</span></p>
+		    		<p>市场价: &yen;<span>560.00</span></p>
+		    	</div>
+		    	<div class="goods_desc_right">
+		    		<span>销量</span>
+		    		<span>3</span>
+		    	</div>
+		    </div>
+		    <!--税费区域-->
+		    <div class="tax">
+		    	<span>税费： 需缴纳21.00%跨境电商综合税（预计￥49.41）</span>
+		    </div>
+		    <!--税费的收取规则-->
+		    <div class="tax_rules">
+		    	<span class="tax_rule_btn">税费收取规则>></span>
+		    	<div class="rules_desc">
+		    		<div class="arrow"></div>
+		    		<!--规则说明-->
+		    		<div class="desc">
+		    			<p>税费=购买单价×件数×税率</p>
+                        <p>税费详情:</p>                                          
+                        <p>跨境电商综合税需按一般贸易增值税及消费税税额的70%征收:(如：100元葡萄酒)</p>
+                        <p>关税=100×0%(免关税)</p>
+                        <p>组成计税价格=(关税完税价格＋关税)÷(1－消费税税率)=(100＋0)÷(1－10%)=111.111</p>
+                        <p>增值税=组成计税价格×17%×70%=13.2222</p>
+                        <p>消费税=组成计税价格×10%×70%=7.7777 </p>
+                        <p>跨境电商综合税=关税(0)＋增值税(13.222)＋消费税(7.777)≈21</p>
+                        <p>【即:需缴纳21%跨境电商综合税】</p>
+                        <p>*单笔购买不含税不能超过1652元，含税不能超过2000元。</p>
+		    		</div>
+		    	</div>
+		    </div>
+		    <!--选择商品的规格和数量-->
+		    <div class="goods_select">
+		    	<span>请点击选择商品规格和数量</span>
+		    	<a href="javascript:;"><img src="img/icon7.png"/></a>
+		    </div>
+		    <!--香港名庄坊-->
+		    <div class="all_goods clearfix">
+		    	<div class="shop_logo f_left">
+		    		<img src="img/shop.png"/>
+		    	</div>
+		    	<div class="shop_goods f_left">
+		    		<p>香港名庄坊</p>
+		    		<p>全部商品28款</p>	
+		    	</div>
+		    </div>
+		    <!--查看全部商品和进入店铺-->
+		    <div class="check_allgoods clearfix">
+		    	<!--左侧的商品-->
+		    	<div class="left_shop">
+		    		<a href="javascript:;">查看全部商品</a>
+		    	</div>
+		    	<!--右侧的店铺-->
+		    	<div class="right_shop">
+		    		<a href="javascript:;">进入店铺</a>
+		    	</div>
+		    </div>
+		    <!--图文详情和评价-->
+		    <div class="details">
+		    	<!--图文详情和评价切换的按钮-->
+		    	<ul>
+		    		<li class="on">图文详情</li>
+		    		<li>评价</li>
+		    	</ul>
+		    </div>
+		    <!--图文详情和评价区域-->
+		    <div class="content">
+		    	<div class="content_area1">
+		    		
+		    	</div>
+		    	<div class="content_area2">
+		    		<!--评价区域-->
+		    		<div class="evaluate">
+		    			<ul class="evaluate_btn clearfix">
+		    				<li class="add">全部</li>
+		    				<li>好评(<span>0</span>)</li>
+		    				<li>中评(<span>0</span>)</li>
+		    				<li>差评(<span>0</span>)</li>	    				
+		    			</ul>
+		    			<!--评价列表-->
+		    			<ul class="evaluate_list">
+		    				<li>暂无评价</li>
+		    			</ul>
+		    		</div>
+		    	</div>
+		    </div>
+		    
+		    
+		    
+		</div>
+		<!--底部的区域-->
+		    <footer>
+		    	<ul class="footer_box clearfix">
+		    		<li>
+		    			<a href="javascript:;">
+		    				<img src="img/icon4select.png" alt="" class="shop_icon"/>
+		    				<span>店铺</span>
+		    			</a>
+		    		</li>
+		    		<li>
+		    			<a href="javascript:;" class="collect_btn">
+		    				<img src="img/icon5.png" alt="" class="collect_icon"/>
+		    				<span class="collect_yes">收藏</span>
+		    			</a>
+		    		</li>
+		    		<li>
+		    			<a href="javascript:;">
+		    				加入购物车
+		    			</a>
+		    		</li>
+		    		<li>
+		    			<a href="javascript:;">
+		    				 立即购买
+		    			</a>
+		    		</li>
+		    	</ul>
+		    </footer>
+		
+	</body>
+</html>
+<script type="text/javascript" src="js/swiper-3.4.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript">
+	//这是轮播图的js代码
+     var mySwiper = new Swiper('.swiper-container',{
+     pagination: '.pagination',
+     paginationClickable: true,
+     loop:true,
+     autoplay:2000
+     });
+     
+     	//让轮播图的图片高度和设备的宽度一致
+	 var w=window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+	 console.log(w);
+	 document.getElementById("swiper_container").style.height=w+"px";
+	 
+     
+     
+</script>

@@ -1,0 +1,56 @@
+/*设置主体的样式*/
+*,
+::before,
+::after{
+	margin: 0;
+	padding: 0;
+	/*去除苹果设备点击出现的背景灰色*/
+	-webkit-tap-highlight-color: transparent;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	/*这一行代码让html5的页面在ios下滚动的更加流畅*/
+	-webkit-overflow-scrolling: touch;
+}
+button{
+	outline: none;
+	border:none;
+}
+body{
+	font-size: 14px;
+	font-family: "MicroSoft YaHei" sans-serif ;
+	color: #333;
+	background: #efeeed;
+}
+a{
+	color: #333;
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: none;
+}
+ul{
+	list-style: none;
+}
+input{
+	/*border: none;
+	outline: none;*/
+	/*-webkit-appearance: none;*/
+}
+/*公共的样式*/
+/*左浮动*/
+.f_left{
+	float: left;
+}
+/*右浮动*/
+.f_right{
+	float: right;
+}
+.clearfix::before,
+.clearfix::after{
+	content: "";
+	line-height: 0;
+	height: 0;
+	display: block;
+	visibility: hidden;
+	clear: both;
+}

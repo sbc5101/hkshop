@@ -1,0 +1,251 @@
+body{
+	font-size: 0;
+}
+.contant{
+	overflow: hidden;
+}
+.notice{
+	height: 40px;
+	width: 100%;
+	background: #bdbdbd;
+	color: #fff;
+	text-align: center;
+	line-height: 40px;
+	font-size: 12px;
+}
+.swiper-container>.swiper-wrapper>.swiper-slide>img{
+	width: 100%;
+	display: block;
+}
+.swiper-container{
+	position: relative;
+	border-bottom: 1px solid #eee;
+}
+.swiper-pagination{
+	position: absolute;
+	bottom: 3px!important;
+	/*background: red;*/
+	z-index: 1000;
+}
+.swiper-pagination-bullet-active{
+	background: #dd153c!important;
+}
+/*商品*/
+.goods_CnName{
+	color: #dc143c;
+	font-size: 15px;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+.goods_EnName{
+	margin-left: 10px;
+	margin-top: 3px;
+}
+.goods_region{
+	font-size: 11px;
+	margin-left: 10px;
+	margin-top: 8px;
+}
+.goods_score{
+	width: 100%;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+.goods_score li{
+	float: left;
+}
+.goods_score li:nth-child(n+2){
+	margin-left: 10px;
+}
+.goods_score li span{
+	display: inline-block;
+	border: 1px solid gray;
+	font-size: 10px;
+	padding: 0px 6px;
+}
+.goods_score li span:first-child{
+	color: #dc143c;
+}
+.goods_score li span:last-child{
+	color: #717171;
+	border-left: none;
+	background: #eee;
+}
+.addToCar{
+	display: inline-block;
+	width: 100%;
+	-height: 90px;
+	position: relative;
+	padding: 0 10px;
+}
+.productPrice{
+	height: 20px;
+	font-size: 18px;
+	color: #757575;
+	float: right;
+	-margin-right: 10px;
+	margin: 14px 10px 10px 0px;
+}
+.AddCart{
+	width: 60%;
+	height: 40px;
+	display: inline-block;
+	float: right;
+	z-index: 2;
+	background: #fff;
+	clear: both;
+	font-size: 13px;
+	position: relative;
+}
+.icon_areas{
+	width: 100%;
+	height: 40px;
+	position: absolute;
+	bottom: 0;
+}
+.collect_icon,.msg{
+	display: inline-block;
+	width: 29px;
+	height: 32.5px;
+	position: absolute;
+	top: 3.75px;
+}
+.collect_icon{
+	left: 5%;
+}
+.msg{
+	left: 22%;
+}
+.addToCar{
+	position: relative;
+	overflow: hidden;
+}
+.AddCart_Btn{
+	float: left;
+	width: 70%;
+	line-height: 40px;
+	background: #d61d2c;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+	font-size: 17px;
+	color: #fff;
+}
+.addCart_num{
+	position: relative;
+	float: right;
+	width: calc(30% - 1px);
+	height: 40px;
+	margin-left: 1px;
+	background: #D61D2C;
+	border-top-right-radius: 4px;
+	border-bottom-right-radius:4px;
+}
+.quantity{
+	z-index: 1;
+	line-height: 40px;
+	color: #fff;
+	text-align: center;
+	font-size: 15px;
+	position: absolute;
+	width: 100%;
+	pointer-events: none;
+}
+.quantity_select{
+	height: 40px;
+	border: none;
+	-webkit-appearance: none;
+	color: #D61D2C;
+	background: #D61D2C;
+	position: absolute;
+	width: 100%;
+}
+.quantity_select option{
+	background: #fff;
+	color: #292B2D;
+}
+/*消息须知*/
+.message_information{
+	width: 100%;
+	-height: 74px;
+	background: #eee;
+	margin-top: 15px;
+}
+.message_information p{
+	font-size: 12px;
+	color: #757575;
+	padding: 0 10px;
+}
+.message_information a{
+	color: #dc143c;
+	font-size: 12px;
+	display: inline-block;
+	margin-left: 10px;
+	text-decoration: underline;
+}
+
+/*弹出框*/
+.msg_alert{
+	position: relative;
+	margin: 10px 0 0 -10px;
+	padding: 15px 30px;
+	width: calc(100% + 20px);
+	background: #eee;
+	display: none;
+}
+.proAlert{
+	
+}
+.proAlert_message{
+	text-align: center;
+	color: #292b2d;
+	font-size: 12px;
+}
+.proAlertForm{
+	margin-top: 12px;
+}
+/*提交的输入框*/
+.formWarp_input{
+	height: 36px;
+	display: inline-block;
+	width: calc(100% - 100px);
+	margin-bottom: 0;
+	padding: 0 14px;
+}
+.formWarp_btn{
+	position: relative;
+	float: right;
+	line-height: 36px;
+	color: #96979a;
+	font-size: 14px;
+	text-align: center;
+	background: rgba(0,0,0,0);
+}
+.formWarp_group{
+	margin-top: 15px;
+	width: 100%;
+}
+fieldset{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+}
+.formWarp_checkbox{
+	position: relative;
+	float: left;
+	height: 20px;
+	width: 20px;
+	border: 1px solid #e5e5e6;
+	background: #fff;
+}
+.formWarp_label{
+	margin-left: 5px;
+}
+.winemakerNotes p{
+	font-size: 13px;
+	color: #333333;
+	padding: 0 10px;
+}
+.rating_award ul li:nth-child(n+2){
+	margin-top: 22px;
+}

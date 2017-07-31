@@ -1,0 +1,77 @@
+{extend name="Public:public"}
+
+{block name="title"}
+	<title>修改管理员</title>
+{/block}
+
+{block name="crumbs"}
+	<li class="active">权限管理</li>
+	<li class="active">修改管理员</li>
+{/block}
+
+{block name="contents"}
+	<div class="panel panel-default bk-bg-white col-md-6 col-md-offset-3">
+		<div class="panel-heading bk-bg-white">
+			<h6><i class="fa fa-indent red"></i>修改会员</h6>							
+			<div class="panel-actions">
+				<a href="#" class="btn-minimize"><i class="fa fa-caret-up"></i></a>
+				<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
+			</div>
+		</div>
+		<div class="panel-body">
+			<form action="{:url('admin/member/action_rev_user')}" method="post">
+				<input type="hidden" name="id" value="{$data.id}">
+				<div class="form-group">
+					<label for="nf-user">用户名</label>
+					<input type="user" id="nf-user" value="{$data.user_name}" class="form-control" readonly>
+				</div>
+				<div class="form-group">
+					<label for="nf-user">昵称</label>
+					<input type="user" id="nf-user" name="nick_name" value="{$data.nick_name}" class="form-control">
+				</div>
+				<div class="form-group">
+				{eq name="$is_agent" value="0"}
+					<label for="nf-user">分润等级(*初次修改10分钟之内能再次修改)</label>
+					<select name="agent_id" class="form-control ">
+						<option value="" {eq name="$data.agent_id" value=""} selected {/eq}>	
+							请选择	
+						</option>
+						{eq name="$superior" value=""}
+						<option value="1" {eq name="$data.agent_id" value="1"} selected {/eq}>	
+							一级合伙人	
+						</option>
+						<option value="2" {eq name="$data.agent_id" value="2"} selected {/eq}>	
+							二级合伙人	
+						</option>
+						<option value="3" {eq name="$data.agent_id" value="3"} selected {/eq}>	
+							三级合伙人	
+						</option>
+						{/eq}
+						{neq name="$superior" value=""}
+						{eq name="$superior.agent_id" value="1"}
+						<option value="2" {eq name="$data.agent_id" value="2"} selected {/eq}>	
+							二级合伙人	
+						</option>
+						<option value="3" {eq name="$data.agent_id" value="3"} selected {/eq}>	
+							三级合伙人	
+						</option>
+						{/eq}
+						{eq name="$superior.agent_id" value="2"}
+						<option value="3" {eq name="$data.agent_id" value="3"} selected {/eq}>	
+							三级合伙人	
+						</option>
+						{/eq}
+						{/neq}
+					</select>
+				{else /}
+					<label for="nf-user">分润等级</label>
+					{eq name="$data.agent_id" value="1"} 一级合伙人 {/eq}
+					{eq name="$data.agent_id" value="2"} 二级合伙人 {/eq}
+					{eq name="$data.agent_id" value="3"} 三级合伙人 {/eq}
+				{/eq}
+				</div>
+				<button type="submit" class="btn btn-primary col-md-3 pull-right">确认</button>
+			</form>
+		</div>								
+	</div>
+{/block}

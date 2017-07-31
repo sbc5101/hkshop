@@ -1,0 +1,79 @@
+{extend name="Public:public"}
+
+{block name="title"}
+	<title>会员列表</title>
+{/block}
+
+{block name="crumbs"}
+	<li class="active">会员管理</li>
+	<li class="active">会员列表</li>
+{/block}
+
+{block name="contents"}
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<div class="panel panel-default bk-bg-white">
+			<div class="panel-heading bk-bg-white">
+				<h6><i class="fa fa-table red"></i><span class="break"></span>会员列表</h6>							
+				<div class="panel-actions">
+					<a href="#" class="btn-minimize"><i class="fa fa-caret-up"></i></a>
+					<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div id="datatable-editable_filter" class="dataTables_filter pull-right">
+					<form action="{:url('admin/member/users')}" method="get">
+						<label>
+							<input type="text" name="user_name" class="form-control" placeholder="按用户名搜索">
+						</label>
+						<button type="submit" class="btn btn-success">确定</button>
+					</form>
+				</div>
+				<div class="table-responsive" style="margin-top: 50px;">
+					<table class="table table-bordered table-striped" >
+						<thead>
+							<tr role="row">
+								<th>用户名</th>
+								<th>昵称</th>
+								<th>注册时间</th>
+								<th>登入ip</th>
+								<th>状态</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							{volist name="new_data" id="vo" empty="<tr><td colspan="6">暂无数据</td></tr>"}	
+							<tr class="gradeA odd" role="row">
+								<td>{$vo.username}</td>
+								<td>{$vo.nickname}</td> 
+								<td>{$vo.create_time}</td>
+								<td>{$vo.last_ip}</td>
+								{eq name="$vo.is_close" value="0"}
+								<td><span class="label label-success">正常</span></td>
+								{else \}
+								<td><span class="label label-warning">禁止</span></td>
+								{/eq}
+								<td class="actions">
+									<a href="{:url('admin/member/rev_user',['id' => $vo.id])}" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+									{eq name="$vo.is_close" value="0"}
+									<a href="{:url('admin/member/action_rev_status',['id' => $vo.id,'is_close' => $vo.is_close])}" title="禁止" onclick="return confirm('确认禁止？');return false;" class="on-default remove-row"><i class="glyphicon glyphicon-remove"></i></a>
+									{else \}
+									<a href="{:url('admin/member/action_rev_status',['id' => $vo.id,'is_close' => $vo.is_close])}" title="开启" onclick="return confirm('确认开启？');return false;" class="on-default remove-row"><i class="glyphicon glyphicon-ok"></i></a>
+									{/eq}
+								</td>
+							</tr>
+							{/volist}
+						</tbody>
+					</table>
+				</div>
+				<div class="row datatables-footer">
+					<div class="col-sm-12 col-md-6 col-md-offset-4">
+						<div class="dataTables_paginate paging_bs_normal" id="datatable-editable_paginate">
+							{$data->render()}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{/block}

@@ -1,0 +1,91 @@
+.container{
+	width: 100%;
+	max-width: 640px;
+	position: relative;
+	margin: 0 auto;
+	padding-bottom: 80px;
+	-webkit-overflow-scrolling: touch;
+}
+.title_bg{
+	width: 100%;
+	height: 4px;
+	background: #dc143c;
+}
+.logo_img{
+	margin-top: 108px;
+	height: 66.5px;
+	width: 100%;
+	text-align: center;
+}
+.logo_img img{
+	width: 214.5px;
+	height: 66.5px;
+}
+/*提交表单的区域*/
+.signWrap{
+	margin: 0 auto;
+	max-width: 400px;
+	padding: 0 15px;
+	margin-top: 77px;
+}
+.formWarp{
+	border: 0;
+	outline: 0;
+	display: block;
+}
+.login_email{
+	height: 47px;
+	border: 1px solid #ceced5;
+	width: 100%;
+	text-indent: 24px;
+	border-radius: 5px 5px 0px 0px;
+	border-bottom: 0px;
+}
+.login_pass{
+	height: 47px;
+	border: 1px solid #ceced5;
+	width: 100%;
+	text-indent: 24px;
+	border-radius: 0px 0px 5px 5px;
+}
+.forgot_pass{
+	display: inline-block;
+	float: right;
+	font-size: 14px;
+	color: #757575;
+	line-height: 40px;
+	margin-bottom: 15px;
+}
+.btn{
+	line-height: 55px;
+	border-radius: 4px;
+	display: block;
+	text-align: center;
+	font-size: 17px;
+	color: #fff;
+	width: 100%;
+	margin: 0 auto 10px;
+	border: none;
+	outline: none;
+	background: #dc143c;
+	margin-top: 23px;
+}
+.btn_fackbook{
+	line-height: 40px;
+	font-size: 14px;
+	text-decoration: underline;
+	text-align: center;
+	color: #b1b1b1;
+	display: block;
+}
+.join a{
+	width: 100%;
+	line-height: 55px;
+	background: #bee000;
+	text-align: center;
+	font-size: 17px;
+	border-radius: 5px;
+	display: inline-block;
+	color: #757575;
+	margin-top: 37px;
+}

@@ -1,0 +1,83 @@
+.payment_state{
+	height: 40px;
+	background: #eee;
+	width: 100%;
+	line-height: 40px;
+	color: #db1141;
+	text-indent: 24px;
+}
+/*酒品列表*/
+.wine_lists{
+	width: 100%;
+	height: 178px;
+}
+.wine_lists li{
+	width: 100%;
+	height: 100%;
+	border-bottom:1px solid #eee ;
+}
+.content_left{
+	height: 178px;
+	width: 38%;
+	float: left;
+	text-align: center;
+}
+.content_left img{
+	display: inline-block;
+	margin-top: 20px;
+}
+.content_right{
+	height: 178px;
+	width: 60%;
+	float: right;
+	margin-left: 2%;
+	
+}
+.goods_EnName{
+	margin-top: 20px;
+}
+.EN_mark{
+	color: #dd153a;
+}
+.EN_mark,.num_score{
+	float: left;
+	display: inline-block;
+	border: 1px solid #bfbfbf;
+	padding: 0px 6px;
+}
+.cancel_box{
+	margin-top: 6px;
+	height: 30px;
+}
+.cancel{
+	background: #bdbdbd;
+	color: #fff;
+	display: inline-block;
+	width: 65px;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 4px;
+	float: right;
+	margin-right: 15px;
+}
+.order_lists{
+	padding: 0px 10px;
+}
+.order_lists>p span{
+	color: #8b8b8b;
+}
+.purchase_list{
+	width: 100%;
+	-height: 104px;
+	background: #eee;
+	margin-top: 10px;
+}
+.purchase_list p{
+	padding: 0 10px;
+}
+.message{
+	font-size: 11px;
+	color: #9f9f9f;
+	text-align: center;
+	padding: 15px 0;
+}

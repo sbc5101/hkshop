@@ -1,0 +1,96 @@
+.goods_select_area{
+	width: 100%;
+	height: 40px;
+	background: #eee;
+}
+.total_num{
+	line-height: 40px;
+	margin-left: 10px;
+}
+.select_label{
+	display: inline-block;
+	float: right;
+	margin-right: 10px;
+	margin-top: 5.5px;
+	font-size: 15px;
+}
+.goods_select_area select{
+	padding: 5px;	
+}
+.goods_list_area{
+	width: 100%;
+	-height: 162px;
+}
+.goods_list_area li{
+	-height: 162px;
+	border-bottom: 1px solid #eee;
+}
+/*商品列表的图片和信息区域*/
+.goods_list_img{
+	float: left;
+	width: 34%;
+	-height: 162px;
+	-background: #fff;
+	text-align: center;
+	margin: 0px 2% 0px 2%;
+}
+.goods_list_img img{
+	display: inline-block;
+	margin-top: 10px;
+}
+.goods_list_desc{
+	float: right;
+	width: 60%;
+	margin-left: 2%;
+	-height: 162px;
+}
+/*商品的英文和中文名称*/
+.goods_desc_EnName{
+	padding-top: 12px;
+}
+.goods_desc_CnName{
+	padding-top: 5px;
+}
+/*得分*/
+.goods_desc_score{
+	padding:5px 0px ;
+}
+.goods_desc_score1,.goods_desc_score2{
+	float: left;
+	display: inline-block;
+	border: 1px solid #bdbdbd;
+	padding: 0 5px;
+}
+.goods_desc_score2{
+	border-left: none;	
+}
+/*价格*/
+.price_after{
+	color: #dc143c;
+}
+.price_before{
+	color: #808080;
+}
+/*购物车和收藏*/
+.bottom_area{
+	position: relative;
+	height: 19px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.goods_collect{
+	position: absolute;
+	width: 20px;
+	height: 18px;
+	right: 50px;
+}
+.goods_collect img,.goods_ToCar img{
+	width: 100%;
+	height: 100%;
+}
+.goods_ToCar{
+	position: absolute;
+	width: 20px;
+	height: 19px;
+	right: 13px;
+}

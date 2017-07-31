@@ -1,0 +1,51 @@
+{extend name="Public:public"}
+
+{block name="title"}
+	<title>添加分类</title>
+{/block}
+
+{block name="crumbs"}
+	<li class="active"><a href="{:url('admin/cates/index')}">分类管理</a></li>
+	<li class="active">添加分类</li>
+{/block}
+
+{block name="contents"}
+	<div class="panel panel-default bk-bg-white col-md-6 col-md-offset-3">
+		<div class="panel-heading bk-bg-white">
+			<h6><i class="fa fa-indent red"></i>添加分类</h6>							
+			<div class="panel-actions">
+				<a href="#" class="btn-minimize"><i class="fa fa-caret-up"></i></a>
+				<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
+			</div>
+		</div>
+		<div class="panel-body">
+			<form action="{:url('admin/cates/action_add_cate')}" method="post" enctype="multipart/form-data">
+				<div class="form-group">
+					<label for="nf-user">分类名称</label>
+					<input type="text" name="cname" class="form-control" value="" placeholder="请输入分类名">
+				</div>
+				<div class="form-group">
+					<label for="nf-password">分类路径</label>
+					<select name="pid" class="form-control">
+						<option value="0">顶级分类</option>
+						{volist name="data" id="vo"}
+						<option value="{$vo.id}">{$vo.new_path}</option>
+						{/volist}
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="nf-password">是否显示</label>
+					<select name="display" class="form-control">
+						<option value="0" selected>显示</option>
+						<option value="1">隐藏</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="nf-password">排序</label>
+					<input type="text" name="sort" class="form-control" value="0" maxlength="3">
+				</div>
+				<button type="submit" class="btn btn-primary col-md-3 pull-right">确认</button>
+			</form>
+		</div>								
+	</div>
+{/block}

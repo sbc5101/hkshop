@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:64:"D:\phpStudy\WWW\hkshop/application/shop\view\register\index.html";i:1501484309;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:64:"D:\phpStudy\WWW\hkshop/application/shop\view\register\index.html";i:1501492942;}*/ ?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -18,11 +18,11 @@
 			<div class="title"></div>
 			<div class="joinWrap">
 				<p class="join_title">Join WineBuyBuy.com</p>
-				<form action="" class="join_form">
-					<input type="text" class="first_name input_box" placeholder="First Name"/>
-					<input type="text" class="Last_name input_box" placeholder="Last Name"/>
-					<input type="email" class="join_email input_box" placeholder="Email"/>
-					<input type="password" class="join_pass input_box" placeholder="Password"/>
+				<form action="<?php echo url('shop/register/action_login'); ?>" method="post" class="join_form">
+					<input type="text" class="first_name input_box" name="first_name" placeholder="First Name"/>
+					<input type="text" name="last_name" class="Last_name input_box" placeholder="Last Name"/>
+					<input type="email" name="username" class="join_email input_box" placeholder="Email"/>
+					<input type="password" name="password" class="join_pass input_box" placeholder="Password"/>
 					<p class="notice">I acknowledge that I am at least 18 years old</p>
 					<button class="join_btn">Create Account</button>
 				</form>

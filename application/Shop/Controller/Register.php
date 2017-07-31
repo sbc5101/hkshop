@@ -44,8 +44,8 @@
 			    	'last name不能为空|请输入正确的last name'
 			    ],
 			    [
-				    'email',
-				    'require|email|unique:users,email',
+				    'username',
+				    'require|email|unique:users,username',
 				    '邮箱不能为空|邮箱格式不正确|邮箱地址已存在'
 			    ],
 			    [
@@ -58,7 +58,7 @@
 			    'first_name'  	=> $message['first_name'],
 			    'last_name'  	=> $message['last_name'],
 			    'password'   	=> $message['password'],
-			    'email'   		=> $message['email'],	
+			    'username'   		=> $message['username'],	
 			];
 
 			$validate = new Validate($rule);
@@ -68,17 +68,14 @@
 				return json(['code' => 400,'message' => $validate->getError()]);
 			}
 			// 定义数据
-			$data['password'] = md5($password);
+			$data['password'] = md5($message['password']);
 			$data['create_time'] = date('Y-m-d H:i:s',time());
-			$data['is_close'] = 0;
+			$data['is_close'] = 1;
 
 			$res = Db::name('users')
 					->insertGetId($data);
 			if($res){
-				Db::name('admin')
-					->where('id',$res['id'])
-					->update(['last_time' => date('Y-m-d H:i:s',time()),'last_ip' => $request->ip()]);
-				$this->success('注册成功！','index/index');
+				$this->success('注册成功！');
 			}else{
 				$this->error('注册失败！');
 			}

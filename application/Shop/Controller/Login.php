@@ -9,26 +9,34 @@
 
 	/**
 	* @Author: Yoshop
-	* 后台登入类
+	* 前台登入类
 	* @Date:   2017-07-19 15:38:14
 	* @Last Modified time: 2017-07-19 16:20:06
 	*/
 	class Login  extends Controller
 	{
+		/**
+		 * 跳转登入页面
+		 * @return [type] [description]
+		 */
 		public function index()
 		{
 			return $this->fetch('index');
 		}
 
+		/**
+		 * 用户执行登入
+		 * @return [type] [description]
+		 */
 		public function action_login()
 		{
 			$message = Request::instance()->post();
 			// 数据验证
 			$rule = [
 			    [
-			    	'name',
-			    	'require|/^[a-zA-Z0-9_]{3,16}$/',
-			    	'用户名不能为空|用户名由3到18位字母，数字或下划线组成'
+			    	'username',
+			    	'require|email',
+			    	'邮箱不能为空|邮箱格式不正确'
 			    ],
 			    [
 				    'password',
@@ -37,7 +45,7 @@
 			    ],
 			];
 			$data = [
-			    'name'  => $message['name'],
+			    'username'  => $message['username'],
 			    'password'   => $message['password'],
 			];
 
@@ -45,28 +53,31 @@
 			$result   = $validate->check($data);
 
 			if(!$result){
-			    $this->error($validate->getError());
+			    return json(['code' => 400,'message' => $validate->getError()]);
 			}
 
-			$res = Db::name('admin')
-					->field('id,user_name,rule_id')
-					->where('user_name',$message['name'])
+			$res = Db::name('users')
+					->field('id,username,first_name,last_name')
+					->where('username',$message['username'])
 					->where('password',md5($message['password']))
 					->find();
 			$request = Request::instance();
-			if($res){
-				Db::name('admin')
+			if(!empty($res)){
+				Db::name('users')
 					->where('id',$res['id'])
-					->update(['last_time' => date('Y-m-d H:i:s',time()),'last_ip' => $request->ip()]);
+					->update([
+							'last_time' => date('Y-m-d H:i:s',time()),
+							'last_ip' 	=> $request->ip(),
+							]);
 
 				// 设置session
-				Session::set('user.id', $res['id'],'admin_user');
-				Session::set('user.name', $res['user_name'],'admin_user');
-				Session::set('user.rule', $res['rule_id'],'admin_user');
-
-				$this->success('登录成功！','index/index');
+				Session::set('user.id', $res['id'],'shop_user');
+				Session::set('user.name', $res['username'],'shop_user');
+				Session::set('user.first_name', $res['first_name'],'shop_user');
+				Session::set('user.last_name', $res['last_name'],'shop_user');
+				return json(['code' => 200,'message' => '登录成功！','data' => ['access_token' => md5($res['id'])]]);
 			}else{
-				$this->error('用户名或密码错误！');
+				return json(['code' => 400,'message' => '用户账户或密码错误']);
 			}
 		}
 	}

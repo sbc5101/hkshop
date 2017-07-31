@@ -1,0 +1,73 @@
+.container{
+	width: 100%;
+	max-width: 640px;
+	position: relative;
+	margin: 0 auto;
+	-webkit-overflow-scrolling: touch;
+}
+.joinWrap{
+	margin: 0 auto;
+	padding: 15px 10px 80px;
+	max-width: 400px;	
+}
+.title{
+	width: 100%;
+	height: 4px;
+	background: #dc143c;
+}
+.join_title{
+	font-size: 17px;
+	line-height: 40px;
+	color: #555559;
+}
+.input_box{
+	width: 100%;
+	display: block;
+	line-height: 48px;
+	font-size: 12px;
+	text-indent: 24px;
+	border:1px solid #ceced5;
+}
+.first_name,.Last_name,.join_email,.join_pass{
+	border-radius: 5px 5px 5px 5px;
+}
+.Last_name,.join_email,.join_pass{
+	margin-top: 2px;
+}
+.notice{
+	font-size: 13px;
+	color: #303239;
+	text-align: center;
+	margin: 35px 0 15px;
+}
+.join_btn{
+	line-height: 55px;
+	text-align: center;
+	width: 100%;
+	display: block;
+	border-radius: 4px;
+	font-size: 17px;
+	background: #dc143c;
+	color: #fff;
+}
+.joinByFacebook{
+	display: block;
+	text-align: center;
+	line-height: 40px;
+	font-size: 16px;
+	margin: 20px 0;
+	text-decoration: underline;
+}
+.join_other{
+	margin-top: 25px;
+}
+.join_other a{
+	display: block;
+	font-size: 14px;
+	text-align: center;
+	color: #292b2d;
+	line-height: 40px;
+}
+.join_blue{
+	color: #dc143c;
+}

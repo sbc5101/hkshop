@@ -11,11 +11,11 @@
 	use app\shop\controller\Base;
 	// use think\Cache;
 
-	class Index extends Base
+	class Order extends Base
 	{
-		public function index()
+		public function order_detail()
 		{
-			return $this->fetch('index');
+			return $this->fetch('order_detail');
 		}
 
 	}

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>分类列表</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    	<meta name="apple-mobile-app-capable" content="yes">
+    	<meta name="description" content="">
+    	<meta name="keywords" content="">
+    	<meta http-equiv="Cache-Control" content="no-siteapp">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		{css href="/public/shop/css/base.css"}
+		{css href="/public/shop/css/index.css"}
+		{css href="/public/shop/css/category.css"}
+		
+		<!--<link rel="stylesheet" type="text/css" href="css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="css/category.css"/>-->
+	</head>
+	<body style="background: #fff;">
+		<div class="container">
+			<div class="alert_box">
+				<section class="searchBar">
+					<form class="formWarp clearfix" action="/serach">
+						<label class="select_label">
+							<span class="select_labelText">Ship to:</span>
+							<select class="selectContent">
+								<option value="DL">DL</option>
+								<option value="HK" selected="selected">HK</option>
+								<option value="TW">TW</option>
+							</select>
+						</label>
+						<div class="search_box">
+							<input class="search_input" type="search" placeholder="Search Wine Buy Buy.com" />
+						</div>
+					</form>
+				</section>
+				<!--分类的列表-->
+				<ul class="type_list">
+					<li class="on">VARIETAL</li>
+					<li>REGION</li>
+					<li>SPECIALS</li>
+					<li>PRO-SEARCH</li>					
+				</ul>
+				<!--分类的内容区域-->
+				<div class="content">
+					<div class="content_area1">
+						<!--Red Wine-->
+						<p class="wine1">RED WINE</p>
+						<ul>
+							<li>
+								<a href="###">
+									<span>Bordeaux Blends</span>
+								</a>
+							</li>
+							<li>
+								<a href="###">
+									<span>Cabernet Sauvignon</span>
+									
+								</a>
+							</li>
+							<li>
+								<a href="###">
+									<span>Merlot</span>
+								</a>
+							</li>
+							<li>
+								<a href="###">
+									<span>Pinot Noir</span>
+								</a>
+							</li>
+							<li>
+								<a href="###">
+									<span>Other Red Blends</span>
+								</a>
+							</li>
+							<li>
+								<a href="###">
+									<span>Sangiovese</span>
+								</a>
+							</li>
+							<li>
+								<a href="###">
+									<span>Syrah/ Shiraz</span>
+								</a>
+							</li>
+							<li>
+								<a href="###">
+									<span>Pinot Gris / Grigio</span>
+								</a>
+							</li>
+						</ul>
+						<!---->
+						<ul>
+							<li></li>
+						</ul>
+					</div>
+					<div class="content_area2">区域2</div>
+					<div class="content_area3">区域3</div>
+					<div class="content_area4">区域4</div>
+				</div>
+			</div>
+			<!--头部的红色线-->
+			<div class="top">
+				
+			</div>
+			<!--头部的区域-->
+			<header>
+				<div class="menu">
+					<img src="/public/shop/img/icon1.png" alt="" class="anniu"/>
+				</div>
+				<div class="logo_area">
+					<img src="/public/shop/img/logo.png" alt="" />
+				</div>
+				<div class="right_box">
+					<div class="center">
+						<a href="personal_center.html">
+							<img src="/public/shop/img/icon2.png" alt="" />
+						</a>						
+					</div>
+					<div class="cart">
+						<a href="shopping_cart.html">
+							<span style="display: inline-block;padding-left: 5px;font-weight: bold;color: #dc143c;">9</span>
+						</a>
+					</div>
+				</div>
+			</header>
+			<!--商品的列表区域-->
+			<div class="contant">
+				<div class="goods_select_area clearfix">
+					<span class="total_num">999 items</span>
+					<label class="select_label">sort:
+					<select name="" id="">
+						<option value="Top Rated">Top Rated</option>
+						<option value="Most Popular" selected="selected">Most Popular</option>
+						<option value="Savings">Savings</option>
+						<option value="Price:Low to High">Price:Low to High</option>
+						<option value="Price:High to Low">Price:High to Low</option>						
+					</select>
+					</label>
+				</div>
+				<!--商品的列表-->
+				<ul class="goods_list_area">
+					<!--动态生成上商品列表-->
+					<li class="clearfix">
+						<div class="goods_list_img">
+							<img src="img/goods_img1.png" alt="" />
+						</div>
+						<div class="goods_list_desc">
+							<p class="goods_desc_EnName">Screaming Eagle Cabernet Sauvignon</p>
+							<p class="goods_desc_CnName">啸鹰赤霞珠</p>
+							<p class="goods_desc_score clearfix">
+								<span class="goods_desc_score1">WE</span>
+								<span class="goods_desc_score2">96</span>
+							</p>
+							<p class="goods_price">
+								<span class="price_after">HK$ 8888</span>
+								<span class="price_before">HK$ 9999</span>
+							</p>
+							<div class="bottom_area">
+								<div class="goods_collect">
+									<img src="/public/shop/img/icon4.png" alt="收藏" />
+								</div>
+								<div class="goods_ToCar">
+									<img src="/public/shop/img/icon6.png" alt="购物车" />
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="clearfix">
+						<div class="goods_list_img">
+							<img src="img/goods_img1.png" alt="" />
+						</div>
+						<div class="goods_list_desc">
+							<p class="goods_desc_EnName">Screaming Eagle Cabernet Sauvignon</p>
+							<p class="goods_desc_CnName">啸鹰赤霞珠</p>
+							<p class="goods_desc_score clearfix">
+								<span class="goods_desc_score1">WE</span>
+								<span class="goods_desc_score2">96</span>
+							</p>
+							<p class="goods_price">
+								<span class="price_after">HK$ 8888</span>
+								<span class="price_before">HK$ 9999</span>
+							</p>
+							<div class="bottom_area">
+								<div class="goods_collect">
+									<img src="img/icon4.png" alt="收藏" />
+								</div>
+								<div class="goods_ToCar">
+									<img src="img/icon6.png" alt="购物车" />
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>
+{js href="/public/shop/js/jquery-3.1.1.min.js"}
+{js href="/public/shop/js/index.js"}
+<!--<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>-->

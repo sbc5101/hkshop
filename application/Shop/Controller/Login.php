@@ -1,5 +1,5 @@
 <?php
-	namespace app\admin\controller;
+	namespace app\shop\controller;
 
 	use think\Controller;
 	use think\Db;
@@ -19,9 +19,9 @@
 		 * 跳转登入页面
 		 * @return [type] [description]
 		 */
-		public function index()
+		public function login()
 		{
-			return $this->fetch('index');
+			return $this->fetch('login');
 		}
 
 		/**

@@ -1,7 +1,7 @@
 <?php
 	/**
 	* @Author: Yoshop
-	* 后台首页类
+	* 商品类
 	* @Date:   2016-12-29 15:38:14
 	* @Last Modified time: 2016-12-29 16:20:06
 	*/
@@ -11,11 +11,11 @@
 	use app\shop\controller\Base;
 	// use think\Cache;
 
-	class Index extends Base
+	class Goods extends Base
 	{
-		public function index()
+		public function goods_detail()
 		{
-			return $this->fetch('index');
+			return $this->fetch('goods_detail');
 		}
 
 	}

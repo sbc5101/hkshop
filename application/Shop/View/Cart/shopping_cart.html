@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>购物车</title>
+		<!--优先使用IE最新版本和Chrome-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<!-- 是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏 -->
+    	<meta name="apple-mobile-app-capable" content="yes">
+    	<!-- 页面描述 -->
+    	<meta name="description" content="">
+    	<!-- 页面关键词 -->
+    	<meta name="keywords" content="">
+    	<!--禁止百度转码-->
+    	<meta http-equiv="Cache-Control" content="no-siteapp">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		{css href="/public/shop/css/base.css"}
+		{css href="/public/shop/css/index.css"}
+		{css href="/public/shop/css/shopping_cart.css"}
+		
+		<!--<link rel="stylesheet" type="text/css" href="css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="css/shopping_cart.css"/>-->
+	</head>
+	<body style="background: #fff;">
+		<div class="container">
+			<!--弹出的区域-->
+			<div class="alert_box">
+				<section class="searchBar">
+					<form class="formWarp clearfix" action="/serach">
+						<label class="select_label">
+							<span class="select_labelText">Ship to:</span>
+							<select class="selectContent">
+								<option value="DL">DL</option>
+								<option value="HK" selected="selected">HK</option>
+								<option value="TW">TW</option>
+							</select>
+						</label>
+						<div class="search_box">
+							<input class="search_input" type="search" placeholder="Search Wine Buy Buy.com" />
+						</div>
+					</form>
+				</section>
+				<!--分类的列表-->
+				<ul class="type_list">
+					<li class="on">VARIETAL</li>
+					<li>REGION</li>
+					<li>SPECIALS</li>
+					<li>PRO-SEARCH</li>					
+				</ul>
+				<!--分类的内容区域-->
+				<div class="content">
+					<div class="content_area1">
+						<!--Red Wine-->
+						<p class="wine1">RED WINE</p>
+						<ul>
+							<li>
+								<a href="###">
+									<span>Bordeaux Blends</span>
+								</a>
+							</li>
+							<li>
+								<a href="###">
+									<span>Cabernet Sauvignon</span>
+									
+								</a>
+							</li>
+							<li>
+								<a href="###">
+									<span>Merlot</span>
+								</a>
+							</li>
+							<li>
+								<a href="###">
+									<span>Pinot Noir</span>
+								</a>
+							</li>
+							<li>
+								<a href="###">
+									<span>Other Red Blends</span>
+								</a>
+							</li>
+							<li>
+								<a href="###">
+									<span>Sangiovese</span>
+								</a>
+							</li>
+							<li>
+								<a href="###">
+									<span>Syrah/ Shiraz</span>
+								</a>
+							</li>
+							<li>
+								<a href="###">
+									<span>Pinot Gris / Grigio</span>
+								</a>
+							</li>
+						</ul>
+						<!---->
+						<ul>
+							<li></li>
+						</ul>
+					</div>
+					<div class="content_area2">区域2</div>
+					<div class="content_area3">区域3</div>
+					<div class="content_area4">区域4</div>
+				</div>
+			</div>
+			<!--头部红色线条-->
+			<div class="top">
+				
+			</div>
+			<!--头部的区域-->
+			<header>
+				<div class="menu">
+					<img src="/public/shop/img/icon1.png" alt="" class="anniu"/>
+				</div>
+				<div class="logo_area">
+					<a href="index.html">
+						<img src="/public/shop/img/logo.png" alt="" />
+					</a>
+				</div>
+				<div class="right_box">
+					<div class="center">
+						<a href="personal_center.html">
+							<img src="/public/shop/img/icon2.png" alt="" />
+						</a>
+					</div>
+					<div class="cart">
+						<a href="shopping_cart.html">
+							<span style="display: inline-block;padding-left: 5px;font-weight: bold;color: #dc143c;">9</span>
+						</a>
+					</div>
+				</div>
+			</header>
+			<!--内容的主体部分-->
+			<div class="contant">
+				<div class="cart_title">
+					SHOPPING CART (<span>0</span>)
+				</div>
+				<div class="goods_cart">
+					<!--没有商品的情况-->
+					<div class="no_goods">
+						<p>Your cart is empty~</p>
+						<div class="goShopping">
+							Go Shopping
+						</div>
+					</div>
+					<!--有商品的情况-->
+					<div class="has_goods">
+						<ul>
+							<!--动态创建购物车的列表-->
+							<li class="clearfix">
+								<!--左侧的图片-->
+								<div class="has_good_left f_left">
+									<img src="/public/shop/img/goods_img1.png"/>
+								</div>
+								<!--右侧的详情区域-->
+								<div class="has_goods_right f_right">
+									<p class="goods_EnName">Screaming Eagle Cabernet Sauvignon</p>
+									<p class="goods_CnName">啸鹰赤霞珠</p>
+									<p class="goods_score clearfix">
+										<span class="score_En">WE</span>
+										<span>96</span>
+									</p>
+									<p class="price_box clearfix">
+										<select class="select_box f_left">
+											
+										</select>
+										<span class="f_left">@ HK$8888</span>
+										<span class="totalPrice">HK$ <span>8888</span></span>
+									</p>
+									<p class="wish_box clearfix">
+										<a href="###">
+											Move To Wish List
+										</a>
+									</p>
+								</div>
+							</li>
+						</ul>
+						<!--取货方式-->
+						<div class="payment_options">
+							<h3>PAYMENT OPTIONS*</h2>
+							<ul class="options_list clearfix">
+								<li >Face to Pay</li>
+								<li>Bank Transfer</li>
+							</ul>
+						</div>
+						<!--收货方式-->
+						<div class="receive_options">
+							<h3>RECEIVING OPTIONS*</h2>
+							<ul class="receive_list">
+								<li >Since Mentioning</li>
+								<li>Express Delivery</li>
+								<li>Subway delivery</li>								
+							</ul>
+						</div>
+						<div class="receive_box">
+							<div class="receive_content1">
+								<div class="triangle triangle1">
+									
+								</div>
+								<form action="">
+									<label>
+										<input type="radio" name="shop" /> CityNoble A Shop <span style="color: #bebebe;">(852) 28181818 
+										Shop D.G/F.City Center Building 145-146 Gloucester Road.Wan chai</span>
+									</label> 
+									<label>
+										<input type="radio"  name="shop" /> CityNoble A Shop<span style="color: #bebebe;">(852) 28181818 
+										Shop D.G/F.City Center Building 145-146 Gloucester Road.Wan chai</span>
+									</label>
+									<label>
+										<input type="radio"  name="shop" /> CityNoble A Shop<span style="color: #bebebe;">(852) 28181818 
+										Shop D.G/F.City Center Building 145-146 Gloucester Road.Wan chai</span>
+									</label>
+									<input class="user_name" type="text" placeholder="Fanny Sun"/>
+									<input class="user_mail" type="email" placeholder="Fanny@hotmail.com"/>
+								</form>
+								<div class="service_time">
+									*Service time: from 9:00am to 20:00pm
+								</div>
+							</div>
+							<div class="receive_content2">
+								<div class="triangle triangle2">
+									
+								</div>
+								我是第二块
+							</div>
+							<div class="receive_content3">
+								<div class="triangle triangle3">
+									
+								</div>
+								我是第三块
+							</div>
+						</div>
+						<!--商品总共的数量详情-->
+						<div class="purchase_detail">
+							<p style="text-align: right;padding-top: 15px;">Order Summary</p>
+							<p style="text-align: right;">Subtotal: <strong style="color: #dd153c;">HK$ <span>8888</span></strong></p>
+							<p style="text-align: right;">Shipping & Handling: <strong style="color: #dd153c;">HK$ <span>0</span></strong></p>
+							<p class="clearfix" style="padding-bottom: 5px;">
+								<span style="float: left;">1item</span>
+								 <strong style="float: right;color: #dd153c;">Total:HK$<span>8888</span></strong>
+							</p>
+						</div>
+						<!--结账的按钮-->
+						<div class="check_out">
+							<a href="###">
+								Check Out
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+{js href="/public/shop/js/jquery-3.1.1.min.js"}
+{js href="/public/shop/js/index.js"}
+<!--<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript">
+	$(function(){
+		if($(".goods_cart").html()==null){
+			$(".goods_cart").html("Your cart is empty~");
+		}
+		for(var i=1;i<=30;i++){
+			var opt=document.createElement("option");
+			opt.value=i;
+			opt.innerHTML=i;
+			$(".select_box").append(opt);
+		}
+		//交货切换
+		
+		$(".options_list li").click(function(){
+			
+			var index=$(this).index();
+			$(this).addClass("selected").siblings().removeClass("selected");
+		})
+		//取货切换
+		$(".receive_list li").click(function(){
+			
+			var index2=$(this).index();
+			$(this).addClass("selected2").siblings().removeClass("selected2");
+			if(index2==0){
+				$(".receive_content1").fadeIn(200).siblings().hide();
+			}else if(index2==1){
+				$(".receive_content2").fadeIn(200).siblings().hide();
+			}else if(index2==2){
+				$(".receive_content3").fadeIn(200).siblings().hide();
+			}
+		})
+	})
+</script>

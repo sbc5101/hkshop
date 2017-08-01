@@ -6,9 +6,9 @@
 	* @Last Modified time: 2016-12-31 16:20:06
 	*/
 
-	namespace app\admin\controller;
+	namespace app\shop\controller;
 
-	use app\admin\controller\Base;
+	use app\shop\controller\Base;
 	// use think\Validate;
 	use think\Db;
 	use think\Request;
@@ -23,32 +23,9 @@
 		 * 分类列表列
 		 * @return [type]      [分类数据]
 		 */
-		public function index()
+		public function cate_list()
 		{
-			$data = self::cate_route_str('cates','cate');
-			if(empty(Session::get('cate'))){
-				$root = [];
-				$r = 0;
-				foreach ($data as $v) {
-					if($v['pid'] == 0){
-						$root[$r] = $v;
-						$r++;
-					}
-				}
-				foreach ($root as $k => $v) {
-					$this->result[$this->n] = $v;
-					$this->n += 1;
-					$this->sort_cate($v);
-				}
-				$result = $this->result;
-				Session::set('cate',$this->result);
-			}else{
-				$result = Session::get('cate');
-			}
-
-			$empty = "<tr><td colspan='4' align='center'><h5>暂无数据</h5></td><td><a class='btn btn-info'";
-
-			return $this->fetch('index',['data' => $result,'empty' => $empty]);
+			return $this->fetch('cate_list');
 		}
 
 		public function sort_cate($root)

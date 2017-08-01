@@ -1,43 +1,26 @@
 <?php
-	namespace app\admin\controller;
+	namespace app\shop\controller;
 
-	use app\admin\controller\Base;
+	use app\shop\controller\Base;
 	use think\Validate;
 	use think\Db;
 	use think\Request;
 	/**
 	* @Author: Yoshop
-	* 后台会员管理类
+	* 个人中心类
 	* @Date:   2016-12-30 15:38:14
 	* @Last Modified time: 2016-12-30 16:20:06
 	*/
 	class Member extends Base 
 	{
 		/**
-		 * 后台会员列表
+		 * 个人中心
 		 * @return [type] [后台会员数据]
 		 */
-		public function users()
+		public function personal_center()
 		{
-			// 接收数据
-			$name 		= Request::instance()->get('username');
-			$user_name = empty($name) ? '' : 'username like "%'.$name.'%"';
-	
-			$data = Db::name('users')
-					->where($user_name)
-					->order('id','desc')
-					->paginate(20,false,[
-						'query' => [
-							'username' => $name,
-							],
-						]);
-			$new_data = [];
-			if(!empty($data)){
-				foreach ($data as $k => $v) {
-					$new_data[$k] = $v;
-				}
-			}
-			return $this->fetch('users',['data' => $data,'new_data' => $new_data]);
+			
+			return $this->fetch('personal_center');
 		}
 
 		/**

@@ -1,7 +1,7 @@
 <?php
 	/**
 	* @Author: Yoshop
-	* 后台首页类
+	* 购物车类
 	* @Date:   2016-12-29 15:38:14
 	* @Last Modified time: 2016-12-29 16:20:06
 	*/
@@ -11,11 +11,11 @@
 	use app\shop\controller\Base;
 	// use think\Cache;
 
-	class Index extends Base
+	class Cart extends Base
 	{
-		public function index()
+		public function shopping_cart()
 		{
-			return $this->fetch('index');
+			return $this->fetch('shopping_cart');
 		}
 
 	}

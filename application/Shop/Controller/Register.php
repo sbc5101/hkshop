@@ -58,7 +58,7 @@
 			    'first_name'  	=> $message['first_name'],
 			    'last_name'  	=> $message['last_name'],
 			    'password'   	=> $message['password'],
-			    'username'   		=> $message['username'],	
+			    'username'   		=> $message['email'],	
 			];
 
 			$validate = new Validate($rule);
@@ -70,17 +70,17 @@
 			// 定义数据
 			$data['password'] = md5($message['password']);
 			$data['create_time'] = date('Y-m-d H:i:s',time());
-			$data['is_close'] = 0;
+			$data['is_close'] = 1;
 
 			$res = Db::name('users')
 					->insertGetId($data);
 			if($res){
 				// 设置session
-				Session::set('user.id', $res['id'],'shop_user');
-				Session::set('user.name', $res['username'],'shop_user');
-				Session::set('user.first_name', $res['first_name'],'shop_user');
-				Session::set('user.last_name', $res['last_name'],'shop_user');
-				return json(['code' => 200,'message' => 'success','data' => ['access_token' => md5($res['id'])]]);
+				Session::set('user.id', $res,'shop_user');
+				Session::set('user.name', $message['email'],'shop_user');
+				Session::set('user.first_name', $message['first_name'],'shop_user');
+				Session::set('user.last_name', $message['last_name'],'shop_user');
+				return json(['code' => 200,'message' => 'success','data' => ['access_token' => md5($res)]]);
 			}else{
 				return json(['code' => 400,'message' => 'error']);
 			}

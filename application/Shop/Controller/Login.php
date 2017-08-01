@@ -75,9 +75,9 @@
 				Session::set('user.name', $res['username'],'shop_user');
 				Session::set('user.first_name', $res['first_name'],'shop_user');
 				Session::set('user.last_name', $res['last_name'],'shop_user');
-				return json(['code' => 200,'message' => '登录成功！','data' => ['access_token' => md5($res['id'])]]);
+				return json(['code' => 200,'message' => 'success','data' => ['access_token' => md5($res['id'])]]);
 			}else{
-				return json(['code' => 400,'message' => '用户账户或密码错误']);
+				return json(['code' => 400,'message' => 'false']);
 			}
 		}
 	}

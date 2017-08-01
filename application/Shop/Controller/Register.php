@@ -75,14 +75,15 @@
 			$res = Db::name('users')
 					->insertGetId($data);
 			if($res){
-				$this->success('注册成功！');
+				// 设置session
+				Session::set('user.id', $res['id'],'shop_user');
+				Session::set('user.name', $res['username'],'shop_user');
+				Session::set('user.first_name', $res['first_name'],'shop_user');
+				Session::set('user.last_name', $res['last_name'],'shop_user');
+				return json(['code' => 200,'message' => 'success','data' => ['access_token' => md5($res['id'])]]);
 			}else{
-				$this->error('注册失败！');
+				return json(['code' => 400,'message' => 'error']);
 			}
 		}
 
-		// // 设置session
-		// Session::set('user.id', $res['id'],'admin_user');
-		// Session::set('user.name', $res['user_name'],'admin_user');
-		// Session::set('user.rule', $res['rule_id'],'admin_user');
 	}

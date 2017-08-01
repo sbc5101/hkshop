@@ -21,16 +21,20 @@
 		<div class="panel-body">
 			<form action="{:url('admin/member/action_add_user')}" method="post">
 				<div class="form-group">
-					<label for="nf-user">用户名</label>
-					<input type="user" id="nf-user" name="user_name" class="form-control" placeholder="请输入用户名">
+					<label>First name</label>
+					<input type="text" name="first_name" class="form-control" placeholder="请输入姓">
 				</div>
 				<div class="form-group">
-					<label for="nf-password">密码</label>
-					<input type="password" id="nf-password" name="password" class="form-control" placeholder="请输入密码">
+					<label>Last name</label>
+					<input type="text" name="last_name" class="form-control" placeholder="请输入名">
 				</div>
 				<div class="form-group">
-					<label for="nf-password">确认密码</label>
-					<input type="password" id="nf-password" name="repassword" class="form-control" placeholder="请再次输入密码">
+					<label>用户名</label>
+					<input type="text" name="username" class="form-control" placeholder="请输入邮箱账户">
+				</div>
+				<div class="form-group">
+					<label>密码</label>
+					<input type="text" name="password" class="form-control" placeholder="请输入密码">
 				</div>
 				<button type="submit" class="btn btn-primary col-md-3 pull-right">确认</button>
 			</form>

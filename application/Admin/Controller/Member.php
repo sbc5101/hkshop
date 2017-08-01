@@ -58,46 +58,49 @@
 
 			// 数据验证
 			$rule = [
-				 [
-			    	'name',
-			    	'require|/^[a-zA-Z0-9_]{3,18}$/|unique:users,user_name',
-			    	'用户名不能为空|用户名由3到18位字母，数字或下划线组成|用户名已存在'
+			    [
+			    	'first_name',
+			    	'require|chsAlpha',
+			    	'first name不能为空|请输入正确的first name'
+			    ],
+			    [
+			    	'last_name',
+			    	'require|chsAlpha',
+			    	'last name不能为空|请输入正确的last name'
+			    ],
+			    [
+				    'username',
+				    'require|email|unique:users,username',
+				    '邮箱不能为空|邮箱格式不正确|邮箱地址已存在'
 			    ],
 			    [
 				    'password',
 				    'require|/^[a-zA-Z0-9_]{6,18}$/ ',
-				    '密码不能为空|由6到18位字母，数字或下划线组成'
-			    ],
-			    [
-			    	'repassword',
-			    	'require|confirm:password',
-			    	'确认密码不能为空|两边密码不一致'
+				    '密码不能为空|密码由6到18位字母，数字或下划线组成'
 			    ],
 			];
 			$data = [
-			    'name'   => $message['user_name'],
-			    'password'   => $message['password'],
-			    'repassword'   => $message['repassword'],
+			    'first_name'  	=> $message['first_name'],
+			    'last_name'  	=> $message['last_name'],
+			    'password'   	=> $message['password'],
+			    'username'   	=> $message['username'],	
 			];
 
 			$validate = new Validate($rule);
 			$result   = $validate->check($data);
 
 			if(!$result){
-			    $this->error($validate->getError());
+				$this>error($validate->getError());
 			}
-		
-			// 生成插入数据
-			$new_data = [
-				'user_name' => $message['user_name'],
-				'password' 	=> md5($message['password']),
-				'create_time' 	=> date('Y-m-d H:i:s',time()),
-			];
-	
+			// 定义数据
+			$data['password'] = md5($message['password']);
+			$data['create_time'] = date('Y-m-d H:i:s',time());
+			$data['is_close'] = 0;
+
 			$res = Db::name('users')
-					->insert($new_data);
+					->insertGetId($data);
 			if($res){
-				$this->run_log('添加会员用户数据操作。'.$message['user_name']);
+				$this->run_log('添加会员用户数据操作。'.$message['username']);
 				$this->success('添加用户成功','member/users');
 			}else{
 				$this->error('添加用户失败');

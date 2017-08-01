@@ -1,0 +1,54 @@
+{extend name="Public:public"}
+
+{block name="title"}
+	<title>导入商品</title>
+{/block}
+
+{block name="crumbs"}
+	<li class="active"><a href="{:url('admin/goods/index')}">商品管理</a></li>
+	<li class="active">导入商品</li>
+{/block}
+
+{block name="contents"}
+  	{js href="/public/kindeditor/kindeditor-all-min.js"}
+  	{js href="/public/kindeditor/lang/zh-CN.js"}
+  	{js href="/public/admin/assets/js/my.js"}
+	<div class="panel panel-default bk-bg-white col-md-6 col-md-offset-3">
+		<div class="panel-heading bk-bg-white">
+			<h6><i class="fa fa-indent red"></i>导入商品</h6>							
+			<div class="panel-actions">
+				<a href="#" class="btn-minimize"><i class="fa fa-caret-up"></i></a>
+				<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
+			</div>
+		</div>
+		<div class="panel-body">
+			<form action="{:url('admin/goods/action_add_excel_goods')}" method="post" enctype="multipart/form-data">
+				<div class="form-group">
+					<label for="nf-user">当前字段行数*</label>
+					<input type="text" name="field_row" class="form-control" value="">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">数据开始行数*</label>
+					<input type="text" name="start_row" class="form-control" value="">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">数据结束行数*</label>
+					<input type="text" name="end_row" class="form-control" value="">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">列数*</label>
+					<input type="text" name="cel_num" class="form-control" value="">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">页名（*为空默认为Sheet1）</label>
+					<input type="text" name="page_name" class="form-control" value="">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">Excel文件*</label>
+					<input type="file" id="file-input" name="excel">
+				</div>
+				<button type="submit" class="btn btn-primary col-md-3 pull-right">确认</button>
+			</form>
+		</div>								
+	</div>
+{/block}

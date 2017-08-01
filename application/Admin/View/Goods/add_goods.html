@@ -1,0 +1,146 @@
+{extend name="Public:public"}
+
+{block name="title"}
+	<title>添加商品</title>
+{/block}
+
+{block name="crumbs"}
+	<li class="active"><a href="{:url('admin/goods/index')}">商品管理</a></li>
+	<li class="active">添加商品</li>
+{/block}
+
+{block name="contents"}
+  	{js href="/public/kindeditor/kindeditor-all-min.js"}
+  	{js href="/public/kindeditor/lang/zh-CN.js"}
+  	{js href="/public/admin/assets/js/my.js"}
+	<div class="panel panel-default bk-bg-white col-md-6 col-md-offset-3">
+		<div class="panel-heading bk-bg-white">
+			<h6><i class="fa fa-indent red"></i>添加商品</h6>							
+			<div class="panel-actions">
+				<a href="#" class="btn-minimize"><i class="fa fa-caret-up"></i></a>
+				<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
+			</div>
+		</div>
+		<div class="panel-body">
+			<form action="{:url('admin/goods/action_add_goods')}" method="post" enctype="multipart/form-data" onsubmit="return fillform()">
+				<input type="hidden" name="winetype" value="" id="winetype">
+				<div class="form-group">
+					<label for="nf-user">商品中文名称*</label>
+					<input type="text" name="hk_title" class="form-control" value="" placeholder="请输入中文名">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">商品英文名称*</label>
+					<input type="text" name="eng_title" class="form-control" value="" placeholder="请输入英文名">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">是否上架销售</label>
+					<div >
+						<div class="radio-custom radio-inline" style="float:left;">
+							<input type="radio" id="status1" name="status" value="0"> 
+							<label for="status1"> 是</label>
+						</div>
+						<div class="radio-custom radio-inline">
+							<input type="radio" id="status2" name="status" value="1" checked> 
+							<label for="status2"> 否</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="nf-password">分类*</label>
+					<select id="cate" name="cate_id[]" class="form-control">
+						{volist name="cate_data" id="vo"}
+						{eq name="$vo.pid" value="0"}
+						<option value="{$vo.id}">{$vo.new_path}</option>
+						{/eq}
+						{/volist}
+					</select>
+					<br>
+					<select id="other" name="cate_id[]" class="form-control" style="display: none;">
+						<option value="">请选择</option>
+						{volist name="cate_data" id="vo"}
+						{eq name="$vo.pid" value="7"}
+						<option value="{$vo.id}">{$vo.new_path}</option>
+						{/eq}
+						{/volist}
+					</select>
+				</div>
+			
+				<div class="form-group">
+					<label for="nf-user">年份*</label>
+					<input type="text" name="years" class="form-control" value="" placeholder="请输入年份">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">零售价*</label>
+					<input type="text" name="marketprice" id="marketprice" class="form-control" value="" placeholder="请输入零售价">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">市场价*</label>
+					<input type="text" name="storeprice" class="form-control" value="" placeholder="请输入市场价">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">侍酒温度</label>
+					<input type="text" name="temperature" class="form-control" value="" placeholder="请输入侍酒温度">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">备案商品编号*</label>
+					<input type="text" name="record_num" class="form-control" value="" placeholder="请输入备案商品编号">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">商品货号*</label>
+					<input type="text" name="record_goosnum" class="form-control" value="" placeholder="请输入商品货号">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">重量*</label>
+					<input type="text" name="weight" class="form-control" value="0" >
+				</div>
+				<div class="form-group">
+					<label for="nf-user">库存*</label>
+					<input type="text" name="stock" class="form-control" value="0">
+				</div>
+				<!-- <div class="form-group">
+					<label for="nf-user">商品属性</label>
+					<div>
+						<div class="checkbox-custom checkbox-inline" style="float:left;">
+							<input type="checkbox" id="is_hot" name="is_hot" value="0"> 
+							<label for="is_hot"> 热卖</label>
+						</div>
+						<div class="checkbox-custom checkbox-inline">
+							<input type="checkbox" id="is_home" name="is_home" value="0"> 
+							<label for="is_home"> 首页推荐</label>
+						</div>
+					</div>
+				</div> -->
+				<div class="form-group">
+					<label for="nf-user">商品主图*</label>
+					<input type="file" id="file-input" name="image">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">其他图片</label>
+					<input type="file" id="file-input" multiple name="images[]">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">商品详细描述*：</label>	
+					<textarea  id="container" name="goods_msg" style="width:750px;height:400px;"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="nf-password">排序</label>
+					<input type="text" maxlength="3" name="sort" class="form-control" value="0">
+				</div>
+				<button type="submit" class="btn btn-primary col-md-3 pull-right">确认</button>
+			</form>
+		</div>								
+	</div>
+	<script>
+        var ke;
+		KindEditor.ready(function(K) {
+			ke=K.create('textarea[id="container"]', {
+				filterMode : false,
+				uploadJson : '/public/kindeditor/php/upload_json.php',
+		        fileManagerJson : '/public/kindeditor/php/file_manager_json.php',
+		        imageSizeLimit : '10MB', //批量上传图片单张最大容量
+    			imageUploadLimit : 100 ,
+		        allowFileManager : true
+			});
+		});
+	</script>
+{/block}

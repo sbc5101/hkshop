@@ -1,0 +1,69 @@
+{extend name="Public:public"}
+
+{block name="title"}
+	<title>修改图片</title>
+{/block}
+
+{block name="crumbs"}
+	<li class="active"><a href="{:url('admin/goods/index')}?title={$title}&type={$type}&status={$status}&page={$page}">商品管理</a></li>
+	<li class="active">修改图片</li>
+{/block}
+
+{block name="contents"}
+	<div class="panel panel-default bk-bg-white col-md-12">
+		<div class="panel-heading bk-bg-white">
+			<h6><i class="fa fa-indent red"></i>修改图片</h6>&nbsp;&nbsp;&nbsp;{$goods.title}&nbsp;|&nbsp;{$goods.years}
+			<a style="border: 1px solid black;font-size: 30px;" href="{:url('admin/goods/rev_images',['id' => $goods_id-1])}">上一个</a>
+			<a style="border: 1px solid black;font-size: 30px;" href="{:url('admin/goods/rev_images',['id' => $goods_id+1])}">下一个</a>
+			<div class="panel-actions">
+				<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
+			</div>
+		</div>
+		
+		<div class="media-gallery">
+			<div class="mg-main">							
+				<div class="row mg-files" data-sort-destination="" data-sort-id="media-gallery" style="padding-top:0;">
+					<div class="col-md-12" style="margin-top: 10px;">
+						<form action="{:url('admin/goods/action_add_imgs')}" method="post" enctype="multipart/form-data">
+							<input type="hidden" name="goods_id" value="{$goods_id}">
+							<button class="pull-right btn btn-success" type="submit">添加新图片</button>
+							<input class="pull-right" type="file" id="file-input" multiple name="images[]" style="display:inline;">
+						</form>
+					</div>
+					{volist name="data" id="vo"}
+					<div class="isotope-item document col-sm-6 col-md-4 col-lg-3" style="float:left;">
+						<div class="thumbnail">
+							<div class="thumb-preview">
+								<a class="thumb-image" href="{$vo.iname}">
+									<img src="{$vo.iname}" class="img-responsive" alt="Project">
+								</a>
+								<div class="mg-thumb-options">
+									<div class="mg-zoom"><i class="fa fa-search"></i></div>
+								</div>
+							</div>
+							<br>
+							<div class="mg-description">
+								<a class="btn btn-danger pull-right" style="margin-left:10px;" href="{:url('admin/goods/action_del_img',['id' => $vo.id])}" onclick="return confirm('此操作不可恢复，确认删除？');return false;">
+									<i class="fa fa-trash-o"></i> 
+									删除
+								</a>
+								{eq name="$vo.cover" value="1"}
+								<a class="btn btn-success pull-right" href="{:url('admin/goods/action_rev_cover',['id' => $vo.id,'goods_id' => $goods_id])}">
+									<i class="fa fa-wrench"></i>
+									设为封面                                            
+								</a>
+								{else /}
+									<span class="label label-info pull-right">封面</span>
+								{/eq}
+							</div>
+						</div>
+					</div>
+					{/volist}
+				</div>
+			</div>
+		</div>
+	</div>
+{/block}
+{block name="pagejs"}
+	 {js href="/public/admin/assets/js/pages/gallery.js" /}
+{/block}

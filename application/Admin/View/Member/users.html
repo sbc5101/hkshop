@@ -35,17 +35,19 @@
 								<th>用户名</th>
 								<th>姓名</th>
 								<th>注册时间</th>
-								<th>登入ip</th>
+								<th>登入时间</th>
+								<th>登入IP</th>
 								<th>状态</th>
 								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>
-							{volist name="new_data" id="vo" empty="<tr><td colspan="6">暂无数据</td></tr>"}	
+							{volist name="new_data" id="vo" empty="<tr><td align='center' colspan='6'>暂无数据</td></tr>"}	
 							<tr class="gradeA odd" role="row">
 								<td>{$vo.username}</td>
 								<td>{$vo.first_name} {$vo.last_name}</td> 
 								<td>{$vo.create_time}</td>
+								<td>{$vo.last_time}</td>
 								<td>{$vo.last_ip}</td>
 								{eq name="$vo.is_close" value="0"}
 								<td><span class="label label-success">正常</span></td>

@@ -1,0 +1,101 @@
+{extend name="Public:public"}
+
+{block name="title"}
+	<title>添加年份分组</title>
+{/block}
+
+{block name="crumbs"}
+	<li class="active"><a href="{:url('admin/goods/year_group')}">年份分组管理</a></li>
+	<li class="active">添加年份分组</li>
+{/block}
+
+{block name="contents"}
+	<div class="panel panel-default bk-bg-white col-md-6 col-md-offset-3">
+		<div class="panel-heading bk-bg-white">
+			<h6><i class="fa fa-indent red"></i>添加年份分组</h6>							
+			<div class="panel-actions">
+				<a href="#" class="btn-minimize"><i class="fa fa-caret-up"></i></a>
+				<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
+			</div>
+		</div>
+		<div class="panel-body">
+			<form action="{:url('admin/goods/action_rev_year_group')}" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="id" value="{$id}">
+				<div class="form-group">
+					<label for="nf-user">组名称*</label>
+					<input type="text" name="group_name" class="form-control" value="{$name}" placeholder="请输入组名">
+				</div>
+				<div class="form-group" id="sel_goods">
+					<label for="nf-password">已选择商品*</label>
+					<div  style="overflow-x: auto; overflow-y: auto; height: 250px;">
+						<table class="table table-bordered" style="text-align: center;">
+							<thead>
+								<tr>
+									<th style="text-align: center;">商品名</th>
+									<th style="text-align: center;">年份</th>
+									<th style="text-align: center;">选择</th>
+								</tr>
+							</thead>
+							<tbody>   
+							{volist name="goods_group" id="vo" empty="<tr><td colspan='3' align='center'>暂无数据</td></tr>"}
+							<tr>
+								<td>{$vo.title}</td>
+								<td>{$vo.years}</td>
+								<td>
+									<input class="sel_goods" type="checkbox" checked name="sel_goodsid[]" value="{$vo.id}">
+								</td>
+							</tr>
+							{/volist}
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="nf-user">搜索商品</label>
+					<input type="text" id="group_name" class="form-control" value="" placeholder="请输入商品名">
+				</div>
+				<div class="form-group" id="sel_goods">
+					<label for="nf-password">选择商品*</label>
+					<div  style="overflow-x: auto; overflow-y: auto; height: 250px;">
+						<table class="table table-bordered" style="text-align: center;">
+							<thead>
+								<tr>
+									<th style="text-align: center;">商品名</th>
+									<th style="text-align: center;">年份</th>
+									<th style="text-align: center;">选择</th>
+								</tr>
+							</thead>
+							<tbody id="goods_content">   
+							{volist name="goods" id="vo" empty="<tr><td colspan='3' align='center'>暂无数据</td></tr>"}
+							<tr>
+								<td>{$vo.title}</td>
+								<td>{$vo.years}</td>
+								<td>
+									<input class="sel_goods" type="checkbox" name="goodsid[]" value="{$vo.id}">
+								</td>
+							</tr>
+							{/volist}
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<br>
+				<button type="submit" class="btn btn-primary col-md-3 pull-right">确认</button>
+			</form>
+		</div>								
+	</div>
+	<script type="text/javascript">
+		$('#group_name').blur(function(){
+			var group_name = $(this).val();
+			var url = "{:url('admin/goods/ajax_get_yeargoods')}";
+			var str = '';
+			$.post(url,{'group_name':group_name},function(data){
+				for (var i = data.length - 1; i >= 0; i--) {
+					// str += '<tr><td>'+data[i]['title']+'</td><td>'+data[i]['years']+'</td><td>'+data[i]['group_name']+'</td><td><input class="sel_goods" type="checkbox" data-price="'+data[i]['package_price']+'" name="goodsid[]" value="'+data[i]['id']+'"></td></tr>';
+					str += '<tr><td>'+data[i]['title']+'</td><td>'+data[i]['years']+'</td><td><input class="sel_goods" type="checkbox" name="goodsid[]" value="'+data[i]['id']+'"></td></tr>';
+				}
+				$('#goods_content').html(str);
+			},'json')
+		})
+	</script>
+{/block}

@@ -28,7 +28,7 @@
 		 * 用户注册动作
 		 * @return [type] [description]
 		 */
-		public function action_login()
+		public function action_register()
 		{
 			$message = Request::instance()->post();
 			// 数据验证

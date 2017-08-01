@@ -86,7 +86,37 @@ $(".join_btn").click(function(){
 	var post_email=$(".join_email").val();
 	var post_pass=$(".join_pass").val();
 	if(first_name.test(post_firstname)&&Last_name.test(post_lastname)&&join_email.test(post_email)&&join_pass.test(post_pass)){
-		window.location.href="www.baidu.com";
+		$.ajax({
+			type:"post",
+			url:"/shop/register/action_register.html",
+			async:true,
+			datatype:"json",
+			data:{
+				"first_name":post_firstname,
+				"last_name":post_lastname,
+				"email":post_email,
+				"password":post_pass			
+			},
+			success:function(data){
+				if(data.code=="200"){
+					var access_cookie=data.data.access_token;
+					console.log(data);
+					$.cookie("name", access_cookie, {
+							expires: 7, //设置保存期限 
+							path: "/" //设置保存的路径 
+					})
+					
+				}else{
+					alert("提交失败");
+				}
+			},
+			error:function(e){
+				//失败的时候打印错误信息
+				console.log(e);
+			}
+			
+		});
+		
 	}else{
 		if($(".first_name").val()==""){
 			$(".span1").show();
@@ -106,3 +136,6 @@ $(".join_btn").click(function(){
 		}
 	}
 })
+
+
+

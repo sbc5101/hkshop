@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:61:"E:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1501579704;}*/ ?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -14,9 +15,9 @@
     	<!--禁止百度转码-->
     	<meta http-equiv="Cache-Control" content="no-siteapp">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		{css href="/public/shop/css/base.css"}
-		{css href="/public/shop/css/index.css"}
-		{css href="/public/shop/css/swiper.min.css"}
+		<link rel="stylesheet" type="text/css" href="/public/shop/css/base.css" />
+		<link rel="stylesheet" type="text/css" href="/public/shop/css/index.css" />
+		<link rel="stylesheet" type="text/css" href="/public/shop/css/swiper.min.css" />
 	</head>
 	<body>
 		<div class="container">
@@ -179,7 +180,7 @@
 			        <div class="swiper-wrapper">
 			            <div class="swiper-slide">
 			            	<div class="goods_img">
-			            		<a href="{:url('shop/register/index')}">
+			            		<a href="<?php echo url('shop/register/index'); ?>">
 			            		<img src="img/goods_img1.png"/>
 			            		</a>
 			            	</div>
@@ -212,7 +213,7 @@
 			            </div>
 			            <div class="swiper-slide">
 			            	<div class="goods_img">
-			            		<a href="{:url('shop/goods/goods_detail')}">
+			            		<a href="<?php echo url('shop/goods/goods_detail'); ?>">
 			            		<img src="img/goods_img1.png"/>
 			            		</a>
 			            	</div>
@@ -933,9 +934,9 @@
 		</div>
 	</body>
 </html>
-{js href="/public/shop/js/jquery-3.1.1.min.js"}
-{js href="/public/shop/js/swiper-3.4.1.min.js"}
-{js href="/public/shop/js/index.js"}
+<script type="text/javascript" src="/public/shop/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="/public/shop/js/swiper-3.4.1.min.js"></script>
+<script type="text/javascript" src="/public/shop/js/index.js"></script>
 <!--<script type="text/javascript" src="js/swiper-3.4.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="js/index.js"></script>-->

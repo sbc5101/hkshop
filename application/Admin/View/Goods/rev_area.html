@@ -1,0 +1,40 @@
+{extend name="Public:public"}
+
+{block name="title"}
+	<title>修改商品区域</title>
+{/block}
+
+{block name="crumbs"}
+	<li class="active"><a href="{:url('admin/goods/area_list')}">商品区域管理</a></li>
+	<li class="active">修改商品区域</li>
+{/block}
+
+{block name="contents"}
+	<div class="panel panel-default bk-bg-white col-md-6 col-md-offset-3">
+		<div class="panel-heading bk-bg-white">
+			<h6><i class="fa fa-indent red"></i>修改商品区域</h6>							
+			<div class="panel-actions">
+				<a href="#" class="btn-minimize"><i class="fa fa-caret-up"></i></a>
+				<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
+			</div>
+		</div>
+		<div class="panel-body">
+			<form action="{:url('admin/goods/action_rev_area')}" method="post">
+				<input type="hidden" name="id" value="{$data.id}">
+				<div class="form-group">
+					<label for="nf-user">区域名称*</label>
+					<input type="text" name="area_name" class="form-control" value="{$data.area_name}" placeholder="请输入区域名">
+				</div>
+			
+				<div class="form-group">
+					<label for="nf-password">状态*</label>
+					<select id="cate" name="display" class="form-control">
+						<option value="0" {eq name="$data.display" value="0"} selected {/eq}>禁止</option>
+						<option value="1"  {eq name="$data.display" value="1"} selected {/eq}>正常</option>
+					</select>
+				</div>
+				<button type="submit" class="btn btn-primary col-md-3 pull-right">确认</button>
+			</form>
+		</div>								
+	</div>
+{/block}

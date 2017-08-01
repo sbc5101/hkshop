@@ -74,7 +74,15 @@
 
 			$res = Db::name('users')
 					->insertGetId($data);
+			$request = Request::instance();
 			if($res){
+				Db::name('users')
+					->where('id',$res['id'])
+					->update([
+							'last_time' => date('Y-m-d H:i:s',time()),
+							'last_ip' 	=> $request->ip(),
+							]);
+
 				// 设置session
 				Session::set('user.id', $res,'shop_user');
 				Session::set('user.name', $message['email'],'shop_user');

@@ -71,9 +71,12 @@
 		public function add_goods()
 		{
 			$cate_data = self::cate_route('cates','cate');
-		
+			$areas_data = Db::name('goods_areas')
+						->where('display',1)
+						->select();
 			return $this->fetch('add_goods',[
-							'cate_data' => $cate_data,
+							'cate_data' 	=> $cate_data,
+							'areas_data' 	=> $areas_data,
 						]);
 		}
 
@@ -87,15 +90,9 @@
 			$msg = Request::instance()->post();
 			$file = Request::instance()->file('image');
 			$files = Request::instance()->file('images');
-			$title = Request::instance()->post('gname');
-			$highlight_img = Request::instance()->file('highlight_img');
-			$vender_img = Request::instance()->file('vender_img');
-
-			$filemsg = '';
-			$filemsgs = '';
 		
 			// 检测数据
-			$goods_data = $this->check_goods_data($msg,$highlight_img,$vender_img);
+			$goods_data = $this->check_goods_data($msg);
 	
 			if(empty($file) && !isset($file)){
 					$this->error('主图不能为空！');
@@ -145,15 +142,11 @@
 		/**
 		 * 检测上传商品数据
 		 * @param  [type] $data 		 [商品信息]
-		 * @param  [type] $highlight_img [售货机亮点背景图]
-		 * @param  [type] $vender_img	 [售货机商品图]
 		 * @return [type]       		 [description]
 		 */
-		private function check_goods_data($data,$highlight_img,$vender_img)
+		private function check_goods_data($data)
 		{	
-			// 初始化数据
-			$highlightImg = '';
-			$venderImg = '';
+			
 			if(!array_key_exists('goods_msg', $data)){
 				$data['goods_msg'] = '';
 			}
@@ -162,11 +155,8 @@
 			$rule = [
 				['title','require','商品名不能为空'],
 			    ['years','require','年份不能为空'],
-			    ['productprice','require','基础价不能为空'], 
-			    ['tax_point','require','税点不能为空'],
 			    ['marketprice','require','零售价不能为空'],
 			    ['storeprice','require','市场价不能为空'],
-			    // ['package_price','require','组合套餐价格不能为空'],
 			    ['weight','require','商品重量不能为空'],
 			    ['content','require','商品描述不能为空'],
 			    ['stock','require','库存不能为空'],
@@ -174,11 +164,8 @@
 			$msg = [
 				'title'  => $data['gname'],
 			    'years'  => $data['years'],
-			    'productprice'  => $data['productprice'],
-			    'tax_point'  => $data['tax_point'],
 			    'marketprice'  => $data['marketprice'],
 			    'storeprice'  => $data['storeprice'],
-			    // 'package_price'  => $data['package_price'],
 			    'weight'  => $data['weight'],
 			    'content'  => $data['goods_msg'],
 			    'stock' => $data['stock'],
@@ -189,43 +176,6 @@
 
 			if(!$result){
 			    $this->error($validate->getError());
-			}
-
-			// 检测分类
-			if($data['cate_id'][0] == 1){
-				$cate_id = $data['cate_id'][0];
-			}else{
-				$cate_id = join(',',$data['cate_id']);
-			}
-			// 售货机亮点背景图
-			if(!empty($highlight_img) && isset($highlight_img)){
-				$highlightImg = $this->upload($highlight_img);
-				if(!$highlightImg){
-					$this->error($highlightImg);
-				}
-			}
-			// 售货机商品主图
-			if(!empty($vender_img) && isset($vender_img)){
-				$venderImg = $this->upload($vender_img);
-				if(!$venderImg){
-					$this->error($venderImg);
-				}
-			}
-			// 处理产区数据
-			$origin_count = count($data['origin_id']);
-			$origin_id = '';
-			for ($i = 0; $i < $origin_count; $i++) { 
-				if(!empty($data['origin_id'][$i])){
-					$origin_id .= $data['origin_id'][$i].',';
-				}
-			}
-			$origin_id = rtrim($origin_id,',');
-
-			// 上架下架处理
-			if($data['status'] ==  0){
-				$status = '上架';
-			}else{
-				$status = '下架';
 			}
 
 			// 添加数据
@@ -239,45 +189,12 @@
 				'alcohol'  			=> 	$data['alcohol'],
 				'condition' 		=> 	$data['condition'],
 				'breathing' 		=> 	$data['breathing'],
-				'stock_sta' 		=> 	$data['stock_sta'],
-				'is_new'  			=> 	array_key_exists('is_new',$data) ? $data['is_new'] : '1',
-				'is_hot'  			=>	array_key_exists('is_hot',$data) ? $data['is_hot'] : '1',
-				'is_free'  			=> 	array_key_exists('is_free',$data) ? $data['is_free'] : '1',
-				'is_home'  			=> 	array_key_exists('is_home',$data) ? $data['is_home'] : '1',
-				'type'  			=> 	$data['type'],
 				'status'  			=> 	$data['status'],
-				'smell' 			=> 	$data['smell'],
 				'area_id' 			=> 	$data['area_id'],
 				'cate_id'  			=> 	$cate_id,
-				'echoosewine'		=> 	empty($data['echoosewine']) ? '' : join(',',$data['echoosewine']),
-				'quick_cateid'		=> 	empty($data['quick_cateid']) ? '' : ',' . join(',',$data['quick_cateid']) . ',',
-				'origin_id'			=> 	$origin_id,
-				'blend_id'			=> 	empty($data['blend_id']) ? '' : $data['varieties'].':'.join(',',$data['blend_id']),
-				'winetype' 			=> 	empty($data['winetype']) ? '' : $data['winetype'],
-				'price_id' 			=> 	empty($data['price_id']) ? '' : $data['price_id'],
-				'type_id' 			=> 	empty($data['type_id']) ? '' : $data['type_id'],
 			    'record_goosnum'  	=> 	$data['record_goosnum'],
-			    'is_presale'  		=> 	$data['is_presale'],
-			    'presale'  			=> 	$data['presale'],
-			    'is_europe'  		=> 	$data['is_europe'],
-			    'product_category'  => 	$data['product_category'],
-			    'package_price'  	=> 	$data['package_price'],
-			    'record_num'  		=> 	$data['record_num'],
-			    'color'  			=> 	$data['color'],
-			    'highlight1'  		=> 	$data['highlight1'],
-			    'highlight2'  		=> 	empty($data['highlight2']) ? '' : str_replace('；',';',trim($data['highlight2'])),
-			    'highlight_img'  	=> 	str_replace('\\','/','/public/uploads/'.date('Ymd') .'/'. $highlightImg),
-			    'vender_img'  		=> 	str_replace('\\','/','/public/uploads/'.date('Ymd') .'/'. $venderImg),
-			    'chateau_id'		=> 	$data['chateau_id'],
-			    'temperature'		=> 	$data['temperature'],
 			    'last_time'			=> 	date('Y-m-d H:i:s',time()),
-			    'status_log'		=> 	$this->getAdminName().':'.$status.':'.date('Y-m-d H:i:s',time()),
 			    'sort'				=> 	$data['sort'],
-			    'otitle'			=> 	$data['otitle'],
-			    'advanced'			=> 	empty($data['advanced']) ? '' : join(',',$data['advanced']),
-			    'wine_style'		=> 	empty($data['wine_style']) ? '' : join(',',$data['wine_style']),
-			    'fine_wine'			=> 	empty($data['fine_wine']) ? '' : join(',',$data['fine_wine']),
-			    'theme'			=> 	empty($data['theme']) ? '' : join(',',$data['theme']),
 			];
 
 			//合并数组 
@@ -629,537 +546,156 @@
 		}
 
 		/**
-		 * 商品年份管理组
+		 * 商品区域列表
 		 * @return [type] [description]
 		 */
-		public function year_group()
+		public function area_list()
 		{
-			$data = Db::name('goods_group')
-					->paginate(15);
-			return $this->fetch('year_group',['data' => $data]);
+			$data = Db::name('goods_areas')
+					->paginate(20);
+			return $this->fetch('area_list',['data' => $data]);
 		}
 
 		/**
-		 * 添加商品年份管理组
-		 */
-		public function add_year_group()
-		{
-			$data = Db::name('goods')
-					->field('id,title,years,year_groupid')
-					->where('year_groupid','null')
-					->where('is_delete','0')
-					->order('years','asc')
-					->select();
-			return $this->fetch('add_year_group',['data' => $data]);	
-		}
-
-		/**
-		 * ajax获取商品信息
-		 * @param  [type] $group_name [description]
-		 * @return [type]             [description]
-		 */
-		public function ajax_get_yeargoods($group_name)
-		{
-			if(!empty($group_name)){
-				$data = Db::name('goods')
-						->field('id,title,years,year_groupid')
-						->where('year_groupid','null')
-						->where('is_delete','0')
-						->where('title','like', '%'.$group_name.'%')
-						->order('id','desc')
-						->select();
-			}else{
-				$data = Db::name('goods')
-						->field('id,title,years,year_groupid')
-						->where('year_groupid','null')
-						->where('is_delete','0')
-						->order('id','desc')
-						->select();
-			}
-
-			if(!empty($data)){
-				foreach ($data as &$v) {
-					// $group_name = Db::name('goods_group')
-					// 				->field('group_name')
-					// 				->where('id',$v['year_groupid'])
-					// 				->find();
-					// if(!empty($group_name['group_name'])){
-					// 	$v['group_name'] = $group_name['group_name'];
-					// }else{
-						$v['group_name'] = '暂无分组';
-					// }
-				}
-			}
-			echo json_encode($data);
-		}
-
-		/**
-		 * 添加分组动作
+		 * 添加商品区域操作
 		 * @return [type] [description]
 		 */
-		public function action_add_year_group()
+		public function add_area()
 		{
-			$msg = Request::instance()->post();
-			$rule = [
-				['group_name','require|unique:goods_group,group_name','组名不能为空|组名已存在'],
-				['goodsid','require','请选择商品'],
-			];
-
-			$validate = new Validate($rule);
-			$result   = $validate->check($msg);
-
-			if(!$result){
-			    $this->error($validate->getError());
-			}
-
-			$data = [
-				'group_name' 	=> $msg['group_name'],
-				'goods_id'		=> ','.implode(',',$msg['goodsid']).',',
-			];
-
-			$id = Db::name('goods_group')
-					->insertGetId($data);
-			if($id){
-				foreach ($msg['goodsid'] as $v) {
-					Db::name('goods')
-						->where('id',$v)
-						->update(['year_groupid' => $id]);
-				}
-				$this->run_log('添加年份分组操作。'.$msg['group_name']);
-				$this->success('添加成功！');
-			}else{
-				$this->error('添加失败！');
-			}
+			return $this->fetch('add_area');
 		}
-
-		/**
-		 * 修改年份分组
-		 * @param  [type] $id   [分组id]
-		 * @return [type]       [description]
-		 */
-		public function rev_year_group($id){
-			$goods_group = Db::name('goods')
-							->field('id,title,years,year_groupid')
-							->where('year_groupid',$id)
-							->order('years','asc')
-							->select();
-
-			$goods = Db::name('goods')
-					->field('id,title,years,year_groupid')
-					->where('year_groupid','null')
-					->where('status','0')
-					->where('is_delete','0')
-					->order('years','asc')
-					->select();
-			$name = Db::name('goods_group')
-					->where('id',$id)
-					->find();
-
-			return $this->fetch('rev_year_group',['goods_group' => $goods_group,'goods' => $goods,'id' => $id,'name' => $name['group_name']]);
-		}
-
-		/**
-		 * 修改分组动作
-		 * @return [type] [description]
-		 */
-		public function action_rev_year_group()
-		{
-			$msg = Request::instance()->post();
-			
-			if(empty($msg['goodsid'])){
-				$msg['goodsid'] = [];
-			}
-			$rule = [
-				['group_name','require','组名不能为空'],
-			];
-
-			$validate = new Validate($rule);
-			$result   = $validate->check($msg);
-
-			if(!$result){
-			    $this->error($validate->getError());
-			}
-			$boolean = Db::name('goods_group')
-						->where('group_name',$msg['group_name'])
-						->where('id','<>',$msg['id'])
-						->find();
-			if(!empty($boolean)){
-				$this->error('组名已存在！');
-			}
-			$goods_group = Db::name('goods_group')
-							->where('id',$msg['id'])
-							->find();
-
-			$sel_goodsid = explode(',',trim($goods_group['goods_id'],','));
-			foreach ($sel_goodsid as $v) {
-				if(in_array($v,$msg['sel_goodsid'])){
-					continue;
-				}
-				Db::name('goods')
-					->where('id',$v)
-					->update(['year_groupid' => null]);
-			}
-	
-			$new_goodsid = array_merge($msg['sel_goodsid'],$msg['goodsid']);
-
-
-
-			foreach ($new_goodsid as $v) {
-				Db::name('goods')
-					->where('id',$v)
-					->update(['year_groupid' => $msg['id']]);
-			}
-			$goods = Db::name('goods')
-					->field('id')
-					->where('year_groupid',$msg['id'])
-					->order('years','asc')
-					->select();
-			$str = ',';
-			foreach ($goods as $v) {
-				$str .= $v['id'];
-			}
-			$str = $str.',';
-			$data = [
-				'group_name' 	=> $msg['group_name'],
-				'goods_id'		=> $str,
-			];
-			$res = Db::name('goods_group')
-					->where('id',$msg['id'])
-					->update($data);
-			if($res !== false){
-				$this->run_log('修改年份分组操作。'.$msg['group_name']);
-				$this->success('修改成功！');
-			}else{
-				$this->error('修改失败！');
-			}
-		}
-
-		/**
-		 * 删除年份分组
-		 * @param  [type] $id [年份分组ID]
-		 * @return [type]     [description]
-		 */
-		public function action_del_year_group($id)
-		{
-			$data = Db::name('goods_group')
-					->where('id',$id)
-					->find();
-			if(!empty($data)){
-				$goods_id = explode(',',trim($data['goods_id'],','));
-				if(!empty($goods_id)){
-					foreach ($goods_id as $v) {
-						Db::name('goods')
-							->where('id',$v)
-							->update(['year_groupid' => null]);
-					}
-				}
-				$res = Db::name('goods_group')
-						->where('id',$id)
-						->delete();	
-				if($res !== false){
-					$this->run_log('删除年份分组操作。'.$data['group_name']);
-					$this->success('删除成功！');
-				}else{
-					$this->error('删除失败！');
-				}
-
-			}
-		}
-
-		/**
-		 * 查询品种混酿信息
-		 * @param  [type] $id [分类ID]
-		 * @return [type]     [description]
-		 */
-		public function ajax_get_varieties($id)
-		{
-			$data = Db::name('cates')
-					->field('id,cname')
-					->where('display',0)
-					->where('pid',$id)
-					->select();
-			echo json_encode($data);
-		}
-
-		/**
-		 * excel批量导入商品
-		 * @return [type] [description]
-		 */
-		public function add_excel_goods()
-		{
-			return $this->fetch('add_excel_goods');
-		}
-
-		/**
-		 * excel批量导入商品动作
-		 * @return [type] [description]
-		 */
-		public function action_add_excel_goods()
-		{
-			$msg  = Request::instance()->post();
-			$page_name  = Request::instance()->post('page_name');
-			$file = Request::instance()->file('excel');
-
-			$rule = [
-				['field_row','require','当前字段行数不能为空'],
-				['start_row','require','数据开始行数不能为空'],
-				['end_row','require','数据结束行数不能为空'],
-				['cel_num','require','列数不能为空'],
-				['file','require','Excel不能为空'],
-			];
-			$msg = [
-				'field_row'  => $msg['field_row'],
-				'start_row'  => $msg['start_row'],
-				'end_row'  => $msg['end_row'],
-				'cel_num'  => $msg['cel_num'],
-				'file'  => $file,
-			];
-
-			$validate = new Validate($rule);
-			$result   = $validate->check($msg);
-
-			if(!$result){
-			    $this->error($validate->getError());
-			}
-			// 初始化数据
-			$field = '';
-			$values = '';
-
-			// 处理数据
-			if(!empty($page_name)){
-				$sheetName = array($page_name);
-			}else{
-				$sheetName = array("Sheet1");
-			}
-
-			// 上传Excel文件
-			$filename = $this->uploadExcel($file);
-
-			// Excel文件生成数组
-			$ExcelToArrary = new ExcelToArrary;
-			$res = $ExcelToArrary->read ($filename,$sheetName);
-
-			//遍历生成字段
-			foreach ($res[$msg['field_row']-1] as $k => $v) {
-				if($k < $msg['cel_num']){
-					$field .= '`'.$v.'`,';
-				}
-			}
-			$field = trim($field,',');
-			// 遍历生成数据
-			foreach ($res as $k => $v) {
-				if($k >= $msg['start_row']-1 && $k <= $msg['end_row']-1){
-					// 处理标题数据
-					$original_title = trim($v[0]); 
-					// 检测标题是否存在|
-					$is_vertical = strstr($original_title,'|');
-					if($is_vertical){
-						// 截取字符串|前面部分
-						$title = trim(explode('|',$original_title)[0]);
-						// 替换年份为%
-						$title = str_replace($v[2],'%',$title);
-						// 替换空格为%
-						$title = str_replace(' ','%',$title);
-						$title = str_replace('%%','%',$title);
-						$title = '%'.trim($title,'%').'%';
-
-						$data = Db::name('goods')
-								->field('id')
-								->where('title','like',$title)
-								->where('type',$v[1])
-								->where('years',$v[2])
-								->find();
-					}else{
-						$data = Db::name('goods')
-								->field('id')
-								->where('title',$v[0])
-								->where('type',$v[1])
-								->where('years',$v[2])
-								->find();
-					}
-	
-					if(empty($data)){
-						foreach ($v as $key => $value) {
-							if($key == 0){
-								$values .= "('".str_replace("'","\'",$value)."',";
-							}
-							if($key > 0 && $key < $msg['cel_num'] -1){
-								$values .= "'".str_replace("'","\'",$value)."',";
-							}
-							if($key == $msg['cel_num']-1){
-								$values .= "'".str_replace("'","\'",$value)."'),";
-							}
-						}
-					}
-				}
-			}
 		
-			$values = trim($values,',');
-
-			// 插入数据
-			$res = Db::execute("INSERT INTO `yo_goods`(".$field.") VALUES".$values);
-			if($res){
-				$this->run_log('批量导入商品操作。');
-				$this->success('导入成功！','goods/index');
-			}else{
-				$this->error('导入失败！');
-			}
-		}
-
 		/**
-		 * 商品酒庄列表
+		 * 添加商品区域动作
 		 * @return [type] [description]
 		 */
-		public function chateau_index()
+		public function action_add_area()
 		{
-			$data = Db::name('goods_chateau')
-					->paginate('20');
-
-			return $this->fetch('chateau_index',['data' => $data]);
-		}
-
-		/**
-		 * 添加酒庄
-		 * @return [type] [description]
-		 */
-		public function add_chateau()
-		{
-			return $this->fetch('add_chateau');
-		}
-
-		/**
-		 * 添加酒庄动作
-		 * @return [type] [description]
-		 */
-		public function action_add_chateau()
-		{
-			$data = Request::instance()->post();
-			$file = Request::instance()->file('c_img');
-
-			// 验证数据
+			$message = Request::instance()->post();
+			// 数据验证
 			$rule = [
-				['c_title','require','酒庄名称不能为空'],
-				['c_content','require','酒庄内容不能为空'],
-				['file','require','酒庄图片不能为空'],
+			    [
+			    	'area_name',
+			    	'require|chsAlpha|unique:goods_areas,area_name',
+			    	'区域名不能为空|请输入正确的区域名|区域名已存在'
+			    ],
+			    [
+				    'display',
+				    'require',
+				    '状态不能为空'
+			    ],
 			];
-			$msg = [
-				'c_title'  	 => $data['c_title'],
-				'c_content'  => $data['c_content'],
-				'file'  	 => $file,
+			$data = [
+			    'area_name'  	=> $message['area_name'],
+			    'display'   	=> $message['display'],
 			];
 
 			$validate = new Validate($rule);
-			$result   = $validate->check($msg);
+			$result   = $validate->check($data);
 
 			if(!$result){
-			    $this->error($validate->getError());
+				$this>error($validate->getError());
 			}
 
-			// 上传图片
-			$filemsg = $this->upload($file);
-			if(!$filemsg){
-				$this->error($filemsg);
-			}
-			$data['c_img'] = str_replace('\\','/','/public/uploads/'.date('Ymd') .'/'. $filemsg);
-
-			// 插入数据
-			$res = Db::name('goods_chateau')
+			$res = Db::name('goods_areas')
 					->insert($data);
-
 			if($res){
-				$this->run_log('添加酒庄操作。'.$data['c_title']);
-				$this->success('添加成功！');
+				$this->run_log('添加商品区域数据操作。'.$message['area_name']);
+				$this->success('添加成功');
 			}else{
-				$this->error('添加失败！');
+				$this->error('添加失败');
 			}
-			
 		}
 
 		/**
-		 * 修改酒庄信息
-		 * @param  [type] $id [酒庄ID]
+		 * 修改商品区域操作
+		 * @param  [type] $id [商品区域ID]
 		 * @return [type]     [description]
 		 */
-		public function rev_chateau($id)
+		public function rev_area($id)
 		{
-			$data = Db::name('goods_chateau')
+			$data = Db::name('goods_areas')
 					->where('id',$id)
 					->find();
-
-			return $this->fetch('rev_chateau',['data' => $data,'id' => $id]);
+			return $this->fetch('rev_area',['data' => $data]);
 		}
-
-
+		
 		/**
-		 * 修改酒庄动作
+		 * 修改商品区域动作
 		 * @return [type] [description]
 		 */
-		public function action_rev_chateau()
+		public function action_rev_area()
 		{
-			$data = Request::instance()->post();
-			$id = Request::instance()->post('id');
-			$file = Request::instance()->file('c_img');
-			unset($data['id']);
-			// 验证数据
+			$message = Request::instance()->post();
+			// 数据验证
 			$rule = [
-				['c_title','require','酒庄名称不能为空'],
-				['c_content','require','酒庄内容不能为空'],
+				[
+			    	'id',
+			    	'require',
+			    	'区域ID不能为空'
+			    ],
+			    [
+			    	'area_name',
+			    	'require|chsAlpha',
+			    	'区域名不能为空|请输入正确的区域名'
+			    ],
+			    [
+				    'display',
+				    'require',
+				    '状态不能为空'
+			    ],
 			];
-			$msg = [
-				'c_title'  	 => $data['c_title'],
-				'c_content'  => $data['c_content'],
+			$data = [
+			    'id'  		=> $message['id'],
+			    'area_name' => $message['area_name'],
+			    'display'   => $message['display'],
 			];
 
 			$validate = new Validate($rule);
-			$result   = $validate->check($msg);
+			$result   = $validate->check($data);
 
 			if(!$result){
-			    $this->error($validate->getError());
+				$this>error($validate->getError());
 			}
-
-			// 上传图片
-			if(!empty($file)){
-				$filemsg = $this->upload($file);
-				if(!$filemsg){
-					$this->error($filemsg);
-				}
-				$data['c_img'] = str_replace('\\','/','/public/uploads/'.date('Ymd') .'/'. $filemsg);
+			$area_name = Db::name('goods_areas')
+							->where('id','<>',$message['id'])
+							->where('area_name',$message['area_name'])
+							->find();
+			if(!empty($area_name)){
+				$this->error('区域名已存在');
 			}
-
-			// 修改数据
-			$res = Db::name('goods_chateau')
-					->where('id',$id)
+			$res = Db::name('goods_areas')
+					->where('id',$message['id'])
 					->update($data);
-
 			if($res !== false){
-				$this->run_log('修改酒庄操作。'.$data['c_title']);
-				$this->success('修改成功！');
+				$this->run_log('修改商品区域数据操作。'.$message['area_name']);
+				$this->success('修改成功','admin/goods/area_list');
 			}else{
-				$this->error('修改失败！');
+				$this->error('修改失败');
 			}
-			
 		}
 
 		/**
-		 * 删除酒庄信息动作
-		 * @param  [type] $id [酒庄ID]
-		 * @return [type]     [description]
+		 * 删除商品区域动作
+		 * @param  [type] $id [商品区域ID]
+		 * @return [type] [description]
 		 */
-		public function action_chateau_del($id)
+		public function action_del_area($id)
 		{
-			$data = Db::name('goods_chateau')
-					->field('c_title')
-					->where('id',$id)
-					->find();
-			$res = Db::name('goods_chateau')
+			$area_name = Db::name('goods')
+							->where('area_id',$id)
+							->find();
+			if(!empty($area_name)){
+				$this->error('该区域下有商品，无法删除！');
+			}
+			$res = Db::name('goods_areas')
 					->where('id',$id)
 					->delete();
 			if($res !== false){
-				$this->run_log('删除酒庄操作。'.$data['c_title']);
-				$this->success('删除成功！');
+				$this->run_log('删除商品区域数据操作。'.$message['area_name']);
+				$this->success('删除成功');
 			}else{
-				$this->error('删除失败！');
+				$this->error('删除失败');
 			}
 		}
-
 	}

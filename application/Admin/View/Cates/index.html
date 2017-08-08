@@ -43,7 +43,7 @@
 							</tr>
 						</thead>   
 						<tbody>	
-							{volist name="data" id="vo" empty="$empty"}	
+							{volist name="data" id="vo" empty="<tr><td colspan='4' align='center'><h5>暂无数据</h5></td></tr>"}	
 							<tr id="cate{$vo.id}" data-tt-id="{$vo.id}" {neq name="$vo.pid" value="0"} data-tt-parent-id="{$vo.pid}" {/neq}>
 								<td></td>	
 								<td>{$vo.cname}</td>

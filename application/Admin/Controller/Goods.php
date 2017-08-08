@@ -70,12 +70,12 @@
 		 */
 		public function add_goods()
 		{
-			$cate_data = self::cate_route('cates','cate');
+			$cates_data = self::cate_route('cates','cate');
 			$areas_data = Db::name('goods_areas')
 						->where('display',1)
 						->select();
 			return $this->fetch('add_goods',[
-							'cate_data' 	=> $cate_data,
+							'cates_data' 	=> $cates_data,
 							'areas_data' 	=> $areas_data,
 						]);
 		}

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:61:"D:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1501572060;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:61:"D:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1501581983;}*/ ?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -180,7 +180,7 @@
 			        <div class="swiper-wrapper">
 			            <div class="swiper-slide">
 			            	<div class="goods_img">
-			            		<a href="<?php echo url('shop/login/index'); ?>">
+			            		<a href="<?php echo url('shop/register/index'); ?>">
 			            		<img src="img/goods_img1.png"/>
 			            		</a>
 			            	</div>

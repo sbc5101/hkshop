@@ -40,7 +40,7 @@ $('#add_child').click(function(){
         }else{
           display = '<span class="label label-warning">隐藏</span>';
         }
-        var str = '<tr id="cate'+data.id+'" data-tt-id="'+data.id+'"  data-tt-parent-id="'+data.pid+'"><td>'+data.cname+'</td><td>'+display+'</td><td><a class="add_child btn btn-success" href="javascript:void(0);" data-id="'+data.id+'" data-name="'+data.cname+'"><i class="fa fa-plus "></i> 添加子类</a> <a class="btn btn-info" href="javascript:void(0);" data-id="'+data.id+'"><i class="fa fa-edit "></i> 修改</a> <a class="action_del_cate btn btn-danger" href="javascript:void(0);" data-id="'+data.id+'"><i class="fa fa-trash-o "></i> 删除</a></td></tr>';
+        var str = '<tr id="cate'+data.id+'" data-tt-id="'+data.id+'"  data-tt-parent-id="'+data.pid+'"><td></td><td>'+data.cname+'</td><td>'+display+'</td><td><a class="add_child btn btn-success" href="javascript:void(0);" data-id="'+data.id+'" data-name="'+data.cname+'"><i class="fa fa-plus "></i> 添加子类</a> <a class="btn btn-info" href="javascript:void(0);" data-id="'+data.id+'"><i class="fa fa-edit "></i> 修改</a> <a class="action_del_cate btn btn-danger" href="javascript:void(0);" data-id="'+data.id+'"><i class="fa fa-trash-o "></i> 删除</a></td></tr>';
         $('#cate'+data.pid).after(str);
         $('#children').css('display','none');  
       }

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:66:"D:\phpStudy\WWW\hkshop/application/admin\view\goods\add_goods.html";i:1501581270;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1501574159;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:66:"D:\phpStudy\WWW\hkshop/application/admin\view\goods\add_goods.html";i:1501641852;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1501574159;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -311,11 +311,27 @@
 
 				<div class="form-group">
 					<label for="nf-password">分类*</label>
-					<select id="cate" name="cate_id" class="form-control">
-						<?php if(is_array($cate_data) || $cate_data instanceof \think\Collection): $i = 0; $__LIST__ = $cate_data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo['pid'] == '0'): ?>
-						<option value="<?php echo $vo['id']; ?>"><?php echo $vo['new_path']; ?></option>
+					<br>
+					<br>
+						<?php if(is_array($cates_data) || $cates_data instanceof \think\Collection): $i = 0; $__LIST__ = $cates_data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo['pid'] == '0'): ?>
+							<input type="checkbox" class="one" data_id="<?php echo $vo['id']; ?>" id="cate_id<?php echo $vo['id']; ?>" name="cate_id[]" value="<?php echo $vo['id']; ?>"> 
+							<label for="cate_id<?php echo $vo['id']; ?>"><?php echo $vo['cname']; ?></label>
+							<?php if(is_array($cates_data) || $cates_data instanceof \think\Collection): $i = 0; $__LIST__ = $cates_data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;if($v['pid'] == $vo['id']): ?>
+							<br>
+							&nbsp;&nbsp;&nbsp;
+							<input class="one<?php echo $vo['id']; ?> second" data_id="<?php echo $v['id']; ?>" data_pid="<?php echo $vo['id']; ?>" type="checkbox" id="cate_id<?php echo $v['id']; ?>" name="cate_id[]" value="<?php echo $v['id']; ?>"> 
+							<label for="cate_id<?php echo $v['id']; ?>"><?php echo $v['cname']; ?></label>
+							<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<?php if(is_array($cates_data) || $cates_data instanceof \think\Collection): $i = 0; $__LIST__ = $cates_data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;if($val['pid'] == $v['id']): ?>
+							<input class="one<?php echo $vo['id']; ?> second<?php echo $v['id']; ?>" type="checkbox" id="cate_id<?php echo $val['id']; ?>" name="cate_id[]" value="<?php echo $val['id']; ?>"> 
+							<label for="cate_id<?php echo $val['id']; ?>"><?php echo $val['cname']; ?></label>
+							<?php endif; endforeach; endif; else: echo "" ;endif; ?>
+							<br>
+							<?php endif; endforeach; endif; else: echo "" ;endif; ?>
+							<br>
+							<br>
 						<?php endif; endforeach; endif; else: echo "" ;endif; ?>
-					</select>
 				</div>
 			
 				<div class="form-group">
@@ -374,6 +390,32 @@
 		        allowFileManager : true
 			});
 		});
+	</script>
+	<script type="text/javascript">
+		// 第一级选择
+		$('.one').click(function(){
+			var is_check = $(this).is(':checked');
+			var id =　$(this).attr('data_id');
+			if(is_check == true){
+				$('.one'+id).attr('checked','true');
+			}else{
+				$('.one'+id).removeAttr('checked');
+			}
+		})
+
+		// 第二级选择
+		$('.second').click(function(){
+			var is_check = $(this).is(':checked');
+			var id =　$(this).attr('data_id');
+			var pid =　$(this).attr('data_pid');
+			if(is_check == true){
+				$('.second'+id).attr('checked','true');
+				$('#rules'+pid).attr('checked','true');
+			}else{
+				$('.second'+id).removeAttr('checked');
+			}
+		})
+
 	</script>
 
           </div>  

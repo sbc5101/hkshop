@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:62:"D:\phpStudy\WWW\hkshop/application/admin\view\cates\index.html";i:1501639243;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1501574159;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:62:"D:\phpStudy\WWW\hkshop/application/admin\view\index\index.html";i:1498615338;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1501574159;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +7,7 @@
     <!-- Basic -->
     <meta charset="UTF-8" />
     
-	<title>分类列表</title>
+	<title>首页</title>
 
     <!-- Mobile Metas -->
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -252,8 +252,7 @@
               <ol class="breadcrumb visible-sm visible-md visible-lg">                
                 <li><a href="<?php echo url('admin/index/index'); ?>"><i class="icon fa fa-home"></i>Home</a></li>
                 
-	<li class="active">分类管理</li>
-	<li class="active">分类列表</li>
+	<li class="active"><i class="fa fa-laptop"></i>首页</li>
 
               </ol>           
             </div>
@@ -265,135 +264,8 @@
           
           <div class="row">
           
-	<script type="text/javascript" src="/public/admin/assets/js/jquery.treetable.js"></script>
-	<script>  
-	     $(function () {  
-	         $("#example-basic-expandable").treetable({ expandable: true });  
-	     })  
-	</script>  
-	<div class="col-lg-12">
-		<div class="panel panel-default bk-bg-white">
-			<div class="panel-heading bk-bg-white">
-				<h6><i class="fa fa-table"></i><span class="break"></span>分类管理</h6>
-				<div class="panel-actions">
-					<a href="#" class="btn-minimize"><i class="fa fa-caret-up"></i></a>
-					<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
-				</div>
-			</div>
-			<div class="col-md-1 pull-right" style="margin:10px 0;">
-				<a class="btn btn-success" href="<?php echo url('admin/cates/add_cate'); ?>">
-					<i class="fa fa-plus"></i> 添加分类                                           
-				</a>
-				
-			</div>
-			<div class="panel-body">
-				<div class="table-responsive">	
-					<table id="example-basic-expandable" class="table table-striped table-bordered bootstrap-datatable datatable">
-						<thead>
-							<tr>
-								<th>选择</th>
-								<th>分类名称</th>
-								<th>状态</th>
-								<th>操作</th>
-							</tr>
-						</thead>   
-						<tbody>	
-							<?php if(is_array($data) || $data instanceof \think\Collection): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "<tr><td colspan='4' align='center'><h5>暂无数据</h5></td></tr>" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>	
-							<tr id="cate<?php echo $vo['id']; ?>" data-tt-id="<?php echo $vo['id']; ?>" <?php if($vo['pid'] != '0'): ?> data-tt-parent-id="<?php echo $vo['pid']; ?>" <?php endif; ?>>
-								<td></td>	
-								<td><?php echo $vo['cname']; ?></td>
-								<td>
-									<?php if($vo['display'] == '0'): ?>
-									<span class="label label-success">显示</span>
-									<?php else: ?>
-									<span class="label label-warning">隐藏</span>
-									<?php endif; ?>
-								</td>
-								<td>
-									<a class="add_child btn btn-success" href="javascript:void(0);" data-id="<?php echo $vo['id']; ?>" data-name="<?php echo $vo['cname']; ?>">
-										<i class="fa fa-plus "></i> 添加子类
-									</a>
-									<a class="btn btn-info rev_cate" data-id="<?php echo $vo['id']; ?>" href="javascript:void(0);">
-										<i class="fa fa-edit "></i> 修改       
-									</a>
-									<a class="btn btn-danger action_del_cate" href="javascript:void(0);" data-id="<?php echo $vo['id']; ?>">
-										<i class="fa fa-trash-o "></i> 删除
-									</a>
-								</td>
-							</tr>
-							<?php endforeach; endif; else: echo "<tr><td colspan='4' align='center'><h5>暂无数据</h5></td></tr>" ;endif; ?>
-						</tbody>
-					</table>
-					<div class="col-lg-7" style="position: fixed;left: 430px;top: 285px;display:none;" id="children">
-						<div class="panel-heading bk-bg-white">
-							<h6><i class="fa fa-indent red"></i><span>添加子类</span></h6>
-							<div class="panel-actions">
-								<a href="#" class="btn-minimize"><i class="fa fa-caret-up"></i></a>
-								<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
-							</div>
-						</div>
-						<div class="panel-body">
-							<input type="hidden" id="parent_id">
-							<div class="form-group">
-								<label for="nf-user">父类名称</label>
-								<input type="text"  class="form-control" id="parent_name" value="" readonly="readonly">
-							</div>
-							<div class="form-group">
-								<label for="nf-user">分类名称*</label>
-								<input type="text"  class="form-control" id="child_name" value="" placeholder="请输入分类名称">
-							</div>
-							<div class="form-group">
-								<label for="nf-user">是否显示*</label>
-								<select id="child_state" class="form-control">
-									<option value="0" selected>显示</option>
-									<option value="1">隐藏</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label for="nf-user">排序</label>
-								<input type="text"  class="form-control" id="child_sort" value="0">
-							</div>
-							<button class="col-md-3 btn btn-success pull-right"	id="add_child">
-								确定     
-							</button>
-						</div>
-					</div>
-					<div class="col-lg-7" style="position: fixed;left: 430px;top: 285px;display:none;" id="revcate">
-						<div class="panel-heading bk-bg-white">
-							<h6><i class="fa fa-indent red"></i><span>修改分类</span></h6>
-							<div class="panel-actions">
-								<a href="#" class="btn-minimize"><i class="fa fa-caret-up"></i></a>
-								<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
-							</div>
-						</div>
-						<div class="panel-body">
-							<input type="hidden" id="rev_cate_id">
-							<div class="form-group">
-								<label for="nf-user">分类名称*</label>
-								<input type="text"  class="form-control" id="rev_name" value="" placeholder="请输入分类名称">
-							</div>
-							<div class="form-group">
-								<label for="nf-user">是否显示*</label>
-								<select id="rev_state" class="form-control">
-									<option value="0" selected>显示</option>
-									<option value="1">隐藏</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label for="nf-user">排序</label>
-								<input type="text"  class="form-control" id="rev_sort" value="0">
-							</div>
-							<button class="col-md-3 btn btn-success pull-right"	id="rev_cate">
-								确定     
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript" src="/public/admin/assets/js/goods/goods_cates.js"></script>
 
+          
           </div>  
 
         </div>

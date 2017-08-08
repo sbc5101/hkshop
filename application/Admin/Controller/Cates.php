@@ -46,9 +46,7 @@
 				$result = Session::get('cate');
 			}
 
-			$empty = "<tr><td colspan='4' align='center'><h5>暂无数据</h5></td><td><a class='btn btn-info'";
-
-			return $this->fetch('index',['data' => $result,'empty' => $empty]);
+			return $this->fetch('index',['data' => $result]);
 		}
 
 		public function sort_cate($root)

@@ -56,13 +56,33 @@
 
 				<div class="form-group">
 					<label for="nf-password">分类*</label>
-					<select id="cate" name="cate_id" class="form-control">
-						{volist name="cate_data" id="vo"}
+					<br>
+					<br>
+						{volist name="cates_data" id="vo"}
 						{eq name="$vo.pid" value="0"}
-						<option value="{$vo.id}">{$vo.new_path}</option>
+							<input type="checkbox" class="one" data_id="{$vo.id}" id="cate_id{$vo.id}" name="cate_id[]" value="{$vo.id}"> 
+							<label for="cate_id{$vo.id}">{$vo.cname}</label>
+							{volist name="cates_data" id="v"}
+							{eq name="$v.pid" value="$vo.id"}
+							<br>
+							&nbsp;&nbsp;&nbsp;
+							<input class="one{$vo.id} second" data_id="{$v.id}" data_pid="{$vo.id}" type="checkbox" id="cate_id{$v.id}" name="cate_id[]" value="{$v.id}"> 
+							<label for="cate_id{$v.id}">{$v.cname}</label>
+							<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							{volist name="cates_data" id="val"}
+							{eq name="$val.pid" value="$v.id"}
+							<input class="one{$vo.id} second{$v.id}" type="checkbox" id="cate_id{$val.id}" name="cate_id[]" value="{$val.id}"> 
+							<label for="cate_id{$val.id}">{$val.cname}</label>
+							{/eq}
+							{/volist}
+							<br>
+							{/eq}
+							{/volist}
+							<br>
+							<br>
 						{/eq}
-						{/volist}
-					</select>
+					{/volist}
 				</div>
 			
 				<div class="form-group">
@@ -121,5 +141,31 @@
 		        allowFileManager : true
 			});
 		});
+	</script>
+	<script type="text/javascript">
+		// 第一级选择
+		$('.one').click(function(){
+			var is_check = $(this).is(':checked');
+			var id =　$(this).attr('data_id');
+			if(is_check == true){
+				$('.one'+id).attr('checked','true');
+			}else{
+				$('.one'+id).removeAttr('checked');
+			}
+		})
+
+		// 第二级选择
+		$('.second').click(function(){
+			var is_check = $(this).is(':checked');
+			var id =　$(this).attr('data_id');
+			var pid =　$(this).attr('data_pid');
+			if(is_check == true){
+				$('.second'+id).attr('checked','true');
+				$('#rules'+pid).attr('checked','true');
+			}else{
+				$('.second'+id).removeAttr('checked');
+			}
+		})
+
 	</script>
 {/block}

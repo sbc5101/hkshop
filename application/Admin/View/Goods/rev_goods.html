@@ -5,7 +5,7 @@
 {/block}
 
 {block name="crumbs"}
-	<li class="active"><a href="{:url('admin/goods/index')}?title={$title}&type={$type}&status={$status}&page={$page}">商品管理</a></li>
+	<li class="active"><a href="{:url('admin/goods/index')}?status={$status}&page={$page}">商品管理</a></li>
 	<li class="active">修改商品</li>
 {/block}
 
@@ -22,30 +22,20 @@
 		{neq name="goods" value=''}
 		<div class="panel-body">
 			<form action="{:url('admin/goods/action_rev_goods')}" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="goods_id" value="{$goods_id}">
-				<input type="hidden" name="winetype" value="{$goods.winetype}" id="winetype">
+				<input type="hidden" name="id" value="{$goods_id}">
 				<div class="form-group">
-					<label>商品名称</label>
-					<input type="text" name="gname" class="form-control" value="{$goods.title}" placeholder="请输入商品名">
+					<label for="nf-user">商品中文名称*</label>
+					<input type="text" name="hk_title" class="form-control" value="{$goods.hk_title}" placeholder="请输入中文名">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">商品别名*</label>
-					<input type="text" name="otitle" class="form-control" value="{$goods.otitle}" placeholder="请输入商品别名">
+					<label for="nf-user">商品英文名称*</label>
+					<input type="text" name="eng_title" class="form-control" value="{$goods.eng_title}" placeholder="请输入英文名">
 				</div>
 				<div class="form-group">
-					<label>商品类型</label>
-					<select id="type" name="type" class="form-control">
-						<option value="0" {eq name="$goods.type" value="0"} selected {/eq}>跨境商品</option>
-						<option value="1" {eq name="$goods.type" value="1"} selected {/eq}>完税商品</option>
-						<option value="2" {eq name="$goods.type" value="2"} selected {/eq}>直邮商品</option>
-						<option value="3" {eq name="$goods.type" value="3"} selected {/eq}>境外商品</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label>是否上架销售</label>
+					<label for="nf-user">是否上架销售</label>
 					<div >
 						<div class="radio-custom radio-inline" style="float:left;">
-							<input type="radio" id="status1" name="status" {eq name="$goods.status" value="0"} checked {/eq} value="0"> 
+							<input type="radio" id="status1" name="status" value="0" {eq name="$goods.status" value="0"} checked {/eq}> 
 							<label for="status1"> 是</label>
 						</div>
 						<div class="radio-custom radio-inline">
@@ -55,468 +45,69 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label>选择商品区域</label>
-					<select name="area_id" class="form-control">
-						{volist name="area" id="vo"}
-						<option value="{$vo.id}" {eq name="$goods.area_id" value="$vo.id"} selected {/eq}>{$vo.new_path}</option>
+					<label for="nf-password">商品区域*</label>
+					<select id="cate" name="area_id" class="form-control">
+						{volist name="areas_data" id="vo"}
+						<option value="{$vo.id}" {eq name="$vo.id" value="goods.area_id"} checked {/eq}>{$vo.area_name}</option>
 						{/volist}
 					</select>
 				</div>
+
 				<div class="form-group">
-					<label>分类*</label>
-					{eq name="$cate_id[0]" value="1"}
-					<select id="cate" name="cate_id[]" class="form-control">
-						{volist name="cate" id="vo"}
+					<label for="nf-password">分类*</label>
+					<br>
+					<br>
+						{volist name="cates_data" id="vo"}
 						{eq name="$vo.pid" value="0"}
-						<option value="{$vo.id}">{$vo.new_path}</option>
+							<input type="checkbox" class="one" data_id="{$vo.id}" id="cate_id{$vo.id}" {neq name="cates" value=""}{volist name="cates" id="a"}{eq name="$a" value="$vo.id"} checked {/eq}{/volist}{/neq} name="cate_id[]" value="{$vo.id}"> 
+							<label for="cate_id{$vo.id}">{$vo.cname}</label>
+							{volist name="cates_data" id="v"}
+							{eq name="$v.pid" value="$vo.id"}
+							<br>
+							&nbsp;&nbsp;&nbsp;
+							<input class="one{$vo.id} second" data_id="{$v.id}" data_pid="{$vo.id}" {neq name="cates" value=""}{volist name="cates" id="a"}{eq name="$a" value="$vo.id"} checked {/eq}{/volist}{/neq}  type="checkbox" id="second{$v.id}" name="cate_id[]" value="{$v.id}"> 
+							<label for="second{$v.id}">{$v.cname}</label>
+							<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							{volist name="cates_data" id="val"}
+							{eq name="$val.pid" value="$v.id"}
+							<input class="one{$vo.id} second{$v.id} three" type="checkbox" id="cate_id{$val.id}" data_ppid="{$vo.id}" data_pid="{$v.id}" {neq name="cates" value=""}{volist name="cates" id="a"}{eq name="$a" value="$vo.id"} checked {/eq}{/volist}{/neq}  name="cate_id[]" value="{$val.id}"> 
+							<label for="cate_id{$val.id}">{$val.cname}</label>
+							{/eq}
+							{/volist}
+							<br>
+							{/eq}
+							{/volist}
+							<br>
+							<br>
 						{/eq}
-						{/volist}
-					</select>
-					<br>
-					<select id="other" name="cate_id[]" class="form-control" style="display: none;">
-						<option value="">请选择</option>
-						{volist name="cate" id="vo"}
-						{eq name="$vo.pid" value="7"}
-						<option value="{$vo.id}">{$vo.new_path}</option>
-						{/eq}
-						{/volist}
-					</select>
-					{else \}
-					<select id="cate" name="cate_id[]" class="form-control">
-						{volist name="cate" id="vo"}
-						{eq name="$vo.pid" value="0"}
-						<option value="{$vo.id}" {eq name="$cate_id[0]" value="$vo.id"} selected {/eq}>{$vo.new_path}</option>
-						{/eq}
-						{/volist}
-					</select>
-					<br>
-					<select id="other" name="cate_id[]" class="form-control">
-						<option value="">请选择</option>
-						{volist name="cate" id="vo"}
-						{eq name="$vo.pid" value="7"}
-						<option value="{$vo.id}" {eq name="$cate_id[1]" value="$vo.id"} selected {/eq}>{$vo.new_path}</option>
-						{/eq}
-						{/volist}
-					</select>
-					{/eq}
+					{/volist}
 				</div>
+			
 				<div class="form-group">
-					<label>产区</label>
-					{eq name="$origin" value=""}
-					<select id="origin-sel1" onchange="areaSel(1)" name="origin_id[]" class="form-control">
-						<option value="">请选择国家</option>
-						{volist name="cate" id="vo"}
-						{eq name="$vo.pid" value="3"}
-						<option value="{$vo.id}">{$vo.new_path}</option>
-						{/eq}
-						{/volist}
-					</select>
-					<br>
-					<select id="origin-sel2" onchange="areaSel(2)" name="origin_id[]" style="display: none;" class="form-control">
-					</select>
-					<br>
-					<select id="origin-sel3" onchange="areaSel(3)" name="origin_id[]" style="display: none;" class="form-control">
-					</select>
-					<br>
-					<select id="origin-sel4" onchange="areaSel(4)" name="origin_id[]" style="display: none;" class="form-control">
-					</select>
-					<br>
-					<select id="origin-sel5" onchange="areaSel(5)" name="origin_id[]" style="display: none;" class="form-control">
-					</select>
-					</div>
-					{else \}
-					<select id="origin-sel1" onchange="areaSel(1)" name="origin_id[]" class="form-control">
-						<option value="">请选择国家</option>
-						{volist name="cate" id="vo"}
-						{eq name="$vo.pid" value="3"}
-						<option value="{$vo.id}" {eq name="$origin[0]" value="$vo.id"} selected {/eq}>{$vo.new_path}</option>
-						{/eq}
-						{/volist}
-					</select>
-					<br>
-					<select id="origin-sel2" onchange="areaSel(2)" name="origin_id[]" class="form-control" {eq name="$origin[2]" value=""} style="display: none;" {/eq}>
-						<option value="">请选择地区</option>
-						{volist name="cate" id="vo"}
-						{eq name="$vo.pid" value="$origin[0]"}
-						<option value="{$vo.id}" {eq name="$origin[1]" value="$vo.id"} selected {/eq}>{$vo.new_path}</option>
-						{/eq}
-						{/volist}
-					</select>
-					<br>
-					<select id="origin-sel3" onchange="areaSel(3)" name="origin_id[]" class="form-control" {eq name="$origin[2]" value=""} style="display: none;" {/eq}>
-						<option value="">请选择地区</option>
-						{volist name="cate" id="vo"}
-						{eq name="$vo.pid" value="$origin[1]"}
-						<option value="{$vo.id}" {eq name="$origin[2]" value="$vo.id"} selected {/eq}>{$vo.new_path}</option>
-						{/eq}
-						{/volist}
-					</select>
-					<br>
-					<select id="origin-sel4" onchange="areaSel(4)" name="origin_id[]" class="form-control" {eq name="$origin[3]" value=""} style="display: none;" {/eq}>
-						<option value="">请选择地区</option>
-						{volist name="cate" id="vo"}
-						{eq name="$vo.pid" value="$origin[2]"}
-						<option value="{$vo.id}" {eq name="$origin[3]" value="$vo.id"} selected {/eq}>{$vo.new_path}</option>
-						{/eq}
-						{/volist}
-					</select>
-					<br>
-					<select id="origin-sel5" onchange="areaSel(5)" name="origin_id[]" class="form-control" {eq name="$origin[4]" value=""} style="display: none;" {/eq}>
-						<option value="">请选择地区</option>
-						{volist name="cate" id="vo"}
-						{eq name="$vo.pid" value="$origin[3]"}
-						<option value="{$vo.id}" {eq name="$origin[4]" value="$vo.id"} selected {/eq}>{$vo.new_path}</option>
-						{/eq}
-						{/volist}
-					</select>
-					{/eq}
-				</div>
-				<div class="form-group">
-					<label for="nf-password">价格</label>
-					<select id="price_id" name="price_id" class="form-control">
-						<option value="">请选择</option>
-						{volist name="cate" id="vo"}
-						{eq name="$vo.pid" value="6"}
-						<option value="{$vo.id}" {eq name="$goods.price_id" value="$vo.id"} selected {/eq}>{$vo.new_path}</option>
-						{/eq}
-						{/volist}
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="nf-password">类型</label>
-					<select id="type_id" name="type_id" class="form-control">
-						<option value="">请选择</option>
-						{volist name="cate" id="vo"}
-						{eq name="$vo.pid" value="5"}
-						<option class="type_name" value="{$vo.id}" {eq name="$goods.type_id" value="$vo.id"} selected {/eq}>{$vo.new_path}</option>
-						{/eq}
-						{/volist}
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="nf-password">酒庄</label>
-					<select name="chateau_id" class="form-control">
-						<option value="">请选择</option>
-						{volist name="chateau" id="vo"}
-						<option value="{$vo.id}" {eq name="$vo.id" value="$goods.chateau_id"} selected {/eq}>{$vo.c_title}</option>
-						{/volist}
-					</select>
-				</div>
-				<div class="form-group">
-					<label>分润产品分类</label>
-					<select name="product_category" class="form-control">
-						<option value="0" {eq name="$goods.product_category" value="0"} selected {/eq}>明星产品</option>
-						<option value="1" {eq name="$goods.product_category" value="1"} selected {/eq}>自主产品</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label>品种</label>
-					<select id="varieties" name="varieties" class="form-control">
-						<option value="">请选择</option>
-						{volist name="cate" id="vo"}
-						{eq name="$vo.pid" value="4"} 
-						<option value="{$vo.id}" {eq name="$vo.id" value="$varieties"} selected {/eq}>{$vo.new_path}</option>
-						{/eq}
-						{/volist}
-					</select>
-				</div>
-				<div class="form-group">
-					<label>混酿类型</label>
-					<div class="form-group" id="blend_id">
-						{neq name="$varieties" value=""}
-						{volist name="cate" id="vo"}
-						{eq name="$vo.pid" value="$varieties"} 
-							<input type="checkbox" id="blend_id{$vo.id}" {neq name="blend" value=""}{volist name="blend" id="v"}{eq name="$v" value="$vo.id"} checked {/eq}{/volist}{/neq} name="blend_id[]" value="{$vo.id}"> 
-							<label for="blend_id{$vo.id}">{$vo.new_path}</label>
-						{/eq}
-						{/volist}
-						{else \}
-						暂无数据！
-						{/neq}
-					</div>
-				</div>
-				<div class="form-group">
-					<label>主题活动</label>
-					<div class="form-group">
-						{volist name="theme_data" id="vo"}
-							<input type="checkbox" id="theme{$vo.id}" name="theme[]" {neq name="theme" value=""}{volist name="theme" id="v"}{eq name="$v" value="$vo.id"} checked {/eq}{/volist}{/neq} value="{$vo.id}"> 
-							<label for="theme{$vo.id}">{$vo.t_title}</label>
-						{/volist}
-					</div>
-				</div>
-				<div class="form-group">
-					<label>进阶筛选</label>
-					<div class="form-group">
-						{volist name="cate" id="vo"}
-						{eq name="$vo.id" value="143"} 
-							<input type="checkbox" id="advanced{$vo.id}" name="advanced[]" {neq name="advanced" value=""}{volist name="advanced" id="v"}{eq name="$v" value="$vo.id"} checked {/eq}{/volist}{/neq} value="{$vo.id}"> 
-							<label for="advanced{$vo.id}">{$vo.new_path}</label>
-						{/eq}
-						{eq name="$vo.pid" value="143"} 
-							<input type="checkbox" id="advanced{$vo.id}" name="advanced[]" {neq name="advanced" value=""}{volist name="advanced" id="v"}{eq name="$v" value="$vo.id"} checked {/eq}{/volist}{/neq} value="{$vo.id}"> 
-							<label for="advanced{$vo.id}">{$vo.new_path}</label>
-						{/eq}
-						{/volist}
-					</div>
-				</div>
-				<div class="form-group">
-					<label>酒款风格</label>
-					<div class="form-group">
-						{volist name="cate" id="vo"}
-						{eq name="$vo.id" value="142"} 
-							<input type="checkbox" id="wine_style{$vo.id}" name="wine_style[]" {neq name="wine_style" value=""}{volist name="wine_style" id="v"}{eq name="$v" value="$vo.id"} checked {/eq}{/volist}{/neq} value="{$vo.id}"> 
-							<label for="wine_style{$vo.id}">{$vo.new_path}</label>
-						{/eq}
-						{eq name="$vo.pid" value="142"} 
-							<input type="checkbox" id="wine_style{$vo.id}" name="wine_style[]" {neq name="wine_style" value=""}{volist name="wine_style" id="v"}{eq name="$v" value="$vo.id"} checked {/eq}{/volist}{/neq} value="{$vo.id}"> 
-							<label for="wine_style{$vo.id}">{$vo.new_path}</label>
-						{/eq}
-						{/volist}
-					</div>
-				</div>
-				<div class="form-group">
-					<label>FINE WINE</label>
-					<div class="form-group">
-						{volist name="cate" id="vo"}
-						{eq name="$vo.id" value="144"} 
-							<input type="checkbox" id="fine_wine{$vo.id}" name="fine_wine[]" {neq name="fine_wine" value=""}{volist name="fine_wine" id="v"}{eq name="$v" value="$vo.id"} checked {/eq}{/volist}{/neq} value="{$vo.id}"> 
-							<label for="fine_wine{$vo.id}">{$vo.new_path}</label>
-						{/eq}
-						{eq name="$vo.pid" value="144"} 
-							<input type="checkbox" id="fine_wine{$vo.id}" name="fine_wine[]" {neq name="fine_wine" value=""}{volist name="fine_wine" id="v"}{eq name="$v" value="$vo.id"} checked {/eq}{/volist}{/neq} value="{$vo.id}"> 
-							<label for="fine_wine{$vo.id}">{$vo.new_path}</label>
-						{/eq}
-						{/volist}
-					</div>
-				</div>
-				<div class="form-group">
-					<label>一键选酒</label>
-					<div class="form-group">
-						{volist name="cate" id="vo"}
-						{eq name="$vo.id" value="2"} 
-							<input type="checkbox" id="echoosewine{$vo.id}" name="echoosewine[]" {neq name="echoosewine" value=""}{volist name="echoosewine" id="v"}{eq name="$v" value="$vo.id"} checked {/eq}{/volist}{/neq} value="{$vo.id}"> 
-							<label for="echoosewine{$vo.id}">{$vo.new_path}</label>
-						{/eq}
-						{eq name="$vo.pid" value="2"} 
-							<input type="checkbox" id="echoosewine{$vo.id}" name="echoosewine[]" {neq name="echoosewine" value=""}{volist name="echoosewine" id="v"}{eq name="$v" value="$vo.id"} checked {/eq}{/volist}{/neq} value="{$vo.id}"> 
-							<label for="echoosewine{$vo.id}">{$vo.new_path}</label>
-						{/eq}
-						{/volist}
-					</div>
-				</div>
-				<div class="form-group">
-					<label>快捷分类</label>
-					<div class="form-group">
-						{volist name="quick_cate" id="vo"}
-							<input type="checkbox" id="quick_cateid{$vo.id}" name="quick_cateid[]" {neq name="quick_cateid" value=""}{volist name="quick_cateid" id="v"}{eq name="$v" value="$vo.id"} checked {/eq}{/volist}{/neq} value="{$vo.id}"> 
-							<label for="quick_cateid{$vo.id}">{$vo.quick_name}</label>
-						{/volist}
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="nf-user">年份</label>
+					<label for="nf-user">年份*</label>
 					<input type="text" name="years" class="form-control" value="{$goods.years}" placeholder="请输入年份">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">基础价</label>
-					<input type="text" id="productprice" name="productprice" class="form-control" value="{$goods.productprice}" placeholder="元">
+					<label for="nf-user">零售价*</label>
+					<input type="text" name="marketprice" id="marketprice" class="form-control" value="{$goods.marketprice}" placeholder="请输入零售价">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">税点</label>
-					<input type="text" id="tax_point" name="tax_point" class="form-control" value="{$goods.tax_point}" placeholder="%">
-				</div>
-				<div class="form-group">
-					<label for="nf-user">零售价</label>
-					<input type="text" id="marketprice" name="marketprice" class="form-control" value="{$goods.marketprice}" placeholder="(基础价+基础价*税点)">
-				</div>
-				<div class="form-group">
-					<label for="nf-user">组合套餐价*</label>
-					<input type="text" name="package_price" class="form-control" value="{$goods.package_price}">
-				</div>
-				<div class="form-group">
-					<label for="nf-user">市场价</label>
+					<label for="nf-user">市场价*</label>
 					<input type="text" name="storeprice" class="form-control" value="{$goods.storeprice}" placeholder="请输入市场价">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">侍酒温度</label>
-					<input type="text" name="temperature" class="form-control" value="{$goods.temperature}" placeholder="请输入侍酒温度">
-				</div>
-				<div class="form-group">
-					<label for="nf-user">备案商品编号</label>
-					<input type="text" name="record_num" class="form-control" value="{$goods.record_num}" placeholder="请输入备案商品编号">
-				</div>
-				<div class="form-group">
-					<label for="nf-user">商品货号</label>
+					<label for="nf-user">商品货号*</label>
 					<input type="text" name="record_goosnum" class="form-control" value="{$goods.record_goosnum}" placeholder="请输入商品货号">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">产地</label>
-					<div>
-						<div class="radio-custom radio-inline" style="float:left;">
-							<select name="origin-sel" onchange="change_sel('origin','origin-txt')" class="form-control" id="origin">
-								<option value="">自定义产地</option>
-								<option value="法国 波尔多">法国 波尔多</option>
-								<option value="智利 卡萨布兰卡山谷">智利 卡萨布兰卡山谷</option>
-								<option value="西班牙 佩内德斯">西班牙 佩内德斯</option>
-								<option value="德国 莱茵黑森">德国 莱茵黑森</option>
-							</select>
-						</div>
-						<div class="radio-custom radio-inline" style="padding:0;">
-							<input type="text" id="origin-txt" name="origin-txt" class="form-control" value="{$goods.origin}">
-						</div>
-					</div>
+					<label for="nf-user">重量*</label>
+					<input type="text" name="weight" class="form-control" value="{$goods.weight}" >
 				</div>
 				<div class="form-group">
-					<label for="nf-user">等级</label>
-					<div>
-						<div class="radio-custom radio-inline" style="float:left;">
-							<select name="level-sel" onchange="change_sel('level','level-txt')" class="form-control" id="level">
-								<option value="">自定义等级</option>
-								<option value="A">A</option>
-							</select>
-						</div>
-						<div class="radio-custom radio-inline" style="padding:0;">
-							<input type="text" name="level-txt" id="level-txt" class="form-control" value="{$goods.level}">
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="nf-user">葡萄品种</label>
-					<div>
-						<div class="radio-custom radio-inline" style="float:left;">
-							<select name="variety-sel" class="form-control" id="variety" onchange="change_sel('variety','variety-txt')">
-								<option value="">自定义葡萄品种</option>
-								<option value="白葡萄">白葡萄</option>
-							</select>
-						</div>
-						<div class="radio-custom radio-inline" style="padding:0;">
-							<input type="text" name="variety-txt" id="variety-txt" class="form-control" value="{$goods.variety}">
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="nf-user">酒庄</label>
-					<div>
-						<div class="radio-custom radio-inline" style="float:left;">
-							<select name="chateau-sel" class="form-control" id="chateau" onchange="change_sel('chateau','chateau-txt')">
-								<option value="">自定义酒庄</option>
-								<option value="巴加芙庄园">巴加芙庄园</option>
-							</select>
-						</div>
-						<div class="radio-custom radio-inline" style="padding:0;">
-							<input type="text" name="chateau-txt" id="chateau-txt" class="form-control" value="{$goods.chateau}">
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="nf-user">口感</label>
-					<input type="text" name="taste" class="form-control" value="{$goods.taste}">
-				</div>
-				<div class="form-group">
-					<label for="nf-user">成分</label>
-					<input type="text" name="component" class="form-control" value="{$goods.component}">
-				</div>
-				<div class="form-group">
-					<label for="nf-user">保存条件</label>
-					<input type="text" name="condition" class="form-control" value="{$goods.condition}">
-				</div>
-				
-				<div class="form-group">
-					<label for="nf-user">酒精度</label>
-					<input type="text" name="alcohol" class="form-control" value="{$goods.alcohol}">
-				</div>
-				<div class="form-group">
-					<label for="nf-user">香气</label>
-					<input type="text" name="smell" class="form-control" value="{$goods.smell}">
-				</div>
-				<div class="form-group">
-					<label for="nf-user">颜色</label>
-					<input type="text" name="color" class="form-control" value="{$goods.color}">
-				</div>
-				<div class="form-group">
-					<label for="nf-user">建议醒酒时间</label>
-					<input type="text" name="breathing" class="form-control" value="{$goods.breathing}">
-				</div>
-				<div class="form-group">
-					<label for="nf-user">重量</label>
-					<input type="text" name="weight" class="form-control" value="{$goods.weight}" placeholder="克">
-				</div>
-				<div class="form-group">
-					<label for="nf-user">库存</label>
+					<label for="nf-user">库存*</label>
 					<input type="text" name="stock" class="form-control" value="{$goods.stock}">
 				</div>
-				<div class="form-group">
-					<label for="nf-user">预售说明</label>
-					<input type="text" name="presale" class="form-control" value="{$goods.presale}">
-				</div>
-				<div class="form-group">
-					<label for="nf-user">是否预售</label>
-					<div >
-						<div class="radio-custom radio-inline" style="float:left;">
-							<input type="radio" id="is_presale1" name="is_presale" value="0" {eq name="$goods.is_presale" value="0"} checked {/eq}> 
-							<label for="is_presale1"> 不预售</label>
-						</div>
-						<div class="radio-custom radio-inline">
-							<input type="radio" id="is_presale2" name="is_presale" value="1" {eq name="$goods.is_presale" value="1"} checked {/eq}> 
-							<label for="is_presale2"> 预售</label>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="nf-user">是否欧洲站</label>
-					<div >
-						<div class="radio-custom radio-inline" style="float:left;">
-							<input type="radio" id="is_europe1" name="is_europe" value="0" {eq name="$goods.is_europe" value="0"} checked {/eq}> 
-							<label for="is_europe1"> 否</label>
-						</div>
-						<div class="radio-custom radio-inline">
-							<input type="radio" id="is_europe2" name="is_europe" value="1" {eq name="$goods.is_europe" value="1"} checked {/eq}> 
-							<label for="is_europe2"> 是</label>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="nf-user">减库存方式</label>
-					<div >
-						<div class="radio-custom radio-inline" style="float:left;">
-							<input type="radio" id="stock-sta1" name="stock_sta" value="0" {eq name="$goods.stock_sta" value="0"} checked {/eq}> 
-							<label for="stock-sta1"> 拍下减库存</label>
-						</div>
-						<div class="radio-custom radio-inline">
-							<input type="radio" id="stock-sta2" name="stock_sta" value="1" {eq name="$goods.stock_sta" value="1"} checked {/eq}> 
-							<label for="stock-sta2"> 永不减库存</label>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="nf-user">商品属性</label>
-					<div>
-						<!-- <div class="checkbox-custom checkbox-inline" style="float:left;">
-							<input type="checkbox" id="is-new" name="is_new" value="0" {eq name="$goods.is_new" value="0"} checked {/eq}> 
-							<label for="is-new"> 新品</label>
-						</div> -->
-						<div class="checkbox-custom checkbox-inline" style="float:left;">
-							<input type="checkbox" id="is_hot" name="is_hot" value="0" {eq name="$goods.is_hot" value="0"} checked {/eq}> 
-							<label for="is_hot"> 热卖</label>
-						</div>
-						<div class="checkbox-custom checkbox-inline">
-							<input type="checkbox" id="is_home" name="is_home" value="0" {eq name="$goods.is_home" value="0"} checked {/eq}> 
-							<label for="is_home"> 首页推荐</label>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="nf-user">免运费商品</label>
-					<div>
-						<div class="checkbox-custom checkbox-inline" style="float:left;">
-							<input type="checkbox" id="is-free" name="is_free" value="0" {eq name="$goods.is_free" value="0"} checked {/eq}> 
-							<label for="is-free">
-								打勾表示此商品不会产生运费花销，否则按照正常运费计算。
-							</label>	
-						</div>
-					</div>
-				</div>
-				<br>
 				<div class="form-group">
 					<label for="nf-user">商品详细描述*：</label>	
 					<textarea  id="container" name="goods_msg" style="width:750px;height:400px;">{$goods.content}</textarea>
@@ -525,23 +116,6 @@
 					<label for="nf-password">排序</label>
 					<input type="text" maxlength="3" name="sort" class="form-control" value="{$goods.sort}">
 				</div>
-				<div class="form-group">
-					<label for="nf-password">售货机亮点1</label>
-					<textarea class="form-control" name="highlight1" >{$goods.highlight1}</textarea>
-				</div>
-				<div class="form-group">
-					<label for="nf-password">售货机亮点2</label>
-					<input type="text" name="highlight2" class="form-control" value="{$goods.highlight2}" placeholder="多个用分号（;）分隔">
-				</div>
-				<div class="form-group">
-					<label for="nf-user">售货机亮点背景图</label>
-					<input type="file" id="file-input" name="highlight_img">
-				</div>
-				<div class="form-group">
-					<label for="nf-user">售货机商品主图</label>
-					<input type="file" id="file-input" name="vender_img">
-				</div>
-				<br>
 				<button type="submit" class="btn btn-primary col-md-3 pull-right">确认</button>
 			</form>
 		</div>
@@ -555,93 +129,46 @@
 				uploadJson : '/public/kindeditor/php/upload_json.php',
 		        fileManagerJson : '/public/kindeditor/php/file_manager_json.php',
 		        imageSizeLimit : '10MB', //批量上传图片单张最大容量
-			    imageUploadLimit : 100 ,
+    			imageUploadLimit : 100 ,
 		        allowFileManager : true
 			});
 		});
 	</script>
 	<script type="text/javascript">
-		/**
-		 * 产区选择
-		 * @param  {[type]} num [description]
-		 * @return {[type]}     [description]
-		 */
-		function areaSel(num){
-			var pid = $('#origin-sel'+num).val();
-			var id = Number(num)+1;
-			var url = "{:url('admin/goods/ajax_get_origin')}";
-			var str = '<option value="">请选择产区</option>';
-			$.post(url,{'pid':pid},function(data){
-				if(data != ''){
-					for (var i = data.length - 1; i >= 0; i--) {
-						str += '<option value="'+data[i]['id']+'">'+data[i]['cname']+'</option>';
-					}
-					$('#origin-sel'+id).css('display','block');
-					$('#origin-sel'+id).html(str);
-					for (var i = 5; i > 1; i--) {
-						if(id < i){
-							$('#origin-sel'+i).html('<option value="">请选择产区</option>');
-							$('#origin-sel'+i).css('display','none');
-						}
-					}
-				}else{
-					for (var i = 5; i > 1; i--) {
-						if(num < i){
-							$('#origin-sel'+i).html('<option value="">请选择产区</option>');
-							$('#origin-sel'+i).css('display','none');
-						}
-					}
-				}
-			},'json');
-			
-		}
-
-	</script>
-	<script type="text/javascript">
-		// 品种
-		$('#varieties').change(function(){
-			var id = $(this).val();
-			var url = "{:url('admin/goods/ajax_get_varieties')}"
-			var str = '';
-			$.post(url,{'id':id},function(data){
-				if(data != ''){
-					for (var i = data.length - 1; i >= 0; i--) {
-						str += '<input type="checkbox" id="blend_id'+data[i]['id']+'" name="blend_id[]" value="'+data[i]['id']+'"> <label for="blend_id'+data[i]['id']+'">'+data[i]['cname']+'</label> ';
-					}
-
-					$('#blend_id').html(str);
-				}else{
-					$('#blend_id').html('暂无数据！');
-				}
-			},'json');
-		})
-
-		// 类型
-		$('#type_id').change(function(){
-			var cname = $('.type_name:selected').html();
-			$('#winetype').val(cname);
-		})
-
-		$('#cate').change(function(){
-			if($(this).val() == 84){
-				$('#other').css('display','block');
-			}
-			if($(this).val() == 1){
-				$('#other').css('display','none');
+		// 第一级选择
+		$('.one').click(function(){
+			var is_check = $(this).is(':checked');
+			var id =　$(this).attr('data_id');
+			if(is_check == false){
+				$('.one'+id).removeAttr('checked');
 			}
 		})
 
-		// $('#marketprice').focus(function(){
-		// 	var tax_point = $('#tax_point').val();
-		// 	var productprice = $('#productprice').val();
-		// 	var type = $('#type').val();
-		// 	// 计算零售价
-		// 	var marketprice = Number((tax_point / 100) * productprice ) + Number(productprice);
-		// 	// 保留小数后两位
-		// 	var last_price = Math.ceil(marketprice);
-		// 	if(type == 0){
-		// 		$(this).val(last_price);
-		// 	}
-		// })
+		// 第二级选择
+		$('.second').click(function(){
+			var is_check = $(this).is(':checked');
+			var id =　$(this).attr('data_id');
+			var pid =　$(this).attr('data_pid');
+			if(is_check == true){
+				$('#cate_id'+pid).attr('checked','true');
+			}else{
+				$('.second'+id).removeAttr('checked');
+			}
+		})
+
+		// 第三级选择
+		$('.three').click(function(){
+			var is_check = $(this).is(':checked');
+			var id =　$(this).attr('data_id');
+			var ppid =　$(this).attr('data_ppid');
+			var pid =　$(this).attr('data_pid');
+			if(is_check == true){
+				$('#second'+pid).attr('checked','true');
+				$('#cate_id'+ppid).attr('checked','true');
+			}else{
+				$('.three'+id).removeAttr('checked');
+			}
+		})
+
 	</script>
 {/block}

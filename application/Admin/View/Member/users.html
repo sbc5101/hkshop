@@ -57,9 +57,9 @@
 								<td class="actions">
 									<a href="{:url('admin/member/rev_user',['id' => $vo.id])}" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
 									{eq name="$vo.is_close" value="0"}
-									<a href="{:url('admin/member/action_rev_status',['id' => $vo.id,'is_close' => $vo.is_close])}" title="禁止" onclick="return confirm('确认禁止？');return false;" class="on-default remove-row"><i class="glyphicon glyphicon-remove"></i></a>
+									<a href="{:url('admin/member/action_rev_status',['id' => $vo.id,'is_close' => 1])}" title="禁止" onclick="return confirm('确认禁止？');return false;" class="on-default remove-row"><i class="glyphicon glyphicon-remove"></i></a>
 									{else \}
-									<a href="{:url('admin/member/action_rev_status',['id' => $vo.id,'is_close' => $vo.is_close])}" title="开启" onclick="return confirm('确认开启？');return false;" class="on-default remove-row"><i class="glyphicon glyphicon-ok"></i></a>
+									<a href="{:url('admin/member/action_rev_status',['id' => $vo.id,'is_close' => 0])}" title="开启" onclick="return confirm('确认开启？');return false;" class="on-default remove-row"><i class="glyphicon glyphicon-ok"></i></a>
 									{/eq}
 								</td>
 							</tr>

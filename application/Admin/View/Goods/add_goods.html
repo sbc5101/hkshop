@@ -66,13 +66,13 @@
 							{eq name="$v.pid" value="$vo.id"}
 							<br>
 							&nbsp;&nbsp;&nbsp;
-							<input class="one{$vo.id} second" data_id="{$v.id}" data_pid="{$vo.id}" type="checkbox" id="cate_id{$v.id}" name="cate_id[]" value="{$v.id}"> 
-							<label for="cate_id{$v.id}">{$v.cname}</label>
+							<input class="one{$vo.id} second" data_id="{$v.id}" data_pid="{$vo.id}" type="checkbox" id="second{$v.id}" name="cate_id[]" value="{$v.id}"> 
+							<label for="second{$v.id}">{$v.cname}</label>
 							<br>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							{volist name="cates_data" id="val"}
 							{eq name="$val.pid" value="$v.id"}
-							<input class="one{$vo.id} second{$v.id}" type="checkbox" id="cate_id{$val.id}" name="cate_id[]" value="{$val.id}"> 
+							<input class="one{$vo.id} second{$v.id} three" type="checkbox" id="cate_id{$val.id}" data_ppid="{$vo.id}" data_pid="{$v.id}" name="cate_id[]" value="{$val.id}"> 
 							<label for="cate_id{$val.id}">{$val.cname}</label>
 							{/eq}
 							{/volist}
@@ -147,9 +147,7 @@
 		$('.one').click(function(){
 			var is_check = $(this).is(':checked');
 			var id =　$(this).attr('data_id');
-			if(is_check == true){
-				$('.one'+id).attr('checked','true');
-			}else{
+			if(is_check == false){
 				$('.one'+id).removeAttr('checked');
 			}
 		})
@@ -160,12 +158,24 @@
 			var id =　$(this).attr('data_id');
 			var pid =　$(this).attr('data_pid');
 			if(is_check == true){
-				$('.second'+id).attr('checked','true');
-				$('#rules'+pid).attr('checked','true');
+				$('#cate_id'+pid).attr('checked','true');
 			}else{
 				$('.second'+id).removeAttr('checked');
 			}
 		})
 
+		// 第三级选择
+		$('.three').click(function(){
+			var is_check = $(this).is(':checked');
+			var id =　$(this).attr('data_id');
+			var ppid =　$(this).attr('data_ppid');
+			var pid =　$(this).attr('data_pid');
+			if(is_check == true){
+				$('#second'+pid).attr('checked','true');
+				$('#cate_id'+ppid).attr('checked','true');
+			}else{
+				$('.three'+id).removeAttr('checked');
+			}
+		})
 	</script>
 {/block}

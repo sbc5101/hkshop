@@ -111,28 +111,22 @@
 		/**
 		 * 会员禁止动作
 		 * @param  [type] $id [会员id]
-		 * @param  [type] $status [会员状态 0 正常 1 禁止]
+		 * @param  [type] $is_close [会员状态 0 正常 1 禁止]
 		 * @return [type]     [是否禁止成功]
 		 */
-		public function action_rev_status($id,$status)
+		public function action_rev_status($id,$is_close)
 		{
-			// 检测状态
-			if($status == 0){
-				$status = 1;
-			}else{
-				$status = 0;
-			}
-
+			// 判断参数
 			if(isset($id) && !empty($id)){
 				$result = Db::name('users')
 						->where('id',$id)
-						->update(['status' => $status]);
+						->update(['is_close' => $is_close]);
 						
 				if($result){
 					$msg = Db::name('users')
 							->where('id',$id)
 							->find();
-					$this->run_log('禁止会员用户数据操作。'.$msg['user_name']);
+					$this->run_log('禁止会员用户数据操作。'.$msg['username']);
 					$this->success('操作成功');
 				}else{
 					$this->error('操作失败');
@@ -153,21 +147,7 @@
 				$is_agent = 0;
 				$data = Db::name('users')
 						->find($id);
-				$superior = Db::name('users')
-							->where('id',$data['superior_id'])
-							->find();
-			
-				if(!empty($data['agent_time'])){
-					// 计算当前时间和绑定时间
-					$disparity = time() - $data['agent_time'];
-					// 计算十分钟
-					$ten_minute = 10*60;
-					if($disparity > $ten_minute){
-						$is_agent = 1;
-					}
-				}
-				$data['nick_name'] = urldecode($data['nick_name']);
-				return $this->fetch('rev_user',['data' => $data,'is_agent' => $is_agent,'superior' => $superior]);
+				return $this->fetch('rev_user',['data' => $data]);
 			}else{
 				$this->error('参数不能为空');
 			}
@@ -181,28 +161,58 @@
 		{
 			$message = Request::instance()->post();
 			$uid = Request::instance()->post('id');
-			$message['nick_name'] = urlencode($message['nick_name']);
-			unset($message['id']);
-			if(!empty($message['agent_id'])){
-				$user = Db::name('users')
-						->where('id',$uid)
-						->find();
-				if($user['is_agent'] == 1){
-					// 计算当前时间和绑定时间
-					$disparity = time() - $user['agent_time'];
-					// 计算十分钟
-					$ten_minute = 10*60;
-					if($disparity < $ten_minute){
-						$message['is_agent'] = 1;
-						$message['agent_time'] = time();
-					}else{
-						$message['agent_id'] = $user['agent_id'];
-					}
-				}else{
-					$message['is_agent'] = 1;
-					$message['agent_time'] = time();
-				}
+			unset($message['username']);
+
+			if(!empty($message['password'])){
+				$rule = [
+				    [
+				    	'first_name',
+				    	'require|chsAlpha',
+				    	'first name不能为空|请输入正确的first name'
+				    ],
+				    [
+				    	'last_name',
+				    	'require|chsAlpha',
+				    	'last name不能为空|请输入正确的last name'
+				    ],
+				    [
+					    'password',
+					    '/^[a-zA-Z0-9_]{6,18}$/ ',
+					    '密码不能为空|密码由6到18位字母，数字或下划线组成'
+				    ],
+				];
+				$data = [
+				    'first_name'  	=> $message['first_name'],
+				    'last_name'  	=> $message['last_name'],
+				    'password'   	=> $message['password'],
+				];
+				$message['password'] = md5($message['password']);
+			}else{
+				$rule = [
+				    [
+				    	'first_name',
+				    	'require|chsAlpha',
+				    	'first name不能为空|请输入正确的first name'
+				    ],
+				    [
+				    	'last_name',
+				    	'require|chsAlpha',
+				    	'last name不能为空|请输入正确的last name'
+				    ],
+				];
+				$data = [
+				    'first_name'  	=> $message['first_name'],
+				    'last_name'  	=> $message['last_name'],
+				];
+				unset($message['password']);
 			}
+			$validate = new Validate($rule);
+			$result   = $validate->check($data);
+
+			if(!$result){
+				$this->error($validate->getError());
+			}
+
 			$rev = Db::name('users')
 					->where('id',$uid)
 					->update($message);
@@ -210,7 +220,7 @@
 				$msg = Db::name('users')
 						->where('id',$uid)
 						->find();
-				$this->run_log('修改会员用户数据操作。'.$msg['user_name']);
+				$this->run_log('修改会员用户数据操作。'.$msg['username']);
 				$this->success('修改成功','member/users');
 			}else{
 				$this->error('修改失败');

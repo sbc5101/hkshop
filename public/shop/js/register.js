@@ -99,12 +99,7 @@ $(".join_btn").click(function(){
 			},
 			success:function(data){
 				if(data.code=="200"){
-					var access_cookie=data.data.access_token;
-					console.log(data);
-					$.cookie("name", access_cookie, {
-							expires: 7, //设置保存期限 
-							path: "/" //设置保存的路径 
-					})
+					window.href="";
 					
 				}else{
 					alert("提交失败");

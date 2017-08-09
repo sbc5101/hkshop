@@ -23,12 +23,9 @@
 		 */
 		public function _initialize()
 		{
-			// if(empty(Session::get('user.id','admin_user'))){
-			// 	// $this->error('请登录用户','login/index');
-			// 	$this->redirect('login/index');
-			// }else{
-				
-			// }
+			if(empty(Session::get('user.id','shop_user'))){
+				$this->redirect('login/login');
+			}
 		}
 
 		/**

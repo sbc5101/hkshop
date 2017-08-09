@@ -70,7 +70,7 @@
 			// 定义数据
 			$data['password'] = md5($message['password']);
 			$data['create_time'] = date('Y-m-d H:i:s',time());
-			$data['is_close'] = 1;
+			$data['is_close'] = 0;
 
 			$res = Db::name('users')
 					->insertGetId($data);

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:62:"D:\phpStudy\WWW\hkshop/application/admin\view\cates\index.html";i:1501639243;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1501574159;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:62:"D:\phpStudy\WWW\hkshop/application/admin\view\cates\index.html";i:1501639243;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1502179807;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,7 +76,7 @@
     
     <!-- Pages JS -->
     
-    <!-- <script type="text/javascript" src="/public/admin/assets/js/pages/index.js"></script> -->
+<!--     <script type="text/javascript" src="/public/admin/assets/js/pages/index.js"></script> -->
     
     <!-- end: JavaScript-->
   </head>

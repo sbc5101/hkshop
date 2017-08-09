@@ -8,10 +8,10 @@
 
 	namespace app\shop\controller;
 
-	use app\shop\controller\Base;
+	use think\Controller;
 	// use think\Cache;
 
-	class Index extends Base
+	class Index extends Controller
 	{
 		public function index()
 		{

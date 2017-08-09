@@ -23,8 +23,6 @@
 		public function index()
 		{
 			// 初始化数据
-			$title = Request::instance()->get('title');
-			$type = Request::instance()->get('type');
 			$status = Request::instance()->get('status');
 			$page = empty(Request::instance()->get('page')) ? '1' : Request::instance()->get('page');
 
@@ -42,8 +40,6 @@
 			// if(isset($status) && $status !== ''){
 			// 	$status_where = 'g.status="'.$status.'"';
 			// }
-			// 特殊字符处理
-			$title = urlencode($title);
 
 			$data = Db::name('goods')
 					->where('is_delete=0')
@@ -55,14 +51,11 @@
 					->order('stock','desc')
 					->paginate(20,false,[
 						'query' => [
-							'type' => $type,
 							'status' => $status,
-							'title' => $title,
 							],
 						]);
-			$title = urldecode($title);
 
-			return $this->fetch('index',['data' => $data,'title' => $title,'type' => $type,'status' => $status,'page' => $page]);
+			return $this->fetch('index',['data' => $data,'status' => $status,'page' => $page]);
 		}
 
 		/**
@@ -111,13 +104,18 @@
 			}
 			
 			$title_exists = Db::name('goods')
-							->where('type',$msg['type'])
-							->where('title',$title)
+							->where('eng_title',$msg['eng_title'])
+							->where('hk_title',$msg['hk_title'])
 							->where('years',$msg['years'])
 							->find();
 			if($title_exists){
 				$this->error('商品名已存在！');
 			}
+			// 合并数据
+			$arr = [
+				'create_time' => date('Y-m-d H:i:s',time()),
+			];
+			$goods_data = array_merge($goods_data,$arr);
 			// 添加商品数据
 			$res = Db::name('goods')
 				->insertGetId($goods_data);
@@ -150,10 +148,11 @@
 			if(!array_key_exists('goods_msg', $data)){
 				$data['goods_msg'] = '';
 			}
-
+			$cate_id = implode(',',$data['cate_id']);
 			// 判断数据不能为空
 			$rule = [
-				['title','require','商品名不能为空'],
+				['hk_title','require','商品中文名不能为空'],
+				['eng_title','require','商品英文名不能为空'],
 			    ['years','require','年份不能为空'],
 			    ['marketprice','require','零售价不能为空'],
 			    ['storeprice','require','市场价不能为空'],
@@ -162,7 +161,8 @@
 			    ['stock','require','库存不能为空'],
 			];
 			$msg = [
-				'title'  => $data['gname'],
+				'hk_title'  => $data['hk_title'],
+				'eng_title'  => $data['eng_title'],
 			    'years'  => $data['years'],
 			    'marketprice'  => $data['marketprice'],
 			    'storeprice'  => $data['storeprice'],
@@ -180,15 +180,6 @@
 
 			// 添加数据
 			$arr =[
-				'level' 			=> 	$data['level-txt'],
-				'variety' 			=> 	$data['variety-txt'],
-				'chateau' 			=> 	$data['chateau-txt'],
-				'origin' 			=> 	$data['origin-txt'],
-				'taste'  			=> 	$data['taste'],
-				'component' 		=> 	$data['component'],
-				'alcohol'  			=> 	$data['alcohol'],
-				'condition' 		=> 	$data['condition'],
-				'breathing' 		=> 	$data['breathing'],
 				'status'  			=> 	$data['status'],
 				'area_id' 			=> 	$data['area_id'],
 				'cate_id'  			=> 	$cate_id,
@@ -210,101 +201,26 @@
 		 */
 		public function rev_goods($id)
 		{	
-			$title = Request::instance()->get('title');
-			$type = Request::instance()->get('type');
 			$status = Request::instance()->get('status');
 			$page = Request::instance()->get('page');
 
-			$area_data = self::cate_route('goods_areas','area');
-			$cate_data = self::cate_route('cates','cate');
+			$cates_data = self::cate_route('cates','cate');
+			$areas_data = Db::name('goods_areas')
+						->where('display',1)
+						->select();
 			$goods_data = Db::name('goods')
 						->where('id',$id)
 						->find();
-			// 酒庄数据
-			$chateau = Db::name('goods_chateau')
-						->select();
+			$cates = explode(',',$goods_data['cate_id']);
 
-			// 初始化数据
-			$manor = '';
-			$blend = [];
-			$varieties = '';
-
-			$quick_cate = Db::name('cates_quick')
-						->field('id,quick_name')
-						->where('display',0)
-						->select();
-			$theme_data = Db::name('activity_theme')
-							->field('id,t_title')
-							->where('is_close',1)
-							->select();
-			// 处理数据
-			$goods_data['content'] 	= htmlspecialchars_decode($goods_data['content']);
-			$echoosewine 			= empty($goods_data['echoosewine']) ? '' : explode(',',$goods_data['echoosewine']);
-			$advanced 				= empty($goods_data['advanced']) ? '' : explode(',',$goods_data['advanced']);
-			$wine_style 			= empty($goods_data['wine_style']) ? '' : explode(',',$goods_data['wine_style']);
-			$fine_wine 				= empty($goods_data['fine_wine']) ? '' : explode(',',$goods_data['fine_wine']);
-			$theme 				= empty($goods_data['theme']) ? '' : explode(',',$goods_data['theme']);
-			$blend 					= empty($goods_data['blend_id']) ? '' : explode(',',$goods_data['blend_id']);
-			$origin 				= empty($goods_data['origin_id']) ? '' : explode(',',$goods_data['origin_id']);
-			$quick_cateid 			= empty($goods_data['quick_cateid']) ? '' : explode(',',trim($goods_data['quick_cateid'],','));
-			$cate 					= empty($goods_data['cate_id']) ? '' : explode(',',$goods_data['cate_id']);
-
-			// 防止数据为空
-			if(empty($origin[0])){
-				$origin[0] = '';
-			}		
-			if(empty($origin[1])){
-				$origin[1] = '';
-			}
-			if(empty($origin[2])){
-				$origin[2] = '';
-			}
-			if(empty($origin[3])){
-				$origin[3] = '';
-			}
-			if(empty($origin[4])){
-				$origin[4] = '';
-			}
-
-			// 判断分类混酿类型ID不为空
-			if(!empty($goods_data['blend_id'])){
-				$blend_id 	= explode(':',$goods_data['blend_id']);
-				$varieties 	= $blend_id[0];
-				if(!empty($blend_id[1])){
-					$blend 	=  explode(',',$blend_id[1]);
-				}
-			}
-
-			// 判断分类产地不为空
-			if(!empty($origin)){
-				$manor = Db::name('cates')
-						->where('pid',$origin[0])
-						->select();
-			}
-	
 			return $this->fetch('rev_goods',[
 					'goods_id' 		=> $id,
-					'cate' 			=> $cate_data,
-					'goods' 		=> $goods_data,
-					'area'			=> $area_data,
-					'echoosewine' 	=> $echoosewine,
-					'blend' 		=> $blend,
-					'origin' 		=> $origin,
-					'manor' 		=> $manor,
-					'cate_id' 		=> $cate,
-					'quick_cateid' 	=> $quick_cateid,
-					'quick_cate' 	=> $quick_cate,
-					'varieties' 	=> $varieties,
-					'title' 		=> $title,
-					'type' 			=> $type,
+					'cates_data' 	=> $cates_data,
+					'areas_data' 	=> $areas_data,
+					'goods'			=> $goods_data,
 					'status' 		=> $status,
 					'page' 			=> $page,
-					'chateau' 		=> $chateau,
-					'advanced' 		=> $advanced,
-					'wine_style' 	=> $wine_style,
-					'fine_wine' 	=> $fine_wine,
-					'theme_data' 	=> $theme_data,
-					'theme' 		=> $theme,
+					'cates' 		=> $cates,
 				]);
 		}
 
@@ -315,15 +231,12 @@
 		public function action_rev_goods()
 		{
 			$msg = Request::instance()->post();
-			$goods_id = Request::instance()->post('goods_id');
-			$title = Request::instance()->post('gname');
-			$highlight_img = Request::instance()->file('highlight_img');
-			$vender_img = Request::instance()->file('vender_img');
+			$goods_id = Request::instance()->post('id');
 			
 			$boolean = Db::name('goods')
 						->where('id','<>',$goods_id)
-						->where('type',$msg['type'])
-						->where('title',$title)
+						->where('eng_title',$msg['eng_title'])
+						->where('hk_title',$msg['hk_title'])
 						->where('years',$msg['years'])
 						->find();
 		
@@ -332,13 +245,13 @@
 			}
 
 			// 检测数据
-			$goods_data = $this->check_goods_data($msg,$highlight_img,$vender_img);
+			$goods_data = $this->check_goods_data($msg);
 
 			$res = Db::name('goods')
 					->where('id',$goods_id)
 					->update($goods_data);
 			if($res !== false){
-				$this->run_log('修改商品数据操作。'.$title);
+				$this->run_log('修改商品数据操作。'.$msg['hk_title']);
 				$this->success('修改成功！');
 			}else{
 				$this->error('修改失败！');
@@ -457,10 +370,10 @@
 						->delete();
 			if($boolean){
 				$msg = Db::name('goods')
-							->field('title')
+							->field('hk_title')
 							->where('id',$res['goods_id'])
 							->find();
-				$this->run_log('删除商品图片操作。'.$msg['title']);
+				$this->run_log('删除商品图片操作。'.$msg['hk_title']);
 				$this->success('删除成功！');
 			}else{
 				$this->error('删除失败！');
@@ -490,10 +403,10 @@
 					->insertAll($data);
 			if($res){
 				$msg = Db::name('goods')
-							->field('title')
+							->field('hk_title')
 							->where('id',$goods_id)
 							->find();
-				$this->run_log('新增商品图片操作。'.$msg['title']);
+				$this->run_log('新增商品图片操作。'.$msg['hk_title']);
 				$this->success('增加图片成功！');
 			}else{
 				$this->error('增加图片失败！');
@@ -518,10 +431,10 @@
 							->update(['cover' => '0']);
 				if($boolean !== false){
 					$msg = Db::name('goods')
-							->field('title')
+							->field('hk_title')
 							->where('id',$goods_id)
 							->find();
-					$this->run_log('修改商品图片封面操作。'.$msg['title']);
+					$this->run_log('修改商品图片封面操作。'.$msg['hk_title']);
 					$this->success('修改成功！');
 				}else{
 					$this->error('修改失败！');

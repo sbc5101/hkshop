@@ -75,7 +75,7 @@
 				Session::set('user.name', $res['username'],'shop_user');
 				Session::set('user.first_name', $res['first_name'],'shop_user');
 				Session::set('user.last_name', $res['last_name'],'shop_user');
-				return json(['code' => 200,'message' => 'success','data' => ['access_token' => md5($res['id'])]]);
+				return json(['code' => 200,'message' => 'success',]);
 			}else{
 				return json(['code' => 400,'message' => 'false']);
 			}

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:62:"D:\phpStudy\WWW\hkshop/application/admin\view\goods\index.html";i:1501566464;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1501574159;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:62:"D:\phpStudy\WWW\hkshop/application/admin\view\goods\index.html";i:1502179348;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1502179807;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,7 +76,7 @@
     
     <!-- Pages JS -->
     
-    <!-- <script type="text/javascript" src="/public/admin/assets/js/pages/index.js"></script> -->
+<!--     <script type="text/javascript" src="/public/admin/assets/js/pages/index.js"></script> -->
     
     <!-- end: JavaScript-->
   </head>
@@ -274,15 +274,15 @@
 					<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
 				</div>
 			</div>
-			<div class=" pull-left">
+			<!-- <div class=" pull-left">
 				<form action="<?php echo url('goods/index'); ?>" method="get" style="margin: 10px 0 0 15px;">
 					<label>
 						<input type="text" name="title" class="form-control" value="" placeholder="按商品名搜索">
 					</label>
 					<button type="submit" class="btn btn-success">确定</button>
 				</form>
-			</div>
-			&nbsp;
+			</div> -->
+			<!-- &nbsp; -->
 			<div class=" pull-left">
 				<form action="<?php echo url('goods/index'); ?>" method="get" style="margin: 10px 0 0 15px;">
 					<label>商品状态：</label>
@@ -349,8 +349,8 @@
 									<?php endif; ?>
 								</td>
 								<td class="actions">
-									<a href="<?php echo url('admin/goods/rev_goods',['id' => $vo['id']]); ?>?title=<?php echo $title; ?>&type=<?php echo $type; ?>&status=<?php echo $status; ?>&page=<?php echo $page; ?>" class="on-default edit-row" title="修改"><i class="fa fa-pencil"></i></a>
-									<a href="<?php echo url('admin/goods/rev_images',['id' => $vo['id']]); ?>?title=<?php echo $title; ?>&type=<?php echo $type; ?>&status=<?php echo $status; ?>&page=<?php echo $page; ?>" class="on-default remove-row" title="图片管理"><i class="fa fa-picture-o"></i></a>
+									<a href="<?php echo url('admin/goods/rev_goods',['id' => $vo['id']]); ?>?status=<?php echo $status; ?>&page=<?php echo $page; ?>" class="on-default edit-row" title="修改"><i class="fa fa-pencil"></i></a>
+									<a href="<?php echo url('admin/goods/rev_images',['id' => $vo['id']]); ?>?status=<?php echo $status; ?>&page=<?php echo $page; ?>" class="on-default remove-row" title="图片管理"><i class="fa fa-picture-o"></i></a>
 									<a href="<?php echo url('admin/goods/action_rev_del',['id' => $vo['id'],'status' => '1']); ?>" class="on-default remove-row" title="删除" onclick="return confirm('确认删除？');return false;"><i class="fa fa-trash-o"></i></a>
 								</td>
 							</tr>

@@ -8,10 +8,10 @@
 
 	namespace app\shop\controller;
 
-	use app\shop\controller\Base;
+	use think\Controller;
 	// use think\Cache;
 
-	class Goods extends Base
+	class Goods extends Controller
 	{
 		public function goods_detail()
 		{

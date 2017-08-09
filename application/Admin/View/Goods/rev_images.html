@@ -5,14 +5,14 @@
 {/block}
 
 {block name="crumbs"}
-	<li class="active"><a href="{:url('admin/goods/index')}?title={$title}&type={$type}&status={$status}&page={$page}">商品管理</a></li>
+	<li class="active"><a href="{:url('admin/goods/index')}?status={$status}&page={$page}">商品管理</a></li>
 	<li class="active">修改图片</li>
 {/block}
 
 {block name="contents"}
 	<div class="panel panel-default bk-bg-white col-md-12">
 		<div class="panel-heading bk-bg-white">
-			<h6><i class="fa fa-indent red"></i>修改图片</h6>&nbsp;&nbsp;&nbsp;{$goods.title}&nbsp;|&nbsp;{$goods.years}
+			<h6><i class="fa fa-indent red"></i>修改图片</h6>&nbsp;&nbsp;&nbsp;{$goods.hk_title}&nbsp;{$goods.eng_title}&nbsp;|&nbsp;{$goods.years}
 			<a style="border: 1px solid black;font-size: 30px;" href="{:url('admin/goods/rev_images',['id' => $goods_id-1])}">上一个</a>
 			<a style="border: 1px solid black;font-size: 30px;" href="{:url('admin/goods/rev_images',['id' => $goods_id+1])}">下一个</a>
 			<div class="panel-actions">

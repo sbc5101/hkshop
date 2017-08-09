@@ -8,10 +8,10 @@
 
 	namespace app\shop\controller;
 
-	use app\shop\controller\Base;
+	use think\Controller;
 	// use think\Cache;
 
-	class Cart extends Base
+	class Cart extends Controller
 	{
 		public function shopping_cart()
 		{

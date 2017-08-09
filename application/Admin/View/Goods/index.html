@@ -18,15 +18,15 @@
 					<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
 				</div>
 			</div>
-			<div class=" pull-left">
+			<!-- <div class=" pull-left">
 				<form action="{:url('goods/index')}" method="get" style="margin: 10px 0 0 15px;">
 					<label>
 						<input type="text" name="title" class="form-control" value="" placeholder="按商品名搜索">
 					</label>
 					<button type="submit" class="btn btn-success">确定</button>
 				</form>
-			</div>
-			&nbsp;
+			</div> -->
+			<!-- &nbsp; -->
 			<div class=" pull-left">
 				<form action="{:url('goods/index')}" method="get" style="margin: 10px 0 0 15px;">
 					<label>商品状态：</label>
@@ -93,8 +93,8 @@
 									{/eq}
 								</td>
 								<td class="actions">
-									<a href="{:url('admin/goods/rev_goods',['id' => $vo.id])}?title={$title}&type={$type}&status={$status}&page={$page}" class="on-default edit-row" title="修改"><i class="fa fa-pencil"></i></a>
-									<a href="{:url('admin/goods/rev_images',['id' => $vo.id])}?title={$title}&type={$type}&status={$status}&page={$page}" class="on-default remove-row" title="图片管理"><i class="fa fa-picture-o"></i></a>
+									<a href="{:url('admin/goods/rev_goods',['id' => $vo.id])}?status={$status}&page={$page}" class="on-default edit-row" title="修改"><i class="fa fa-pencil"></i></a>
+									<a href="{:url('admin/goods/rev_images',['id' => $vo.id])}?status={$status}&page={$page}" class="on-default remove-row" title="图片管理"><i class="fa fa-picture-o"></i></a>
 									<a href="{:url('admin/goods/action_rev_del',['id' => $vo.id,'status' => '1'])}" class="on-default remove-row" title="删除" onclick="return confirm('确认删除？');return false;"><i class="fa fa-trash-o"></i></a>
 								</td>
 							</tr>

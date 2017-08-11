@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>登录页面</title>
+		<title>登录</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     	<meta name="apple-mobile-app-capable" content="yes">
     	<meta name="description" content="">
@@ -22,12 +22,15 @@
 			<div class="signWrap">
 				<form action="" method="post" class="formWarp">					
 					<input type="email" placeholder="Email" class="login_email"/>
+					<p class='mail_msg' style="display: none;color:#dc143c">请输入邮箱</p>
 					<input type="password" placeholder="Password" class="login_pass" />
+					<p class="pass_msg" style="display: none;color:#dc143c">请输入密码</p>
 					<a href="###" class="forgot_pass">Forgot your password?</a>
-					<button class="btn">
-						Sign In						
-					</button>
+					
 				</form>
+				<button class="btn">
+					Sign In						
+				</button>
 				<a href="###" class="btn_fackbook">
 					Or Sign In with Facebook
 				</a>
@@ -41,3 +44,86 @@
 		</div>
 	</body>
 </html>
+{js href="/public/shop/js/jquery-3.1.1.min.js"}
+<script type="text/javascript">
+	//首次聚焦输入框
+	window.onload=function(){
+		$(".login_email").focus();
+	}
+	//失去焦点判断
+	$("input").blur(function(){
+		//对邮箱判断
+		if($(this).is(".login_email")){
+			var loginEmail=/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+			if($(".login_email").val!=""){
+				if(!(loginEmail.test($(".login_email").val()))){
+					$(".mail_msg").show();
+					$(".mail_msg").text("邮箱输入格式不正确！");
+					return false;
+				}else if(loginEmail){
+					$(".mail_msg").hide();
+					$(".mail_msg").text("");
+					return true;
+				}
+			}else{
+				$(".mail_msg").text("");
+			}
+		}
+		//对密码的判断
+		if($(this).is(".login_pass")){
+			var loginPass= /^[A-Za-z0-9]{6,20}$/;
+			if($(".login_pass").val()!=""){
+				if(!(loginPass.test($(".login_pass").val()))){
+					$(".pass_msg").show();
+					$(".pass_msg").text("密碼輸入不合法");
+					return false;
+				}else if(loginPass){
+					$(".pass_msg").hide();
+					return true;
+				}
+			}else{
+				$(".pass_msg").text("");
+			}
+		}
+	})
+	
+	//点击按钮提交
+	$(".btn").click(function(){
+		var loginEmail=/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+		var loginPass= /^[A-Za-z0-9]{6,20}$/;
+		
+		var postEmail=$(".login_email").val();
+		var postPassword=$(".login_pass").val();
+		if(loginEmail.test(postEmail)&&loginPass.test(postPassword)){
+			$.ajax({
+				type:"post",
+				url:"/shop/login/action_login.html",
+				async:true,
+				datatype:"json",
+				data:{
+					"username":postEmail,
+					"password":postPassword
+				},
+				success:function(data){
+					if(data.code=="200"){
+						console.log(data);
+					}else{
+						alert("提交失败！");
+					}
+				},
+				error:function(e){
+					console.log(e);
+				}
+			});
+		}else{
+			if($(".login_email").val()==""){
+				$(".mail_msg").show();
+				$(".mail_msg").text("请输入邮箱号！");
+			}
+			if($(".login_pass").val()==""){
+				$(".pass_msg").show();
+				$(".pass_msg").text("请输入密码");
+			}
+		}
+	})
+</script>

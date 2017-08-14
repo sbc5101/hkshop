@@ -8,7 +8,7 @@
 	use think\Session;
 
 	/**
-	* @Author: Yoshop
+	* @Author: Hkshop
 	* 后台登入类
 	* @Date:   2017-07-19 15:38:14
 	* @Last Modified time: 2017-07-19 16:20:06

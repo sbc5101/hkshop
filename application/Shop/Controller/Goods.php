@@ -9,13 +9,30 @@
 	namespace app\shop\controller;
 
 	use think\Controller;
+	use think\Request;
+	use think\Db;
 	// use think\Cache;
 
 	class Goods extends Controller
 	{
-		public function goods_detail()
+		/**
+		 * 商品详情页面
+		 * @param  [type] $id [description]
+		 * @return [type]     [description]
+		 */
+		public function goods_detail($id)
 		{
-			return $this->fetch('goods_detail');
+			$data = Db::name('goods')
+						->where('id',$id)
+						->find();
+			$goods_images = Db::name('goods_images')
+								->where('goods_id',$id)
+								->order('cover','asc')
+								->select();
+			return $this->fetch('goods_detail',[
+					'goods_images' 	=> $goods_images,
+					'data' 			=> $data,
+				]);
 		}
 
 	}

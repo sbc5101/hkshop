@@ -1,6 +1,6 @@
 <?php
 	/**
-	* @Author: Yoshop
+	* @Author: Hkshop
 	* 商品管理类
 	* @Date:   2016-1-2 15:38:14
 	* @Last Modified time: 2016-1-2 16:20:06
@@ -129,7 +129,7 @@
 					Db::name('goods_images')
 						->insertAll($imgs);
 				}
-				$this->run_log('新增商品数据操作。'.$title);
+				$this->run_log('新增商品数据操作。'.$msg['hk_title']);
 				$this->success('商品添加成功！','goods/add_goods');
 			}else{
 				$this->error('商品添加失败！');
@@ -186,6 +186,7 @@
 			    'record_goosnum'  	=> 	$data['record_goosnum'],
 			    'last_time'			=> 	date('Y-m-d H:i:s',time()),
 			    'sort'				=> 	$data['sort'],
+			    'is_home'			=> 	$data['is_home'],
 			];
 
 			//合并数组 

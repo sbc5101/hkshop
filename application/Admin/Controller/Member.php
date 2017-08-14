@@ -6,7 +6,7 @@
 	use think\Db;
 	use think\Request;
 	/**
-	* @Author: Yoshop
+	* @Author: Hkshop
 	* 后台会员管理类
 	* @Date:   2016-12-30 15:38:14
 	* @Last Modified time: 2016-12-30 16:20:06

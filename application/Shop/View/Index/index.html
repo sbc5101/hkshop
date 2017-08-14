@@ -11,9 +11,9 @@
 			<label class="select_label">
 				<span class="select_labelText">Ship to:</span>
 				<select class="selectContent">
-					<option value="DL">DL</option>
-					<option value="HK" selected="selected">HK</option>
-					<option value="TW">TW</option>
+					{volist name="$goods_areas" id="v"}
+					<option value="{$v.id}" {eq name="$v.id" value="$area_id"} selected {/eq}>{$v.area_name}</option>
+					{/volist}
 				</select>
 			</label>
 			<div class="search_box">
@@ -28,21 +28,13 @@
 	<!--轮播图区域-->
 	<div class="swiper-container swiper-img">
 	    <div class="swiper-wrapper">
+	    	{volist name="$carousel" id="v" empty="<div class="swiper-slide">暂无轮播数据</div>"}
 	        <div class="swiper-slide">
-	        	<a href="###">
-	        		<img src="/public/shop/img/swiper1-1.png"/>
+	        	<a href="{$v.url}">
+	        		<img src="{$v.img_name}"/>
 	        	</a>
 	        </div>
-	        <div class="swiper-slide">
-	        	<a href="###">
-	        		<img src="/public/shop/img/swiper1-1.png"/>
-	        	</a>
-	        </div>
-	        <div class="swiper-slide">
-	        	<a href="###">
-	        		<img src="/public/shop/img/swiper1-1.png"/>
-	        	</a>
-	        </div>
+	        {/volist}
 	    </div>
 		<div class="swiper-pagination"></div>
 	</div>
@@ -52,15 +44,16 @@
 		<!--滑动区域-->
 		<div class="swiper-container swiper1">
 	        <div class="swiper-wrapper">
+		        {volist name="$most_goods" id="v"}
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
-	            		<a href="{:url('shop/register/index')}">
-	            		<img src="img/goods_img1.png"/>
+	            		<a href="{:url('shop/goods/goods_detail',['id' => $v.id])}">
+	            		<img src="{$v.iname}"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
+	            		<p class="En_name">{$v.eng_title}</p>
+	            		<p class="Cn_name">{$v.hk_title}</p>
 	            		<div class="score">
 	            			<ul>
 	            				<li>
@@ -71,119 +64,21 @@
 	            		</div>
 	            		<!--价格-->
 	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
+	            			<span class="price">HK$ {$v.marketprice}</span>
+	            			<span class="marketprice">HK$ {$v.storeprice}</span>
 	            		</p>
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
+	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
 	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
+	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="{:url('shop/goods/goods_detail')}">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
+	            {/volist}
 	        </div>
 		</div>
 	</div>
@@ -193,15 +88,16 @@
 		<!--滑动区域-->
 		<div class="swiper-container swiper1">
 	        <div class="swiper-wrapper">
+	        	{volist name="$new_goods" id="v"}
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
+	            		<a href="{:url('shop/goods/goods_detail',['id' => $v.id])}">
+	            		<img src="{$v.iname}"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
+	            		<p class="En_name">{$v.eng_title}</p>
+	            		<p class="Cn_name">{$v.hk_title}</p>
 	            		<div class="score">
 	            			<ul>
 	            				<li>
@@ -212,119 +108,21 @@
 	            		</div>
 	            		<!--价格-->
 	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
+	            			<span class="price">HK$ {$v.marketprice}</span>
+	            			<span class="marketprice">HK$ {$v.storeprice}</span>
 	            		</p>
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
+	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
 	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
+	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
+	          	{/volist}
 	        </div>
 		</div>
 	</div>
@@ -334,15 +132,16 @@
 		<!--滑动区域-->
 		<div class="swiper-container swiper1">
 	        <div class="swiper-wrapper">
+	        	{volist name="$red_goods" id="v"}
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
+	            		<a href="{:url('shop/goods/goods_detail',['id' => $v.id])}">
+	            		<img src="{$v.iname}"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
+	            		<p class="En_name">{$v.eng_title}</p>
+	            		<p class="Cn_name">{$v.hk_title}</p>
 	            		<div class="score">
 	            			<ul>
 	            				<li>
@@ -353,119 +152,21 @@
 	            		</div>
 	            		<!--价格-->
 	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
+	            			<span class="price">HK$ {$v.marketprice}</span>
+	            			<span class="marketprice">HK$ {$v.storeprice}</span>
 	            		</p>
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
+	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
 	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
+	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
+	          	{/volist}
 	        </div>
 		</div>
 	</div>
@@ -475,15 +176,16 @@
 		<!--滑动区域-->
 		<div class="swiper-container swiper1">
 	        <div class="swiper-wrapper">
+	        	{volist name="$white_goods" id="v"}
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
+	            		<a href="{:url('shop/goods/goods_detail',['id' => $v.id])}">
+	            		<img src="{$v.iname}"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
+	            		<p class="En_name">{$v.eng_title}</p>
+	            		<p class="Cn_name">{$v.hk_title}</p>
 	            		<div class="score">
 	            			<ul>
 	            				<li>
@@ -494,119 +196,21 @@
 	            		</div>
 	            		<!--价格-->
 	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
+	            			<span class="price">HK$ {$v.marketprice}</span>
+	            			<span class="marketprice">HK$ {$v.storeprice}</span>
 	            		</p>
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
+	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
 	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
+	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
+	            {/volist}
 	        </div>
 		</div>
 	</div>
@@ -616,15 +220,16 @@
 		<!--滑动区域-->
 		<div class="swiper-container swiper1">
 	        <div class="swiper-wrapper">
+		        {volist name="$white_goods" id="v"}
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
+	            		<a href="{:url('shop/goods/goods_detail',['id' => $v.id])}">
+	            		<img src="{$v.iname}"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
+	            		<p class="En_name">{$v.eng_title}</p>
+	            		<p class="Cn_name">{$v.hk_title}</p>
 	            		<div class="score">
 	            			<ul>
 	            				<li>
@@ -635,119 +240,21 @@
 	            		</div>
 	            		<!--价格-->
 	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
+	            			<span class="price">HK$ {$v.marketprice}</span>
+	            			<span class="marketprice">HK$ {$v.storeprice}</span>
 	            		</p>
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
+	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
 	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
+	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
+	         	{/volist}
 	        </div>
 		</div>
 	</div>

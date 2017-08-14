@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * @ YoShop
+	 * @ Hkshop
 	 * 后台基础类
 	 * @Date:   2016-12-29 15:37:53
 	 * @Last Modified time: 2017-01-16 11:26:11

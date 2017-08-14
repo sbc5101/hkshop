@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:66:"D:\phpStudy\WWW\hkshop/application/admin\view\goods\area_list.html";i:1501576894;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1501574159;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:66:"D:\phpStudy\WWW\hkshop/application/admin\view\goods\area_list.html";i:1501576894;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1502682033;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,7 +76,7 @@
     
     <!-- Pages JS -->
     
-    <!-- <script type="text/javascript" src="/public/admin/assets/js/pages/index.js"></script> -->
+<!--     <script type="text/javascript" src="/public/admin/assets/js/pages/index.js"></script> -->
     
     <!-- end: JavaScript-->
   </head>
@@ -209,6 +209,16 @@
                       </li>
                     </ul>
                   </li>
+                  <li class="nav-parent">
+                    <a>
+                      <i class="fa fa-cogs" aria-hidden="true"></i><span>商城设置</span>
+                    </a>
+                    <ul class="nav nav-children">
+                      <li>
+                        <a href="<?php echo url('admin/advert/carousel_list'); ?>"><span class="text"> 轮播图管理</span></a>
+                      </li>
+                    </ul>
+                  </li>
                   <!-- <?php  if(rule_count(1) == 1){  ?> -->
                   <li class="nav-parent">
                     <a>
@@ -225,6 +235,7 @@
                     </ul>
                   </li>
                   <!-- <?php  }  ?> -->
+
                 </ul>
               </nav>
             </div>

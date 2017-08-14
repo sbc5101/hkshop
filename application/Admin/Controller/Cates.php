@@ -1,6 +1,6 @@
 <?php
 	/**
-	* @Author: Yoshop
+	* @Author: Hkshop
 	* 分类管理类
 	* @Date:   2016-12-31 15:38:14
 	* @Last Modified time: 2016-12-31 16:20:06

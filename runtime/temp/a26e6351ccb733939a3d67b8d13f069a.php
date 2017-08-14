@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:66:"D:\phpStudy\WWW\hkshop/application/admin\view\goods\add_goods.html";i:1501641852;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1502179807;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:66:"D:\phpStudy\WWW\hkshop/application/admin\view\goods\add_goods.html";i:1502674703;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1502179807;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -319,12 +319,12 @@
 							<?php if(is_array($cates_data) || $cates_data instanceof \think\Collection): $i = 0; $__LIST__ = $cates_data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;if($v['pid'] == $vo['id']): ?>
 							<br>
 							&nbsp;&nbsp;&nbsp;
-							<input class="one<?php echo $vo['id']; ?> second" data_id="<?php echo $v['id']; ?>" data_pid="<?php echo $vo['id']; ?>" type="checkbox" id="cate_id<?php echo $v['id']; ?>" name="cate_id[]" value="<?php echo $v['id']; ?>"> 
-							<label for="cate_id<?php echo $v['id']; ?>"><?php echo $v['cname']; ?></label>
+							<input class="one<?php echo $vo['id']; ?> second" data_id="<?php echo $v['id']; ?>" data_pid="<?php echo $vo['id']; ?>" type="checkbox" id="second<?php echo $v['id']; ?>" name="cate_id[]" value="<?php echo $v['id']; ?>"> 
+							<label for="second<?php echo $v['id']; ?>"><?php echo $v['cname']; ?></label>
 							<br>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<?php if(is_array($cates_data) || $cates_data instanceof \think\Collection): $i = 0; $__LIST__ = $cates_data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;if($val['pid'] == $v['id']): ?>
-							<input class="one<?php echo $vo['id']; ?> second<?php echo $v['id']; ?>" type="checkbox" id="cate_id<?php echo $val['id']; ?>" name="cate_id[]" value="<?php echo $val['id']; ?>"> 
+							<input class="one<?php echo $vo['id']; ?> second<?php echo $v['id']; ?> three" type="checkbox" id="cate_id<?php echo $val['id']; ?>" data_ppid="<?php echo $vo['id']; ?>" data_pid="<?php echo $v['id']; ?>" name="cate_id[]" value="<?php echo $val['id']; ?>"> 
 							<label for="cate_id<?php echo $val['id']; ?>"><?php echo $val['cname']; ?></label>
 							<?php endif; endforeach; endif; else: echo "" ;endif; ?>
 							<br>
@@ -371,6 +371,19 @@
 					<textarea  id="container" name="goods_msg" style="width:750px;height:400px;"></textarea>
 				</div>
 				<div class="form-group">
+					<label for="nf-user">是否首页展示</label>
+					<div >
+						<div class="radio-custom radio-inline" style="float:left;">
+							<input type="radio" id="is_home1" name="is_home" value="0" checked> 
+							<label for="is_home1"> 否</label>
+						</div>
+						<div class="radio-custom radio-inline">
+							<input type="radio" id="is_home2" name="is_home" value="1"> 
+							<label for="is_home2"> 是</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
 					<label for="nf-password">排序</label>
 					<input type="text" maxlength="3" name="sort" class="form-control" value="0">
 				</div>
@@ -396,9 +409,7 @@
 		$('.one').click(function(){
 			var is_check = $(this).is(':checked');
 			var id =　$(this).attr('data_id');
-			if(is_check == true){
-				$('.one'+id).attr('checked','true');
-			}else{
+			if(is_check == false){
 				$('.one'+id).removeAttr('checked');
 			}
 		})
@@ -409,13 +420,25 @@
 			var id =　$(this).attr('data_id');
 			var pid =　$(this).attr('data_pid');
 			if(is_check == true){
-				$('.second'+id).attr('checked','true');
-				$('#rules'+pid).attr('checked','true');
+				$('#cate_id'+pid).attr('checked','true');
 			}else{
 				$('.second'+id).removeAttr('checked');
 			}
 		})
 
+		// 第三级选择
+		$('.three').click(function(){
+			var is_check = $(this).is(':checked');
+			var id =　$(this).attr('data_id');
+			var ppid =　$(this).attr('data_ppid');
+			var pid =　$(this).attr('data_pid');
+			if(is_check == true){
+				$('#second'+pid).attr('checked','true');
+				$('#cate_id'+ppid).attr('checked','true');
+			}else{
+				$('.three'+id).removeAttr('checked');
+			}
+		})
 	</script>
 
           </div>  

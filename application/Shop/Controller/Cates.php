@@ -9,7 +9,6 @@
 	namespace app\shop\controller;
 
 	use app\shop\controller\Base;
-	// use think\Validate;
 	use think\Db;
 	use think\Request;
 	use think\Session;

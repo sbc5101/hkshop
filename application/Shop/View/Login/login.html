@@ -97,7 +97,7 @@
 		if(loginEmail.test(postEmail)&&loginPass.test(postPassword)){
 			$.ajax({
 				type:"post",
-				url:"/shop/login/action_login.html",
+				url:"{:url('shop/login/action_login')}",
 				async:true,
 				datatype:"json",
 				data:{
@@ -106,9 +106,9 @@
 				},
 				success:function(data){
 					if(data.code=="200"){
-						console.log(data);
+						window.location.href = "{:url('shop/member/personal_center')}"; 
 					}else{
-						alert("提交失败！");
+						alert(data['message']);
 					}
 				},
 				error:function(e){

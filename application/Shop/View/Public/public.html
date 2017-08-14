@@ -42,69 +42,102 @@
             </div>
           </form>
         </section>
+        {php} $cates = get_cates(); {/php}
+        {php} $i = 1; {/php}
         <!--分类的列表-->
         <ul class="type_list">
-          <li class="on">VARIETAL</li>
-          <li>REGION</li>
-          <li>SPECIALS</li>
-          <li>PRO-SEARCH</li>         
+          {php} if(!empty($cates)){ {/php}
+          {php} foreach($cates as $v){ {/php}
+          {php} if($v['pid'] == 0){ {/php}
+          {php} if($i > 4){ breack;}{/php}
+          <li {php} if($i == 1){ echo 'class="on"';} {/php}>{php} echo $v['cname'] {/php}</li>
+          {php} $i++; {/php}
+          {php} } {/php}
+          {php} } {/php}
+          {php} } {/php}
         </ul>
         <!--分类的内容区域-->
         <div class="content">
           <div class="content_area1">
-            <!--Red Wine-->
-            <p class="wine1">RED WINE</p>
-            <ul>
-              <li>
-                <a href="###">
-                  <span>Bordeaux Blends</span>
-                </a>
-              </li>
-              <li>
-                <a href="###">
-                  <span>Cabernet Sauvignon</span>
-                  
-                </a>
-              </li>
-              <li>
-                <a href="###">
-                  <span>Merlot</span>
-                </a>
-              </li>
-              <li>
-                <a href="###">
-                  <span>Pinot Noir</span>
-                </a>
-              </li>
-              <li>
-                <a href="###">
-                  <span>Other Red Blends</span>
-                </a>
-              </li>
-              <li>
-                <a href="###">
-                  <span>Sangiovese</span>
-                </a>
-              </li>
-              <li>
-                <a href="###">
-                  <span>Syrah/ Shiraz</span>
-                </a>
-              </li>
-              <li>
-                <a href="###">
-                  <span>Pinot Gris / Grigio</span>
-                </a>
-              </li>
-            </ul>
-            <!---->
-            <ul>
-              <li></li>
-            </ul>
+            {php} if(!empty($cates)){ {/php}
+            {php} foreach($cates as $v){ {/php}
+            {php} if($v['pid'] == 373){ {/php}
+            <p class="wine1">{php} echo $v['cname'] {/php}</p>
+              {php} foreach($cates as $val){ {/php}
+              {php} if($val['pid'] == $v['id']){ {/php}
+              <ul>
+                <li>
+                  <a href="###">
+                    <span>{php} echo $val['cname'] {/php}</span>
+                  </a>
+                </li>
+              </ul>
+              {php} } {/php}
+              {php} } {/php}
+            {php} } {/php}
+            {php} } {/php}
+            {php} } {/php}
           </div>
-          <div class="content_area2">区域2</div>
-          <div class="content_area3">区域3</div>
-          <div class="content_area4">区域4</div>
+          <div class="content_area2">
+            {php} if(!empty($cates)){ {/php}
+            {php} foreach($cates as $v){ {/php}
+            {php} if($v['pid'] == 374){ {/php}
+            <p class="wine1">{php} echo $v['cname'] {/php}</p>
+              {php} foreach($cates as $val){ {/php}
+              {php} if($val['pid'] == $v['id']){ {/php}
+              <ul>
+                <li>
+                  <a href="###">
+                    <span>{php} echo $val['cname'] {/php}</span>
+                  </a>
+                </li>
+              </ul>
+              {php} } {/php}
+              {php} } {/php}
+            {php} } {/php}
+            {php} } {/php}
+            {php} } {/php}
+          </div>
+          <div class="content_area3">
+            {php} if(!empty($cates)){ {/php}
+            {php} foreach($cates as $v){ {/php}
+            {php} if($v['pid'] == 375){ {/php}
+            <p class="wine1">{php} echo $v['cname'] {/php}</p>
+              {php} foreach($cates as $val){ {/php}
+              {php} if($val['pid'] == $v['id']){ {/php}
+              <ul>
+                <li>
+                  <a href="###">
+                    <span>{php} echo $val['cname'] {/php}</span>
+                  </a>
+                </li>
+              </ul>
+              {php} } {/php}
+              {php} } {/php}
+            {php} } {/php}
+            {php} } {/php}
+            {php} } {/php}
+          </div>
+          <div class="content_area4">
+            {php} if(!empty($cates)){ {/php}
+            {php} foreach($cates as $v){ {/php}
+            {php} if($v['pid'] == 376){ {/php}
+            <p class="wine1">{php} echo $v['cname'] {/php}</p>
+              {php} foreach($cates as $val){ {/php}
+              {php} if($val['pid'] == $v['id']){ {/php}
+              <ul>
+                <li>
+                  <a href="###">
+                    <span>{php} echo $val['cname'] {/php}</span>
+                  </a>
+                </li>
+              </ul>
+              {php} } {/php}
+              {php} } {/php}
+            {php} } {/php}
+            {php} } {/php}
+            {php} } {/php}
+          </div>
         </div>
       </div>
       <div class="top">

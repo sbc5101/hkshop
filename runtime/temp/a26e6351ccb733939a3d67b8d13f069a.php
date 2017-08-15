@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:66:"D:\phpStudy\WWW\hkshop/application/admin\view\goods\add_goods.html";i:1502674703;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1502179807;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:66:"D:\phpStudy\WWW\hkshop/application/admin\view\goods\add_goods.html";i:1502698617;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1502701349;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -115,7 +115,7 @@
               </figure>
               <div class="profile-info">
                 <span class="name"><?php echo Session::get('user.name','admin_user') ?></span>
-                <span class="role"><i class="fa fa-circle bk-fg-success"></i> 管理员</span>
+                <span class="role"><i class="fa fa-circle bk-fg-success"></i> 管理員</span>
               </div>      
               <i class="fa custom-caret"></i>
             </a>
@@ -171,7 +171,7 @@
                   </div>
                   <li class="active">
                     <a href="<?php echo url('admin/index/index'); ?>">
-                      <i class="fa fa-home" aria-hidden="true"></i><span>首页</span>
+                      <i class="fa fa-home" aria-hidden="true"></i><span>首頁</span>
                     </a>
                   </li>
        <!--            <li>
@@ -186,26 +186,39 @@
                     </a>
                     <ul class="nav nav-children">
                      <li>
-                        <a href="<?php echo url('admin/cates/index'); ?>"><span class="text"> 分类管理</span></a>
+                        <a href="<?php echo url('admin/cates/index'); ?>"><span class="text"> 分類管理</span></a>
                       </li>
                       <li>
                         <a href="<?php echo url('admin/goods/index'); ?>"><span class="text"> 商品管理</span></a>
                       </li>
                       <li>
-                        <a href="<?php echo url('admin/goods/area_list'); ?>"><span class="text"> 商品区域</span></a>
+                        <a href="<?php echo url('admin/goods/area_list'); ?>"><span class="text"> 商品區域</span></a>
+                      </li>
+                      <li>
+                        <a href="<?php echo url('admin/score/score_list'); ?>"><span class="text"> 商品評分管理</span></a>
                       </li>
                     </ul>
                   </li>
                   <li class="nav-parent">
                     <a>
-                      <i class="fa fa-group" aria-hidden="true"></i><span>会员管理</span>
+                      <i class="fa fa-group" aria-hidden="true"></i><span>會員管理</span>
                     </a>
                     <ul class="nav nav-children">
                       <li>
-                        <a href="<?php echo url('admin/member/users'); ?>"><span class="text"> 会员列表</span></a>
+                        <a href="<?php echo url('admin/member/users'); ?>"><span class="text"> 會員列表</span></a>
                       </li>
                       <li>
-                        <a href="<?php echo url('admin/member/add_user'); ?>"><span class="text"> 新增会员</span></a>
+                        <a href="<?php echo url('admin/member/add_user'); ?>"><span class="text"> 新增會員</span></a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-parent">
+                    <a>
+                      <i class="fa fa-cogs" aria-hidden="true"></i><span>商城設置</span>
+                    </a>
+                    <ul class="nav nav-children">
+                      <li>
+                        <a href="<?php echo url('admin/advert/carousel_list'); ?>"><span class="text"> 輪播圖管理</span></a>
                       </li>
                     </ul>
                   </li>
@@ -225,6 +238,7 @@
                     </ul>
                   </li>
                   <!-- <?php  }  ?> -->
+
                 </ul>
               </nav>
             </div>
@@ -280,15 +294,15 @@
 			<form action="<?php echo url('admin/goods/action_add_goods'); ?>" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="winetype" value="" id="winetype">
 				<div class="form-group">
-					<label for="nf-user">商品中文名称*</label>
-					<input type="text" name="hk_title" class="form-control" value="" placeholder="请输入中文名">
+					<label for="nf-user">商品中文名稱*</label>
+					<input type="text" name="hk_title" class="form-control" value="" placeholder="請輸入中文名">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">商品英文名称*</label>
-					<input type="text" name="eng_title" class="form-control" value="" placeholder="请输入英文名">
+					<label for="nf-user">商品英文名稱*</label>
+					<input type="text" name="eng_title" class="form-control" value="" placeholder="請輸入英文名">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">是否上架销售</label>
+					<label for="nf-user">是否上架銷售</label>
 					<div >
 						<div class="radio-custom radio-inline" style="float:left;">
 							<input type="radio" id="status1" name="status" value="0"> 
@@ -301,7 +315,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="nf-password">商品区域*</label>
+					<label for="nf-password">商品區域*</label>
 					<select id="cate" name="area_id" class="form-control">
 						<?php if(is_array($areas_data) || $areas_data instanceof \think\Collection): $i = 0; $__LIST__ = $areas_data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
 						<option value="<?php echo $vo['id']; ?>"><?php echo $vo['area_name']; ?></option>
@@ -310,7 +324,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="nf-password">分类*</label>
+					<label for="nf-password">分類*</label>
 					<br>
 					<br>
 						<?php if(is_array($cates_data) || $cates_data instanceof \think\Collection): $i = 0; $__LIST__ = $cates_data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo['pid'] == '0'): ?>
@@ -336,42 +350,42 @@
 			
 				<div class="form-group">
 					<label for="nf-user">年份*</label>
-					<input type="text" name="years" class="form-control" value="" placeholder="请输入年份">
+					<input type="text" name="years" class="form-control" value="" placeholder="請輸入年份">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">零售价*</label>
-					<input type="text" name="marketprice" id="marketprice" class="form-control" value="" placeholder="请输入零售价">
+					<label for="nf-user">零售價*</label>
+					<input type="text" name="marketprice" id="marketprice" class="form-control" value="" placeholder="請輸入零售價">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">市场价*</label>
-					<input type="text" name="storeprice" class="form-control" value="" placeholder="请输入市场价">
+					<label for="nf-user">市場價*</label>
+					<input type="text" name="storeprice" class="form-control" value="" placeholder="請輸入市場價">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">商品货号*</label>
-					<input type="text" name="record_goosnum" class="form-control" value="" placeholder="请输入商品货号">
+					<label for="nf-user">商品貨號*</label>
+					<input type="text" name="record_goosnum" class="form-control" value="" placeholder="請輸入商品貨號">
 				</div>
 				<div class="form-group">
 					<label for="nf-user">重量*</label>
 					<input type="text" name="weight" class="form-control" value="0" >
 				</div>
 				<div class="form-group">
-					<label for="nf-user">库存*</label>
+					<label for="nf-user">庫存*</label>
 					<input type="text" name="stock" class="form-control" value="0">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">商品主图*</label>
+					<label for="nf-user">商品主圖*</label>
 					<input type="file" id="file-input" name="image">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">其他图片</label>
+					<label for="nf-user">其他圖片</label>
 					<input type="file" id="file-input" multiple name="images[]">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">商品详细描述*：</label>	
+					<label for="nf-user">商品詳細描述*：</label>	
 					<textarea  id="container" name="goods_msg" style="width:750px;height:400px;"></textarea>
 				</div>
 				<div class="form-group">
-					<label for="nf-user">是否首页展示</label>
+					<label for="nf-user">是否首頁展示</label>
 					<div >
 						<div class="radio-custom radio-inline" style="float:left;">
 							<input type="radio" id="is_home1" name="is_home" value="0" checked> 
@@ -387,7 +401,7 @@
 					<label for="nf-password">排序</label>
 					<input type="text" maxlength="3" name="sort" class="form-control" value="0">
 				</div>
-				<button type="submit" class="btn btn-primary col-md-3 pull-right">确认</button>
+				<button type="submit" class="btn btn-primary col-md-3 pull-right">確認</button>
 			</form>
 		</div>								
 	</div>

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:62:"D:\phpStudy\WWW\hkshop/application/admin\view\index\index.html";i:1498615338;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1502179807;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:62:"D:\phpStudy\WWW\hkshop/application/admin\view\index\index.html";i:1502698936;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1502697745;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +7,7 @@
     <!-- Basic -->
     <meta charset="UTF-8" />
     
-	<title>首页</title>
+	<title>首頁</title>
 
     <!-- Mobile Metas -->
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -115,7 +115,7 @@
               </figure>
               <div class="profile-info">
                 <span class="name"><?php echo Session::get('user.name','admin_user') ?></span>
-                <span class="role"><i class="fa fa-circle bk-fg-success"></i> 管理员</span>
+                <span class="role"><i class="fa fa-circle bk-fg-success"></i> 管理員</span>
               </div>      
               <i class="fa custom-caret"></i>
             </a>
@@ -171,7 +171,7 @@
                   </div>
                   <li class="active">
                     <a href="<?php echo url('admin/index/index'); ?>">
-                      <i class="fa fa-home" aria-hidden="true"></i><span>首页</span>
+                      <i class="fa fa-home" aria-hidden="true"></i><span>首頁</span>
                     </a>
                   </li>
        <!--            <li>
@@ -186,26 +186,36 @@
                     </a>
                     <ul class="nav nav-children">
                      <li>
-                        <a href="<?php echo url('admin/cates/index'); ?>"><span class="text"> 分类管理</span></a>
+                        <a href="<?php echo url('admin/cates/index'); ?>"><span class="text"> 分類管理</span></a>
                       </li>
                       <li>
                         <a href="<?php echo url('admin/goods/index'); ?>"><span class="text"> 商品管理</span></a>
                       </li>
                       <li>
-                        <a href="<?php echo url('admin/goods/area_list'); ?>"><span class="text"> 商品区域</span></a>
+                        <a href="<?php echo url('admin/goods/area_list'); ?>"><span class="text"> 商品區域</span></a>
                       </li>
                     </ul>
                   </li>
                   <li class="nav-parent">
                     <a>
-                      <i class="fa fa-group" aria-hidden="true"></i><span>会员管理</span>
+                      <i class="fa fa-group" aria-hidden="true"></i><span>會員管理</span>
                     </a>
                     <ul class="nav nav-children">
                       <li>
-                        <a href="<?php echo url('admin/member/users'); ?>"><span class="text"> 会员列表</span></a>
+                        <a href="<?php echo url('admin/member/users'); ?>"><span class="text"> 會員列表</span></a>
                       </li>
                       <li>
-                        <a href="<?php echo url('admin/member/add_user'); ?>"><span class="text"> 新增会员</span></a>
+                        <a href="<?php echo url('admin/member/add_user'); ?>"><span class="text"> 新增會員</span></a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-parent">
+                    <a>
+                      <i class="fa fa-cogs" aria-hidden="true"></i><span>商城設置</span>
+                    </a>
+                    <ul class="nav nav-children">
+                      <li>
+                        <a href="<?php echo url('admin/advert/carousel_list'); ?>"><span class="text"> 輪播圖管理</span></a>
                       </li>
                     </ul>
                   </li>
@@ -225,6 +235,7 @@
                     </ul>
                   </li>
                   <!-- <?php  }  ?> -->
+
                 </ul>
               </nav>
             </div>
@@ -252,7 +263,7 @@
               <ol class="breadcrumb visible-sm visible-md visible-lg">                
                 <li><a href="<?php echo url('admin/index/index'); ?>"><i class="icon fa fa-home"></i>Home</a></li>
                 
-	<li class="active"><i class="fa fa-laptop"></i>首页</li>
+	<li class="active"><i class="fa fa-laptop"></i>首頁</li>
 
               </ol>           
             </div>

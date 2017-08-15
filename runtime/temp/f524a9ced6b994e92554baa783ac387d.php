@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:65:"D:\phpStudy\WWW\hkshop/application/admin\view\goods\add_area.html";i:1501576538;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1501574159;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:65:"D:\phpStudy\WWW\hkshop/application/admin\view\goods\add_area.html";i:1501578139;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1502697745;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,7 +76,7 @@
     
     <!-- Pages JS -->
     
-    <!-- <script type="text/javascript" src="/public/admin/assets/js/pages/index.js"></script> -->
+<!--     <script type="text/javascript" src="/public/admin/assets/js/pages/index.js"></script> -->
     
     <!-- end: JavaScript-->
   </head>
@@ -115,7 +115,7 @@
               </figure>
               <div class="profile-info">
                 <span class="name"><?php echo Session::get('user.name','admin_user') ?></span>
-                <span class="role"><i class="fa fa-circle bk-fg-success"></i> 管理员</span>
+                <span class="role"><i class="fa fa-circle bk-fg-success"></i> 管理員</span>
               </div>      
               <i class="fa custom-caret"></i>
             </a>
@@ -171,7 +171,7 @@
                   </div>
                   <li class="active">
                     <a href="<?php echo url('admin/index/index'); ?>">
-                      <i class="fa fa-home" aria-hidden="true"></i><span>首页</span>
+                      <i class="fa fa-home" aria-hidden="true"></i><span>首頁</span>
                     </a>
                   </li>
        <!--            <li>
@@ -186,26 +186,36 @@
                     </a>
                     <ul class="nav nav-children">
                      <li>
-                        <a href="<?php echo url('admin/cates/index'); ?>"><span class="text"> 分类管理</span></a>
+                        <a href="<?php echo url('admin/cates/index'); ?>"><span class="text"> 分類管理</span></a>
                       </li>
                       <li>
                         <a href="<?php echo url('admin/goods/index'); ?>"><span class="text"> 商品管理</span></a>
                       </li>
                       <li>
-                        <a href="<?php echo url('admin/goods/area_list'); ?>"><span class="text"> 商品区域</span></a>
+                        <a href="<?php echo url('admin/goods/area_list'); ?>"><span class="text"> 商品區域</span></a>
                       </li>
                     </ul>
                   </li>
                   <li class="nav-parent">
                     <a>
-                      <i class="fa fa-group" aria-hidden="true"></i><span>会员管理</span>
+                      <i class="fa fa-group" aria-hidden="true"></i><span>會員管理</span>
                     </a>
                     <ul class="nav nav-children">
                       <li>
-                        <a href="<?php echo url('admin/member/users'); ?>"><span class="text"> 会员列表</span></a>
+                        <a href="<?php echo url('admin/member/users'); ?>"><span class="text"> 會員列表</span></a>
                       </li>
                       <li>
-                        <a href="<?php echo url('admin/member/add_user'); ?>"><span class="text"> 新增会员</span></a>
+                        <a href="<?php echo url('admin/member/add_user'); ?>"><span class="text"> 新增會員</span></a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-parent">
+                    <a>
+                      <i class="fa fa-cogs" aria-hidden="true"></i><span>商城設置</span>
+                    </a>
+                    <ul class="nav nav-children">
+                      <li>
+                        <a href="<?php echo url('admin/advert/carousel_list'); ?>"><span class="text"> 輪播圖管理</span></a>
                       </li>
                     </ul>
                   </li>
@@ -225,6 +235,7 @@
                     </ul>
                   </li>
                   <!-- <?php  }  ?> -->
+
                 </ul>
               </nav>
             </div>
@@ -275,7 +286,6 @@
 		</div>
 		<div class="panel-body">
 			<form action="<?php echo url('admin/goods/action_add_area'); ?>" method="post">
-				<input type="hidden" name="winetype" value="" id="winetype">
 				<div class="form-group">
 					<label for="nf-user">区域名称*</label>
 					<input type="text" name="area_name" class="form-control" value="" placeholder="请输入区域名">

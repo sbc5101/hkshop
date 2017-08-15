@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"D:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1502689601;s:63:"D:\phpStudy\WWW\hkshop/application/shop\view\Public\public.html";i:1502693171;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"D:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1502689601;s:63:"D:\phpStudy\WWW\hkshop/application/shop\view\Public\public.html";i:1502693277;}*/ ?>
 <!DOCTYPE html>
 <html>
   <head>

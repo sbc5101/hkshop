@@ -1,18 +1,18 @@
 {extend name="Public:public"}
 
 {block name="title"}
-	<title>修改分类</title>
+	<title>修改分類</title>
 {/block}
 
 {block name="crumbs"}
-	<li class="active">分类管理</li>
-	<li class="active">修改分类</li>
+	<li class="active">分類管理</li>
+	<li class="active">修改分類</li>
 {/block}
 
 {block name="contents"}
 	<div class="panel panel-default bk-bg-white col-md-6 col-md-offset-3">
 		<div class="panel-heading bk-bg-white">
-			<h6><i class="fa fa-indent red"></i>修改分类</h6>							
+			<h6><i class="fa fa-indent red"></i>修改分類</h6>							
 			<div class="panel-actions">
 				<a href="#" class="btn-minimize"><i class="fa fa-caret-up"></i></a>
 				<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
@@ -22,7 +22,7 @@
 			<form action="{:url('admin/cates/action_rev_cate')}" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="id" value="{$data.id}">
 				<div class="form-group">
-					<label for="nf-user">分类名</label>
+					<label for="nf-user">分類名</label>
 					<input type="text" id="nf-user" name="cname" value="{$data.cname}" class="form-control">
 				</div>
 				<div class="form-group">
@@ -30,17 +30,17 @@
 					<input type="text" name="sort" value="{$data.sort}" class="form-control" maxlength="3">
 				</div>
 				<div class="form-group">
-					<label for="nf-password">图片</label>
+					<label for="nf-password">圖片</label>
 					<input type="file" id="file-input" name="file">
 				</div>
 				<div class="form-group">
 					<select class="form-control" name="display">
-						<option value="0" {eq name="$data.display" value="0"} selected {/eq}>显示</option>
-						<option value="1" {eq name="$data.display" value="1"} selected {/eq}>隐藏</option>
+						<option value="0" {eq name="$data.display" value="0"} selected {/eq}>顯示</option>
+						<option value="1" {eq name="$data.display" value="1"} selected {/eq}>隱藏</option>
 					</select>
 				</div>
 				
-				<button type="submit" class="btn btn-primary col-md-3 pull-right">确认</button>
+				<button type="submit" class="btn btn-primary col-md-3 pull-right">確認</button>
 			</form>
 		</div>								
 	</div>

@@ -29,20 +29,20 @@
 			<!-- &nbsp; -->
 			<div class=" pull-left">
 				<form action="{:url('goods/index')}" method="get" style="margin: 10px 0 0 15px;">
-					<label>商品状态：</label>
+					<label>商品狀態：</label>
 					<label>
 						<select name="status" class="form-control">
-							<option value="" {eq name="$status" value=""} selected {/eq}>请选择</option>
+							<option value="" {eq name="$status" value=""} selected {/eq}>請選擇</option>
 							<option value="0" {eq name="$status" value="0"} selected {/eq}>上架</option>
 							<option value="1" {eq name="$status" value="1"} selected {/eq}>下架</option>
 						</select>
 					</label>
-					<button type="submit" class="btn btn-success">确定</button>
+					<button type="submit" class="btn btn-success">確定</button>
 				</form>
 			</div>
 			<div class="col-md-1 pull-left" style="margin:10px 0 0 20px;">
 				<a class="btn btn-info" href="{:url('admin/goods/index')}">
-					显示所有                                           
+					顯示所有                                           
 				</a>
 			</div>
 			<div class="col-md-1 pull-right" style="margin:10px 0;">
@@ -50,32 +50,25 @@
 					<i class="fa fa-plus"></i> 添加商品                                           
 				</a>
 			</div>
-
-	<!-- 		<div class="col-md-1 pull-right" style="margin:10px 0;">
-				<a class="btn btn-info" href="{:url('admin/goods/add_excel_goods')}">
-					<i class="fa fa-plus"></i> 导入商品                                           
-				</a>
-			</div> -->
-			
 			<div class="panel-body">
 				<div class="table-responsive">	
 					<table class="table table-striped table-bordered bootstrap-datatable datatable">
 						<thead>
 							<tr>
-								<th>序号</th>
-								<th>中文名称</th>
-								<th>英文名称</th>
+								<th>序號</th>
+								<th>中文名稱</th>
+								<th>英文名稱</th>
 								<th>年份</th>
-								<th>零售价</th>
-								<th>市场价</th>
-								<th>库存</th>
-								<th>销量</th>
-								<th>状态</th>
+								<th>零售價</th>
+								<th>市場價</th>
+								<th>庫存</th>
+								<th>銷量</th>
+								<th>狀態</th>
 								<th>操作</th>
 							</tr>
 						</thead>   
 						<tbody>
-							{volist name="data" id="vo" key="k" empty="<tr><td colspan='10' align='center'>暂无数据</td></tr>"}
+							{volist name="data" id="vo" key="k" empty="<tr><td colspan='10' align='center'>暫無數據</td></tr>"}
 							<tr class="gradeA odd" role="row">
 								<td class="actions">{$k}</td>
 								<td class="actions">{$vo.hk_title}</td>
@@ -94,8 +87,8 @@
 								</td>
 								<td class="actions">
 									<a href="{:url('admin/goods/rev_goods',['id' => $vo.id])}?status={$status}&page={$page}" class="on-default edit-row" title="修改"><i class="fa fa-pencil"></i></a>
-									<a href="{:url('admin/goods/rev_images',['id' => $vo.id])}?status={$status}&page={$page}" class="on-default remove-row" title="图片管理"><i class="fa fa-picture-o"></i></a>
-									<a href="{:url('admin/goods/action_rev_del',['id' => $vo.id,'status' => '1'])}" class="on-default remove-row" title="删除" onclick="return confirm('确认删除？');return false;"><i class="fa fa-trash-o"></i></a>
+									<a href="{:url('admin/goods/rev_images',['id' => $vo.id])}?status={$status}&page={$page}" class="on-default remove-row" title="圖片管理"><i class="fa fa-picture-o"></i></a>
+									<a href="{:url('admin/goods/action_rev_del',['id' => $vo.id,'status' => '1'])}" class="on-default remove-row" title="删除" onclick="return confirm('確認删除？');return false;"><i class="fa fa-trash-o"></i></a>
 								</td>
 							</tr>
 							{/volist}

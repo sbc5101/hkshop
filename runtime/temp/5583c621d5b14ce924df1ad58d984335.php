@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:62:"D:\phpStudy\WWW\hkshop/application/admin\view\goods\index.html";i:1502179348;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1502179807;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:62:"D:\phpStudy\WWW\hkshop/application/admin\view\goods\index.html";i:1502698771;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1502701349;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -115,7 +115,7 @@
               </figure>
               <div class="profile-info">
                 <span class="name"><?php echo Session::get('user.name','admin_user') ?></span>
-                <span class="role"><i class="fa fa-circle bk-fg-success"></i> 管理员</span>
+                <span class="role"><i class="fa fa-circle bk-fg-success"></i> 管理員</span>
               </div>      
               <i class="fa custom-caret"></i>
             </a>
@@ -171,7 +171,7 @@
                   </div>
                   <li class="active">
                     <a href="<?php echo url('admin/index/index'); ?>">
-                      <i class="fa fa-home" aria-hidden="true"></i><span>首页</span>
+                      <i class="fa fa-home" aria-hidden="true"></i><span>首頁</span>
                     </a>
                   </li>
        <!--            <li>
@@ -186,26 +186,39 @@
                     </a>
                     <ul class="nav nav-children">
                      <li>
-                        <a href="<?php echo url('admin/cates/index'); ?>"><span class="text"> 分类管理</span></a>
+                        <a href="<?php echo url('admin/cates/index'); ?>"><span class="text"> 分類管理</span></a>
                       </li>
                       <li>
                         <a href="<?php echo url('admin/goods/index'); ?>"><span class="text"> 商品管理</span></a>
                       </li>
                       <li>
-                        <a href="<?php echo url('admin/goods/area_list'); ?>"><span class="text"> 商品区域</span></a>
+                        <a href="<?php echo url('admin/goods/area_list'); ?>"><span class="text"> 商品區域</span></a>
+                      </li>
+                      <li>
+                        <a href="<?php echo url('admin/score/score_list'); ?>"><span class="text"> 商品評分管理</span></a>
                       </li>
                     </ul>
                   </li>
                   <li class="nav-parent">
                     <a>
-                      <i class="fa fa-group" aria-hidden="true"></i><span>会员管理</span>
+                      <i class="fa fa-group" aria-hidden="true"></i><span>會員管理</span>
                     </a>
                     <ul class="nav nav-children">
                       <li>
-                        <a href="<?php echo url('admin/member/users'); ?>"><span class="text"> 会员列表</span></a>
+                        <a href="<?php echo url('admin/member/users'); ?>"><span class="text"> 會員列表</span></a>
                       </li>
                       <li>
-                        <a href="<?php echo url('admin/member/add_user'); ?>"><span class="text"> 新增会员</span></a>
+                        <a href="<?php echo url('admin/member/add_user'); ?>"><span class="text"> 新增會員</span></a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-parent">
+                    <a>
+                      <i class="fa fa-cogs" aria-hidden="true"></i><span>商城設置</span>
+                    </a>
+                    <ul class="nav nav-children">
+                      <li>
+                        <a href="<?php echo url('admin/advert/carousel_list'); ?>"><span class="text"> 輪播圖管理</span></a>
                       </li>
                     </ul>
                   </li>
@@ -225,6 +238,7 @@
                     </ul>
                   </li>
                   <!-- <?php  }  ?> -->
+
                 </ul>
               </nav>
             </div>
@@ -285,20 +299,20 @@
 			<!-- &nbsp; -->
 			<div class=" pull-left">
 				<form action="<?php echo url('goods/index'); ?>" method="get" style="margin: 10px 0 0 15px;">
-					<label>商品状态：</label>
+					<label>商品狀態：</label>
 					<label>
 						<select name="status" class="form-control">
-							<option value="" <?php if($status == ''): ?> selected <?php endif; ?>>请选择</option>
+							<option value="" <?php if($status == ''): ?> selected <?php endif; ?>>請選擇</option>
 							<option value="0" <?php if($status == '0'): ?> selected <?php endif; ?>>上架</option>
 							<option value="1" <?php if($status == '1'): ?> selected <?php endif; ?>>下架</option>
 						</select>
 					</label>
-					<button type="submit" class="btn btn-success">确定</button>
+					<button type="submit" class="btn btn-success">確定</button>
 				</form>
 			</div>
 			<div class="col-md-1 pull-left" style="margin:10px 0 0 20px;">
 				<a class="btn btn-info" href="<?php echo url('admin/goods/index'); ?>">
-					显示所有                                           
+					顯示所有                                           
 				</a>
 			</div>
 			<div class="col-md-1 pull-right" style="margin:10px 0;">
@@ -306,32 +320,25 @@
 					<i class="fa fa-plus"></i> 添加商品                                           
 				</a>
 			</div>
-
-	<!-- 		<div class="col-md-1 pull-right" style="margin:10px 0;">
-				<a class="btn btn-info" href="<?php echo url('admin/goods/add_excel_goods'); ?>">
-					<i class="fa fa-plus"></i> 导入商品                                           
-				</a>
-			</div> -->
-			
 			<div class="panel-body">
 				<div class="table-responsive">	
 					<table class="table table-striped table-bordered bootstrap-datatable datatable">
 						<thead>
 							<tr>
-								<th>序号</th>
-								<th>中文名称</th>
-								<th>英文名称</th>
+								<th>序號</th>
+								<th>中文名稱</th>
+								<th>英文名稱</th>
 								<th>年份</th>
-								<th>零售价</th>
-								<th>市场价</th>
-								<th>库存</th>
-								<th>销量</th>
-								<th>状态</th>
+								<th>零售價</th>
+								<th>市場價</th>
+								<th>庫存</th>
+								<th>銷量</th>
+								<th>狀態</th>
 								<th>操作</th>
 							</tr>
 						</thead>   
 						<tbody>
-							<?php if(is_array($data) || $data instanceof \think\Collection): $k = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "<tr><td colspan='10' align='center'>暂无数据</td></tr>" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($k % 2 );++$k;?>
+							<?php if(is_array($data) || $data instanceof \think\Collection): $k = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "<tr><td colspan='10' align='center'>暫無數據</td></tr>" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($k % 2 );++$k;?>
 							<tr class="gradeA odd" role="row">
 								<td class="actions"><?php echo $k; ?></td>
 								<td class="actions"><?php echo $vo['hk_title']; ?></td>
@@ -350,11 +357,11 @@
 								</td>
 								<td class="actions">
 									<a href="<?php echo url('admin/goods/rev_goods',['id' => $vo['id']]); ?>?status=<?php echo $status; ?>&page=<?php echo $page; ?>" class="on-default edit-row" title="修改"><i class="fa fa-pencil"></i></a>
-									<a href="<?php echo url('admin/goods/rev_images',['id' => $vo['id']]); ?>?status=<?php echo $status; ?>&page=<?php echo $page; ?>" class="on-default remove-row" title="图片管理"><i class="fa fa-picture-o"></i></a>
-									<a href="<?php echo url('admin/goods/action_rev_del',['id' => $vo['id'],'status' => '1']); ?>" class="on-default remove-row" title="删除" onclick="return confirm('确认删除？');return false;"><i class="fa fa-trash-o"></i></a>
+									<a href="<?php echo url('admin/goods/rev_images',['id' => $vo['id']]); ?>?status=<?php echo $status; ?>&page=<?php echo $page; ?>" class="on-default remove-row" title="圖片管理"><i class="fa fa-picture-o"></i></a>
+									<a href="<?php echo url('admin/goods/action_rev_del',['id' => $vo['id'],'status' => '1']); ?>" class="on-default remove-row" title="删除" onclick="return confirm('確認删除？');return false;"><i class="fa fa-trash-o"></i></a>
 								</td>
 							</tr>
-							<?php endforeach; endif; else: echo "<tr><td colspan='10' align='center'>暂无数据</td></tr>" ;endif; ?>
+							<?php endforeach; endif; else: echo "<tr><td colspan='10' align='center'>暫無數據</td></tr>" ;endif; ?>
 						</tbody>
 					</table>
 				</div>

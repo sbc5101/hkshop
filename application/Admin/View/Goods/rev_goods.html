@@ -16,23 +16,23 @@
 	<div class="panel panel-default bk-bg-white col-md-8 col-md-offset-3">
 		<div class="panel-heading bk-bg-white">
 			<h6><i class="fa fa-indent red"></i>修改商品</h6>
-			<a style="border: 1px solid black;font-size: 25px;" href="{:url('admin/goods/rev_goods',['id' => $goods_id-1])}">上一个</a>
-			<a style="border: 1px solid black;font-size: 25px;" href="{:url('admin/goods/rev_goods',['id' => $goods_id+1])}">下一个</a>
+		<!-- 	<a style="border: 1px solid black;font-size: 25px;" href="{:url('admin/goods/rev_goods',['id' => $goods_id-1])}">上一個</a>
+			<a style="border: 1px solid black;font-size: 25px;" href="{:url('admin/goods/rev_goods',['id' => $goods_id+1])}">下一個</a> -->
 		</div>
 		{neq name="goods" value=''}
 		<div class="panel-body">
 			<form action="{:url('admin/goods/action_rev_goods')}" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="id" value="{$goods_id}">
 				<div class="form-group">
-					<label for="nf-user">商品中文名称*</label>
-					<input type="text" name="hk_title" class="form-control" value="{$goods.hk_title}" placeholder="请输入中文名">
+					<label for="nf-user">商品中文名稱*</label>
+					<input type="text" name="hk_title" class="form-control" value="{$goods.hk_title}" placeholder="請輸入中文名">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">商品英文名称*</label>
-					<input type="text" name="eng_title" class="form-control" value="{$goods.eng_title}" placeholder="请输入英文名">
+					<label for="nf-user">商品英文名稱*</label>
+					<input type="text" name="eng_title" class="form-control" value="{$goods.eng_title}" placeholder="請輸入英文名">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">是否上架销售</label>
+					<label for="nf-user">是否上架銷售</label>
 					<div >
 						<div class="radio-custom radio-inline" style="float:left;">
 							<input type="radio" id="status1" name="status" value="0" {eq name="$goods.status" value="0"} checked {/eq}> 
@@ -45,7 +45,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="nf-password">商品区域*</label>
+					<label for="nf-password">商品區域*</label>
 					<select id="cate" name="area_id" class="form-control">
 						{volist name="areas_data" id="vo"}
 						<option value="{$vo.id}" {eq name="$vo.id" value="goods.area_id"} checked {/eq}>{$vo.area_name}</option>
@@ -54,7 +54,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="nf-password">分类*</label>
+					<label for="nf-password">分類*</label>
 					<br>
 					<br>
 						{volist name="cates_data" id="vo"}
@@ -86,37 +86,37 @@
 			
 				<div class="form-group">
 					<label for="nf-user">年份*</label>
-					<input type="text" name="years" class="form-control" value="{$goods.years}" placeholder="请输入年份">
+					<input type="text" name="years" class="form-control" value="{$goods.years}" placeholder="請輸入年份">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">零售价*</label>
-					<input type="text" name="marketprice" id="marketprice" class="form-control" value="{$goods.marketprice}" placeholder="请输入零售价">
+					<label for="nf-user">零售價*</label>
+					<input type="text" name="marketprice" id="marketprice" class="form-control" value="{$goods.marketprice}" placeholder="請輸入零售價">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">市场价*</label>
-					<input type="text" name="storeprice" class="form-control" value="{$goods.storeprice}" placeholder="请输入市场价">
+					<label for="nf-user">市場價*</label>
+					<input type="text" name="storeprice" class="form-control" value="{$goods.storeprice}" placeholder="請輸入市場價">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">商品货号*</label>
-					<input type="text" name="record_goosnum" class="form-control" value="{$goods.record_goosnum}" placeholder="请输入商品货号">
+					<label for="nf-user">商品貨號*</label>
+					<input type="text" name="record_goosnum" class="form-control" value="{$goods.record_goosnum}" placeholder="請輸入商品貨號">
 				</div>
 				<div class="form-group">
 					<label for="nf-user">重量*</label>
 					<input type="text" name="weight" class="form-control" value="{$goods.weight}" >
 				</div>
 				<div class="form-group">
-					<label for="nf-user">库存*</label>
+					<label for="nf-user">庫存*</label>
 					<input type="text" name="stock" class="form-control" value="{$goods.stock}">
 				</div>
 				<div class="form-group">
-					<label for="nf-user">商品详细描述*：</label>	
+					<label for="nf-user">商品詳細描述*：</label>	
 					<textarea  id="container" name="goods_msg" style="width:750px;height:400px;">{$goods.content}</textarea>
 				</div>
 				<div class="form-group">
 					<label for="nf-password">排序</label>
 					<input type="text" maxlength="3" name="sort" class="form-control" value="{$goods.sort}">
 				</div>
-				<button type="submit" class="btn btn-primary col-md-3 pull-right">确认</button>
+				<button type="submit" class="btn btn-primary col-md-3 pull-right">確認</button>
 			</form>
 		</div>
 		{/neq}

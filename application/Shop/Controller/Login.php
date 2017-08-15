@@ -36,12 +36,12 @@
 			    [
 			    	'username',
 			    	'require|email',
-			    	'邮箱不能为空|邮箱格式不正确'
+			    	'郵箱不能為空|郵箱格式不正確'
 			    ],
 			    [
 				    'password',
 				    'require|/^[a-zA-Z0-9_]{6,18}$/ ',
-				    '密码不能为空|密码由6到18位字母，数字或下划线组成'
+				    '密碼不能為空|密碼由6到18位字母，數字或下劃線組成'
 			    ],
 			];
 			$data = [
@@ -75,9 +75,9 @@
 				Session::set('user.name', $res['username'],'shop_user');
 				Session::set('user.first_name', $res['first_name'],'shop_user');
 				Session::set('user.last_name', $res['last_name'],'shop_user');
-				return json(['code' => 200,'message' => '登录成功',]);
+				return json(['code' => 200,'message' => '登錄成功',]);
 			}else{
-				return json(['code' => 400,'message' => '密码或用户名错误']);
+				return json(['code' => 400,'message' => '密碼或用戶名錯誤']);
 			}
 		}
 	}

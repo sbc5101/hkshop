@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:62:"D:\phpStudy\WWW\hkshop/application/admin\view\cates\index.html";i:1501639243;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1502682033;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:62:"D:\phpStudy\WWW\hkshop/application/admin\view\cates\index.html";i:1502698384;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1502697745;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +7,7 @@
     <!-- Basic -->
     <meta charset="UTF-8" />
     
-	<title>分类列表</title>
+	<title>分類列表</title>
 
     <!-- Mobile Metas -->
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -115,7 +115,7 @@
               </figure>
               <div class="profile-info">
                 <span class="name"><?php echo Session::get('user.name','admin_user') ?></span>
-                <span class="role"><i class="fa fa-circle bk-fg-success"></i> 管理员</span>
+                <span class="role"><i class="fa fa-circle bk-fg-success"></i> 管理員</span>
               </div>      
               <i class="fa custom-caret"></i>
             </a>
@@ -171,7 +171,7 @@
                   </div>
                   <li class="active">
                     <a href="<?php echo url('admin/index/index'); ?>">
-                      <i class="fa fa-home" aria-hidden="true"></i><span>首页</span>
+                      <i class="fa fa-home" aria-hidden="true"></i><span>首頁</span>
                     </a>
                   </li>
        <!--            <li>
@@ -186,36 +186,36 @@
                     </a>
                     <ul class="nav nav-children">
                      <li>
-                        <a href="<?php echo url('admin/cates/index'); ?>"><span class="text"> 分类管理</span></a>
+                        <a href="<?php echo url('admin/cates/index'); ?>"><span class="text"> 分類管理</span></a>
                       </li>
                       <li>
                         <a href="<?php echo url('admin/goods/index'); ?>"><span class="text"> 商品管理</span></a>
                       </li>
                       <li>
-                        <a href="<?php echo url('admin/goods/area_list'); ?>"><span class="text"> 商品区域</span></a>
+                        <a href="<?php echo url('admin/goods/area_list'); ?>"><span class="text"> 商品區域</span></a>
                       </li>
                     </ul>
                   </li>
                   <li class="nav-parent">
                     <a>
-                      <i class="fa fa-group" aria-hidden="true"></i><span>会员管理</span>
+                      <i class="fa fa-group" aria-hidden="true"></i><span>會員管理</span>
                     </a>
                     <ul class="nav nav-children">
                       <li>
-                        <a href="<?php echo url('admin/member/users'); ?>"><span class="text"> 会员列表</span></a>
+                        <a href="<?php echo url('admin/member/users'); ?>"><span class="text"> 會員列表</span></a>
                       </li>
                       <li>
-                        <a href="<?php echo url('admin/member/add_user'); ?>"><span class="text"> 新增会员</span></a>
+                        <a href="<?php echo url('admin/member/add_user'); ?>"><span class="text"> 新增會員</span></a>
                       </li>
                     </ul>
                   </li>
                   <li class="nav-parent">
                     <a>
-                      <i class="fa fa-cogs" aria-hidden="true"></i><span>商城设置</span>
+                      <i class="fa fa-cogs" aria-hidden="true"></i><span>商城設置</span>
                     </a>
                     <ul class="nav nav-children">
                       <li>
-                        <a href="<?php echo url('admin/advert/carousel_list'); ?>"><span class="text"> 轮播图管理</span></a>
+                        <a href="<?php echo url('admin/advert/carousel_list'); ?>"><span class="text"> 輪播圖管理</span></a>
                       </li>
                     </ul>
                   </li>
@@ -263,8 +263,8 @@
               <ol class="breadcrumb visible-sm visible-md visible-lg">                
                 <li><a href="<?php echo url('admin/index/index'); ?>"><i class="icon fa fa-home"></i>Home</a></li>
                 
-	<li class="active">分类管理</li>
-	<li class="active">分类列表</li>
+	<li class="active">分類管理</li>
+	<li class="active">分類列表</li>
 
               </ol>           
             </div>
@@ -285,7 +285,7 @@
 	<div class="col-lg-12">
 		<div class="panel panel-default bk-bg-white">
 			<div class="panel-heading bk-bg-white">
-				<h6><i class="fa fa-table"></i><span class="break"></span>分类管理</h6>
+				<h6><i class="fa fa-table"></i><span class="break"></span>分類管理</h6>
 				<div class="panel-actions">
 					<a href="#" class="btn-minimize"><i class="fa fa-caret-up"></i></a>
 					<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
@@ -293,7 +293,7 @@
 			</div>
 			<div class="col-md-1 pull-right" style="margin:10px 0;">
 				<a class="btn btn-success" href="<?php echo url('admin/cates/add_cate'); ?>">
-					<i class="fa fa-plus"></i> 添加分类                                           
+					<i class="fa fa-plus"></i> 添加分類                                           
 				</a>
 				
 			</div>
@@ -302,27 +302,27 @@
 					<table id="example-basic-expandable" class="table table-striped table-bordered bootstrap-datatable datatable">
 						<thead>
 							<tr>
-								<th>选择</th>
-								<th>分类名称</th>
-								<th>状态</th>
+								<th>選擇</th>
+								<th>分類名稱</th>
+								<th>狀態</th>
 								<th>操作</th>
 							</tr>
 						</thead>   
 						<tbody>	
-							<?php if(is_array($data) || $data instanceof \think\Collection): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "<tr><td colspan='4' align='center'><h5>暂无数据</h5></td></tr>" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>	
+							<?php if(is_array($data) || $data instanceof \think\Collection): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "<tr><td colspan='4' align='center'><h5>暫無數據</h5></td></tr>" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>	
 							<tr id="cate<?php echo $vo['id']; ?>" data-tt-id="<?php echo $vo['id']; ?>" <?php if($vo['pid'] != '0'): ?> data-tt-parent-id="<?php echo $vo['pid']; ?>" <?php endif; ?>>
 								<td></td>	
 								<td><?php echo $vo['cname']; ?></td>
 								<td>
 									<?php if($vo['display'] == '0'): ?>
-									<span class="label label-success">显示</span>
+									<span class="label label-success">顯示</span>
 									<?php else: ?>
-									<span class="label label-warning">隐藏</span>
+									<span class="label label-warning">隱藏</span>
 									<?php endif; ?>
 								</td>
 								<td>
 									<a class="add_child btn btn-success" href="javascript:void(0);" data-id="<?php echo $vo['id']; ?>" data-name="<?php echo $vo['cname']; ?>">
-										<i class="fa fa-plus "></i> 添加子类
+										<i class="fa fa-plus "></i> 添加子類
 									</a>
 									<a class="btn btn-info rev_cate" data-id="<?php echo $vo['id']; ?>" href="javascript:void(0);">
 										<i class="fa fa-edit "></i> 修改       
@@ -332,12 +332,12 @@
 									</a>
 								</td>
 							</tr>
-							<?php endforeach; endif; else: echo "<tr><td colspan='4' align='center'><h5>暂无数据</h5></td></tr>" ;endif; ?>
+							<?php endforeach; endif; else: echo "<tr><td colspan='4' align='center'><h5>暫無數據</h5></td></tr>" ;endif; ?>
 						</tbody>
 					</table>
 					<div class="col-lg-7" style="position: fixed;left: 430px;top: 285px;display:none;" id="children">
 						<div class="panel-heading bk-bg-white">
-							<h6><i class="fa fa-indent red"></i><span>添加子类</span></h6>
+							<h6><i class="fa fa-indent red"></i><span>添加子類</span></h6>
 							<div class="panel-actions">
 								<a href="#" class="btn-minimize"><i class="fa fa-caret-up"></i></a>
 								<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
@@ -346,18 +346,18 @@
 						<div class="panel-body">
 							<input type="hidden" id="parent_id">
 							<div class="form-group">
-								<label for="nf-user">父类名称</label>
+								<label for="nf-user">父類名稱</label>
 								<input type="text"  class="form-control" id="parent_name" value="" readonly="readonly">
 							</div>
 							<div class="form-group">
-								<label for="nf-user">分类名称*</label>
-								<input type="text"  class="form-control" id="child_name" value="" placeholder="请输入分类名称">
+								<label for="nf-user">分類名稱*</label>
+								<input type="text"  class="form-control" id="child_name" value="" placeholder="请输入分類名稱">
 							</div>
 							<div class="form-group">
-								<label for="nf-user">是否显示*</label>
+								<label for="nf-user">是否顯示*</label>
 								<select id="child_state" class="form-control">
-									<option value="0" selected>显示</option>
-									<option value="1">隐藏</option>
+									<option value="0" selected>顯示</option>
+									<option value="1">隱藏</option>
 								</select>
 							</div>
 							<div class="form-group">
@@ -365,13 +365,13 @@
 								<input type="text"  class="form-control" id="child_sort" value="0">
 							</div>
 							<button class="col-md-3 btn btn-success pull-right"	id="add_child">
-								确定     
+								確定     
 							</button>
 						</div>
 					</div>
 					<div class="col-lg-7" style="position: fixed;left: 430px;top: 285px;display:none;" id="revcate">
 						<div class="panel-heading bk-bg-white">
-							<h6><i class="fa fa-indent red"></i><span>修改分类</span></h6>
+							<h6><i class="fa fa-indent red"></i><span>修改分類</span></h6>
 							<div class="panel-actions">
 								<a href="#" class="btn-minimize"><i class="fa fa-caret-up"></i></a>
 								<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
@@ -380,14 +380,14 @@
 						<div class="panel-body">
 							<input type="hidden" id="rev_cate_id">
 							<div class="form-group">
-								<label for="nf-user">分类名称*</label>
-								<input type="text"  class="form-control" id="rev_name" value="" placeholder="请输入分类名称">
+								<label for="nf-user">分類名稱*</label>
+								<input type="text"  class="form-control" id="rev_name" value="" placeholder="请输入分類名稱">
 							</div>
 							<div class="form-group">
-								<label for="nf-user">是否显示*</label>
+								<label for="nf-user">是否顯示*</label>
 								<select id="rev_state" class="form-control">
-									<option value="0" selected>显示</option>
-									<option value="1">隐藏</option>
+									<option value="0" selected>顯示</option>
+									<option value="1">隱藏</option>
 								</select>
 							</div>
 							<div class="form-group">
@@ -395,7 +395,7 @@
 								<input type="text"  class="form-control" id="rev_sort" value="0">
 							</div>
 							<button class="col-md-3 btn btn-success pull-right"	id="rev_cate">
-								确定     
+								確定     
 							</button>
 						</div>
 					</div>

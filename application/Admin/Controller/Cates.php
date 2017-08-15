@@ -73,13 +73,13 @@
 					->where('pid',$id)
 					->find();
 			if(isset($result) && !empty($result)){
-				return (['code' => 400,'message' => '该分类下还有子分类，无法删除！']);
+				return (['code' => 400,'message' => '該分類下還有子分類，無法刪除！']);
 			}
 			$goods = Db::name('goods')
 					->where('cate_id',$id)
 					->find();
 			if(isset($goods) && !empty($goods)){
-				return (['code' => 400,'message' => '该分类下还有商品，无法删除！']);
+				return (['code' => 400,'message' => '該分類下還有商品，無法刪除！']);
 			}
 			$cname = Db::name('cates')
 					->field('cname')
@@ -91,7 +91,7 @@
 					->delete();
 			if($res){
 				Session::delete('cate');
-				$this->run_log('删除商品分类数据操作。'.$cname);
+				$this->run_log('删除商品分類數據操作。'.$cname);
 				return (['code' => 200,'message' => '删除成功！']);
 			}else{
 				return (['code' => 400,'message' => '删除失败！']);
@@ -126,10 +126,10 @@
 						->where('id','<>',$data['id'])
 						->find();
 				if($exis){
-					return (['code' => 400,'message' => '该分类名已存在！']);
+					return (['code' => 400,'message' => '該分類名已存在！']);
 				}
 			}else{
-				return (['code' => 400,'message' => '请输入分类名！']);
+				return (['code' => 400,'message' => '請輸入分類名！']);
 			}
 
 			// 执行修改
@@ -142,7 +142,7 @@
 						->where('id',$data['id'])
 						->find();
 				Session::delete('cate');
-				$this->run_log('修改商品分类数据操作。'.$pid['cname']);
+				$this->run_log('修改商品分類數據操作。'.$pid['cname']);
 				return (['code' => 200,'message' => '修改成功！']);
 			}else{
 				return (['code' => 400,'message' => '修改失败！']);
@@ -168,7 +168,7 @@
 			$data = Request::instance()->post();
 
 			if(!isset($data['display'])){
-				$this->error('是否显示不能为空！');
+				$this->error('是否顯示不能為空！');
 			}
 
 			if(!empty($data['cname']) && isset($data['cname'])){
@@ -176,10 +176,10 @@
 						->where('cname',$data['cname'])
 						->find();
 				if($exis){
-					$this->error('分类名称已存在！');
+					$this->error('分類名稱已存在！');
 				}
 			}else{
-				$this->error('分类名不能为空！');
+				$this->error('分類名稱不能为空！');
 			}
 
 			if($data['pid'] == 0){
@@ -200,7 +200,7 @@
 				Session::delete('cate');
 				$this->success('添加成功！');
 			}else{
-				$this->error('添加失败！');
+				$this->error('添加失敗！');
 			}
 		}
 
@@ -213,7 +213,7 @@
 			$data = Request::instance()->post();
 
 			if(!isset($data['display'])){
-				return json(['code' => 400,'message' => '是否显示不能为空！']);
+				return json(['code' => 400,'message' => '是否顯示不能為空！']);
 			}
 
 			if(!empty($data['cname']) && isset($data['cname'])){
@@ -221,10 +221,10 @@
 						->where('cname',$data['cname'])
 						->find();
 				if($exis){
-					return json(['code' => 400,'message' => '分类名称已存在！']);
+					return json(['code' => 400,'message' => '分類名稱已存在！']);
 				}
 			}else{
-				return json(['code' => 400,'message' => '分类名不能为空！']);
+				return json(['code' => 400,'message' => '分類名稱不能为空！']);
 			}
 
 			if($data['pid'] == 0){
@@ -246,7 +246,7 @@
 				Session::delete('cate');
 				return json(['code' => 200,'message' => '添加成功！','data' => $data]);
 			}else{
-				return json(['code' => 400,'message' => '添加失败！']);
+				return json(['code' => 400,'message' => '添加失敗！']);
 			}
 		}
 	}

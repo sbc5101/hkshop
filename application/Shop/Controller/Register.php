@@ -36,22 +36,22 @@
 			    [
 			    	'first_name',
 			    	'require|chsAlpha',
-			    	'first name不能为空|请输入正确的first name'
+			    	'first name不能為空|請輸入正確的first name'
 			    ],
 			    [
 			    	'last_name',
 			    	'require|chsAlpha',
-			    	'last name不能为空|请输入正确的last name'
+			    	'last name不能為空|請輸入正確的last name'
 			    ],
 			    [
 				    'username',
 				    'require|email|unique:users,username',
-				    '邮箱不能为空|邮箱格式不正确|邮箱地址已存在'
+				    '郵箱不能為空|郵箱格式不正確|郵箱地址已存在'
 			    ],
 			    [
 				    'password',
 				    'require|/^[a-zA-Z0-9_]{6,18}$/ ',
-				    '密码不能为空|密码由6到18位字母，数字或下划线组成'
+				    '密碼不能為空|密碼由6到18位字母，數字或下劃線組成'
 			    ],
 			];
 			$data = [

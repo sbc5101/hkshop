@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:62:"D:\phpStudy\WWW\hkshop/application/admin\view\goods\index.html";i:1502698771;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1502701349;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:62:"D:\phpStudy\WWW\hkshop/application/admin\view\goods\index.html";i:1502698771;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1502767701;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -192,7 +192,10 @@
                         <a href="<?php echo url('admin/goods/index'); ?>"><span class="text"> 商品管理</span></a>
                       </li>
                       <li>
-                        <a href="<?php echo url('admin/goods/area_list'); ?>"><span class="text"> 商品區域</span></a>
+                        <a href="<?php echo url('admin/goods/area_list'); ?>"><span class="text"> 商品區域管理</span></a>
+                      </li>
+                      <li>
+                        <a href="<?php echo url('admin/chateau/chateau_index'); ?>"><span class="text"> 商品酒莊管理</span></a>
                       </li>
                       <li>
                         <a href="<?php echo url('admin/score/score_list'); ?>"><span class="text"> 商品評分管理</span></a>

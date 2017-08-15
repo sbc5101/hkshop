@@ -30,7 +30,7 @@
 			$goods = Db::name('goods')
 						->alias('g')
 						->join('__GOODS_IMAGES__ i','i.goods_id = g.id')
-						->field('i.iname,g.id,g.hk_title,g.eng_title,g.marketprice,g.storeprice,g.cate_id,g.score')
+						->field('i.iname,g.id,g.hk_title,g.eng_title,g.marketprice,g.storeprice,g.cate_id,g.score_id')
 						->where('i.cover',0)
 						->where('g.area_id',$area_id)
 						->where('g.is_delete',0)

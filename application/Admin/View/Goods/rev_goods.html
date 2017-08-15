@@ -32,6 +32,10 @@
 					<input type="text" name="eng_title" class="form-control" value="{$goods.eng_title}" placeholder="請輸入英文名">
 				</div>
 				<div class="form-group">
+					<label for="nf-user">摘要</label>
+					<input type="text" name="abstract" class="form-control" value="{$goods.abstract}" placeholder="請輸入摘要信息">
+				</div>
+				<div class="form-group">
 					<label for="nf-user">是否上架銷售</label>
 					<div >
 						<div class="radio-custom radio-inline" style="float:left;">
@@ -43,6 +47,15 @@
 							<label for="status2"> 否</label>
 						</div>
 					</div>
+				</div>
+				<div class="form-group">
+					<label for="nf-password">商品酒莊</label>
+					<select id="cate" name="chateau_id" class="form-control">
+						<option value="">請選擇</option>
+						{volist name="chateau_data" id="vo"}
+						<option value="{$vo.id}" {eq name="$vo.id" value="$goods.chateau_id"} selected {/eq}>{$vo.c_title}</option>
+						{/volist}
+					</select>
 				</div>
 				<div class="form-group">
 					<label for="nf-password">商品區域*</label>
@@ -109,8 +122,33 @@
 					<input type="text" name="stock" class="form-control" value="{$goods.stock}">
 				</div>
 				<div class="form-group">
+					<label for="nf-password">獎項評分</label>
+					<br>
+					{volist name="score_data" id="vo"}
+						<input type="checkbox" id="score_id{$vo.id}" name="score_id[]" {neq name="goods_score" value=""}{volist name="goods_score" id="a"}{eq name="$a" value="$vo.id"} checked {/eq}{/volist}{/neq} value="{$vo.id}"> 
+						<label for="score_id{$vo.id}">{$vo.score_name} {$vo.mechanism} {$vo.score_num}</label>&nbsp;
+					{/volist}
+				</div>
+				<div class="form-group">
+					<label for="nf-password">釀酒筆記</label>
+					<textarea class="form-control" name="winemaker_notes">{$goods.winemaker_notes}</textarea>
+				</div>
+				<div class="form-group">
 					<label for="nf-user">商品詳細描述*：</label>	
 					<textarea  id="container" name="goods_msg" style="width:750px;height:400px;">{$goods.content}</textarea>
+				</div>
+				<div class="form-group">
+					<label for="nf-user">是否首頁展示</label>
+					<div >
+						<div class="radio-custom radio-inline" style="float:left;">
+							<input type="radio" id="is_home1" name="is_home" value="0" {eq name="$goods.is_home" value="0"} checked {/eq}> 
+							<label for="is_home1"> 否</label>
+						</div>
+						<div class="radio-custom radio-inline">
+							<input type="radio" id="is_home2" name="is_home" value="1" {eq name="$goods.is_home" value="1"} checked {/eq}> 
+							<label for="is_home2"> 是</label>
+						</div>
+					</div>
 				</div>
 				<div class="form-group">
 					<label for="nf-password">排序</label>

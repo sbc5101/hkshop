@@ -38,22 +38,16 @@
 		<strong>{$data.hk_title}</strong>
 	</p>
 	<p class="goods_region">
-		Cabernet Sauvignon from Oakville Napa Valley California
+		{$data.abstract}
 	</p>
 	<!--得分-->
 	<ul class="goods_score clearfix">
+		{volist name="$score_data" id="v"}
 		<li>
-			<span>JS</span>
-			<span>100</span>
+			<span>{$v.mechanism}</span>
+			<span>{$v.score_num}</span>
 		</li>
-		<li>
-			<span>D</span>
-			<span>99</span>
-		</li>
-		<li>
-			<span>V</span>
-			<span>98</span>
-		</li>
+		{/volist}
 	</ul>
 	<!--加入购物车的区域-->
 	<div class="addToCar">
@@ -115,40 +109,34 @@
 		<div class="winemakerNotes">
 			<h3 style="font-size: 16px;padding:28px 0 13px 10px ;">| Winemaker Notes</h3>
 			<p>
-				What a back-to-back pair of vintages! I assume one would have to go back to 2002 and 2001 to find two Screaming Eagles this compelling. The 2013 appears set for 25-30 years of longevity. There is something magical about this Oakville parcel on the valley floor just under the looming hillsides of such wineries as Phelps, Bacchus and Dalla Valle's Maya, and across the street from the Rudd Estate, Plumpjack, etc.
+				{$data.winemaker_notes}
 			</p>
 		</div>
 		<!--评级和奖-->
 		<div class="rating_award">
 			<h3 style="font-size: 16px;padding:28px 0 13px 10px ;">| Rating / Award</h3>
 			<ul>
+				{volist name="$score_data" id="v"}
 				<li>
 					<div class="revaluate_person" style="margin-left: 10px;margin-bottom: 10px;">
-						<span style="font-size: 10px;color: #dc143c; display: inline-block;border: 1px solid #bdbdbd;padding: 2px 10px;">JS</span>
-						<span style="font-size: 10px;color: #717171;background: #eee; display: inline-block;border: 1px solid #bdbdbd;border-left:none;padding: 2px 10px;">100</span>
-						<span style="font-size: 13px;color: #dc143c;display: inline-block;margin-left: 10px;">James Suckling</span>
+						<span style="font-size: 10px;color: #dc143c; display: inline-block;border: 1px solid #bdbdbd;padding: 2px 10px;">{$v.mechanism}</span>
+						<span style="font-size: 10px;color: #717171;background: #eee; display: inline-block;border: 1px solid #bdbdbd;border-left:none;padding: 2px 10px;">{$v.score_num}</span>
+						<span style="font-size: 13px;color: #dc143c;display: inline-block;margin-left: 10px;">
+							{$v.score_name}
+						</span>
 					</div>
 					<p class="revaluate_content" style="font-size: 13px;padding: 0 10px;">
-						Breathtaking aromas of blueberry, wet earth, black truffle, vine bark and lavender undertones. Full-bodied, yet tight and compressed with fabulous savory and dark fruit flavors. It lasts for minutes on the finish. The classicism in this wine is second to none. Incredible subtlety. Lovely austerity. Beauty in simplicity. Glorious to taste, yet a wine for decades ahead. 76% cabernet sauvignon, 13% merlot, and 11% cabernet franc. 800 cases made.
+						{$v.score_content}
 					</p>
 				</li>
-				<li>
-					<div class="revaluate_person" style="margin-left: 10px;margin-bottom: 10px;">
-						<span style="font-size: 10px;color: #dc143c; display: inline-block;border: 1px solid #bdbdbd;padding: 2px 10px;">JS</span>
-						<span style="font-size: 10px;color: #717171;background: #eee; display: inline-block;border: 1px solid #bdbdbd;border-left:none;padding: 2px 10px;">100</span>
-						<span style="font-size: 13px;color: #dc143c;display: inline-block;margin-left: 10px;">James Suckling</span>
-					</div>
-					<p class="revaluate_content" style="font-size: 13px;padding: 0 10px;">
-						Breathtaking aromas of blueberry, wet earth, black truffle, vine bark and lavender undertones. Full-bodied, yet tight and compressed with fabulous savory and dark fruit flavors. It lasts for minutes on the finish. The classicism in this wine is second to none. Incredible subtlety. Lovely austerity. Beauty in simplicity. Glorious to taste, yet a wine for decades ahead. 76% cabernet sauvignon, 13% merlot, and 11% cabernet franc. 800 cases made.
-					</p>
-				</li>
+				{/volist}
 			</ul>
 		</div>
 		<!--酒庄-->
 		<div class="Decoy">
-			<h3 style="font-size: 16px;padding:28px 0 13px 10px ;">| Winemaker Notes</h3>
+			<h3 style="font-size: 16px;padding:28px 0 13px 10px ;">| Decoy</h3>
 			<p style="font-size: 13px;color: #333333;padding: 0 10px;">
-				Screaming Eagle is one of Napa Valley's smallest wineries. The little stone winery is perched on a rocky hillside in the Oakville Appellation overlooking the vineyard planted in Cabernet Sauvignon, Merlot and Cabernet Franc. The wine is aged in 65% new French oak barrels for almost two years. Annual production is approximately 500 cases with most wine sold directly to consumers via a mailing list. The winery's first release was approximately 200 cases of the 1992 vintage.
+				{$chateau_data.c_content}	
 			</p>
 		</div>
 	</div>

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:66:"D:\phpStudy\WWW\hkshop/application/admin\view\goods\add_goods.html";i:1502698617;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1502701349;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:66:"D:\phpStudy\WWW\hkshop/application/admin\view\goods\add_goods.html";i:1502775293;s:64:"D:\phpStudy\WWW\hkshop/application/admin\view\Public\public.html";i:1502767701;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -192,7 +192,10 @@
                         <a href="<?php echo url('admin/goods/index'); ?>"><span class="text"> 商品管理</span></a>
                       </li>
                       <li>
-                        <a href="<?php echo url('admin/goods/area_list'); ?>"><span class="text"> 商品區域</span></a>
+                        <a href="<?php echo url('admin/goods/area_list'); ?>"><span class="text"> 商品區域管理</span></a>
+                      </li>
+                      <li>
+                        <a href="<?php echo url('admin/chateau/chateau_index'); ?>"><span class="text"> 商品酒莊管理</span></a>
                       </li>
                       <li>
                         <a href="<?php echo url('admin/score/score_list'); ?>"><span class="text"> 商品評分管理</span></a>
@@ -302,6 +305,10 @@
 					<input type="text" name="eng_title" class="form-control" value="" placeholder="請輸入英文名">
 				</div>
 				<div class="form-group">
+					<label for="nf-user">摘要</label>
+					<input type="text" name="abstract" class="form-control" value="" placeholder="請輸入摘要信息">
+				</div>
+				<div class="form-group">
 					<label for="nf-user">是否上架銷售</label>
 					<div >
 						<div class="radio-custom radio-inline" style="float:left;">
@@ -313,6 +320,15 @@
 							<label for="status2"> 否</label>
 						</div>
 					</div>
+				</div>
+				<div class="form-group">
+					<label for="nf-password">商品酒莊</label>
+					<select id="cate" name="chateau_id" class="form-control">
+						<option value="">請選擇</option>
+						<?php if(is_array($chateau_data) || $chateau_data instanceof \think\Collection): $i = 0; $__LIST__ = $chateau_data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+						<option value="<?php echo $vo['id']; ?>"><?php echo $vo['c_title']; ?></option>
+						<?php endforeach; endif; else: echo "" ;endif; ?>
+					</select>
 				</div>
 				<div class="form-group">
 					<label for="nf-password">商品區域*</label>
@@ -347,7 +363,7 @@
 							<br>
 						<?php endif; endforeach; endif; else: echo "" ;endif; ?>
 				</div>
-			
+				
 				<div class="form-group">
 					<label for="nf-user">年份*</label>
 					<input type="text" name="years" class="form-control" value="" placeholder="請輸入年份">
@@ -373,12 +389,24 @@
 					<input type="text" name="stock" class="form-control" value="0">
 				</div>
 				<div class="form-group">
+					<label for="nf-password">獎項評分</label>
+					<br>
+					<?php if(is_array($score_data) || $score_data instanceof \think\Collection): $i = 0; $__LIST__ = $score_data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+						<input type="checkbox" id="score_id<?php echo $vo['id']; ?>" name="score_id[]" value="<?php echo $vo['id']; ?>"> 
+						<label for="score_id<?php echo $vo['id']; ?>"><?php echo $vo['score_name']; ?> <?php echo $vo['mechanism']; ?> <?php echo $vo['score_num']; ?></label>&nbsp;
+					<?php endforeach; endif; else: echo "" ;endif; ?>
+				</div>
+				<div class="form-group">
 					<label for="nf-user">商品主圖*</label>
 					<input type="file" id="file-input" name="image">
 				</div>
 				<div class="form-group">
 					<label for="nf-user">其他圖片</label>
 					<input type="file" id="file-input" multiple name="images[]">
+				</div>
+				<div class="form-group">
+					<label for="nf-password">釀酒筆記</label>
+					<textarea class="form-control" name="winemaker_notes"></textarea>
 				</div>
 				<div class="form-group">
 					<label for="nf-user">商品詳細描述*：</label>	

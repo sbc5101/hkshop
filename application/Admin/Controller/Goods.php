@@ -22,7 +22,7 @@
 		 */
 		public function index()
 		{
-			// 初始化数据
+			// 初始化數據
 			$status = Request::instance()->get('status');
 			$page = empty(Request::instance()->get('page')) ? '1' : Request::instance()->get('page');
 
@@ -67,9 +67,15 @@
 			$areas_data = Db::name('goods_areas')
 						->where('display',1)
 						->select();
+			$score_data = Db::name('goods_score')
+							->select();
+			$chateau_data = Db::name('goods_chateau')
+								->select();
 			return $this->fetch('add_goods',[
 							'cates_data' 	=> $cates_data,
 							'areas_data' 	=> $areas_data,
+							'score_data' 	=> $score_data,
+							'chateau_data' 	=> $chateau_data,
 						]);
 		}
 
@@ -79,16 +85,16 @@
 		 */
 		public function action_add_goods()
 		{
-			// 接收数据
+			// 接收數據
 			$msg = Request::instance()->post();
 			$file = Request::instance()->file('image');
 			$files = Request::instance()->file('images');
 		
-			// 检测数据
+			// 检测數據
 			$goods_data = $this->check_goods_data($msg);
 	
 			if(empty($file) && !isset($file)){
-					$this->error('主图不能为空！');
+					$this->error('主圖不能為空！');
 			}else{
 				$filemsg = $this->upload($file);
 				if(!$filemsg){
@@ -111,12 +117,12 @@
 			if($title_exists){
 				$this->error('商品名已存在！');
 			}
-			// 合并数据
+			// 合并數據
 			$arr = [
 				'create_time' => date('Y-m-d H:i:s',time()),
 			];
 			$goods_data = array_merge($goods_data,$arr);
-			// 添加商品数据
+			// 添加商品數據
 			$res = Db::name('goods')
 				->insertGetId($goods_data);
 			if($res){
@@ -129,16 +135,16 @@
 					Db::name('goods_images')
 						->insertAll($imgs);
 				}
-				$this->run_log('新增商品数据操作。'.$msg['hk_title']);
+				$this->run_log('新增商品數據操作。'.$msg['hk_title']);
 				$this->success('商品添加成功！','goods/add_goods');
 			}else{
-				$this->error('商品添加失败！');
+				$this->error('商品添加失敗！');
 			}	
 			
 		}
 
 		/**
-		 * 检测上传商品数据
+		 * 检测上传商品數據
 		 * @param  [type] $data 		 [商品信息]
 		 * @return [type]       		 [description]
 		 */
@@ -149,16 +155,16 @@
 				$data['goods_msg'] = '';
 			}
 			$cate_id = implode(',',$data['cate_id']);
-			// 判断数据不能为空
+			// 判断數據不能為空
 			$rule = [
-				['hk_title','require','商品中文名不能为空'],
-				['eng_title','require','商品英文名不能为空'],
-			    ['years','require','年份不能为空'],
-			    ['marketprice','require','零售价不能为空'],
-			    ['storeprice','require','市场价不能为空'],
-			    ['weight','require','商品重量不能为空'],
-			    ['content','require','商品描述不能为空'],
-			    ['stock','require','库存不能为空'],
+				['hk_title','require','商品中文名不能為空'],
+				['eng_title','require','商品英文名不能為空'],
+			    ['years','require','年份不能為空'],
+			    ['marketprice','require','零售價不能為空'],
+			    ['storeprice','require','市場價不能為空'],
+			    ['weight','require','商品重量不能為空'],
+			    ['content','require','商品描述不能為空'],
+			    ['stock','require','庫存不能為空'],
 			];
 			$msg = [
 				'hk_title'  => $data['hk_title'],
@@ -177,8 +183,8 @@
 			if(!$result){
 			    $this->error($validate->getError());
 			}
-
-			// 添加数据
+		
+			// 添加數據
 			$arr =[
 				'status'  			=> 	$data['status'],
 				'area_id' 			=> 	$data['area_id'],
@@ -187,6 +193,10 @@
 			    'last_time'			=> 	date('Y-m-d H:i:s',time()),
 			    'sort'				=> 	$data['sort'],
 			    'is_home'			=> 	$data['is_home'],
+			    'score_id'			=> 	empty($data['score_id']) ? '' : implode(',',$data['score_id']),
+			    'abstract'			=> 	$data['abstract'],
+			    'winemaker_notes'	=> 	$data['winemaker_notes'],
+			    'chateau_id'		=> 	$data['chateau_id'],
 			];
 
 			//合并数组 
@@ -204,7 +214,6 @@
 		{	
 			$status = Request::instance()->get('status');
 			$page = Request::instance()->get('page');
-
 			$cates_data = self::cate_route('cates','cate');
 			$areas_data = Db::name('goods_areas')
 						->where('display',1)
@@ -212,8 +221,12 @@
 			$goods_data = Db::name('goods')
 						->where('id',$id)
 						->find();
+			$goods_score = explode(',',$goods_data['score_id']);
 			$cates = explode(',',$goods_data['cate_id']);
-
+			$score_data = Db::name('goods_score')
+							->select();
+			$chateau_data = Db::name('goods_chateau')
+							->select();		
 			return $this->fetch('rev_goods',[
 					'goods_id' 		=> $id,
 					'cates_data' 	=> $cates_data,
@@ -222,6 +235,9 @@
 					'status' 		=> $status,
 					'page' 			=> $page,
 					'cates' 		=> $cates,
+					'score_data' 	=> $score_data,
+					'goods_score' 	=> $goods_score,
+					'chateau_data' 	=> $chateau_data,
 				]);
 		}
 
@@ -233,7 +249,7 @@
 		{
 			$msg = Request::instance()->post();
 			$goods_id = Request::instance()->post('id');
-			
+
 			$boolean = Db::name('goods')
 						->where('id','<>',$goods_id)
 						->where('eng_title',$msg['eng_title'])
@@ -245,17 +261,17 @@
 				$this->error('该商品已存在！');
 			}
 
-			// 检测数据
+			// 检测數據
 			$goods_data = $this->check_goods_data($msg);
 
 			$res = Db::name('goods')
 					->where('id',$goods_id)
 					->update($goods_data);
 			if($res !== false){
-				$this->run_log('修改商品数据操作。'.$msg['hk_title']);
+				$this->run_log('修改商品數據操作。'.$msg['hk_title']);
 				$this->success('修改成功！');
 			}else{
-				$this->error('修改失败！');
+				$this->error('修改失敗！');
 			}
 
 		}
@@ -279,16 +295,16 @@
 							->where('goods_id',$id)
 							->delete();
 				if($boolean){
-					$this->run_log('删除商品数据操作。'.$msg['title']);
+					$this->run_log('删除商品數據操作。'.$msg['title']);
 					$this->success('删除成功！');
 				}else{
-					$this->error('删除失败！');
+					$this->error('删除失敗！');
 				}
 			}
 		}
 
 		/**
-		 * 商品恢复操作
+		 * 商品恢復操作
 		 * @param  [type] $id     [商品id]
 		 * @return [type]         [是否操作成功]
 		 */
@@ -301,10 +317,10 @@
 				$title = Db::name('goods')
 							->where('id',$id)
 							->find()['title'];
-				$this->run_log('恢复商品数据操作。'.$title);
-				$this->success('恢复成功！','goods/goods_recycle');
+				$this->run_log('恢復商品數據操作。'.$title);
+				$this->success('恢復成功！','goods/goods_recycle');
 			}else{
-				$this->error('操作失败！');
+				$this->error('操作失敗！');
 			}
 		}
 
@@ -327,7 +343,7 @@
 
 
 		/**
-		 * 商品图片修改操作
+		 * 商品圖片修改操作
 		 * @param  [type] $id [商品id]
 		 * @return [type]     [是否修改成功]
 		 */
@@ -349,8 +365,8 @@
 		}
 
 		/**
-		 * 商品图片删除动作
-		 * @param  [type] $id [商品图片id]
+		 * 商品圖片删除动作
+		 * @param  [type] $id [商品圖片id]
 		 * @return [type]     [返回是否删除成功]
 		 */
 		public function action_del_img($id)
@@ -361,7 +377,7 @@
 					->find();
 			
 			if($res['cover'] == 0){
-				$this->error('封面无法删除！');
+				$this->error('封面無法删除！');
 			}
 			// if($res['iname']){
 			// 	unlink(ROOT_PATH . str_replace('/','\\',ltrim($res['iname'],'/')));
@@ -374,15 +390,15 @@
 							->field('hk_title')
 							->where('id',$res['goods_id'])
 							->find();
-				$this->run_log('删除商品图片操作。'.$msg['hk_title']);
+				$this->run_log('删除商品圖片操作。'.$msg['hk_title']);
 				$this->success('删除成功！');
 			}else{
-				$this->error('删除失败！');
+				$this->error('删除失敗！');
 			}
 		}
 
 		/**
-		 * 添加图片动作
+		 * 添加圖片动作
 		 * @return [type] [是否添加成功]
 		 */
 		public function action_add_imgs()
@@ -392,7 +408,7 @@
 
 			$data = [];
 			if(empty($files) && !isset($files)){
-				return $this->error('请选择图片！');
+				return $this->error('请选择圖片！');
 			}
 			$filemsg = $this->uploads($files);
 
@@ -407,18 +423,18 @@
 							->field('hk_title')
 							->where('id',$goods_id)
 							->find();
-				$this->run_log('新增商品图片操作。'.$msg['hk_title']);
-				$this->success('增加图片成功！');
+				$this->run_log('新增商品圖片操作。'.$msg['hk_title']);
+				$this->success('增加圖片成功！');
 			}else{
-				$this->error('增加图片失败！');
+				$this->error('增加圖片失敗！');
 			}
 		}
 
 		/**
-		 * 修改图片封面动作
-		 * @param  [type] $id       [商品图片id]
+		 * 修改圖片封面动作
+		 * @param  [type] $id       [商品圖片id]
 		 * @param  [type] $goods_id [商品id]
-		 * @return [type]           [设置是否成功]
+		 * @return [type]           [設置是否成功]
 		 */
 		public function action_rev_cover($id,$goods_id)
 		{
@@ -435,10 +451,10 @@
 							->field('hk_title')
 							->where('id',$goods_id)
 							->find();
-					$this->run_log('修改商品图片封面操作。'.$msg['hk_title']);
+					$this->run_log('修改商品圖片封面操作。'.$msg['hk_title']);
 					$this->success('修改成功！');
 				}else{
-					$this->error('修改失败！');
+					$this->error('修改失敗！');
 				}
 			}
 		}
@@ -460,7 +476,7 @@
 		}
 
 		/**
-		 * 商品区域列表
+		 * 商品區域列表
 		 * @return [type] [description]
 		 */
 		public function area_list()
@@ -471,7 +487,7 @@
 		}
 
 		/**
-		 * 添加商品区域操作
+		 * 添加商品區域操作
 		 * @return [type] [description]
 		 */
 		public function add_area()
@@ -480,23 +496,23 @@
 		}
 		
 		/**
-		 * 添加商品区域动作
+		 * 添加商品區域动作
 		 * @return [type] [description]
 		 */
 		public function action_add_area()
 		{
 			$message = Request::instance()->post();
-			// 数据验证
+			// 數據验证
 			$rule = [
 			    [
 			    	'area_name',
 			    	'require|chsAlpha|unique:goods_areas,area_name',
-			    	'区域名不能为空|请输入正确的区域名|区域名已存在'
+			    	'區域名不能為空|請輸入正確的區域名|區域名已存在'
 			    ],
 			    [
 				    'display',
 				    'require',
-				    '状态不能为空'
+				    '狀態不能為空'
 			    ],
 			];
 			$data = [
@@ -514,16 +530,16 @@
 			$res = Db::name('goods_areas')
 					->insert($data);
 			if($res){
-				$this->run_log('添加商品区域数据操作。'.$message['area_name']);
+				$this->run_log('添加商品區域數據操作。'.$message['area_name']);
 				$this->success('添加成功');
 			}else{
-				$this->error('添加失败');
+				$this->error('添加失敗');
 			}
 		}
 
 		/**
-		 * 修改商品区域操作
-		 * @param  [type] $id [商品区域ID]
+		 * 修改商品區域操作
+		 * @param  [type] $id [商品區域ID]
 		 * @return [type]     [description]
 		 */
 		public function rev_area($id)
@@ -535,28 +551,28 @@
 		}
 		
 		/**
-		 * 修改商品区域动作
+		 * 修改商品區域动作
 		 * @return [type] [description]
 		 */
 		public function action_rev_area()
 		{
 			$message = Request::instance()->post();
-			// 数据验证
+			// 數據验证
 			$rule = [
 				[
 			    	'id',
 			    	'require',
-			    	'区域ID不能为空'
+			    	'區域ID不能為空'
 			    ],
 			    [
 			    	'area_name',
 			    	'require|chsAlpha',
-			    	'区域名不能为空|请输入正确的区域名'
+			    	'區域名不能為空|請輸入正確的區域名'
 			    ],
 			    [
 				    'display',
 				    'require',
-				    '状态不能为空'
+				    '狀態不能為空'
 			    ],
 			];
 			$data = [
@@ -576,22 +592,22 @@
 							->where('area_name',$message['area_name'])
 							->find();
 			if(!empty($area_name)){
-				$this->error('区域名已存在');
+				$this->error('區域名已存在');
 			}
 			$res = Db::name('goods_areas')
 					->where('id',$message['id'])
 					->update($data);
 			if($res !== false){
-				$this->run_log('修改商品区域数据操作。'.$message['area_name']);
+				$this->run_log('修改商品區域數據操作。'.$message['area_name']);
 				$this->success('修改成功','admin/goods/area_list');
 			}else{
-				$this->error('修改失败');
+				$this->error('修改失敗');
 			}
 		}
 
 		/**
-		 * 删除商品区域动作
-		 * @param  [type] $id [商品区域ID]
+		 * 删除商品區域动作
+		 * @param  [type] $id [商品區域ID]
 		 * @return [type] [description]
 		 */
 		public function action_del_area($id)
@@ -600,16 +616,16 @@
 							->where('area_id',$id)
 							->find();
 			if(!empty($area_name)){
-				$this->error('该区域下有商品，无法删除！');
+				$this->error('该區域下有商品，無法删除！');
 			}
 			$res = Db::name('goods_areas')
 					->where('id',$id)
 					->delete();
 			if($res !== false){
-				$this->run_log('删除商品区域数据操作。'.$message['area_name']);
+				$this->run_log('删除商品區域數據操作。'.$message['area_name']);
 				$this->success('删除成功');
 			}else{
-				$this->error('删除失败');
+				$this->error('删除失敗');
 			}
 		}
 	}

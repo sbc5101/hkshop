@@ -71,10 +71,10 @@
 							]);
 
 				// 设置session
-				Session::set('user.id', $res['id'],'shop_user');
-				Session::set('user.name', $res['username'],'shop_user');
-				Session::set('user.first_name', $res['first_name'],'shop_user');
-				Session::set('user.last_name', $res['last_name'],'shop_user');
+				Session::set('user.id', $res['id'],'hk_shop_user');
+				Session::set('user.name', $res['username'],'hk_shop_user');
+				Session::set('user.first_name', $res['first_name'],'hk_shop_user');
+				Session::set('user.last_name', $res['last_name'],'hk_shop_user');
 				return json(['code' => 200,'message' => '登錄成功',]);
 			}else{
 				return json(['code' => 400,'message' => '密碼或用戶名錯誤']);

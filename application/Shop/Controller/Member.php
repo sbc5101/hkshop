@@ -20,8 +20,8 @@
 		 */
 		public function personal_center()
 		{
-			$first_name = Session::get('user.first_name','shop_user');
-			$last_name = Session::get('user.last_name','shop_user');
+			$first_name = Session::get('user.first_name','hk_shop_user');
+			$last_name = Session::get('user.last_name','hk_shop_user');
 			$name =  $last_name . ' ' . $first_name;
 			return $this->fetch('personal_center',['name' => $name]);
 		}

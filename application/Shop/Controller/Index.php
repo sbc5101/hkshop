@@ -44,24 +44,74 @@
 					// MOST POPULAR RED WINE
 					if(in_array(382,$cate_id) !== false){
 						$most_goods[$k] = $v;
+						// 初始化数据
+						$most_goods[$k]['score_data'] = '';
+						// 查询获奖数据
+						if(!empty($v['score_id'])){
+							$most_goods[$k]['score_data'] = Db::name('goods_score')
+								->field('score_num,mechanism')
+								->where('id','in',$v['score_id'])
+								->limit(3)
+								->select();
+						}
 					}
 					// NEW ARRIVALS
 					if(in_array(386,$cate_id) !== false){
-						$new_goods[$k] = $v;					
+						$new_goods[$k] = $v;
+						// 初始化数据
+						$new_goods[$k]['score_data'] = '';
+						// 查询获奖数据
+						if(!empty($v['score_id'])){
+							$new_goods[$k]['score_data'] = Db::name('goods_score')
+								->field('score_num,mechanism')
+								->where('id','in',$v['score_id'])
+								->limit(3)
+								->select();
+						}					
 					}
 				
 					// RED WINE
 					if(in_array(377,$cate_id) !== false){
 						$red_goods[$k] = $v;
+						// 初始化数据
+						$red_goods[$k]['score_data'] = '';
+						// 查询获奖数据
+						if(!empty($v['score_id'])){
+							$red_goods[$k]['score_data'] = Db::name('goods_score')
+								->field('score_num,mechanism')
+								->where('id','in',$v['score_id'])
+								->limit(3)
+								->select();
+						}
 
 					}
 					// WHITE WINE
 					if(in_array(387,$cate_id) !== false){
 						$white_goods[$k] = $v;
+						// 初始化数据
+						$white_goods[$k]['score_data'] = '';
+						// 查询获奖数据
+						if(!empty($v['score_id'])){
+							$white_goods[$k]['score_data'] = Db::name('goods_score')
+								->field('score_num,mechanism')
+								->where('id','in',$v['score_id'])
+								->limit(3)
+								->select();
+						}
 					}
 					// CHAMPAGNE & SPARKLING
 					if(in_array(388,$cate_id) !== false){
 						$champagne_goods[$k] = $v;
+						// 初始化数据
+						$champagne_goods[$k]['score_data'] = '';
+						// 查询获奖数据
+						if(!empty($v['score_id'])){
+							$champagne_goods[$k]['score_data'] = Db::name('goods_score')
+								->field('score_num,mechanism')
+								->where('id','in',$v['score_id'])
+								->limit(3)
+								->select();
+						}
 					}
 				}
 			}

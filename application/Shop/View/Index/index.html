@@ -56,10 +56,12 @@
 	            		<p class="Cn_name">{$v.hk_title}</p>
 	            		<div class="score">
 	            			<ul>
+	            			 	{volist name="$v.score_data" id="val"}
 	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
+	            					<span class="score1">{$val.mechanism}</span>
+	            					<span class="score2">{$val.score_num}</span>
 	            				</li>
+	            				{/volist}
 	            			</ul>
 	            		</div>
 	            		<!--价格-->
@@ -73,7 +75,7 @@
 	            		<div class="collect">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
-	            		<div class="addTo_car">
+	            		<div class="addTo_car" data-id="{$v.id}">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
@@ -100,10 +102,12 @@
 	            		<p class="Cn_name">{$v.hk_title}</p>
 	            		<div class="score">
 	            			<ul>
+	            				{volist name="$v.score_data" id="val"}
 	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
+	            					<span class="score1">{$val.mechanism}</span>
+	            					<span class="score2">{$val.score_num}</span>
 	            				</li>
+	            				{/volist}
 	            			</ul>
 	            		</div>
 	            		<!--价格-->
@@ -117,7 +121,7 @@
 	            		<div class="collect">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
-	            		<div class="addTo_car">
+	            		<div class="addTo_car" data-id="{$v.id}">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
@@ -144,10 +148,12 @@
 	            		<p class="Cn_name">{$v.hk_title}</p>
 	            		<div class="score">
 	            			<ul>
+	            				{volist name="$v.score_data" id="val"}
 	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
+	            					<span class="score1">{$val.mechanism}</span>
+	            					<span class="score2">{$val.score_num}</span>
 	            				</li>
+	            				{/volist}
 	            			</ul>
 	            		</div>
 	            		<!--价格-->
@@ -161,7 +167,7 @@
 	            		<div class="collect">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
-	            		<div class="addTo_car">
+	            		<div class="addTo_car" data-id="{$v.id}">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
@@ -188,10 +194,12 @@
 	            		<p class="Cn_name">{$v.hk_title}</p>
 	            		<div class="score">
 	            			<ul>
+	            				{volist name="$v.score_data" id="val"}
 	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
+	            					<span class="score1">{$val.mechanism}</span>
+	            					<span class="score2">{$val.score_num}</span>
 	            				</li>
+	            				{/volist}
 	            			</ul>
 	            		</div>
 	            		<!--价格-->
@@ -205,7 +213,7 @@
 	            		<div class="collect">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
-	            		<div class="addTo_car">
+	            		<div class="addTo_car" data-id="{$v.id}">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
@@ -232,10 +240,12 @@
 	            		<p class="Cn_name">{$v.hk_title}</p>
 	            		<div class="score">
 	            			<ul>
+	            				{volist name="$v.score_data" id="val"}
 	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
+	            					<span class="score1">{$val.mechanism}</span>
+	            					<span class="score2">{$val.score_num}</span>
 	            				</li>
+	            				{/volist}
 	            			</ul>
 	            		</div>
 	            		<!--价格-->
@@ -249,7 +259,7 @@
 	            		<div class="collect">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
-	            		<div class="addTo_car">
+	            		<div class="addTo_car" data-id="{$v.id}">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
@@ -275,5 +285,13 @@
 	        spaceBetween: 10,
 	        freeMode: true
 	    });
+
+	    $('.addTo_car').click(function(){
+	    	var goods_id = $(this).attr('data-id');
+	    	var url = "{:url('shop/cart/add_cart')}";
+	    	$.post(url,{'goods_id':goods_id,'buy_num':1},function(data){
+	    		console.log(data);
+	    	},'json');
+	    })
 	</script>
 {/block}

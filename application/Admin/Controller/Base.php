@@ -22,7 +22,7 @@
 		 */
 		public function _initialize()
 		{
-			if(empty(Session::get('user.id','admin_user'))){
+			if(empty(Session::get('user.id','hk_admin_user'))){
 				// $this->error('请登录用户','login/index');
 				$this->redirect('login/index');
 			}else{
@@ -36,7 +36,7 @@
 				// 		->find()['id'];
 				// $rule_group = Db::name('admin_group_rule')
 				// 			->field('rules')
-				// 			->where('id',Session::get('user.rule','admin_user'))
+				// 			->where('id',Session::get('user.rule','hk_admin_user'))
 				// 			->find();
 				// $rules = explode(',',$rule_group['rules']);
 			
@@ -54,8 +54,8 @@
 		 */
 		public function loginOut()
 		{
-			Session::clear('admin_user');
-			if(empty(Session::get('user.id','admin_user'))){
+			Session::clear('hk_admin_user');
+			if(empty(Session::get('user.id','hk_admin_user'))){
 				$this->success('退出成功','login/index');		
 			}
 		}
@@ -66,7 +66,7 @@
 		 */
 		protected function getAdminId()
 		{
-			return Session::get('user.id','admin_user');
+			return Session::get('user.id','hk_admin_user');
 		}
 
 		/**
@@ -75,7 +75,7 @@
 		 */
 		protected function getAdminName()
 		{
-			return Session::get('user.name','admin_user');
+			return Session::get('user.name','hk_admin_user');
 		}
 
 		/**

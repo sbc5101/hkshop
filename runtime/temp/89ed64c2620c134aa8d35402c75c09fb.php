@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"D:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1502689601;s:63:"D:\phpStudy\WWW\hkshop/application/shop\view\Public\public.html";i:1502693277;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"D:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1502853600;s:63:"D:\phpStudy\WWW\hkshop/application/shop\view\Public\public.html";i:1502693277;}*/ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -187,10 +187,12 @@
 	            		<p class="Cn_name"><?php echo $v['hk_title']; ?></p>
 	            		<div class="score">
 	            			<ul>
+	            			 	<?php if(is_array($v['score_data']) || $v['score_data'] instanceof \think\Collection): $i = 0; $__LIST__ = $v['score_data'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?>
 	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
+	            					<span class="score1"><?php echo $val['mechanism']; ?></span>
+	            					<span class="score2"><?php echo $val['score_num']; ?></span>
 	            				</li>
+	            				<?php endforeach; endif; else: echo "" ;endif; ?>
 	            			</ul>
 	            		</div>
 	            		<!--价格-->
@@ -204,7 +206,7 @@
 	            		<div class="collect">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
-	            		<div class="addTo_car">
+	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
@@ -231,10 +233,12 @@
 	            		<p class="Cn_name"><?php echo $v['hk_title']; ?></p>
 	            		<div class="score">
 	            			<ul>
+	            				<?php if(is_array($v['score_data']) || $v['score_data'] instanceof \think\Collection): $i = 0; $__LIST__ = $v['score_data'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?>
 	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
+	            					<span class="score1"><?php echo $val['mechanism']; ?></span>
+	            					<span class="score2"><?php echo $val['score_num']; ?></span>
 	            				</li>
+	            				<?php endforeach; endif; else: echo "" ;endif; ?>
 	            			</ul>
 	            		</div>
 	            		<!--价格-->
@@ -248,7 +252,7 @@
 	            		<div class="collect">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
-	            		<div class="addTo_car">
+	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
@@ -275,10 +279,12 @@
 	            		<p class="Cn_name"><?php echo $v['hk_title']; ?></p>
 	            		<div class="score">
 	            			<ul>
+	            				<?php if(is_array($v['score_data']) || $v['score_data'] instanceof \think\Collection): $i = 0; $__LIST__ = $v['score_data'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?>
 	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
+	            					<span class="score1"><?php echo $val['mechanism']; ?></span>
+	            					<span class="score2"><?php echo $val['score_num']; ?></span>
 	            				</li>
+	            				<?php endforeach; endif; else: echo "" ;endif; ?>
 	            			</ul>
 	            		</div>
 	            		<!--价格-->
@@ -292,7 +298,7 @@
 	            		<div class="collect">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
-	            		<div class="addTo_car">
+	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
@@ -319,10 +325,12 @@
 	            		<p class="Cn_name"><?php echo $v['hk_title']; ?></p>
 	            		<div class="score">
 	            			<ul>
+	            				<?php if(is_array($v['score_data']) || $v['score_data'] instanceof \think\Collection): $i = 0; $__LIST__ = $v['score_data'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?>
 	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
+	            					<span class="score1"><?php echo $val['mechanism']; ?></span>
+	            					<span class="score2"><?php echo $val['score_num']; ?></span>
 	            				</li>
+	            				<?php endforeach; endif; else: echo "" ;endif; ?>
 	            			</ul>
 	            		</div>
 	            		<!--价格-->
@@ -336,7 +344,7 @@
 	            		<div class="collect">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
-	            		<div class="addTo_car">
+	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
@@ -363,10 +371,12 @@
 	            		<p class="Cn_name"><?php echo $v['hk_title']; ?></p>
 	            		<div class="score">
 	            			<ul>
+	            				<?php if(is_array($v['score_data']) || $v['score_data'] instanceof \think\Collection): $i = 0; $__LIST__ = $v['score_data'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?>
 	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
+	            					<span class="score1"><?php echo $val['mechanism']; ?></span>
+	            					<span class="score2"><?php echo $val['score_num']; ?></span>
 	            				</li>
+	            				<?php endforeach; endif; else: echo "" ;endif; ?>
 	            			</ul>
 	            		</div>
 	            		<!--价格-->
@@ -380,7 +390,7 @@
 	            		<div class="collect">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
-	            		<div class="addTo_car">
+	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
@@ -406,6 +416,14 @@
 	        spaceBetween: 10,
 	        freeMode: true
 	    });
+
+	    $('.addTo_car').click(function(){
+	    	var goods_id = $(this).attr('data-id');
+	    	var url = "<?php echo url('shop/cart/add_cart'); ?>";
+	    	$.post(url,{'goods_id':goods_id,'buy_num':1},function(data){
+	    		console.log(data);
+	    	},'json');
+	    })
 	</script>
 
         

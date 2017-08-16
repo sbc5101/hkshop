@@ -60,9 +60,9 @@
 					->update(['last_time' => date('Y-m-d H:i:s',time()),'last_ip' => $request->ip()]);
 
 				// 设置session
-				Session::set('user.id', $res['id'],'admin_user');
-				Session::set('user.name', $res['user_name'],'admin_user');
-				Session::set('user.rule', $res['rule_id'],'admin_user');
+				Session::set('user.id', $res['id'],'hk_admin_user');
+				Session::set('user.name', $res['user_name'],'hk_admin_user');
+				Session::set('user.rule', $res['rule_id'],'hk_admin_user');
 
 				$this->success('登录成功！','index/index');
 			}else{

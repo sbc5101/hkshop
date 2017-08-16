@@ -1,9 +1,9 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:62:"D:\phpStudy\WWW\hkshop/application/admin\view\login\index.html";i:1498615338;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:62:"D:\phpStudy\WWW\hkshop/application/admin\view\login\index.html";i:1502698980;}*/ ?>
 ﻿<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
-		<title>登录页面</title> 
+		<title>登錄頁面</title> 
 		<link rel="stylesheet" type="text/css" href="/public/admin/assets/css/login.css" />     
 		<script type="text/javascript" src="/public/admin/assets/js/jquery-1.9.1.min.js"></script>     
 		<script type="text/javascript">
@@ -48,10 +48,10 @@
 		</div>
 		<form action="<?php echo url('login/action_login'); ?>" method="post">
 			<p style="padding: 30px 0px 10px; position: relative;"><span class="u_logo"></span>         
-				<input class="ipt" name="name" type="text" placeholder="请输入用户名" value=""> 
+				<input class="ipt" name="name" type="text" placeholder="請輸入用戶名" value=""> 
 			</p>
 			<p style="position: relative;"><span class="p_logo"></span>         
-				<input class="ipt" name="password" id="password" type="password" placeholder="请输入密码" value="">   
+				<input class="ipt" name="password" id="password" type="password" placeholder="請輸入密碼" value="">   
 			</p>
 			<div style="height: 50px; line-height: 50px; margin-top: 30px; border-top-color: rgb(231, 231, 231); border-top-width: 1px; border-top-style: solid;">
 					<p style="margin: 0px 35px 20px 45px;">
@@ -60,7 +60,7 @@
 						</span> 
 			           <span style="float: right;">
 			           <!-- <a style="color: rgb(204, 204, 204); margin-right: 10px;" href="#">注册</a>   -->
-			              <button type="submit" style="background: rgb(0, 142, 173); padding: 7px 10px; border-radius: 4px; border: 1px solid rgb(26, 117, 152); border-image: none; color: rgb(255, 255, 255); font-weight: bold;">登录</button>  
+			              <button type="submit" style="background: rgb(0, 142, 173); padding: 7px 10px; border-radius: 4px; border: 1px solid rgb(26, 117, 152); border-image: none; color: rgb(255, 255, 255); font-weight: bold;">登錄</button>  
 			           </span>         
 			        </p>
 			    </div>

@@ -46,9 +46,101 @@
 									->select();
 				}
 			}
+			$total = 0;
+			if(!empty($cart_data)){
+				foreach ($cart_data as $k => &$v) {
+					$goods = Db::name('goods')
+								->alias('g')
+								->join('__GOODS_IMAGES__ i','i.goods_id = g.id')
+								->field('g.marketprice,g.hk_title,g.eng_title,g.score_id,i.iname')
+								->where('g.id',$v['goods_id'])
+								->where('g.is_delete',0)
+								->where('g.status',0)
+								->where('i.cover',0)
+								->find();
+					if(!empty($goods)){
+						if(!empty($goods['score_id'])){
+							$score = Db::name('goods_score')
+										->field('score_num,mechanism')
+										->where('id','in',$goods['score_id'])
+										->select();
+							$v['score'] = $score;
+						}else{
+							$v['score'] = [];
+						}
+						$v['marketprice'] = $goods['marketprice'];
+						$v['hk_title'] = $goods['hk_title'];
+						$v['eng_title'] = $goods['eng_title'];
+						$v['iname'] = $goods['iname'];
+						$total += $goods['marketprice'] * $v['buy_num'];
+					}else{
+						unset($cart_data[$k]);
+					}
+				}
+			}
 			return $this->fetch('shopping_cart',[
 										'cart_data' => $cart_data,
+										'total' => $total,
 										]);
+		}
+
+		/**
+		 * 删除购物车商品
+		 * @return [type] [description]
+		 */
+		public function del_cart()
+		{
+			$data = Request::instance()->post();
+			$user_id = Session::get('user.id','hk_shop_user');
+			// 初始化数据
+			$total = 0;
+			$cart_data = '';
+
+			if(!empty($user_id)){
+				$res = Db::name('cart')
+						->where('goods_id',$data['goods_id'])
+						->where('user_id',$user_id)
+						->delete();
+				if($res == false){
+					return json(['code' => '400','message' => '删除购物车商品失败']);
+				}
+				$cart_data = Db::name('cart')
+								->where('goods_id',$data['goods_id'])
+								->where('user_id',$user_id)
+								->select();
+			}else{
+				$cart_data = Cookie::get('cart_info','hk_shop');
+				if(!empty($cart_data)){
+					$cart_data = json_decode($cart_goods,true);
+					foreach ($cart_data as $k => $v) {
+						if($v['goods_id'] == $data['goods_id']){
+							unset($cart_data[$k]);
+							break;
+						}
+					}
+					Cookie::set('cart_info',json_encode($cart_goods),[
+							'prefix'=>'hk_shop',
+							'expire' => 0
+							]);
+				}
+			}
+			if(!empty($cart_data)){
+				foreach ($cart_data as $v) {
+					$price = Db::name('goods')
+								->field('marketprice')
+								->where('id',$v['goods_id'])
+								->where('is_delete',0)
+								->where('status',0)
+								->find()['marketprice'];
+					$total += $price * $v['buy_num'];			
+				}
+			}
+			return json([
+							'code' => '200',
+							'message' => '删除购物车商品成功',
+							'data' => ['total' => $total]
+						]);
+
 		}
 
 		/**
@@ -151,7 +243,7 @@
 
 			return json([
 						'code' => '200',
-						'message' => '添加商品成功！',
+						'message' => '添加商品成功',
 						'data' => [
 								'total_buy_num' => $total_buy_num
 								],
@@ -183,6 +275,10 @@
 			}
 		}
 
+		/**
+		 * 修改商品数量
+		 * @return [type] [description]
+		 */
 		public function rev_cart_goods()
 		{
 			$data = Request::instance()->post();
@@ -209,14 +305,19 @@
 			$user_id = Session::get('user.id','hk_shop_user');
 			//购物车所有商品数量
 			$total_buy_num = 0;
+			// 购物车商品总金额
+			$total = 0;
 			if(!empty($user_id)){
-
 				$res = Db::name('cart')
 						->where('user_id',$data['goods_id'])
 						->update(['buy_num' => $data['buy_num']]);
 				if($res == false){
 					return json(['code' => '400','message' => '添加商品失敗！']);
 				}
+				// 查询购物车商品
+				$cart_goods = Db::name('cart')
+								->where('user_id',$user_id)
+								->select();
 				$total_buy_num = Db::name('cart')
 									->where('user_id',$user_id)
 									->sum('buy_num');
@@ -242,15 +343,27 @@
 						'buy_num' => $data['buy_num'],
 					];
 				}
+
 				foreach ($cart_goods as $v) {
 					$total_buy_num += $v['buy_num'];
+				}
+			}
+			// 计算购物车商品总金额
+			if(!empty($cart_goods)){
+				foreach ($cart_goods as $v) {
+					$price = Db::name('goods')
+								->field('marketprice')
+								->where('id',$v['goods_id'])
+								->find()['marketprice'];
+					$total += $price * $buy_num;
 				}
 			}
 			return json([
 						'code' => '200',
 						'message' => '添加商品成功！',
 						'data' => [
-								'total_buy_num' => $total_buy_num
+								'total_buy_num' => $total_buy_num,
+								'total' => $total_buy_num
 								],
 						]);
 		}

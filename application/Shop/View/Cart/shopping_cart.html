@@ -12,6 +12,7 @@
 <!-- 内容 -->
 {block name="content"}
     {css href="/public/shop/css/shopping_cart.css"}
+    {js href="/public/shop/js/index.js"}
 	<div class="cart_title">
 		SHOPPING CART (<span>0</span>)
 	</div>
@@ -27,33 +28,37 @@
 		<div class="has_goods">
 			<ul>
 				<!--动态创建购物车的列表-->
+				{volist name="$cart_data" id="v"}
 				<li class="clearfix">
 					<!--左侧的图片-->
 					<div class="has_good_left f_left">
-						<img src="/public/shop/img/goods_img1.png"/>
+						<img src="{$v.iname}" width="70" height="70">
 					</div>
 					<!--右侧的详情区域-->
 					<div class="has_goods_right f_right">
-						<p class="goods_EnName">Screaming Eagle Cabernet Sauvignon</p>
-						<p class="goods_CnName">啸鹰赤霞珠</p>
+						<p class="goods_EnName">{$v.eng_title}</p>
+						<p class="goods_CnName">{$v.hk_title}</p>
 						<p class="goods_score clearfix">
-							<span class="score_En">WE</span>
-							<span>96</span>
+							{volist name="$v.score" id="vo"}
+							<span class="score_En">{$vo.mechanism}</span>
+							<span>{$vo.score_num}</span>
+							{/volist}
 						</p>
 						<p class="price_box clearfix">
 							<select class="select_box f_left">
 								
 							</select>
-							<span class="f_left">@ HK$8888</span>
-							<span class="totalPrice">HK$ <span>8888</span></span>
+							<span class="f_left">@ HK${$v.marketprice}</span>
+							<span class="totalPrice">HK$ <span>{$v.marketprice}</span></span>
 						</p>
 						<p class="wish_box clearfix">
-							<a href="###">
+							<a href="###" data-id="{$v.goods_id}">
 								Move To Wish List
 							</a>
 						</p>
 					</div>
 				</li>
+				{/volist}
 			</ul>
 			<!--取货方式-->
 			<div class="payment_options">
@@ -113,11 +118,11 @@
 			<!--商品总共的数量详情-->
 			<div class="purchase_detail">
 				<p style="text-align: right;padding-top: 15px;">Order Summary</p>
-				<p style="text-align: right;">Subtotal: <strong style="color: #dd153c;">HK$ <span>8888</span></strong></p>
+				<p style="text-align: right;">Subtotal: <strong style="color: #dd153c;">HK$ <span>{$total}</span></strong></p>
 				<p style="text-align: right;">Shipping & Handling: <strong style="color: #dd153c;">HK$ <span>0</span></strong></p>
 				<p class="clearfix" style="padding-bottom: 5px;">
 					<span style="float: left;">1item</span>
-					 <strong style="float: right;color: #dd153c;">Total:HK$<span>8888</span></strong>
+					 <strong style="float: right;color: #dd153c;">Total:HK$<span>{$total}</span></strong>
 				</p>
 			</div>
 			<!--结账的按钮-->

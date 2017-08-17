@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"D:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1502853600;s:63:"D:\phpStudy\WWW\hkshop/application/shop\view\Public\public.html";i:1502693277;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"D:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1502853600;s:63:"D:\phpStudy\WWW\hkshop/application/shop\view\Public\public.html";i:1502877782;}*/ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -127,7 +127,7 @@
           </div>
           <div class="cart">
             <a href="<?php echo url('shop/cart/shopping_cart'); ?>">
-              <span style="display: inline-block;padding-left: 5px;font-weight: bold;color:#dc143c;">9</span>
+              <span style="display: inline-block;padding-left: 5px;font-weight: bold;color:#dc143c;"><?php  echo get_total_buy_num()  ?></span>
             </a>
           </div>
         </div>

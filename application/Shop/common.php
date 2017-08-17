@@ -20,7 +20,10 @@
 		return $data;
 	}
 
-
+	/**
+	 * 获取购物车所有商品数量
+	 * @return [type] [description]
+	 */
 	function get_total_buy_num()
 	{
 		$user_id = Session::get('user.id','hk_shop_user');

@@ -20,6 +20,7 @@
 		public function shopping_cart()
 		{
 			$user_id = Session::get('user.id','hk_shop_user');
+			$cart_data = '';
 			if(!empty($user_id)){
 				$cart_data = Cookie::get('cart_info','hk_shop');
 				if(!empty($cart_data)){

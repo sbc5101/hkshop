@@ -46,14 +46,17 @@
 						</p>
 						<p class="price_box clearfix">
 							<select class="select_box f_left">
+								{for start="1" end="30" step="1" name="i"}
+								<option {eq name="$v.buy_num" value="$i"} selected {/eq}>{$i}</option>
 								
+								{/for}
 							</select>
 							<span class="f_left">@ HK${$v.marketprice}</span>
 							<span class="totalPrice">HK$ <span>{$v.marketprice}</span></span>
 						</p>
 						<p class="wish_box clearfix">
 							<a href="###" data-id="{$v.goods_id}">
-								Move To Wish List
+								delete
 							</a>
 						</p>
 					</div>
@@ -131,28 +134,39 @@
 					Check Out
 				</a>
 			</div>
+			
+			
 		</div>
 	</div>
-	
+	<!--弹出是否删除此商品-->
+			<div class="hk_win">
+				<div class="hk_win_box">
+					<div class="hk_win_tit">你确定删除该商品吗？</div>
+					<div class="hk_btn clearfix">
+						<a href="###" class="cancle f_left">取消</a>
+						<a href="###" class="submit f_right">确定</a>
+					</div>				
+				</div>
+			</div>
 	<script type="text/javascript">
 	$(function(){
 		if($(".goods_cart").html()==null){
 			$(".goods_cart").html("Your cart is empty~");
 		}
-		for(var i=1;i<=30;i++){
-			var opt=document.createElement("option");
-			opt.value=i;
-			opt.innerHTML=i;
-			$(".select_box").append(opt);
-		}
-		//交货切换
+//		for(var i=1;i<=30;i++){
+//			var opt=document.createElement("option");
+//			opt.value=i;
+//			opt.innerHTML=i;
+//			$(".select_box").append(opt);
+//		}
+		//----------------交货切换
 		
 		$(".options_list li").click(function(){
 			
 			var index=$(this).index();
 			$(this).addClass("selected").siblings().removeClass("selected");
 		})
-		//取货切换
+		//--------------取货切换
 		$(".receive_list li").click(function(){
 			
 			var index2=$(this).index();
@@ -165,6 +179,45 @@
 				$(".receive_content3").fadeIn(200).siblings().hide();
 			}
 		})
+		//---------------再次使用select修改商品的数量
+		$(".select_box").change(function(){
+			//var option=$(this).find("option:selected");
+			// sel_value=option.val(); //获取当前选中的值
+			//console.log(sel_value);
+			var goods_id = $(".wish_box a").attr('data-id');
+			var url = "{:url('/shop/cart/rev_cart_goods')}";
+			$.post(url,{'goods_id':goods_id,'buy_num':1},function(data){
+	    		if(data.code=="200"){
+	    			console.log(data);
+	    		}
+	    	},'json');
+	    	alert(456);
+		})
+		
+		//---------------删除购物车里面的商品
+		var that;
+		$(".wish_box a").click(function(){
+			$(".hk_win").show();
+			that=$(this);
+		})
+		//取消按钮
+		$('.cancle').on('click',function(){
+	        $('.hk_win').hide();
+    	})
+		//确定按钮
+		$('.submit').on('click',function(){
+	        var goods_id = that.attr('data-id');
+			var url = "{:url('/shop/cart/del_cart')}";
+			$.post(url,{'goods_id':goods_id},function(data){
+	    		if(data.code=="200"){
+	    			console.log(data);
+	    			$(".cart a span").html(data.data.total);
+	    			that.parent().parent().parent().remove();
+	    		}
+	    	},'json');
+	    	
+	        $('.hk_win').hide();
+    	})
 	})
 </script>
 {/block}

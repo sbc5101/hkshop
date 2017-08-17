@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"E:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1502432768;s:63:"E:\phpStudy\WWW\hkshop/application/shop\view\Public\public.html";i:1502432768;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"E:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1502950606;s:63:"E:\phpStudy\WWW\hkshop/application/shop\view\Public\public.html";i:1502946750;}*/ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -43,69 +43,67 @@
             </div>
           </form>
         </section>
+        <?php  $cates = get_cates();   $i = 1;  ?>
         <!--分类的列表-->
         <ul class="type_list">
-          <li class="on">VARIETAL</li>
-          <li>REGION</li>
-          <li>SPECIALS</li>
-          <li>PRO-SEARCH</li>         
+          <?php  if(!empty($cates)){   foreach($cates as $v){   if($v['pid'] == 0){   if($i > 4){ breack;} ?>
+          <li <?php  if($i == 1){ echo 'class="on"';}  ?>><?php  echo $v['cname']  ?></li>
+          <?php  $i++;   }   }   }  ?>
         </ul>
         <!--分类的内容区域-->
         <div class="content">
           <div class="content_area1">
-            <!--Red Wine-->
-            <p class="wine1">RED WINE</p>
-            <ul>
-              <li>
-                <a href="###">
-                  <span>Bordeaux Blends</span>
-                </a>
-              </li>
-              <li>
-                <a href="###">
-                  <span>Cabernet Sauvignon</span>
-                  
-                </a>
-              </li>
-              <li>
-                <a href="###">
-                  <span>Merlot</span>
-                </a>
-              </li>
-              <li>
-                <a href="###">
-                  <span>Pinot Noir</span>
-                </a>
-              </li>
-              <li>
-                <a href="###">
-                  <span>Other Red Blends</span>
-                </a>
-              </li>
-              <li>
-                <a href="###">
-                  <span>Sangiovese</span>
-                </a>
-              </li>
-              <li>
-                <a href="###">
-                  <span>Syrah/ Shiraz</span>
-                </a>
-              </li>
-              <li>
-                <a href="###">
-                  <span>Pinot Gris / Grigio</span>
-                </a>
-              </li>
-            </ul>
-            <!---->
-            <ul>
-              <li></li>
-            </ul>
+            <?php  if(!empty($cates)){   foreach($cates as $v){   if($v['pid'] == 373){  ?>
+            <p class="wine1"><?php  echo $v['cname']  ?></p>
+              <?php  foreach($cates as $val){   if($val['pid'] == $v['id']){  ?>
+              <ul>
+                <li>
+                  <a href="###">
+                    <span><?php  echo $val['cname']  ?></span>
+                  </a>
+                </li>
+              </ul>
+              <?php  }   }   }   }   }  ?>
           </div>
-          <div class="content_area2">区域2</div>
-          <div class="content_area3">区域3</div>
-          <div class="content_area4">区域4</div>
+          <div class="content_area2">
+            <?php  if(!empty($cates)){   foreach($cates as $v){   if($v['pid'] == 374){  ?>
+            <p class="wine1"><?php  echo $v['cname']  ?></p>
+              <?php  foreach($cates as $val){   if($val['pid'] == $v['id']){  ?>
+              <ul>
+                <li>
+                  <a href="###">
+                    <span><?php  echo $val['cname']  ?></span>
+                  </a>
+                </li>
+              </ul>
+              <?php  }   }   }   }   }  ?>
+          </div>
+          <div class="content_area3">
+            <?php  if(!empty($cates)){   foreach($cates as $v){   if($v['pid'] == 375){  ?>
+            <p class="wine1"><?php  echo $v['cname']  ?></p>
+              <?php  foreach($cates as $val){   if($val['pid'] == $v['id']){  ?>
+              <ul>
+                <li>
+                  <a href="###">
+                    <span><?php  echo $val['cname']  ?></span>
+                  </a>
+                </li>
+              </ul>
+              <?php  }   }   }   }   }  ?>
+          </div>
+          <div class="content_area4">
+            <?php  if(!empty($cates)){   foreach($cates as $v){   if($v['pid'] == 376){  ?>
+            <p class="wine1"><?php  echo $v['cname']  ?></p>
+              <?php  foreach($cates as $val){   if($val['pid'] == $v['id']){  ?>
+              <ul>
+                <li>
+                  <a href="###">
+                    <span><?php  echo $val['cname']  ?></span>
+                  </a>
+                </li>
+              </ul>
+              <?php  }   }   }   }   }  ?>
+          </div>
         </div>
       </div>
       <div class="top">
@@ -129,7 +127,7 @@
           </div>
           <div class="cart">
             <a href="<?php echo url('shop/cart/shopping_cart'); ?>">
-              <span style="display: inline-block;padding-left: 5px;font-weight: bold;color:#dc143c;">9</span>
+              <span style="display: inline-block;padding-left: 5px;font-weight: bold;color:#dc143c;"><?php  echo get_total_buy_num()  ?></span>
             </a>
           </div>
         </div>
@@ -144,9 +142,9 @@
 			<label class="select_label">
 				<span class="select_labelText">Ship to:</span>
 				<select class="selectContent">
-					<option value="DL">DL</option>
-					<option value="HK" selected="selected">HK</option>
-					<option value="TW">TW</option>
+					<?php if(is_array($goods_areas) || $goods_areas instanceof \think\Collection): $i = 0; $__LIST__ = $goods_areas;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
+					<option value="<?php echo $v['id']; ?>" <?php if($v['id'] == $area_id): ?> selected <?php endif; ?>><?php echo $v['area_name']; ?></option>
+					<?php endforeach; endif; else: echo "" ;endif; ?>
 				</select>
 			</label>
 			<div class="search_box">
@@ -161,21 +159,13 @@
 	<!--轮播图区域-->
 	<div class="swiper-container swiper-img">
 	    <div class="swiper-wrapper">
+	    	<?php if(is_array($carousel) || $carousel instanceof \think\Collection): $i = 0; $__LIST__ = $carousel;if( count($__LIST__)==0 ) : echo "<div class=" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
 	        <div class="swiper-slide">
-	        	<a href="###">
-	        		<img src="/public/shop/img/swiper1-1.png"/>
+	        	<a href="<?php echo $v['url']; ?>">
+	        		<img src="<?php echo $v['img_name']; ?>"/>
 	        	</a>
 	        </div>
-	        <div class="swiper-slide">
-	        	<a href="###">
-	        		<img src="/public/shop/img/swiper1-1.png"/>
-	        	</a>
-	        </div>
-	        <div class="swiper-slide">
-	        	<a href="###">
-	        		<img src="/public/shop/img/swiper1-1.png"/>
-	        	</a>
-	        </div>
+	        <?php endforeach; endif; else: echo "<div class=" ;endif; ?>
 	    </div>
 		<div class="swiper-pagination"></div>
 	</div>
@@ -185,138 +175,43 @@
 		<!--滑动区域-->
 		<div class="swiper-container swiper1">
 	        <div class="swiper-wrapper">
+		        <?php if(is_array($most_goods) || $most_goods instanceof \think\Collection): $i = 0; $__LIST__ = $most_goods;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
-	            		<a href="<?php echo url('shop/register/index'); ?>">
-	            		<img src="img/goods_img1.png"/>
+	            		<a href="<?php echo url('shop/goods/goods_detail',['id' => $v['id']]); ?>">
+	            		<img src="<?php echo $v['iname']; ?>"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
+	            		<p class="En_name"><?php echo $v['eng_title']; ?></p>
+	            		<p class="Cn_name"><?php echo $v['hk_title']; ?></p>
 	            		<div class="score">
 	            			<ul>
+	            			 	<?php if(is_array($v['score_data']) || $v['score_data'] instanceof \think\Collection): $i = 0; $__LIST__ = $v['score_data'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?>
 	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
+	            					<span class="score1"><?php echo $val['mechanism']; ?></span>
+	            					<span class="score2"><?php echo $val['score_num']; ?></span>
 	            				</li>
+	            				<?php endforeach; endif; else: echo "" ;endif; ?>
 	            			</ul>
 	            		</div>
 	            		<!--价格-->
 	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
+	            			<span class="price">HK$ <?php echo $v['marketprice']; ?></span>
+	            			<span class="marketprice">HK$ <?php echo $v['storeprice']; ?></span>
 	            		</p>
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
+	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="<?php echo url('shop/goods/goods_detail'); ?>">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
+	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
+	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
+	            <?php endforeach; endif; else: echo "" ;endif; ?>
 	        </div>
 		</div>
 	</div>
@@ -326,138 +221,43 @@
 		<!--滑动区域-->
 		<div class="swiper-container swiper1">
 	        <div class="swiper-wrapper">
+	        	<?php if(is_array($new_goods) || $new_goods instanceof \think\Collection): $i = 0; $__LIST__ = $new_goods;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
+	            		<a href="<?php echo url('shop/goods/goods_detail',['id' => $v['id']]); ?>">
+	            		<img src="<?php echo $v['iname']; ?>"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
+	            		<p class="En_name"><?php echo $v['eng_title']; ?></p>
+	            		<p class="Cn_name"><?php echo $v['hk_title']; ?></p>
 	            		<div class="score">
 	            			<ul>
+	            				<?php if(is_array($v['score_data']) || $v['score_data'] instanceof \think\Collection): $i = 0; $__LIST__ = $v['score_data'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?>
 	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
+	            					<span class="score1"><?php echo $val['mechanism']; ?></span>
+	            					<span class="score2"><?php echo $val['score_num']; ?></span>
 	            				</li>
+	            				<?php endforeach; endif; else: echo "" ;endif; ?>
 	            			</ul>
 	            		</div>
 	            		<!--价格-->
 	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
+	            			<span class="price">HK$ <?php echo $v['marketprice']; ?></span>
+	            			<span class="marketprice">HK$ <?php echo $v['storeprice']; ?></span>
 	            		</p>
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
+	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
+	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
+	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
+	          	<?php endforeach; endif; else: echo "" ;endif; ?>
 	        </div>
 		</div>
 	</div>
@@ -467,138 +267,43 @@
 		<!--滑动区域-->
 		<div class="swiper-container swiper1">
 	        <div class="swiper-wrapper">
+	        	<?php if(is_array($red_goods) || $red_goods instanceof \think\Collection): $i = 0; $__LIST__ = $red_goods;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
+	            		<a href="<?php echo url('shop/goods/goods_detail',['id' => $v['id']]); ?>">
+	            		<img src="<?php echo $v['iname']; ?>"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
+	            		<p class="En_name"><?php echo $v['eng_title']; ?></p>
+	            		<p class="Cn_name"><?php echo $v['hk_title']; ?></p>
 	            		<div class="score">
 	            			<ul>
+	            				<?php if(is_array($v['score_data']) || $v['score_data'] instanceof \think\Collection): $i = 0; $__LIST__ = $v['score_data'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?>
 	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
+	            					<span class="score1"><?php echo $val['mechanism']; ?></span>
+	            					<span class="score2"><?php echo $val['score_num']; ?></span>
 	            				</li>
+	            				<?php endforeach; endif; else: echo "" ;endif; ?>
 	            			</ul>
 	            		</div>
 	            		<!--价格-->
 	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
+	            			<span class="price">HK$ <?php echo $v['marketprice']; ?></span>
+	            			<span class="marketprice">HK$ <?php echo $v['storeprice']; ?></span>
 	            		</p>
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
+	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
+	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
+	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
+	          	<?php endforeach; endif; else: echo "" ;endif; ?>
 	        </div>
 		</div>
 	</div>
@@ -608,138 +313,43 @@
 		<!--滑动区域-->
 		<div class="swiper-container swiper1">
 	        <div class="swiper-wrapper">
+	        	<?php if(is_array($white_goods) || $white_goods instanceof \think\Collection): $i = 0; $__LIST__ = $white_goods;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
+	            		<a href="<?php echo url('shop/goods/goods_detail',['id' => $v['id']]); ?>">
+	            		<img src="<?php echo $v['iname']; ?>"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
+	            		<p class="En_name"><?php echo $v['eng_title']; ?></p>
+	            		<p class="Cn_name"><?php echo $v['hk_title']; ?></p>
 	            		<div class="score">
 	            			<ul>
+	            				<?php if(is_array($v['score_data']) || $v['score_data'] instanceof \think\Collection): $i = 0; $__LIST__ = $v['score_data'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?>
 	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
+	            					<span class="score1"><?php echo $val['mechanism']; ?></span>
+	            					<span class="score2"><?php echo $val['score_num']; ?></span>
 	            				</li>
+	            				<?php endforeach; endif; else: echo "" ;endif; ?>
 	            			</ul>
 	            		</div>
 	            		<!--价格-->
 	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
+	            			<span class="price">HK$ <?php echo $v['marketprice']; ?></span>
+	            			<span class="marketprice">HK$ <?php echo $v['storeprice']; ?></span>
 	            		</p>
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
+	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
+	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
+	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
+	            <?php endforeach; endif; else: echo "" ;endif; ?>
 	        </div>
 		</div>
 	</div>
@@ -749,138 +359,43 @@
 		<!--滑动区域-->
 		<div class="swiper-container swiper1">
 	        <div class="swiper-wrapper">
+		        <?php if(is_array($white_goods) || $white_goods instanceof \think\Collection): $i = 0; $__LIST__ = $white_goods;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
+	            		<a href="<?php echo url('shop/goods/goods_detail',['id' => $v['id']]); ?>">
+	            		<img src="<?php echo $v['iname']; ?>"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
+	            		<p class="En_name"><?php echo $v['eng_title']; ?></p>
+	            		<p class="Cn_name"><?php echo $v['hk_title']; ?></p>
 	            		<div class="score">
 	            			<ul>
+	            				<?php if(is_array($v['score_data']) || $v['score_data'] instanceof \think\Collection): $i = 0; $__LIST__ = $v['score_data'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?>
 	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
+	            					<span class="score1"><?php echo $val['mechanism']; ?></span>
+	            					<span class="score2"><?php echo $val['score_num']; ?></span>
 	            				</li>
+	            				<?php endforeach; endif; else: echo "" ;endif; ?>
 	            			</ul>
 	            		</div>
 	            		<!--价格-->
 	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
+	            			<span class="price">HK$ <?php echo $v['marketprice']; ?></span>
+	            			<span class="marketprice">HK$ <?php echo $v['storeprice']; ?></span>
 	            		</p>
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
+	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
+	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
+	            			<img src="/public/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
-	            <div class="swiper-slide">
-	            	<div class="goods_img">
-	            		<a href="###">
-	            		<img src="img/goods_img1.png"/>
-	            		</a>
-	            	</div>
-	            	<div class="goods_desc">
-	            		<p class="En_name">Screaming Eagle Cabernet Sauvignon</p>
-	            		<p class="Cn_name">啸鹰赤霞珠</p>
-	            		<div class="score">
-	            			<ul>
-	            				<li>
-	            					<span class="score1">WE</span>
-	            					<span class="score2">94</span>
-	            				</li>
-	            			</ul>
-	            		</div>
-	            		<!--价格-->
-	            		<p>
-	            			<span class="price">HK$ 88882</span>
-	            			<span class="marketprice">HK$ 99992</span>
-	            		</p>
-	            	</div>
-	            	<!--收藏和加入购物车-->
-	            	<div class="bot_areas">
-	            		<div class="collect">
-	            			<img src="img/icon4.png" alt="" />
-	            		</div>
-	            		<div class="addTo_car">
-	            			<img src="img/icon6.png" alt="" />
-	            		</div>
-	            	</div>
-	            </div>
+	         	<?php endforeach; endif; else: echo "" ;endif; ?>
 	        </div>
 		</div>
 	</div>
@@ -901,6 +416,17 @@
 	        spaceBetween: 10,
 	        freeMode: true
 	    });
+
+	    $('.addTo_car').click(function(){
+	    	var goods_id = $(this).attr('data-id');
+	    	var url = "<?php echo url('/shop/cart/add_cart'); ?>";
+	    	$.post(url,{'goods_id':goods_id,'buy_num':1},function(data){
+	    		if(data.code=="200"){
+	    			console.log(data)
+	    			$(".cart a span").html(data.data.total_buy_num);
+	    		}
+	    	},'json');
+	    })
 	</script>
 
         

@@ -240,3 +240,49 @@
 .check_out a{
 	color: #fff;
 }
+/*删除商品的时候出现的弹出框*/
+.hk_win{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.6);
+	z-index: 9999;
+	display: none;
+}
+.hk_win_box{
+	width: 80%;
+	padding: 0 10px;
+	border-radius: 4px;
+	background: #fff;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	-webkit-transform: translate(-50%,-50%);
+}
+.hk_win_tit{
+	border-bottom: 1px solid #ccc;
+	line-height: 75px;
+	text-align: center;
+	font-size: 18px;
+}
+.hk_btn{
+	width: 100%;
+	padding: 10px 0;
+}
+.hk_btn a{
+	line-height: 36px;
+	width: 45%;
+	text-align: center;
+	border-radius: 4px;
+}
+.hk_btn .cancle{
+    margin-right: 10%;
+    border: 1px solid #ccc;
+}
+.hk_btn .submit{
+    background: #d8505c;
+    color: #fff;
+}

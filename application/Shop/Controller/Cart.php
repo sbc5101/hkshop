@@ -181,7 +181,7 @@
 				}
 				if(!empty($cart_data)){
 					$res = Db::name('cart')
-							->where('id',$cart_data['id'])
+							->where('id',$cart_data)
 							->setInc('buy_num',$data['buy_num']);
 				}else{
 					if($stock == 0 || $stock < $data['buy_num']){

@@ -312,7 +312,7 @@
 				$res = Db::name('cart')
 						->where('user_id',$data['goods_id'])
 						->update(['buy_num' => $data['buy_num']]);
-				if($res == false){
+				if($res === false){
 					return json(['code' => '400','message' => '添加商品失敗！']);
 				}
 				// 查询购物车商品

@@ -182,16 +182,20 @@
 		//---------------再次使用select修改商品的数量
 		$(".select_box").change(function(){
 			var option=$(this).find("option:selected");
+
 			var sel_value=option.val(); //获取当前选中的值
+
+			sel_value=option.val(); //获取当前选中的值
+
 			//console.log(sel_value);
 			var goods_id = $(".wish_box a").attr('data-id');
 			var url = "{:url('/shop/cart/rev_cart_goods')}";
 			$.post(url,{'goods_id':goods_id,'buy_num':sel_value},function(data){
 	    		if(data.code=="200"){
 	    			console.log(data);
+	    			$(".cart a span").html(data.data.total_buy_num);
 	    		}
 	    	},'json');
-	    	
 		})
 		
 		//---------------删除购物车里面的商品

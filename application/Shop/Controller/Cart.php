@@ -17,6 +17,10 @@
 
 	class Cart extends Controller
 	{
+		/**
+		 * 购物车页面
+		 * @return [type] [description]
+		 */
 		public function shopping_cart()
 		{
 			$user_id = Session::get('user.id','hk_shop_user');
@@ -95,6 +99,7 @@
 			$user_id = Session::get('user.id','hk_shop_user');
 			// 初始化数据
 			$total = 0;
+			$total_buy_num = 0;
 			$cart_data = '';
 
 			if(!empty($user_id)){
@@ -106,7 +111,6 @@
 					return json(['code' => '400','message' => '删除购物车商品失败']);
 				}
 				$cart_data = Db::name('cart')
-								->where('goods_id',$data['goods_id'])
 								->where('user_id',$user_id)
 								->select();
 			}else{
@@ -134,12 +138,16 @@
 								->where('status',0)
 								->find()['marketprice'];
 					$total += $price * $v['buy_num'];			
+					$total_buy_num += $v['buy_num'];
 				}
 			}
 			return json([
 							'code' => '200',
 							'message' => '删除购物车商品成功',
-							'data' => ['total' => $total]
+							'data' => [
+										'total' => $total,
+										'total_buy_num' => $total_buy_num
+									]
 						]);
 
 		}
@@ -310,7 +318,8 @@
 			$total = 0;
 			if(!empty($user_id)){
 				$res = Db::name('cart')
-						->where('user_id',$data['goods_id'])
+						->where('user_id',$user_id)
+						->where('goods_id',$data['goods_id'])
 						->update(['buy_num' => $data['buy_num']]);
 				if($res === false){
 					return json(['code' => '400','message' => '添加商品失敗！']);
@@ -356,15 +365,17 @@
 								->field('marketprice')
 								->where('id',$v['goods_id'])
 								->find()['marketprice'];
-					$total += $price * $buy_num;
+					$total += $price * $v['buy_num'];
+
 				}
 			}
+			
 			return json([
 						'code' => '200',
 						'message' => '添加商品成功！',
 						'data' => [
 								'total_buy_num' => $total_buy_num,
-								'total' => $total_buy_num
+								'total' => $total
 								],
 						]);
 		}

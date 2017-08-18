@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"E:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1502950606;s:63:"E:\phpStudy\WWW\hkshop/application/shop\view\Public\public.html";i:1502946750;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"E:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1503035271;s:63:"E:\phpStudy\WWW\hkshop/application/shop\view\Public\public.html";i:1502946750;}*/ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -203,7 +203,7 @@
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
-	            		<div class="collect">
+	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
@@ -249,7 +249,7 @@
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
-	            		<div class="collect">
+	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
@@ -295,7 +295,7 @@
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
-	            		<div class="collect">
+	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
@@ -341,7 +341,7 @@
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
-	            		<div class="collect">
+	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
@@ -387,7 +387,7 @@
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
-	            		<div class="collect">
+	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
@@ -398,6 +398,11 @@
 	         	<?php endforeach; endif; else: echo "" ;endif; ?>
 	        </div>
 		</div>
+	</div>
+	
+	<!--收藏提示框-->
+	<div class="collect_alert" style="width: 30%;line-height: 30px;font-size: 15px;position: fixed;left: 50%;top: 60%;transform: translate(-50%);background: rgba(0,0,0,0.6);z-index: 100;text-align: center;color: #fff;border-radius: 5px;display: none;">
+		
 	</div>
 	<script type="text/javascript" src="/public/shop/js/index.js"></script>
 	<script type="text/javascript">
@@ -416,7 +421,7 @@
 	        spaceBetween: 10,
 	        freeMode: true
 	    });
-
+		//加入购物车
 	    $('.addTo_car').click(function(){
 	    	var goods_id = $(this).attr('data-id');
 	    	var url = "<?php echo url('/shop/cart/add_cart'); ?>";
@@ -426,6 +431,30 @@
 	    			$(".cart a span").html(data.data.total_buy_num);
 	    		}
 	    	},'json');
+	    })
+	    $('.collect img').click(function(){
+	    		var that=$(this);
+	    		var goods_id = $(this).parent().attr('data-id');
+	    		console.log(goods_id);
+		    	var url = "<?php echo url('shop/goods/action_goods_collection'); ?>";
+		    	$.post(url,{'goods_id':goods_id},function(data){
+		    		if(data.code=="200"){
+		    			if (that.attr("src")=="/public/shop/img/icon4.png") {
+		    				console.log(data);
+			    			that.attr("src","/public/shop/img/icon5.png");
+			    			$(".collect_alert").html("收藏成功!").fadeIn(300).delay(1000).fadeOut(300);
+		    			}else{
+			    			that.attr("src","/public/shop/img/icon4.png");
+			    			$(".collect_alert").html("取消收藏!").fadeIn(300).delay(1000).fadeOut(300);
+			    			
+		    			}
+		    		}else if(data.code=="401"){
+		    			window.location.href='/shop/login/login.html';
+		    		}else if(data.code=="400"){
+		    			alert("商品收藏失败!");
+		    		}
+		    		
+		    	},'json');	    			    		    	
 	    })
 	</script>
 

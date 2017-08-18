@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"D:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1502853600;s:63:"D:\phpStudy\WWW\hkshop/application/shop\view\Public\public.html";i:1502877782;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"D:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1502954498;s:63:"D:\phpStudy\WWW\hkshop/application/shop\view\Public\public.html";i:1502877782;}*/ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -203,7 +203,7 @@
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
-	            		<div class="collect">
+	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
@@ -249,7 +249,7 @@
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
-	            		<div class="collect">
+	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
@@ -295,7 +295,7 @@
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
-	            		<div class="collect">
+	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
@@ -341,7 +341,7 @@
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
-	            		<div class="collect">
+	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
@@ -387,7 +387,7 @@
 	            	</div>
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
-	            		<div class="collect">
+	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon4.png" alt="" />
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
@@ -421,6 +421,13 @@
 	    	var goods_id = $(this).attr('data-id');
 	    	var url = "<?php echo url('shop/cart/add_cart'); ?>";
 	    	$.post(url,{'goods_id':goods_id,'buy_num':1},function(data){
+	    		console.log(data);
+	    	},'json');
+	    })
+	    $('.collect').click(function(){
+	    	var goods_id = $(this).attr('data-id');
+	    	var url = "<?php echo url('shop/goods/action_goods_collection'); ?>";
+	    	$.post(url,{'goods_id':goods_id},function(data){
 	    		console.log(data);
 	    	},'json');
 	    })

@@ -288,9 +288,12 @@
 
 	    $('.addTo_car').click(function(){
 	    	var goods_id = $(this).attr('data-id');
-	    	var url = "{:url('shop/cart/add_cart')}";
+	    	var url = "{:url('/shop/cart/add_cart')}";
 	    	$.post(url,{'goods_id':goods_id,'buy_num':1},function(data){
-	    		console.log(data);
+	    		if(data.code=="200"){
+	    			console.log(data)
+	    			$(".cart a span").html(data.data.total_buy_num);
+	    		}
 	    	},'json');
 	    })
 	    $('.collect').click(function(){

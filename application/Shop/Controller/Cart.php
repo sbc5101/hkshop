@@ -321,7 +321,7 @@
 						->where('user_id',$user_id)
 						->where('goods_id',$data['goods_id'])
 						->update(['buy_num' => $data['buy_num']]);
-				if($res == false){
+				if($res === false){
 					return json(['code' => '400','message' => '添加商品失敗！']);
 				}
 				// 查询购物车商品
@@ -365,15 +365,17 @@
 								->field('marketprice')
 								->where('id',$v['goods_id'])
 								->find()['marketprice'];
-					$total += $price * $buy_num;
+					$total += $price * $v['buy_num'];
+
 				}
 			}
+			
 			return json([
 						'code' => '200',
 						'message' => '添加商品成功！',
 						'data' => [
 								'total_buy_num' => $total_buy_num,
-								'total' => $total_buy_num
+								'total' => $total
 								],
 						]);
 		}

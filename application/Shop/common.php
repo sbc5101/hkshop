@@ -21,6 +21,18 @@
 	}
 
 	/**
+	 * 获取商品地区信息
+	 * @return [type] [description]
+	 */
+	function get_goods_area()
+	{
+		$data = Db::name('goods_areas')
+					->where('display',1)
+					->select();
+		return $data;
+	}
+
+	/**
 	 * 获取购物车所有商品数量
 	 * @return [type] [description]
 	 */

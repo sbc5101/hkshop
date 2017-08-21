@@ -67,17 +67,18 @@
 			<div class="payment_options">
 				<h3>PAYMENT OPTIONS*</h2>
 				<ul class="options_list clearfix">
-					<li >Face to Pay</li>
-					<li>Bank Transfer</li>
+					{volist name="$pay_data" id="v"}
+					<li data-id="{$v.id}">{$v.title}</li>
+					{/volist}
 				</ul>
 			</div>
 			<!--收货方式-->
 			<div class="receive_options">
 				<h3>RECEIVING OPTIONS*</h2>
 				<ul class="receive_list">
-					<li >Since Mentioning</li>
-					<li>Express Delivery</li>
-					<li>Subway delivery</li>								
+					{volist name="pickup_data" id="v"}
+					<li data-id="{$v.id}">{$v.pickup_name}</li>
+					{/volist}
 				</ul>
 			</div>
 			<div class="receive_box">
@@ -86,18 +87,11 @@
 						
 					</div>
 					<form action="">
+						{volist name="$shop_data" id="v"}
 						<label>
-							<input type="radio" name="shop" /> CityNoble A Shop <span style="color: #bebebe;">(852) 28181818 
-							Shop D.G/F.City Center Building 145-146 Gloucester Road.Wan chai</span>
+							<input type="radio" name="shop" value="{$v.id}" /> {$v.shop_title} A Shop <span style="color: #bebebe;">{$v.address}</span>
 						</label> 
-						<label>
-							<input type="radio"  name="shop" /> CityNoble A Shop<span style="color: #bebebe;">(852) 28181818 
-							Shop D.G/F.City Center Building 145-146 Gloucester Road.Wan chai</span>
-						</label>
-						<label>
-							<input type="radio"  name="shop" /> CityNoble A Shop<span style="color: #bebebe;">(852) 28181818 
-							Shop D.G/F.City Center Building 145-146 Gloucester Road.Wan chai</span>
-						</label>
+						{/volist}
 						<input class="user_name" type="text" placeholder="Fanny Sun"/>
 						<input class="user_mail" type="email" placeholder="Fanny@hotmail.com"/>
 					</form>
@@ -130,7 +124,7 @@
 			</div>
 			<!--结账的按钮-->
 			<div class="check_out">
-				<a href="###">
+				<a href="javascript:vive(0)">
 					Check Out
 				</a>
 			</div>
@@ -222,6 +216,17 @@
 	    	
 	        $('.hk_win').hide();
     	})
+	})
+	$('.check_out').click(function(){
+		var pay_id = 1;
+		var pickup_id = 1;
+		var shop_id = 1;
+		var user_name = '沈斌超';
+		var user_email = '541891006@qq.com';
+		var url = "{:url('/shop/order/make_order')}"
+		$.post(url,{'pay_id':pay_id,'pickup_id':pickup_id,'shop_id':shop_id,'user_name':user_name,'user_email':user_email},function(data){
+			
+		})
 	})
 </script>
 {/block}

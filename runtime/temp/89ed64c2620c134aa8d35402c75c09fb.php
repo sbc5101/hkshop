@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"D:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1503020213;s:63:"D:\phpStudy\WWW\hkshop/application/shop\view\Public\public.html";i:1502877782;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"D:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1503284962;s:63:"D:\phpStudy\WWW\hkshop/application/shop\view\Public\public.html";i:1503297623;}*/ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -28,14 +28,15 @@
   <body  >
     <div class="container">
       <div class="alert_box">
+        
         <section class="searchBar">
           <form class="formWarp clearfix" action="/serach">
             <label class="select_label">
               <span class="select_labelText">Ship to:</span>
-              <select class="selectContent">
-                <option value="DL">DL</option>
-                <option value="HK" selected="selected">HK</option>
-                <option value="TW">TW</option>
+              <select class="selectContent" id="gcate">
+                  <?php  $goods_area = get_goods_area();   if(!empty($goods_area)){   foreach($goods_area as $v){  ?>
+                  <option value="<?php echo $v['id']; ?>"><?php echo $v['area_name']; ?></option>
+                  <?php  }   }  ?>
               </select>
             </label>
             <div class="search_box">
@@ -43,6 +44,7 @@
             </div>
           </form>
         </section>
+        
         <?php  $cates = get_cates();   $i = 1;  ?>
         <!--分类的列表-->
         <ul class="type_list">
@@ -58,7 +60,7 @@
               <?php  foreach($cates as $val){   if($val['pid'] == $v['id']){  ?>
               <ul>
                 <li>
-                  <a href="###">
+                  <a href="<?php echo url('shop/cates/cate_list'); ?>?cid=<?php echo $val['id']; ?>&title=&area=">
                     <span><?php  echo $val['cname']  ?></span>
                   </a>
                 </li>
@@ -71,7 +73,7 @@
               <?php  foreach($cates as $val){   if($val['pid'] == $v['id']){  ?>
               <ul>
                 <li>
-                  <a href="###">
+                  <a href="<?php echo url('shop/cates/cate_list'); ?>?cid=<?php echo $val['id']; ?>&title=&area=">
                     <span><?php  echo $val['cname']  ?></span>
                   </a>
                 </li>
@@ -84,7 +86,7 @@
               <?php  foreach($cates as $val){   if($val['pid'] == $v['id']){  ?>
               <ul>
                 <li>
-                  <a href="###">
+                  <a href="<?php echo url('shop/cates/cate_list'); ?>?cid=<?php echo $val['id']; ?>&title=&area=">
                     <span><?php  echo $val['cname']  ?></span>
                   </a>
                 </li>
@@ -97,7 +99,7 @@
               <?php  foreach($cates as $val){   if($val['pid'] == $v['id']){  ?>
               <ul>
                 <li>
-                  <a href="###">
+                  <a href="<?php echo url('shop/cates/cate_list'); ?>?cid=<?php echo $val['id']; ?>&title=&area=">
                     <span><?php  echo $val['cname']  ?></span>
                   </a>
                 </li>
@@ -141,7 +143,7 @@
 		<form class="formWarp clearfix" action="/serach">
 			<label class="select_label">
 				<span class="select_labelText">Ship to:</span>
-				<select class="selectContent">
+				<select class="selectContent" id="area_data">
 					<?php if(is_array($goods_areas) || $goods_areas instanceof \think\Collection): $i = 0; $__LIST__ = $goods_areas;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
 					<option value="<?php echo $v['id']; ?>" <?php if($v['id'] == $area_id): ?> selected <?php endif; ?>><?php echo $v['area_name']; ?></option>
 					<?php endforeach; endif; else: echo "" ;endif; ?>
@@ -204,7 +206,11 @@
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
+	            		<?php if($v['is_collection'] == '0'): ?>
 	            			<img src="/public/shop/img/icon4.png" alt="" />
+	            		<?php else: ?>
+							<img src="/public/shop/img/icon5.png" alt="" />
+	            		<?php endif; ?>
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
@@ -250,7 +256,11 @@
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
-	            			<img src="/public/shop/img/icon4.png" alt="" />
+	            			<?php if($v['is_collection'] == '0'): ?>
+	            				<img src="/public/shop/img/icon4.png" alt="" />
+		            		<?php else: ?>
+								<img src="/public/shop/img/icon5.png" alt="" />
+		            		<?php endif; ?>
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
@@ -296,7 +306,11 @@
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
-	            			<img src="/public/shop/img/icon4.png" alt="" />
+	            			<?php if($v['is_collection'] == '0'): ?>
+	            				<img src="/public/shop/img/icon4.png" alt="" />
+		            		<?php else: ?>
+								<img src="/public/shop/img/icon5.png" alt="" />
+		            		<?php endif; ?>
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
@@ -342,7 +356,11 @@
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
-	            			<img src="/public/shop/img/icon4.png" alt="" />
+	            			<?php if($v['is_collection'] == '0'): ?>
+	            				<img src="/public/shop/img/icon4.png" alt="" />
+		            		<?php else: ?>
+								<img src="/public/shop/img/icon5.png" alt="" />
+		            		<?php endif; ?>
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
@@ -388,7 +406,11 @@
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
-	            			<img src="/public/shop/img/icon4.png" alt="" />
+	            			<?php if($v['is_collection'] == '0'): ?>
+	            				<img src="/public/shop/img/icon4.png" alt="" />
+		            		<?php else: ?>
+								<img src="/public/shop/img/icon5.png" alt="" />
+		            		<?php endif; ?>
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
@@ -398,6 +420,11 @@
 	         	<?php endforeach; endif; else: echo "" ;endif; ?>
 	        </div>
 		</div>
+	</div>
+	
+	<!--收藏提示框-->
+	<div class="collect_alert" style="width: 30%;line-height: 30px;font-size: 15px;position: fixed;left: 50%;top: 60%;transform: translate(-50%);background: rgba(0,0,0,0.6);z-index: 100;text-align: center;color: #fff;border-radius: 5px;display: none;">
+		
 	</div>
 	<script type="text/javascript" src="/public/shop/js/index.js"></script>
 	<script type="text/javascript">
@@ -416,7 +443,7 @@
 	        spaceBetween: 10,
 	        freeMode: true
 	    });
-
+		//加入购物车
 	    $('.addTo_car').click(function(){
 	    	var goods_id = $(this).attr('data-id');
 	    	var url = "<?php echo url('/shop/cart/add_cart'); ?>";
@@ -427,12 +454,36 @@
 	    		}
 	    	},'json');
 	    })
-	    $('.collect').click(function(){
-	    	var goods_id = $(this).attr('data-id');
+	    $('.collect img').click(function(){
+    		var that=$(this);
+    		var goods_id = $(this).parent().attr('data-id');
+    		console.log(goods_id);
 	    	var url = "<?php echo url('shop/goods/action_goods_collection'); ?>";
 	    	$.post(url,{'goods_id':goods_id},function(data){
-	    		console.log(data);
-	    	},'json');
+	    		if(data.code=="200"){
+	    			if (that.attr("src")=="/public/shop/img/icon4.png") {
+	    				console.log(data);
+		    			that.attr("src","/public/shop/img/icon5.png");
+		    			$(".collect_alert").html("收藏成功~").fadeIn(300).delay(1000).fadeOut(300);
+	    			}else{
+		    			that.attr("src","/public/shop/img/icon4.png");
+		    			$(".collect_alert").html("取消收藏!").fadeIn(300).delay(1000).fadeOut(300);
+		    			
+	    			}
+	    		}else if(data.code=="401"){
+	    			window.location.href='/shop/login/login.html';
+	    		}else if(data.code=="400"){
+	    			alert("商品收藏失败!");
+	    		}
+	    		
+	    	},'json');	    			    		    	
+	    })
+
+	    // 选择商品区域
+	    $('#area_data').change(function(){
+	    	var area_id = $(this).val();
+	    	var url = "<?php echo url('shop/index/index'); ?>?area="+area_id;
+	    	window.location.href = url;
 	    })
 	</script>
 
@@ -494,6 +545,14 @@
       
       </div>
     </div>
+    <script type="text/javascript">
+        // 选择商品区域
+      $('#gcate').change(function(){
+        var area_id = $(this).val();
+        var url = "<?php echo url('shop/cates/cate_list'); ?>?area="+area_id+"&title=&cid=";
+        window.location.href = url;
+      })
+    </script>
   </body>
 </html>
 

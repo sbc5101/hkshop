@@ -58,80 +58,38 @@
 						<span class="order_time f_right">Your order from 19/07/2017</span>
 					</div>
 				</li>
-				<li>
-					<div class="goods_img_left">
-						<div class="goods_imgs">
-							<img src="img/goods_img1.png"/>
-						</div>
-					</div>
-					<div class="goods_desc_right">
-						<p class="goods_EnName">Screaming Eagle Cabernet Sauvignon</p>
-						<p class="goods_CnName">啸鹰赤霞珠</p>
-						<p class="goods_score clearfix">
-							<span class="goods_score1">WE</span>
-							<span class="goods_score2">96</span>
-						</p>
-						<p class="goods_price">
-							<span class="price_after">HK$ 8888</span>
-							<span class="price_before">HK$ 9999</span>
-						</p>
-					</div>
-					<div class="goods_notice clearfix">
-						<span class="goods_num f_left">1 item</span>
-						<span class="order_time f_right">Your order from 19/07/2017</span>
-					</div>
-				</li>
 			</ul>
 			
 		</div>
 		<div class="goods_content2">
 			<ul class="goods_content1_ul">
+				{volist name="collection" id="v"}
 				<li>
 					<div class="goods_img_left">
 						<div class="goods_imgs">
-							<img src="img/goods_img1.png"/>
+							<img src="{$v.iname}"/>
 						</div>
 					</div>
 					<div class="goods_desc_right">
-						<p class="goods_EnName">Screaming Eagle Cabernet Sauvignon</p>
-						<p class="goods_CnName">啸鹰赤霞珠</p>
+						<p class="goods_EnName">{$v.eng_title}</p>
+						<p class="goods_CnName">{$v.hk_title}</p>
 						<p class="goods_score clearfix">
-							<span class="goods_score1">WE</span>
-							<span class="goods_score2">96</span>
+							{volist name="$v.score_data" id="val"}
+							<span class="goods_score1">{$val.mechanism}</span>
+							<span class="goods_score2">{$val.score_num}</span>
+							{/volist}
 						</p>
 						<p class="goods_price">
-							<span class="price_after">HK$ 8888</span>
-							<span class="price_before">HK$ 9999</span>
+							<span class="price_after">HK$ {$v.marketprice}</span>
+							<span class="price_before">HK$ {$v.storeprice}</span>
 						</p>
 					</div>
 					<div class="goods_notice clearfix">
 						<span class="goods_num f_left">1 item</span>
-						<span class="order_time f_right">Your collection from 19/07/2017</span>
+						<span class="order_time f_right">Your collection from {$v.create_time}</span>
 					</div>
 				</li>
-				<li>
-					<div class="goods_img_left">
-						<div class="goods_imgs">
-							<img src="img/goods_img1.png"/>
-						</div>
-					</div>
-					<div class="goods_desc_right">
-						<p class="goods_EnName">Screaming Eagle Cabernet Sauvignon</p>
-						<p class="goods_CnName">啸鹰赤霞珠</p>
-						<p class="goods_score clearfix">
-							<span class="goods_score1">WE</span>
-							<span class="goods_score2">96</span>
-						</p>
-						<p class="goods_price">
-							<span class="price_after">HK$ 8888</span>
-							<span class="price_before">HK$ 9999</span>
-						</p>
-					</div>
-					<div class="goods_notice clearfix">
-						<span class="goods_num f_left">1 item</span>
-						<span class="order_time f_right">Your collection from 19/07/2017</span>
-					</div>
-				</li>
+				{/volist}
 			</ul>
 		</div>
 		<div class="goods_content3">暂定</div>

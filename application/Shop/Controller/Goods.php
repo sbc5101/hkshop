@@ -31,7 +31,10 @@
 			$data = Db::name('goods')
 						->where('id',$id)
 						->find();
-
+			// 修改商品点击量
+			Db::name('goods')
+				->where('id',$id)
+				->setInc('click_num');
 			$goods_images = Db::name('goods_images')
 								->where('goods_id',$id)
 								->order('cover','asc')
@@ -110,6 +113,7 @@
 							->insert([
 										'goods_id' => $data['goods_id'],
 										'user_id' => $user_id,
+										'create_time' => time(),
 									]);
 					if($res == false){
 						return json(['code' => 400,'message' => '收藏失败','data' => ['is_collection' => 1]]);

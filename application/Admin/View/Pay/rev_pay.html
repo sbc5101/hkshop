@@ -1,0 +1,61 @@
+{extend name="Public:public"}
+
+{block name="title"}
+	<title>添加支付</title>
+{/block}
+
+{block name="crumbs"}
+	<li class="active"><a href="{:url('admin/pay/index')}">支付管理</a></li>
+	<li class="active">添加支付</li>
+{/block}
+
+{block name="contents"}
+	<div class="panel panel-default bk-bg-white col-md-6 col-md-offset-3">
+		<div class="panel-heading bk-bg-white">
+			<h6><i class="fa fa-indent red"></i>添加支付</h6>							
+			<div class="panel-actions">
+				<a href="#" class="btn-minimize"><i class="fa fa-caret-up"></i></a>
+				<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
+			</div>
+		</div>
+		<div class="panel-body">
+			<form action="{:url('admin/pay/action_rev_pay')}" method="post">
+				<input type="hidden" name="id" value="{$data.id}">
+				<div class="form-group">
+					<label for="nf-user">支付名*</label>
+					<input type="text" name="title" class="form-control" value="{$data.title}" placeholder="請輸入支付名">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">開戶卡號</label>
+					<input type="text" name="bank_num" class="form-control" value="{$data.bank_num}" placeholder="請輸入開戶卡號">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">開戶姓名</label>
+					<input type="text" name="bank_name" class="form-control" value="{$data.bank_name}" placeholder="請輸入開戶姓名">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">開戶行</label>
+					<input type="text" name="opening_bank" class="form-control" value="{$data.opening_bank}" placeholder="請輸入開戶行">
+				</div>
+				<div class="form-group">
+					<label for="nf-password">排序</label>
+					<input type="text" maxlength="3" name="sort" class="form-control" value="{$data.sort}">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">狀態</label>
+					<div >
+						<div class="radio-custom radio-inline" style="float:left;">
+							<input type="radio" id=i"s_close1" name="is_close" value="0" {eq name="$data.is_close" value="0" } checked {/eq}> 
+							<label for="is_close1"> 開啟</label>
+						</div>
+						<div class="radio-custom radio-inline">
+							<input type="radio" id="is_close2" name="is_close" value="1" {eq name="$data.is_close" value="1" } checked {/eq}> 
+							<label for="is_close2"> 關閉</label>
+						</div>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary col-md-3 pull-right">確認</button>
+			</form>
+		</div>								
+	</div>
+{/block}

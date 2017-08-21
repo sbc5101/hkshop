@@ -1,0 +1,74 @@
+{extend name="Public:public"}
+
+{block name="title"}
+	<title>添加快遞</title>
+{/block}
+
+{block name="crumbs"}
+	<li class="active"><a href="{:url('admin/express/index')}">快遞管理</a></li>
+	<li class="active">添加快遞</li>
+{/block}
+
+{block name="contents"}
+	<div class="panel panel-default bk-bg-white col-md-6 col-md-offset-3">
+		<div class="panel-heading bk-bg-white">
+			<h6><i class="fa fa-indent red"></i>添加快遞</h6>							
+			<div class="panel-actions">
+				<a href="#" class="btn-minimize"><i class="fa fa-caret-up"></i></a>
+				<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
+			</div>
+		</div>
+		<div class="panel-body">
+			<form action="{:url('admin/express/action_add_express')}" method="post">
+				<div class="form-group">
+					<label for="nf-user">快遞名*</label>
+					<input type="text" name="e_title" class="form-control" value="" placeholder="請輸入快遞名">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">快遞編號</label>
+					<input type="text" name="code" class="form-control" value="" placeholder="請輸入快遞編號">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">首重</label>
+					<input type="text" name="first_weight" class="form-control" value="" placeholder="請輸入首重">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">首重價格</label>
+					<input type="text" name="first_price" class="form-control" value="" placeholder="請輸入首重價格">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">續重</label>
+					<input type="text" name="second_weight" class="form-control" value="" placeholder="請輸入續重">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">續重價格</label>
+					<input type="text" name="second_price" class="form-control" value="" placeholder="請輸入續重價格">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">描述</label>
+					<textarea name="describe" class="form-control">
+
+					</textarea>
+				</div>
+				<div class="form-group">
+					<label for="nf-password">排序</label>
+					<input type="text" maxlength="3" name="sort" class="form-control" value="0">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">狀態</label>
+					<div >
+						<div class="radio-custom radio-inline" style="float:left;">
+							<input type="radio" id=i"s_close1" name="is_close" value="0" checked> 
+							<label for="is_close1"> 開啟</label>
+						</div>
+						<div class="radio-custom radio-inline">
+							<input type="radio" id="is_close2" name="is_close" value="1"> 
+							<label for="is_close2"> 關閉</label>
+						</div>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary col-md-3 pull-right">確認</button>
+			</form>
+		</div>								
+	</div>
+{/block}

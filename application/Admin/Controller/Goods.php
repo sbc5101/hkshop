@@ -9,7 +9,7 @@
 	namespace app\admin\controller;
 
 	use app\admin\controller\Base;
-	use app\admin\model\ExcelToArrary;
+	// use app\admin\model\ExcelToArrary;
 	use think\Validate;
 	use think\Db;
 	use think\Request;

@@ -12,20 +12,23 @@
 	use think\Request;
 	use think\Db;
 	use think\Cache;
+	use think\Session;
 
 	class Index extends Controller
 	{
 		public function index()
 		{
 			$area_id = Request::instance()->get('area');
+			$title = Request::instance()->get('title');
 			// 初始化值
-			$area_id = empty($area_id) ? 1 : $area_id;
+			$user_id = Session::get('user.id','hk_shop_user');
+			$area_id = empty($area_id) ? 2 : $area_id;
 			$most_goods = [];
 			$new_goods = [];
 			$red_goods = [];
 			$white_goods = [];
 			$champagne_goods = [];
-
+			$is_collection = 0;
 			// 查询商品信息
 			$goods = Db::name('goods')
 						->alias('g')
@@ -40,12 +43,26 @@
 						->select();
 			if(!empty($goods)){
 				foreach ($goods as $k => $v) {
+					if(!empty($user_id)){
+						// 判斷該商品是否收藏
+						$collection = Db::name('goods_collection')
+										->field('id')
+										->where('user_id',$user_id)
+										->where('goods_id',$v['id'])
+										->find();
+						if(!empty($collection)){
+							$is_collection = 1;
+						}else{
+							$is_collection = 0;
+						}
+					}
 					$cate_id = explode(',', $v['cate_id']);
 					// MOST POPULAR RED WINE
 					if(in_array(382,$cate_id) !== false){
 						$most_goods[$k] = $v;
 						// 初始化数据
 						$most_goods[$k]['score_data'] = '';
+						$most_goods[$k]['is_collection'] = $is_collection;
 						// 查询获奖数据
 						if(!empty($v['score_id'])){
 							$most_goods[$k]['score_data'] = Db::name('goods_score')
@@ -60,6 +77,7 @@
 						$new_goods[$k] = $v;
 						// 初始化数据
 						$new_goods[$k]['score_data'] = '';
+						$new_goods[$k]['is_collection'] = $is_collection;
 						// 查询获奖数据
 						if(!empty($v['score_id'])){
 							$new_goods[$k]['score_data'] = Db::name('goods_score')
@@ -69,12 +87,13 @@
 								->select();
 						}					
 					}
-				
+
 					// RED WINE
 					if(in_array(377,$cate_id) !== false){
 						$red_goods[$k] = $v;
 						// 初始化数据
 						$red_goods[$k]['score_data'] = '';
+						$red_goods[$k]['is_collection'] = $is_collection;
 						// 查询获奖数据
 						if(!empty($v['score_id'])){
 							$red_goods[$k]['score_data'] = Db::name('goods_score')
@@ -90,6 +109,7 @@
 						$white_goods[$k] = $v;
 						// 初始化数据
 						$white_goods[$k]['score_data'] = '';
+						$white_goods[$k]['is_collection'] = $is_collection;
 						// 查询获奖数据
 						if(!empty($v['score_id'])){
 							$white_goods[$k]['score_data'] = Db::name('goods_score')
@@ -104,6 +124,7 @@
 						$champagne_goods[$k] = $v;
 						// 初始化数据
 						$champagne_goods[$k]['score_data'] = '';
+						$champagne_goods[$k]['is_collection'] = $is_collection;
 						// 查询获奖数据
 						if(!empty($v['score_id'])){
 							$champagne_goods[$k]['score_data'] = Db::name('goods_score')

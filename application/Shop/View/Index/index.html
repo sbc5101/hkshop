@@ -10,7 +10,7 @@
 		<form class="formWarp clearfix" action="/serach">
 			<label class="select_label">
 				<span class="select_labelText">Ship to:</span>
-				<select class="selectContent">
+				<select class="selectContent" id="area_data">
 					{volist name="$goods_areas" id="v"}
 					<option value="{$v.id}" {eq name="$v.id" value="$area_id"} selected {/eq}>{$v.area_name}</option>
 					{/volist}
@@ -73,7 +73,11 @@
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="{$v.id}">
+	            		{eq name="$v.is_collection" value="0"}
 	            			<img src="/public/shop/img/icon4.png" alt="" />
+	            		{else /}
+							<img src="/public/shop/img/icon5.png" alt="" />
+	            		{/eq}
 	            		</div>
 	            		<div class="addTo_car" data-id="{$v.id}">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
@@ -119,7 +123,11 @@
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="{$v.id}">
-	            			<img src="/public/shop/img/icon4.png" alt="" />
+	            			{eq name="$v.is_collection" value="0"}
+	            				<img src="/public/shop/img/icon4.png" alt="" />
+		            		{else /}
+								<img src="/public/shop/img/icon5.png" alt="" />
+		            		{/eq}
 	            		</div>
 	            		<div class="addTo_car" data-id="{$v.id}">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
@@ -165,7 +173,11 @@
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="{$v.id}">
-	            			<img src="/public/shop/img/icon4.png" alt="" />
+	            			{eq name="$v.is_collection" value="0"}
+	            				<img src="/public/shop/img/icon4.png" alt="" />
+		            		{else /}
+								<img src="/public/shop/img/icon5.png" alt="" />
+		            		{/eq}
 	            		</div>
 	            		<div class="addTo_car" data-id="{$v.id}">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
@@ -211,7 +223,11 @@
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="{$v.id}">
-	            			<img src="/public/shop/img/icon4.png" alt="" />
+	            			{eq name="$v.is_collection" value="0"}
+	            				<img src="/public/shop/img/icon4.png" alt="" />
+		            		{else /}
+								<img src="/public/shop/img/icon5.png" alt="" />
+		            		{/eq}
 	            		</div>
 	            		<div class="addTo_car" data-id="{$v.id}">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
@@ -257,7 +273,11 @@
 	            	<!--收藏和加入购物车-->
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="{$v.id}">
-	            			<img src="/public/shop/img/icon4.png" alt="" />
+	            			{eq name="$v.is_collection" value="0"}
+	            				<img src="/public/shop/img/icon4.png" alt="" />
+		            		{else /}
+								<img src="/public/shop/img/icon5.png" alt="" />
+		            		{/eq}
 	            		</div>
 	            		<div class="addTo_car" data-id="{$v.id}">
 	            			<img src="/public/shop/img/icon6.png" alt="" />
@@ -302,28 +322,35 @@
 	    	},'json');
 	    })
 	    $('.collect img').click(function(){
-	    		var that=$(this);
-	    		var goods_id = $(this).parent().attr('data-id');
-	    		console.log(goods_id);
-		    	var url = "{:url('shop/goods/action_goods_collection')}";
-		    	$.post(url,{'goods_id':goods_id},function(data){
-		    		if(data.code=="200"){
-		    			if (that.attr("src")=="/public/shop/img/icon4.png") {
-		    				console.log(data);
-			    			that.attr("src","/public/shop/img/icon5.png");
-			    			$(".collect_alert").html("收藏成功~").fadeIn(300).delay(1000).fadeOut(300);
-		    			}else{
-			    			that.attr("src","/public/shop/img/icon4.png");
-			    			$(".collect_alert").html("取消收藏!").fadeIn(300).delay(1000).fadeOut(300);
-			    			
-		    			}
-		    		}else if(data.code=="401"){
-		    			window.location.href='/shop/login/login.html';
-		    		}else if(data.code=="400"){
-		    			alert("商品收藏失败!");
-		    		}
-		    		
-		    	},'json');	    			    		    	
+    		var that=$(this);
+    		var goods_id = $(this).parent().attr('data-id');
+    		console.log(goods_id);
+	    	var url = "{:url('shop/goods/action_goods_collection')}";
+	    	$.post(url,{'goods_id':goods_id},function(data){
+	    		if(data.code=="200"){
+	    			if (that.attr("src")=="/public/shop/img/icon4.png") {
+	    				console.log(data);
+		    			that.attr("src","/public/shop/img/icon5.png");
+		    			$(".collect_alert").html("收藏成功~").fadeIn(300).delay(1000).fadeOut(300);
+	    			}else{
+		    			that.attr("src","/public/shop/img/icon4.png");
+		    			$(".collect_alert").html("取消收藏!").fadeIn(300).delay(1000).fadeOut(300);
+		    			
+	    			}
+	    		}else if(data.code=="401"){
+	    			window.location.href='/shop/login/login.html';
+	    		}else if(data.code=="400"){
+	    			alert("商品收藏失败!");
+	    		}
+	    		
+	    	},'json');	    			    		    	
+	    })
+
+	    // 选择商品区域
+	    $('#area_data').change(function(){
+	    	var area_id = $(this).val();
+	    	var url = "{:url('shop/index/index')}?area="+area_id;
+	    	window.location.href = url;
 	    })
 	</script>
 {/block}

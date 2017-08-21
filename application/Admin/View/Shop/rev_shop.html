@@ -1,0 +1,61 @@
+{extend name="Public:public"}
+
+{block name="title"}
+	<title>修改門店</title>
+{/block}
+
+{block name="crumbs"}
+	<li class="active"><a href="{:url('admin/shop/shop_list')}">門店管理</a></li>
+	<li class="active">修改門店</li>
+{/block}
+
+{block name="contents"}
+	<div class="panel panel-default bk-bg-white col-md-6 col-md-offset-3">
+		<div class="panel-heading bk-bg-white">
+			<h6><i class="fa fa-indent red"></i>修改門店</h6>							
+			<div class="panel-actions">
+				<a href="#" class="btn-minimize"><i class="fa fa-caret-up"></i></a>
+				<a href="#" class="btn-close"><i class="fa fa-times"></i></a>
+			</div>
+		</div>
+		<div class="panel-body">
+			<form action="{:url('admin/shop/action_rev_shop')}" method="post">
+				<input type="hidden" name="id" value="{$data.id}">
+				<div class="form-group">
+					<label for="nf-user">門店名*</label>
+					<input type="text" name="shop_title" class="form-control" value="{$data.shop_title}" placeholder="請輸入門店名">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">座机</label>
+					<input type="text" name="tel" class="form-control" value="{$data.tel}" placeholder="請輸入座机">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">手機號</label>
+					<input type="text" name="mobile" class="form-control" value="{$data.mobile}" placeholder="請輸入手機號">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">門店地址</label>
+					<input type="text" name="address" class="form-control" value="{$data.address}" placeholder="請輸入門店地址">
+				</div>
+				<div class="form-group">
+					<label for="nf-password">排序</label>
+					<input type="text" maxlength="3" name="sort" class="form-control" value="{$data.sort}">
+				</div>
+				<div class="form-group">
+					<label for="nf-user">狀態</label>
+					<div >
+						<div class="radio-custom radio-inline" style="float:left;">
+							<input type="radio" id=i"s_close1" name="is_close" value="0" {eq name="$data.is_close" value="0" } checked {/eq}> 
+							<label for="is_close1"> 開啟</label>
+						</div>
+						<div class="radio-custom radio-inline">
+							<input type="radio" id="is_close2" name="is_close" value="1" {eq name="$data.is_close" value="1" } checked {/eq}> 
+							<label for="is_close2"> 關閉</label>
+						</div>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary col-md-3 pull-right">確認</button>
+			</form>
+		</div>								
+	</div>
+{/block}

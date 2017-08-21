@@ -83,10 +83,72 @@
 					}
 				}
 			}
+			// 獲取購物車相關數據
+			$shop_data = $this->get_shop_data();
+			$express_data = $this->get_express_data();
+			$pay_data = $this->get_pay_data();
+			$pickup_data = $this->get_pickup_data();
 			return $this->fetch('shopping_cart',[
 										'cart_data' => $cart_data,
 										'total' => $total,
+										'shop_data' => $shop_data,
+										'express_data' => $express_data,
+										'pay_data' => $pay_data,
+										'pickup_data' => $pickup_data,
 										]);
+		}
+
+		/**
+		 * 獲取店鋪信息
+		 * @return [type] [description]
+		 */
+		public function get_shop_data()
+		{
+			$data = Db::name('shop')	
+					->where('is_close',0)
+					->order('sort','desc')
+					->select();
+			return $data;
+		}
+
+		/**
+		 * 獲取快遞信息
+		 * @return [type] [description]
+		 */
+		public function get_express_data()
+		{
+			$data = Db::name('express')	
+					->where('is_close',0)
+					->order('sort','desc')
+					->select();
+			return $data;
+		}
+
+
+		/**
+		 * 獲取货信息
+		 * @return [type] [description]
+		 */
+		public function get_pickup_data()
+		{
+			$data = Db::name('pickup')	
+					->where('is_close',0)
+					->order('sort','desc')
+					->select();
+			return $data;
+		}
+
+		/**
+		 * 獲取支付方式信息
+		 * @return [type] [description]
+		 */
+		public function get_pay_data()
+		{
+			$data = Db::name('pay')	
+					->where('is_close',0)
+					->order('sort','desc')
+					->select();
+			return $data;
 		}
 
 		/**

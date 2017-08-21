@@ -50,7 +50,6 @@
 				return json(['code' => 404,'message' => '请选择商品']);
 			} 
 			foreach ($cart_goods as &$v) {
-				$v['price'] = 0;
 				$goods = Db::name('goods')
 							->alias('g')
 							->join('__GOODS_IMAGES__ i','i.goods_id=g.id')
@@ -74,8 +73,6 @@
 				$v['eng_title'] = $goods['eng_title'];
 				$v['hk_title'] = $goods['hk_title'];
 				$v['marketprice'] = $goods['marketprice'];
-				$v['storeprice'] = $goods['storeprice'];
-				$v['score_id'] = $goods['score_id'];
 				$v['price'] += $goods['marketprice'] * $v['buy_num'];
 			}
 
@@ -115,9 +112,45 @@
 			return json(['code' => 200,'message' => '订单生成成功']);
 		}
 
-		public function order_detail()
+		public function order_detail($oid)
 		{
-			return $this->fetch('order_detail');
+			$order = Db::name('order')
+						->where('id',$oid)
+						->find();
+			if(empty($order)){
+				$this->error('訂單不存在!');
+			}
+			$order['create_time'] = date('d/m/Y H:s',$order['create_time']);
+			$order_goods['score_data'] = '';
+			$order_goods = Db::name('order_goods')
+							->where('order_id',$oid)
+							->select();
+			$pay_name = Db::name('pay')
+						->where('id',$order['pay_id'])
+						->find()['title'];
+			$pickup = Db::name('pickup')
+						->where('id',$order['pickup_id'])
+						->find()['pickup_name'];
+			$shop = Db::name('shop')
+						->where('id',$order['shop_id'])
+						->find();
+			$total_num = 0;
+			if(!empty($order_goods)){
+				foreach ($order_goods as &$v) {
+					$v['score_data'] = Db::name('goods_score')
+						->where('id','in',$v['score_id'])
+						->select();
+				}
+				$total_num += $v['buy_num'];
+			}
+			return $this->fetch('order_detail',[
+					'order' => $order,
+					'order_goods' => $order_goods,
+					'pay_name' => $pay_name,
+					'pickup' => $pickup,
+					'shop' => $shop,
+					'total_num' => $total_num,
+					]);
 		}
 
 	}

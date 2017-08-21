@@ -5,15 +5,12 @@
 	* @Date:   2016-1-2 15:38:14
 	* @Last Modified time: 2016-1-2 16:20:06
 	*/
-
 	namespace app\admin\controller;
-
 	use app\admin\controller\Base;
 	// use app\admin\model\ExcelToArrary;
 	use think\Validate;
 	use think\Db;
 	use think\Request;
-
 	class Goods extends Base
 	{
 		/**
@@ -25,11 +22,9 @@
 			// 初始化數據
 			$status = Request::instance()->get('status');
 			$page = empty(Request::instance()->get('page')) ? '1' : Request::instance()->get('page');
-
 			$title_where = '';
 			$type_where = '';
 			$status_where = '';
-
 			// 筛选
 			// if(!empty($title)){
 			// 	$title_where = 'g.title like "%'.$title.'%"';
@@ -40,7 +35,6 @@
 			// if(isset($status) && $status !== ''){
 			// 	$status_where = 'g.status="'.$status.'"';
 			// }
-
 			$data = Db::name('goods')
 					->where('is_delete=0')
 					->where($title_where)
@@ -54,10 +48,8 @@
 							'status' => $status,
 							],
 						]);
-
 			return $this->fetch('index',['data' => $data,'status' => $status,'page' => $page]);
 		}
-
 		/**
 		 * 添加商品操作
 		 */
@@ -78,7 +70,6 @@
 							'chateau_data' 	=> $chateau_data,
 						]);
 		}
-
 		/**
 		 * 添加商品动作
 		 * @return [type] [添加商品是否成功]
@@ -101,7 +92,6 @@
 					$this->error($filemsg);
 				}
 			}
-
 			if(!empty($files) && isset($files)){
 				$filemsgs = $this->uploads($files);
 				if(!$filemsgs){
@@ -142,7 +132,6 @@
 			}	
 			
 		}
-
 		/**
 		 * 检测上传商品數據
 		 * @param  [type] $data 		 [商品信息]
@@ -176,10 +165,8 @@
 			    'content'  => $data['goods_msg'],
 			    'stock' => $data['stock'],
 			];
-
 			$validate = new Validate($rule);
 			$result   = $validate->check($msg);
-
 			if(!$result){
 			    $this->error($validate->getError());
 			}
@@ -198,13 +185,10 @@
 			    'winemaker_notes'	=> 	$data['winemaker_notes'],
 			    'chateau_id'		=> 	$data['chateau_id'],
 			];
-
 			//合并数组 
 			$new_data = array_merge($msg,$arr);
-
 			return $new_data;
 		}
-
 		/**
 		 * 修改商品信息操作
 		 * @param  [type] $id [商品id]
@@ -240,7 +224,6 @@
 					'chateau_data' 	=> $chateau_data,
 				]);
 		}
-
 		/**
 		 * 商品修改动作
 		 * @return [type] [是否修改成功]
@@ -249,7 +232,6 @@
 		{
 			$msg = Request::instance()->post();
 			$goods_id = Request::instance()->post('id');
-
 			$boolean = Db::name('goods')
 						->where('id','<>',$goods_id)
 						->where('eng_title',$msg['eng_title'])
@@ -260,10 +242,8 @@
 			if($boolean){
 				$this->error('该商品已存在！');
 			}
-
 			// 检测數據
 			$goods_data = $this->check_goods_data($msg);
-
 			$res = Db::name('goods')
 					->where('id',$goods_id)
 					->update($goods_data);
@@ -273,9 +253,7 @@
 			}else{
 				$this->error('修改失敗！');
 			}
-
 		}
-
 		/**
 		 * 商品彻底删除动作
 		 * @param  [type] $id [商品id]
@@ -302,7 +280,6 @@
 				}
 			}
 		}
-
 		/**
 		 * 商品恢復操作
 		 * @param  [type] $id     [商品id]
@@ -323,7 +300,6 @@
 				$this->error('操作失敗！');
 			}
 		}
-
 		/**
 		 * 商品回收站操作
 		 * @return [type] [description]
@@ -336,12 +312,8 @@
 					->field('g.id,g.title,g.type,g.status,g.is_hot,g.is_new,g.is_free,g.marketprice,g.stock,g.sale_number,i.iname')
 					->where('g.is_delete=1 AND i.cover=0')
 					->paginate(15);
-
 			return $this->fetch('goods_recycle',['data' => $data]);
 		}
-
-
-
 		/**
 		 * 商品圖片修改操作
 		 * @param  [type] $id [商品id]
@@ -353,17 +325,14 @@
 			$type = Request::instance()->get('type');
 			$status = Request::instance()->get('status');
 			$page = Request::instance()->get('page');
-
 			$images = Db::name('goods_images')
 						->where('goods_id',$id)
 						->select();
 			$goods = Db::name('goods')
 						->where('id',$id)
 						->find();
-
 			return $this->fetch('rev_images',['data' => $images,'goods_id' => $id,'goods' => $goods,'title' => $title,'type' => $type,'status' => $status,'page' => $page]);
 		}
-
 		/**
 		 * 商品圖片删除动作
 		 * @param  [type] $id [商品圖片id]
@@ -396,7 +365,6 @@
 				$this->error('删除失敗！');
 			}
 		}
-
 		/**
 		 * 添加圖片动作
 		 * @return [type] [是否添加成功]
@@ -405,17 +373,14 @@
 		{
 			$files = Request::instance()->file('images');
 			$goods_id = Request::instance()->post('goods_id');
-
 			$data = [];
 			if(empty($files) && !isset($files)){
 				return $this->error('请选择圖片！');
 			}
 			$filemsg = $this->uploads($files);
-
 			foreach ($filemsg as $v) {
 				$data[] = ['iname' => str_replace('\\','/','/public/uploads/'.date('Ymd').'/'.$v),'goods_id' => $goods_id];
 			}
-
 			$res = Db::name('goods_images')
 					->insertAll($data);
 			if($res){
@@ -429,7 +394,6 @@
 				$this->error('增加圖片失敗！');
 			}
 		}
-
 		/**
 		 * 修改圖片封面动作
 		 * @param  [type] $id       [商品圖片id]
@@ -458,7 +422,6 @@
 				}
 			}
 		}
-
 		/**
 		 * ajax获取产区
 		 * @return [type] [description]
@@ -466,7 +429,6 @@
 		public function ajax_get_origin()
 		{
 			$pid = Request::instance()->post('pid');
-
 			$data = Db::name('cates')
 					->field('id,cname')
 					->where('pid',$pid)
@@ -474,7 +436,6 @@
 					->select();
 			echo json_encode($data);
 		}
-
 		/**
 		 * 商品區域列表
 		 * @return [type] [description]
@@ -485,7 +446,6 @@
 					->paginate(20);
 			return $this->fetch('area_list',['data' => $data]);
 		}
-
 		/**
 		 * 添加商品區域操作
 		 * @return [type] [description]
@@ -519,14 +479,11 @@
 			    'area_name'  	=> $message['area_name'],
 			    'display'   	=> $message['display'],
 			];
-
 			$validate = new Validate($rule);
 			$result   = $validate->check($data);
-
 			if(!$result){
 				$this>error($validate->getError());
 			}
-
 			$res = Db::name('goods_areas')
 					->insert($data);
 			if($res){
@@ -536,7 +493,6 @@
 				$this->error('添加失敗');
 			}
 		}
-
 		/**
 		 * 修改商品區域操作
 		 * @param  [type] $id [商品區域ID]
@@ -580,10 +536,8 @@
 			    'area_name' => $message['area_name'],
 			    'display'   => $message['display'],
 			];
-
 			$validate = new Validate($rule);
 			$result   = $validate->check($data);
-
 			if(!$result){
 				$this>error($validate->getError());
 			}
@@ -604,7 +558,6 @@
 				$this->error('修改失敗');
 			}
 		}
-
 		/**
 		 * 删除商品區域动作
 		 * @param  [type] $id [商品區域ID]

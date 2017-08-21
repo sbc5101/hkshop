@@ -50,10 +50,11 @@
 				return json(['code' => 404,'message' => '请选择商品']);
 			} 
 			foreach ($cart_goods as &$v) {
+				$v['price'] = 0;
 				$goods = Db::name('goods')
 							->alias('g')
 							->join('__GOODS_IMAGES__ i','i.goods_id=g.id')
-							->field('i.iname,g.eng_title,g.hk_title,g.marketprice,g.stock')
+							->field('i.iname,g.eng_title,g.hk_title,g.marketprice,g.stock,g.storeprice,g.score_id')
 							->where('g.is_delete',0)
 							->where('g.id',$v['goods_id'])
 							->where('g.is_delete',0)
@@ -73,7 +74,9 @@
 				$v['eng_title'] = $goods['eng_title'];
 				$v['hk_title'] = $goods['hk_title'];
 				$v['marketprice'] = $goods['marketprice'];
-				$price += $goods['marketprice'] * $v['buy_num'];
+				$v['storeprice'] = $goods['storeprice'];
+				$v['score_id'] = $goods['score_id'];
+				$v['price'] += $goods['marketprice'] * $v['buy_num'];
 			}
 
 			$msg['create_time'] = time();
@@ -92,6 +95,8 @@
 						'eng_title' => $v['eng_title'],
 						'hk_title' => $v['hk_title'],
 						'buy_num' => $v['buy_num'],
+						'storeprice' => $v['storeprice'],
+						'score_id' => $v['score_id'],
 						'order_id' => $order_res,
 					];
 					$res = Db::name('order_goods')

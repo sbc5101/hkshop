@@ -124,12 +124,15 @@
 			</div>
 			<!--结账的按钮-->
 			<div class="check_out">
-				<a href="javascript:vive(0)">
+				<a href="javascript:void(0)">
 					Check Out
 				</a>
 			</div>
 			
 			
+		</div>
+		<div class="collect_alert" style="width: 30%;line-height: 30px;font-size: 15px;position: fixed;left: 50%;top: 60%;transform: translate(-50%);background: rgba(0,0,0,0.6);z-index: 100;text-align: center;color: #fff;border-radius: 5px;display: none;">
+		
 		</div>
 	</div>
 	<!--弹出是否删除此商品-->
@@ -154,12 +157,14 @@
 //			$(".select_box").append(opt);
 //		}
 		//----------------交货切换
-		
-		$(".options_list li").click(function(){
-			
+		$(".options_list li").click(function(){			
 			var index=$(this).index();
 			$(this).addClass("selected").siblings().removeClass("selected");
-		})
+			var payId=$(this).attr("data-id");
+			get_payId=function(){
+				return payId;
+			}
+		});
 		//--------------取货切换
 		$(".receive_list li").click(function(){
 			
@@ -171,6 +176,17 @@
 				$(".receive_content2").fadeIn(200).siblings().hide();
 			}else if(index2==2){
 				$(".receive_content3").fadeIn(200).siblings().hide();
+			}
+			var pickupId=$(this).attr("data-id");
+			get_pickupId=function(){
+				return pickupId;
+			}
+		})
+		//店铺的选择
+		$("label input").click(function(){
+			var val_now=$(this).val();
+			get_shopId=function(){
+				return val_now;
 			}
 		})
 		//---------------再次使用select修改商品的数量
@@ -218,15 +234,25 @@
     	})
 	})
 	$('.check_out').click(function(){
-		var pay_id = 1;
-		var pickup_id = 1;
-		var shop_id = 1;
-		var user_name = '沈斌超';
-		var user_email = '541891006@qq.com';
-		var url = "{:url('/shop/order/make_order')}"
-		$.post(url,{'pay_id':pay_id,'pickup_id':pickup_id,'shop_id':shop_id,'user_name':user_name,'user_email':user_email},function(data){
+			if($(".user_mail").val()==""){
+				$(".collect_alert").html("請填寫完整信息~").fadeIn(300).delay(1000).fadeOut(300);
+			}else{
+				var pay_id = get_payId(); //获取支付方式
+				//console.log(pay_id);
+				var pickup_id = get_pickupId();        //获取取货方式
+				var shop_id = get_shopId();
+				var user_name = $(".user_name").val();
+				var user_email = $(".user_mail").val();
+				var url = "{:url('/shop/order/make_order')}"
+				$.post(url,{'pay_id':pay_id,'pickup_id':pickup_id,'shop_id':shop_id,'user_name':user_name,'user_email':user_email},function(data){
+					if(data.code=="200"){
+						console.log(data);
+						window.location.href="{:url('shop/Order/order_detail')}"
+					}
+				})
+			}
 			
-		})
+		
 	})
 </script>
 {/block}

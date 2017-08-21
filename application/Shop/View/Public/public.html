@@ -237,9 +237,11 @@
     </div>
     <script type="text/javascript">
         // 选择商品区域
-      $('#gcate').change(function(){
+      $('.search_input').blur(function(){
         var area_id = $(this).val();
-        var url = "{:url('shop/cates/cate_list')}?area="+area_id+"&title=&cid=";
+        var input_title=$(".search_input").val();
+        console.log(input_title);
+        var url = "{:url('shop/cates/cate_list')}?area=&title="+ input_title +"&cid=";
         window.location.href = url;
       })
     </script>

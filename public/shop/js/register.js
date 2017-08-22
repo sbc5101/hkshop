@@ -99,7 +99,7 @@ $(".join_btn").click(function(){
 			},
 			success:function(data){
 				if(data.code=="200"){
-					window.href="";
+					window.location.href="";
 					
 				}else{
 					alert("提交失败");

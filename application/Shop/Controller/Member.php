@@ -28,7 +28,7 @@
 			$collection = $this->get_collection($user_id);
 			// 获取订单信息
 			$order = $this->get_order($user_id);
-
+	
 			return $this->fetch('personal_center',[
 						'name' 			=> $name,
 						'collection' 	=> $collection,

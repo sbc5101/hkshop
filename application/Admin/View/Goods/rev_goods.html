@@ -10,9 +10,9 @@
 {/block}
 
 {block name="contents"}
-  	{js href="/public/kindeditor/kindeditor-all-min.js"}
-  	{js href="/public/kindeditor/lang/zh-CN.js"}
-  	{js href="/public/admin/assets/js/my.js"}
+  	{js href="__PUBLIC__/kindeditor/kindeditor-all-min.js"}
+  	{js href="__PUBLIC__/kindeditor/lang/zh-CN.js"}
+  	{js href="__PUBLIC__/admin/assets/js/my.js"}
 	<div class="panel panel-default bk-bg-white col-md-8 col-md-offset-3">
 		<div class="panel-heading bk-bg-white">
 			<h6><i class="fa fa-indent red"></i>修改商品</h6>
@@ -164,8 +164,8 @@
 		KindEditor.ready(function(K) {
 			ke=K.create('textarea[id="container"]', {
 				filterMode : false,
-				uploadJson : '/public/kindeditor/php/upload_json.php',
-		        fileManagerJson : '/public/kindeditor/php/file_manager_json.php',
+				uploadJson : '__PUBLIC__/kindeditor/php/upload_json.php',
+		        fileManagerJson : '__PUBLIC__/kindeditor/php/file_manager_json.php',
 		        imageSizeLimit : '10MB', //批量上传图片单张最大容量
     			imageUploadLimit : 100 ,
 		        allowFileManager : true

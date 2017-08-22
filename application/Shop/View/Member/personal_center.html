@@ -39,7 +39,9 @@
 				<li>
 					<div class="goods_img_left">
 						<div class="goods_imgs">
-							<img src="__SRC__{$v.goods.iname}"/>
+							<a href="{:url('shop/order/order_detail',['oid' => $v.id])}">
+								<img src="__SRC__{$v.goods.iname}"/>
+							</a>
 						</div>
 					</div>
 					<div class="goods_desc_right">
@@ -71,7 +73,9 @@
 				<li>
 					<div class="goods_img_left">
 						<div class="goods_imgs">
-							<img src="__SRC__{$v.iname}"/>
+							<a href="{:url('shop/goods/goods_detail',['id' => $v.id])}">
+								<img src="__SRC__{$v.iname}"/>
+							</a>
 						</div>
 					</div>
 					<div class="goods_desc_right">

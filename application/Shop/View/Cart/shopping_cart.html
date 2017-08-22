@@ -103,20 +103,20 @@
 					<div class="triangle triangle2">
 						
 					</div>
-					<input type="text" placeholder="liudehua"/>
-					<input type="text" placeholder="dehua@qq.com"/>
-					<input type="text" placeholder="Please enter the contact number" />
-					<input type="text" placeholder="Please enter the shipping address" />
+					<input class="user_name2" type="text" placeholder="liudehua"/>
+					<input class="user_mail2" type="text" placeholder="dehua@qq.com"/>
+					<input class="user_num2" type="text" placeholder="Please enter the contact number" />
+					<input class="user_address" type="text" placeholder="Please enter the shipping address" />
 					<p style="color: #dd153c;width: 95%;margin: 0 2.5%;padding: 10px 0;font-size: 13px;">*Shipped within 24 hours</p>
 				</div>
 				<div class="receive_content3">
 					<div class="triangle triangle3">
 						
 					</div>
-					<input type="text" placeholder="liudehua"/>
-					<input type="text" placeholder="dehua@qq.com"/>
-					<input type="text" placeholder="Please enter the contact number" />
-					<input type="text" placeholder="Please enter the designated subway station&time" />
+					<input class="user_name3" type="text" placeholder="liudehua"/>
+					<input class="user_mail3" type="text" placeholder="dehua@qq.com"/>
+					<input class="user_num3" type="text" placeholder="Please enter the contact number" />
+					<input class="user_subway" type="text" placeholder="Please enter the designated subway station&time" />
 					<p style="color: #dd153c;width: 95%;margin: 0 2.5%;padding: 10px 0;font-size: 13px;">*Shipped within 24 hours</p>
 				</div>
 			</div>
@@ -242,22 +242,72 @@
     	})
 	})
 	$('.check_out').click(function(){
-			if($(".user_mail").val()==""){
-				$(".collect_alert").html("請填寫完整信息~").fadeIn(300).delay(1000).fadeOut(300);
-			}else{
-				var pay_id = get_payId(); //获取支付方式
-				//console.log(pay_id);
-				var pickup_id = get_pickupId();        //获取取货方式
-				var shop_id = get_shopId();
-				var user_name = $(".user_name").val();
-				var user_email = $(".user_mail").val();
-				var url = "{:url('/shop/order/make_order')}"
-				$.post(url,{'pay_id':pay_id,'pickup_id':pickup_id,'shop_id':shop_id,'user_name':user_name,'user_email':user_email},function(data){
-					if(data.code=="200"){
-						console.log(data);
-						window.location.href="{:url('shop/Order/order_detail')}"
-					}
-				})
+//			if($(".user_mail").val()==""){
+//				$(".collect_alert").html("請填寫完整信息~").fadeIn(300).delay(1000).fadeOut(300);
+//			}else{
+//				var pay_id = get_payId();
+//				var pickup_id = get_pickupId();
+//				var shop_id = get_shopId();
+//				var user_name = $(".user_name").val();
+//				var user_email = $(".user_mail").val();
+//				var url = "{:url('/shop/order/make_order')}"
+//				$.post(url,{'pay_id':pay_id,'pickup_id':pickup_id,'shop_id':shop_id,'user_name':user_name,'user_email':user_email},function(data){
+//					if(data.code=="200"){
+//						console.log(data);
+//						window.location.href="{:url('shop/Order/order_detail')}"
+//					}
+//				})
+//			}
+			var pick_id=get_pickupId();
+			if(pick_id==1){
+				if($(".user_mail").val()==""){
+					$(".collect_alert").html("請填寫完整信息~").fadeIn(300).delay(1000).fadeOut(300);
+				}else{
+					var pay_id = get_payId();
+					var pickup_id = get_pickupId();
+					var shop_id = get_shopId();
+					var user_name = $(".user_name").val();
+					var user_email = $(".user_mail").val();
+					var url = "{:url('/shop/order/make_order')}"
+					$.post(url,{'pay_id':pay_id,'pickup_id':pickup_id,'shop_id':shop_id,'user_name':user_name,'user_email':user_email},function(data){
+						if(data.code=="200"){
+							console.log(data);
+							window.location.href="{:url('shop/Order/order_detail')}";
+						}
+					})
+				}
+			}else if(pick_id==2){
+				if($(".user_address").val()==""){
+					$(".collect_alert").html("請填寫完整信息~").fadeIn(300).delay(1000).fadeOut(300);
+				}else{
+					var user_name = $(".user_name2").val();
+					var user_email = $(".user_mail2").val();
+					var user_num=$(".user_num2").val();
+					var user_address=$(".user_address").val();
+					var url = "{:url('/shop/order/make_order')}"
+					$.post(url,{'pay_id':pay_id,'pickup_id':pickup_id,'shop_id':shop_id,'user_name':user_name,'user_email':user_email},function(data){
+						if(data.code=="200"){
+							console.log(data);
+							window.location.href="{:url('shop/Order/order_detail')}";
+						}
+					})
+				}
+			}else if(pick_id==3){
+				if($(".user_subway").val()==""){
+					$(".collect_alert").html("請填寫完整信息~").fadeIn(300).delay(1000).fadeOut(300);
+				}else{
+					var user_name = $(".user_name3").val();
+					var user_email = $(".user_mail3").val();
+					var user_num=$(".user_num3").val();
+					var user_address=$(".user_subway").val();
+					var url = "{:url('/shop/order/make_order')}"
+					$.post(url,{'pay_id':pay_id,'pickup_id':pickup_id,'shop_id':shop_id,'user_name':user_name,'user_email':user_email},function(data){
+						if(data.code=="200"){
+							console.log(data);
+							window.location.href="{:url('shop/Order/order_detail')}";
+						}
+					})
+				}
 			}
 			
 		

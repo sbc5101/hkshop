@@ -293,6 +293,10 @@
 	<div class="collect_alert" style="width: 30%;line-height: 30px;font-size: 15px;position: fixed;left: 50%;top: 60%;transform: translate(-50%);background: rgba(0,0,0,0.6);z-index: 100;text-align: center;color: #fff;border-radius: 5px;display: none;">
 		
 	</div>
+	<!--加入购物车提示框-->
+	<div class="addToCar_succ" style="width: 30%;line-height: 30px;font-size: 15px;position: fixed;left: 50%;top: 60%;transform: translate(-50%);background: rgba(0,0,0,0.6);z-index: 100;text-align: center;color: #fff;border-radius: 5px;display: none;">
+		
+	</div>
 	{js href="__PUBLIC__/shop/js/index.js"}
 	<script type="text/javascript">
 		var mySwiper = new Swiper('.swiper-img',{
@@ -310,17 +314,20 @@
 	        spaceBetween: 10,
 	        freeMode: true
 	    });
-		//加入购物车
+		//----------------加入购物车
 	    $('.addTo_car').click(function(){
 	    	var goods_id = $(this).attr('data-id');
 	    	var url = "{:url('/shop/cart/add_cart')}";
 	    	$.post(url,{'goods_id':goods_id,'buy_num':1},function(data){
 	    		if(data.code=="200"){
+	    			
 	    			console.log(data)
 	    			$(".cart a span").html(data.data.total_buy_num);
+	    			$(".addToCar_succ").html("加入购物车成功~").fadeIn(300).delay(1000).fadeOut(300);
 	    		}
 	    	},'json');
 	    })
+	    //---------------点击收藏
 	    $('.collect img').click(function(){
     		var that=$(this);
     		var goods_id = $(this).parent().attr('data-id');
@@ -338,7 +345,7 @@
 		    			
 	    			}
 	    		}else if(data.code=="401"){
-	    			window.location.href='/shop/login/login.html';
+	    			window.location.href="{:url('shop/login/login')}";
 	    		}else if(data.code=="400"){
 	    			alert("商品收藏失败!");
 	    		}

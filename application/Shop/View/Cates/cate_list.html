@@ -33,14 +33,14 @@
     {css href="__PUBLIC__/shop/css/category.css"}
     {js href="__PUBLIC__/shop/js/index.js"}
 	<div class="goods_select_area clearfix">
-		<span class="total_num">999 items</span>
+		<span class="total_num">{$total_num} items</span>
 		<label class="select_label">sort:
-		<select name="" id="">
-			<option value="Top Rated">Top Rated</option>
-			<option value="Most Popular" selected="selected">Most Popular</option>
-			<option value="Savings">Savings</option>
-			<option value="Price:Low to High">Price:Low to High</option>
-			<option value="Price:High to Low">Price:High to Low</option>						
+		<select id="sort">
+			<option value="1" {eq name="$order" value="1" } selected {/eq}>Top Rated</option>
+			<option value="2" {eq name="$order" value="2" } selected {/eq}>Most Popular</option>
+			<option value="3" {eq name="$order" value="3" } selected {/eq}>Savings</option>
+			<option value="4" {eq name="$order" value="4" } selected {/eq}>Price:Low to High</option>
+			<option value="5" {eq name="$order" value="5" } selected {/eq}>Price:High to Low</option>						
 		</select>
 		</label>
 	</div>
@@ -81,6 +81,13 @@
 		</li>
 		{/volist}
 	</ul>
+	<script type="text/javascript">
+		$('#sort').change(function(data){
+			var val = $(this).val();
+			var url = "{:url('shop/cates/cate_list')}?cid={$cid}&title={$title}&area={$area_id}&order="+val;
+			window.location.href = url;
+		})
+	</script>
 {/block}
 
 	

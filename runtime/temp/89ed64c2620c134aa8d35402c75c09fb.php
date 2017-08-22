@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"D:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1503367151;s:63:"D:\phpStudy\WWW\hkshop/application/shop\view\Public\public.html";i:1503366744;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"D:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1503381271;s:63:"D:\phpStudy\WWW\hkshop/application/shop\view\Public\public.html";i:1503366744;}*/ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -377,7 +377,7 @@
 		<!--滑动区域-->
 		<div class="swiper-container swiper1">
 	        <div class="swiper-wrapper">
-		        <?php if(is_array($white_goods) || $white_goods instanceof \think\Collection): $i = 0; $__LIST__ = $white_goods;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
+		        <?php if(is_array($champagne_goods) || $champagne_goods instanceof \think\Collection): $i = 0; $__LIST__ = $champagne_goods;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
 	            		<a href="<?php echo url('shop/goods/goods_detail',['id' => $v['id']]); ?>">

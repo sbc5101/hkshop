@@ -23,20 +23,21 @@
 		public function cate_list()
 		{
 			$data = Request::instance()->get();
+			$total_num = 0;
 			$cate_where = empty($data['cid']) ? '' : 'g.cate_id like "%'.$data['cid'].'%"';			
 			$title_where = empty($data['title']) ? '' : 'g.title like "%' . $data['title'] . '%"';
 			$area_where = empty($data['area']) ? '' : 'g.area_id="' . $data['area'].'"';
 			$order = empty($data['order']) ? 2 : $data['order'];
 			if($order == 1){
-				$order = 'g.click_num desc';
+				$order_sort = 'g.click_num desc';
 			}elseif($order == 2){
-				$order = 'g.sale_number desc';
+				$order_sort = 'g.sale_number desc';
 			}elseif($order == 3){
-				$order = 'g.sort desc';
+				$ordorder_sorter = 'g.sort desc';
 			}elseif($order == 4){
-				$order = 'g.marketprice desc';
+				$order_sort = 'g.marketprice desc';
 			}elseif($order == 5){
-				$order = 'g.marketprice asc';
+				$order_sort = 'g.marketprice asc';
 			}
 			$is_collection = 0;
 			$goods = Db::name('goods')
@@ -56,7 +57,7 @@
 
 			if(!empty($goods)){
 				foreach ($goods as $k => &$v) {
-
+					$total_num += 1;
 					if(!empty($user_id)){
 						// 判斷該商品是否收藏
 						$collection = Db::name('goods_collection')
@@ -92,6 +93,9 @@
 							'goods_cate'	=> $goods_cates,
 							'area_id'		=> $data['area'],
 							'title'			=> $data['title'],
+							'total_num'		=> $total_num,
+							'order'			=> $order,
+							'cid'			=> $data['cid'],
 						]);
 		}
 

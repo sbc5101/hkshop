@@ -12,10 +12,10 @@
 
 		
 {block name="content"}
-	{css href="/public/shop/css/base.css"}
-	{css href="/public/shop/css/index.css"}
-	{css href="/public/shop/css/goods_detail.css"}
-	{css href="/public/shop/css/swiper.min.css"}
+	{css href="__PUBLIC__/shop/css/base.css"}
+	{css href="__PUBLIC__/shop/css/index.css"}
+	{css href="__PUBLIC__/shop/css/goods_detail.css"}
+	{css href="__PUBLIC__/shop/css/swiper.min.css"}
 	
 	<!--消息通知-->
 	<div class="notice">
@@ -25,7 +25,7 @@
 	<div class="swiper-container">
 	    <div class="swiper-wrapper">
 	    	{volist name="$goods_images" id="v"}
-	        <div class="swiper-slide"><img src="{$v.iname}"/></div>
+	        <div class="swiper-slide"><img src="__SRC__{$v.iname}"/></div>
 	    	{/volist}
 	    </div>
 		<div class="swiper-pagination"></div>
@@ -71,8 +71,8 @@
 			</div>
 		</div>
 		<div class="icon_areas">
-			<img class="collect_icon" src="/public/shop/img/icon12.png" alt="" />
-			<img class="msg" src="/public/shop/img/icon13.png" alt="" />
+			<img class="collect_icon" src="__PUBLIC__/shop/img/icon12.png" alt="" />
+			<img class="msg" src="__PUBLIC__/shop/img/icon13.png" alt="" />
 		</div>
 		
 		
@@ -140,7 +140,7 @@
 			</p>
 		</div>
 	</div>
-	{js href="/public/shop/js/index.js"}
+	{js href="__PUBLIC__/shop/js/index.js"}
 	<script type="text/javascript">
 		var mySwiper = new Swiper('.swiper-container',{
 	    pagination: '.swiper-pagination',
@@ -152,13 +152,13 @@
 	    
 	    $(".msg").click(function(){
 	    	
-	    	if($(".msg").attr("src")=="/public/shop/img/icon13.png")
+	    	if($(".msg").attr("src")=="__PUBLIC__/shop/img/icon13.png")
 		   {
-		    $(".msg").attr("src","/public/shop/img/icon15.png");
+		    $(".msg").attr("src","__PUBLIC__/shop/img/icon15.png");
 		   }
 		   else
 		   {
-		    $(".msg").attr("src","/public/shop/img/icon13.png");
+		    $(".msg").attr("src","__PUBLIC__/shop/img/icon13.png");
 		   }
 		   $(".msg_alert").slideToggle(300);
 	    })

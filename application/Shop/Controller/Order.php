@@ -23,15 +23,13 @@
 			    ['pay_id','require','pay_id不能為空'],
 			    ['user_name','require','购买人姓名不能為空'],
 			    ['user_email','require','购买人邮箱不能為空'],
-			    ['shop_id','require','选择店铺id不能為空'],
 			    ['pickup_id','require','取货方式不能為空'],
 			];
 			$data = [
 			    'pay_id'  	=> $msg['pay_id'],
 			    'user_name' => $msg['user_name'],
 			    'user_email'=> $msg['user_email'],
-			    'shop_id'  	=> $msg['shop_id'],
-			    'pickup_id'  	=> $msg['pickup_id'],
+			    'pickup_id' => $msg['pickup_id'],
 			];
 			$validate = new Validate($rule);
 			$result   = $validate->check($data);
@@ -104,6 +102,10 @@
 					Db::name('goods')
 						->where('id',$v['goods_id'])
 						->setDec('stock', $v['buy_num']);
+					// 清空購物車
+					Db::name('cart')
+						->where('user_id',$user_id)
+						->delete();	
 				}
 			}else{
 				return json(['code' => 400,'message' => '订单生成失败']);
@@ -164,7 +166,44 @@
 		 */
 		public function cancel_order($oid)
 		{
-			
+			$order_data = Db::name('order')
+							->field('id')
+							->where('id',$oid)
+							->find();
+			if(empty($order_data)){
+				return json(['code' => 400,'message' => '訂單不存在！']);
+			}
+
+			// 启动事务
+			Db::startTrans();
+			try{
+				$result = Db::name('order')
+							->where('id',$oid)
+							->update(['status' => -1]);
+				if($result !== false){
+					// 返回訂單商品庫存
+					$order_goods = Db::name('order_goods')
+									->where('order_id',$oid)
+									->select();
+					if(empty($order_goods)){
+						throw new \Exception('訂單商品不存在！');
+					}
+					foreach ($order_goods as $v) {
+						Db::name('goods')
+							->where('id',$v['goods_id'])
+							->setInc('stock',$v['buy_num']);
+					}
+				}else{
+					throw new \Exception('訂單取消失敗！');
+				}
+			    // 提交事务
+			    Db::commit();  
+			} catch (\Exception $e) {
+			    // 回滚事务
+			    Db::rollback();
+			    return json(['message' => '訂單取消失敗！','code' => 400]);
+			}
+			return json(['message' => '訂單取消成功！','code' => 200]);
 		}
 	}
  

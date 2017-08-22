@@ -71,18 +71,21 @@
 				$v['marketprice'] = $goods['marketprice'];
 				$v['storeprice'] = $goods['storeprice'];
 				$v['score_id'] = $goods['score_id'];
-				$v['price'] += $goods['marketprice'] * $v['buy_num'];
+				$price += $goods['marketprice'] * $v['buy_num'];
 			}
 			$msg['create_time'] = time();
 			$msg['user_id'] = $user_id;
+			$msg['price'] = $price;
 			$msg['ordersn'] = date('Ymd') . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
 			$msg['status'] = 1;
+			
+	
 			$order_res = Db::name('order')
 							->insertGetId($msg);
 			if($order_res){
 				foreach ($cart_goods as $v) {
 					$goods_data =  [
-						'goods_id' => $v['id'],
+						'goods_id' => $v['goods_id'],
 						'price' => $v['marketprice'],
 						'iname' => $v['iname'],
 						'eng_title' => $v['eng_title'],
@@ -99,7 +102,7 @@
 					}
 					// 减商品库存
 					Db::name('goods')
-						->where('id',$v['id'])
+						->where('id',$v['goods_id'])
 						->setDec('stock', $v['buy_num']);
 				}
 			}else{
@@ -108,6 +111,11 @@
 			return json(['code' => 200,'message' => '订单生成成功','data' => ['oid' => $order_res]]);
 		}
 
+		/**
+		 * 訂單商品詳情
+		 * @param  [type] $oid [description]
+		 * @return [type]      [description]
+		 */
 		public function order_detail($oid)
 		{
 			$order = Db::name('order')
@@ -147,6 +155,16 @@
 					'shop' => $shop,
 					'total_num' => $total_num,
 					]);
+		}
+
+		/**
+		 * 取消訂單接口
+		 * @param  [type] $oid [訂單ID]
+		 * @return [type]      [description]
+		 */
+		public function cancel_order($oid)
+		{
+			
 		}
 	}
  

@@ -164,17 +164,37 @@
 }
 .receive_content2{
 	width: 100%;
-	height: 50px;
-	background: tomato;
+	background: #eee;
 	display: none;
 	position: relative;
 }
+.receive_content2 input{
+	width: 95%;
+	margin: 0 2.5%;
+	line-height: 36px;
+	outline: none;
+	border: none;
+	border-bottom: 1px solid #fff;
+	font-size: 13px;
+	background: #eee;
+	text-indent: 12px;
+}
 .receive_content3{
 	width: 100%;
-	height: 50px;
-	background: #007AFF;
+	background: #eee;
 	display: none;
 	position: relative;
+}
+.receive_content3 input{
+	width: 95%;
+	margin: 0 2.5%;
+	line-height: 36px;
+	outline: none;
+	border: none;
+	border-bottom: 1px solid #fff;
+	font-size: 13px;
+	background: #eee;
+	text-indent: 12px;
 }
 .triangle{
 	display: inline-block;

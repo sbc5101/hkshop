@@ -30,8 +30,8 @@
 {/block}
 <!-- 内容 -->
 {block name="content"}
-    {css href="/public/shop/css/category.css"}
-    {js href="/public/shop/js/index.js"}
+    {css href="__PUBLIC__/shop/css/category.css"}
+    {js href="__PUBLIC__/shop/js/index.js"}
 	<div class="goods_select_area clearfix">
 		<span class="total_num">999 items</span>
 		<label class="select_label">sort:
@@ -50,7 +50,7 @@
 		{volist name="$goods" id="v"}
 		<li class="clearfix">
 			<div class="goods_list_img">
-				<img src="{$v.iname}" alt="" width="70" height="100" />
+				<img src="__SRC__{$v.iname}" alt="" width="70" height="100" />
 			</div>
 			<div class="goods_list_desc">
 				<p class="goods_desc_EnName">{$v.eng_title}</p>
@@ -68,13 +68,13 @@
 				<div class="bottom_area">
 					<div class="goods_collect">
 						{eq name="$v.is_collection" value="0"}
-	            			<img src="/public/shop/img/icon4.png" alt="" />
+	            			<img src="__PUBLIC__/shop/img/icon4.png" alt="" />
 	            		{else /}
-							<img src="/public/shop/img/icon5.png" alt="" />
+							<img src="__PUBLIC__/shop/img/icon5.png" alt="" />
 	            		{/eq}
 					</div>
 					<div class="goods_ToCar">
-						<img src="/public/shop/img/icon6.png" alt="购物车" />
+						<img src="__PUBLIC__/shop/img/icon6.png" alt="购物车" />
 					</div>
 				</div>
 			</div>

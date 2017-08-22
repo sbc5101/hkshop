@@ -26,10 +26,47 @@
 			$name =  $last_name . ' ' . $first_name;
 			// 获取收藏信息
 			$collection = $this->get_collection($user_id);
+			// 获取订单信息
+			$order = $this->get_order($user_id);
+
 			return $this->fetch('personal_center',[
 						'name' 			=> $name,
 						'collection' 	=> $collection,
+						'order' 		=> $order,
 					]);
+		}
+
+		public function get_order($uid)
+		{
+			$order = Db::name('order')
+						->field('price,create_time,ordersn,id')
+						->where('user_id',$uid)
+						->select();
+			if(!empty($order)){
+				foreach ($order as &$v) {
+					$v['create_time'] = date('d/m/Y',$v['create_time']);
+					$goods = Db::name('order_goods')
+									->where('order_id',$v['id'])
+									->select();
+					$v['goods'] = '';
+					$v['total_num'] = 0;
+					if(!empty($goods)){
+						foreach ($goods as $val) {
+							$v['total_num'] += $val['buy_num'];
+						}
+						$goods[0]['score_data'] = '';
+						if(!empty($goods[0]['score_id'])){
+							$goods[0]['score_data'] = Db::name('goods_score')
+										->field('score_num,mechanism')
+										->where('id','in',$goods[0]['score_id'])
+										->limit(3)
+										->select();
+						}
+						$v['goods'] = $goods[0];
+					}
+				}
+			}
+			return $order;
 		}
 
 		/**

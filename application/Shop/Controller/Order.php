@@ -5,15 +5,12 @@
 	* @Date:   2017-08-21 15:38:14
 	* @Last Modified time: 2017-08-21 16:20:06
 	*/
-
 	namespace app\shop\controller;
-
 	use app\shop\controller\Base;
 	use think\Db;
 	use think\Session;
 	use think\Validate;
 	use think\Request;
-
 	class Order extends Base
 	{
 		public function make_order()
@@ -36,10 +33,8 @@
 			    'shop_id'  	=> $msg['shop_id'],
 			    'pickup_id'  	=> $msg['pickup_id'],
 			];
-
 			$validate = new Validate($rule);
 			$result   = $validate->check($data);
-
 			if(!$result){
 				return json(['code' => 400,'message' => $validate->getError()]);
 			}
@@ -50,6 +45,7 @@
 				return json(['code' => 404,'message' => '请选择商品']);
 			} 
 			foreach ($cart_goods as &$v) {
+				$v['price'] = 0;
 				$goods = Db::name('goods')
 							->alias('g')
 							->join('__GOODS_IMAGES__ i','i.goods_id=g.id')
@@ -73,14 +69,14 @@
 				$v['eng_title'] = $goods['eng_title'];
 				$v['hk_title'] = $goods['hk_title'];
 				$v['marketprice'] = $goods['marketprice'];
+				$v['storeprice'] = $goods['storeprice'];
+				$v['score_id'] = $goods['score_id'];
 				$v['price'] += $goods['marketprice'] * $v['buy_num'];
 			}
-
 			$msg['create_time'] = time();
 			$msg['user_id'] = $user_id;
 			$msg['ordersn'] = date('Ymd') . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
 			$msg['status'] = 1;
-
 			$order_res = Db::name('order')
 							->insertGetId($msg);
 			if($order_res){
@@ -109,7 +105,7 @@
 			}else{
 				return json(['code' => 400,'message' => '订单生成失败']);
 			}
-			return json(['code' => 200,'message' => '订单生成成功']);
+			return json(['code' => 200,'message' => '订单生成成功','data' => ['oid' => $order_res]]);
 		}
 
 		public function order_detail($oid)
@@ -152,6 +148,5 @@
 					'total_num' => $total_num,
 					]);
 		}
-
 	}
  

@@ -11,8 +11,8 @@
 
 <!-- 内容 -->
 {block name="content"}
-    {css href="/public/shop/css/shopping_cart.css"}
-    {js href="/public/shop/js/index.js"}
+    {css href="__PUBLIC__/shop/css/shopping_cart.css"}
+    {js href="__PUBLIC__/shop/js/index.js"}
 	<div class="cart_title">
 		SHOPPING CART (<span>0</span>)
 	</div>
@@ -32,7 +32,7 @@
 				<li class="clearfix">
 					<!--左侧的图片-->
 					<div class="has_good_left f_left">
-						<img src="{$v.iname}" width="70" height="70">
+						<img src="__SRC__{$v.iname}" width="70" height="70">
 					</div>
 					<!--右侧的详情区域-->
 					<div class="has_goods_right f_right">

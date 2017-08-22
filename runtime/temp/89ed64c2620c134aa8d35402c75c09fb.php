@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"D:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1503284962;s:63:"D:\phpStudy\WWW\hkshop/application/shop\view\Public\public.html";i:1503297623;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:61:"D:\phpStudy\WWW\hkshop/application/shop\view\index\index.html";i:1503367151;s:63:"D:\phpStudy\WWW\hkshop/application/shop\view\Public\public.html";i:1503366744;}*/ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -19,11 +19,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 
     <!-- 公共css -->
-    <link rel="stylesheet" type="text/css" href="/public/shop/css/base.css" />
-    <link rel="stylesheet" type="text/css" href="/public/shop/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/shop/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/shop/css/index.css" />
     <!-- 公共js -->
-    <script type="text/javascript" src="/public/shop/js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="/public/shop/js/swiper-3.4.1.min.js"></script>   
+    <script type="text/javascript" src="__PUBLIC__/shop/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/shop/js/swiper-3.4.1.min.js"></script>   
   </head>
   <body  >
     <div class="container">
@@ -114,17 +114,17 @@
       <!--头部的区域-->
       <header>
         <div class="menu">
-          <img src="/public/shop/img/icon1.png" alt="" class="anniu"/>
+          <img src="__PUBLIC__/shop/img/icon1.png" alt="" class="anniu"/>
         </div>
         <div class="logo_area">
           <a href="<?php echo url('shop/index/index'); ?>">
-            <img src="/public/shop/img/logo.png" alt="" />
+            <img src="__PUBLIC__/shop/img/logo.png" alt="" />
           </a>
         </div>
         <div class="right_box">
           <div class="center">
             <a href="<?php echo url('shop/member/personal_center'); ?>">
-              <img src="/public/shop/img/icon2.png" alt="" />
+              <img src="__PUBLIC__/shop/img/icon2.png" alt="" />
             </a>            
           </div>
           <div class="cart">
@@ -138,7 +138,7 @@
       <div class="contant">
          
         
-    <link rel="stylesheet" type="text/css" href="/public/shop/css/swiper.min.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/shop/css/swiper.min.css" />
 	<section class="searchBar">
 		<form class="formWarp clearfix" action="/serach">
 			<label class="select_label">
@@ -164,7 +164,7 @@
 	    	<?php if(is_array($carousel) || $carousel instanceof \think\Collection): $i = 0; $__LIST__ = $carousel;if( count($__LIST__)==0 ) : echo "<div class=" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
 	        <div class="swiper-slide">
 	        	<a href="<?php echo $v['url']; ?>">
-	        		<img src="<?php echo $v['img_name']; ?>"/>
+	        		<img src="__SRC__<?php echo $v['img_name']; ?>"/>
 	        	</a>
 	        </div>
 	        <?php endforeach; endif; else: echo "<div class=" ;endif; ?>
@@ -181,7 +181,7 @@
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
 	            		<a href="<?php echo url('shop/goods/goods_detail',['id' => $v['id']]); ?>">
-	            		<img src="<?php echo $v['iname']; ?>"/>
+	            		<img src="__SRC__<?php echo $v['iname']; ?>"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
@@ -207,13 +207,13 @@
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
 	            		<?php if($v['is_collection'] == '0'): ?>
-	            			<img src="/public/shop/img/icon4.png" alt="" />
+	            			<img src="__PUBLIC__/shop/img/icon4.png" alt="" />
 	            		<?php else: ?>
-							<img src="/public/shop/img/icon5.png" alt="" />
+							<img src="__PUBLIC__/shop/img/icon5.png" alt="" />
 	            		<?php endif; ?>
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
-	            			<img src="/public/shop/img/icon6.png" alt="" />
+	            			<img src="__PUBLIC__/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
@@ -231,7 +231,7 @@
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
 	            		<a href="<?php echo url('shop/goods/goods_detail',['id' => $v['id']]); ?>">
-	            		<img src="<?php echo $v['iname']; ?>"/>
+	            		<img src="__SRC__<?php echo $v['iname']; ?>"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
@@ -257,13 +257,13 @@
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
 	            			<?php if($v['is_collection'] == '0'): ?>
-	            				<img src="/public/shop/img/icon4.png" alt="" />
+	            				<img src="__PUBLIC__/shop/img/icon4.png" alt="" />
 		            		<?php else: ?>
-								<img src="/public/shop/img/icon5.png" alt="" />
+								<img src="__PUBLIC__/shop/img/icon5.png" alt="" />
 		            		<?php endif; ?>
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
-	            			<img src="/public/shop/img/icon6.png" alt="" />
+	            			<img src="__PUBLIC__/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
@@ -281,7 +281,7 @@
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
 	            		<a href="<?php echo url('shop/goods/goods_detail',['id' => $v['id']]); ?>">
-	            		<img src="<?php echo $v['iname']; ?>"/>
+	            		<img src="__SRC__<?php echo $v['iname']; ?>"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
@@ -307,13 +307,13 @@
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
 	            			<?php if($v['is_collection'] == '0'): ?>
-	            				<img src="/public/shop/img/icon4.png" alt="" />
+	            				<img src="__PUBLIC__/shop/img/icon4.png" alt="" />
 		            		<?php else: ?>
-								<img src="/public/shop/img/icon5.png" alt="" />
+								<img src="__PUBLIC__/shop/img/icon5.png" alt="" />
 		            		<?php endif; ?>
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
-	            			<img src="/public/shop/img/icon6.png" alt="" />
+	            			<img src="__PUBLIC__/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
@@ -331,7 +331,7 @@
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
 	            		<a href="<?php echo url('shop/goods/goods_detail',['id' => $v['id']]); ?>">
-	            		<img src="<?php echo $v['iname']; ?>"/>
+	            		<img src="__SRC__<?php echo $v['iname']; ?>"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
@@ -357,13 +357,13 @@
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
 	            			<?php if($v['is_collection'] == '0'): ?>
-	            				<img src="/public/shop/img/icon4.png" alt="" />
+	            				<img src="__PUBLIC__/shop/img/icon4.png" alt="" />
 		            		<?php else: ?>
-								<img src="/public/shop/img/icon5.png" alt="" />
+								<img src="__PUBLIC__/shop/img/icon5.png" alt="" />
 		            		<?php endif; ?>
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
-	            			<img src="/public/shop/img/icon6.png" alt="" />
+	            			<img src="__PUBLIC__/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
@@ -381,7 +381,7 @@
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
 	            		<a href="<?php echo url('shop/goods/goods_detail',['id' => $v['id']]); ?>">
-	            		<img src="<?php echo $v['iname']; ?>"/>
+	            		<img src="__SRC__<?php echo $v['iname']; ?>"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
@@ -407,13 +407,13 @@
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="<?php echo $v['id']; ?>">
 	            			<?php if($v['is_collection'] == '0'): ?>
-	            				<img src="/public/shop/img/icon4.png" alt="" />
+	            				<img src="__PUBLIC__/shop/img/icon4.png" alt="" />
 		            		<?php else: ?>
-								<img src="/public/shop/img/icon5.png" alt="" />
+								<img src="__PUBLIC__/shop/img/icon5.png" alt="" />
 		            		<?php endif; ?>
 	            		</div>
 	            		<div class="addTo_car" data-id="<?php echo $v['id']; ?>">
-	            			<img src="/public/shop/img/icon6.png" alt="" />
+	            			<img src="__PUBLIC__/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
@@ -426,7 +426,7 @@
 	<div class="collect_alert" style="width: 30%;line-height: 30px;font-size: 15px;position: fixed;left: 50%;top: 60%;transform: translate(-50%);background: rgba(0,0,0,0.6);z-index: 100;text-align: center;color: #fff;border-radius: 5px;display: none;">
 		
 	</div>
-	<script type="text/javascript" src="/public/shop/js/index.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/shop/js/index.js"></script>
 	<script type="text/javascript">
 		var mySwiper = new Swiper('.swiper-img',{
 	    //pagination: '.swiper-pagination',
@@ -461,12 +461,12 @@
 	    	var url = "<?php echo url('shop/goods/action_goods_collection'); ?>";
 	    	$.post(url,{'goods_id':goods_id},function(data){
 	    		if(data.code=="200"){
-	    			if (that.attr("src")=="/public/shop/img/icon4.png") {
+	    			if (that.attr("src")=="__PUBLIC__/shop/img/icon4.png") {
 	    				console.log(data);
-		    			that.attr("src","/public/shop/img/icon5.png");
+		    			that.attr("src","__PUBLIC__/shop/img/icon5.png");
 		    			$(".collect_alert").html("收藏成功~").fadeIn(300).delay(1000).fadeOut(300);
 	    			}else{
-		    			that.attr("src","/public/shop/img/icon4.png");
+		    			that.attr("src","__PUBLIC__/shop/img/icon4.png");
 		    			$(".collect_alert").html("取消收藏!").fadeIn(300).delay(1000).fadeOut(300);
 		    			
 	    			}
@@ -502,7 +502,7 @@
               <li>
                 <a href="www.facebook.com">                         
                   <div>
-                    <img src="/public/shop/img/icon7.png" alt="" style="width: 11.5px;height: 22px;"/>
+                    <img src="__PUBLIC__/shop/img/icon7.png" alt="" style="width: 11.5px;height: 22px;"/>
                   </div>
                   <p>
                     Facebook
@@ -512,7 +512,7 @@
               <li>
                 <a href="###">                          
                   <div>
-                    <img src="/public/shop/img/icon8.png" alt="" style="width: 20.26px;height: 21.5px;"/>
+                    <img src="__PUBLIC__/shop/img/icon8.png" alt="" style="width: 20.26px;height: 21.5px;"/>
                   </div>
                   <p>
                     Youtobe
@@ -522,7 +522,7 @@
               <li>
                 <a href="###">                          
                   <div>
-                    <img src="/public/shop/img/icon9.png" alt="" style="width: 21px;height: 21.5px;"/>
+                    <img src="__PUBLIC__/shop/img/icon9.png" alt="" style="width: 21px;height: 21.5px;"/>
                   </div>
                   <p>
                     Privacy Policy
@@ -532,7 +532,7 @@
               <li>
                 <a href="###">                          
                   <div>
-                    <img src="/public/shop/img/icon10.png" alt="" style="width: 18px;height: 21.5px;"/>
+                    <img src="__PUBLIC__/shop/img/icon10.png" alt="" style="width: 18px;height: 21.5px;"/>
                   </div>
                   <p>
                     Terms
@@ -547,9 +547,11 @@
     </div>
     <script type="text/javascript">
         // 选择商品区域
-      $('#gcate').change(function(){
+      $('.search_input').blur(function(){
         var area_id = $(this).val();
-        var url = "<?php echo url('shop/cates/cate_list'); ?>?area="+area_id+"&title=&cid=";
+        var input_title=$(".search_input").val();
+        console.log(input_title);
+        var url = "<?php echo url('shop/cates/cate_list'); ?>?area=&title="+ input_title +"&cid=";
         window.location.href = url;
       })
     </script>

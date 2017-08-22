@@ -11,8 +11,8 @@
 
 <!-- 内容 -->
 {block name="content"}
-	{css href="/public/shop/css/order_detail.css"}
-	{js href="/public/shop/js/index.js"}
+	{css href="__PUBLIC__/shop/css/order_detail.css"}
+	{js href="__PUBLIC__/shop/js/index.js"}
 
 	<!--付款状态-->
 	<div class="payment_state">
@@ -27,7 +27,7 @@
 		{volist name="$order_goods" id="v"}
 		<li class="clearfix">
 			<div class="content_left">
-				<img src="{$v.iname}" width="80" height="70" />
+				<img src="__SRC__{$v.iname}" width="80" height="70" />
 			</div>
 			<div class="content_right">
 				<p class="goods_EnName">{$v.eng_title}</p>

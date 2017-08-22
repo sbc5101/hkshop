@@ -5,7 +5,7 @@
 {/block}
 
 {block name="content"}
-    {css href="/public/shop/css/swiper.min.css"}
+    {css href="__PUBLIC__/shop/css/swiper.min.css"}
 	<section class="searchBar">
 		<form class="formWarp clearfix" action="/serach">
 			<label class="select_label">
@@ -31,7 +31,7 @@
 	    	{volist name="$carousel" id="v" empty="<div class="swiper-slide">暂无轮播数据</div>"}
 	        <div class="swiper-slide">
 	        	<a href="{$v.url}">
-	        		<img src="{$v.img_name}"/>
+	        		<img src="__SRC__{$v.img_name}"/>
 	        	</a>
 	        </div>
 	        {/volist}
@@ -48,7 +48,7 @@
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
 	            		<a href="{:url('shop/goods/goods_detail',['id' => $v.id])}">
-	            		<img src="{$v.iname}"/>
+	            		<img src="__SRC__{$v.iname}"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
@@ -74,13 +74,13 @@
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="{$v.id}">
 	            		{eq name="$v.is_collection" value="0"}
-	            			<img src="/public/shop/img/icon4.png" alt="" />
+	            			<img src="__PUBLIC__/shop/img/icon4.png" alt="" />
 	            		{else /}
-							<img src="/public/shop/img/icon5.png" alt="" />
+							<img src="__PUBLIC__/shop/img/icon5.png" alt="" />
 	            		{/eq}
 	            		</div>
 	            		<div class="addTo_car" data-id="{$v.id}">
-	            			<img src="/public/shop/img/icon6.png" alt="" />
+	            			<img src="__PUBLIC__/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
@@ -98,7 +98,7 @@
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
 	            		<a href="{:url('shop/goods/goods_detail',['id' => $v.id])}">
-	            		<img src="{$v.iname}"/>
+	            		<img src="__SRC__{$v.iname}"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
@@ -124,13 +124,13 @@
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="{$v.id}">
 	            			{eq name="$v.is_collection" value="0"}
-	            				<img src="/public/shop/img/icon4.png" alt="" />
+	            				<img src="__PUBLIC__/shop/img/icon4.png" alt="" />
 		            		{else /}
-								<img src="/public/shop/img/icon5.png" alt="" />
+								<img src="__PUBLIC__/shop/img/icon5.png" alt="" />
 		            		{/eq}
 	            		</div>
 	            		<div class="addTo_car" data-id="{$v.id}">
-	            			<img src="/public/shop/img/icon6.png" alt="" />
+	            			<img src="__PUBLIC__/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
@@ -148,7 +148,7 @@
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
 	            		<a href="{:url('shop/goods/goods_detail',['id' => $v.id])}">
-	            		<img src="{$v.iname}"/>
+	            		<img src="__SRC__{$v.iname}"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
@@ -174,13 +174,13 @@
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="{$v.id}">
 	            			{eq name="$v.is_collection" value="0"}
-	            				<img src="/public/shop/img/icon4.png" alt="" />
+	            				<img src="__PUBLIC__/shop/img/icon4.png" alt="" />
 		            		{else /}
-								<img src="/public/shop/img/icon5.png" alt="" />
+								<img src="__PUBLIC__/shop/img/icon5.png" alt="" />
 		            		{/eq}
 	            		</div>
 	            		<div class="addTo_car" data-id="{$v.id}">
-	            			<img src="/public/shop/img/icon6.png" alt="" />
+	            			<img src="__PUBLIC__/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
@@ -198,7 +198,7 @@
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
 	            		<a href="{:url('shop/goods/goods_detail',['id' => $v.id])}">
-	            		<img src="{$v.iname}"/>
+	            		<img src="__SRC__{$v.iname}"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
@@ -224,13 +224,13 @@
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="{$v.id}">
 	            			{eq name="$v.is_collection" value="0"}
-	            				<img src="/public/shop/img/icon4.png" alt="" />
+	            				<img src="__PUBLIC__/shop/img/icon4.png" alt="" />
 		            		{else /}
-								<img src="/public/shop/img/icon5.png" alt="" />
+								<img src="__PUBLIC__/shop/img/icon5.png" alt="" />
 		            		{/eq}
 	            		</div>
 	            		<div class="addTo_car" data-id="{$v.id}">
-	            			<img src="/public/shop/img/icon6.png" alt="" />
+	            			<img src="__PUBLIC__/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
@@ -248,7 +248,7 @@
 	            <div class="swiper-slide">
 	            	<div class="goods_img">
 	            		<a href="{:url('shop/goods/goods_detail',['id' => $v.id])}">
-	            		<img src="{$v.iname}"/>
+	            		<img src="__SRC__{$v.iname}"/>
 	            		</a>
 	            	</div>
 	            	<div class="goods_desc">
@@ -274,13 +274,13 @@
 	            	<div class="bot_areas">
 	            		<div class="collect" data-id="{$v.id}">
 	            			{eq name="$v.is_collection" value="0"}
-	            				<img src="/public/shop/img/icon4.png" alt="" />
+	            				<img src="__PUBLIC__/shop/img/icon4.png" alt="" />
 		            		{else /}
-								<img src="/public/shop/img/icon5.png" alt="" />
+								<img src="__PUBLIC__/shop/img/icon5.png" alt="" />
 		            		{/eq}
 	            		</div>
 	            		<div class="addTo_car" data-id="{$v.id}">
-	            			<img src="/public/shop/img/icon6.png" alt="" />
+	            			<img src="__PUBLIC__/shop/img/icon6.png" alt="" />
 	            		</div>
 	            	</div>
 	            </div>
@@ -293,7 +293,7 @@
 	<div class="collect_alert" style="width: 30%;line-height: 30px;font-size: 15px;position: fixed;left: 50%;top: 60%;transform: translate(-50%);background: rgba(0,0,0,0.6);z-index: 100;text-align: center;color: #fff;border-radius: 5px;display: none;">
 		
 	</div>
-	{js href="/public/shop/js/index.js"}
+	{js href="__PUBLIC__/shop/js/index.js"}
 	<script type="text/javascript">
 		var mySwiper = new Swiper('.swiper-img',{
 	    //pagination: '.swiper-pagination',
@@ -328,12 +328,12 @@
 	    	var url = "{:url('shop/goods/action_goods_collection')}";
 	    	$.post(url,{'goods_id':goods_id},function(data){
 	    		if(data.code=="200"){
-	    			if (that.attr("src")=="/public/shop/img/icon4.png") {
+	    			if (that.attr("src")=="__PUBLIC__/shop/img/icon4.png") {
 	    				console.log(data);
-		    			that.attr("src","/public/shop/img/icon5.png");
+		    			that.attr("src","__PUBLIC__/shop/img/icon5.png");
 		    			$(".collect_alert").html("收藏成功~").fadeIn(300).delay(1000).fadeOut(300);
 	    			}else{
-		    			that.attr("src","/public/shop/img/icon4.png");
+		    			that.attr("src","__PUBLIC__/shop/img/icon4.png");
 		    			$(".collect_alert").html("取消收藏!").fadeIn(300).delay(1000).fadeOut(300);
 		    			
 	    			}

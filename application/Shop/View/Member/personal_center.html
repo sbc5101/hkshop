@@ -11,15 +11,15 @@
 
 <!-- 内容 -->
 {block name="content"}
-	{css href="/public/shop/css/shop_cart.css"}
-	{js href="/public/shop/js/index.js"}
+	{css href="__PUBLIC__/shop/css/shop_cart.css"}
+	{js href="__PUBLIC__/shop/js/index.js"}
 	<div class="center_bg">
-		<img src="/public/shop/img/center_bg.jpg"/>
+		<img src="__PUBLIC__/shop/img/center_bg.jpg"/>
 	</div>
 	<!--客户头像-->
 	<div class="personal_area">
 		<div class="portrait">
-			<img src="/public/shop/img/portrait_bg.png" alt="" />
+			<img src="__PUBLIC__/shop/img/portrait_bg.png" alt="" />
 		</div>
 		<p>{$name}</p>
 	</div>
@@ -35,29 +35,33 @@
 	<div class="goods_box">
 		<div class="goods_content1">
 			<ul class="goods_content1_ul">
+				{volist name="$order" id="v"}
 				<li>
 					<div class="goods_img_left">
 						<div class="goods_imgs">
-							<img src="img/goods_img1.png"/>
+							<img src="__SRC__{$v.goods.iname}"/>
 						</div>
 					</div>
 					<div class="goods_desc_right">
-						<p class="goods_EnName">Screaming Eagle Cabernet Sauvignon</p>
-						<p class="goods_CnName">啸鹰赤霞珠</p>
+						<p class="goods_EnName">{$v.goods.eng_title}</p>
+						<p class="goods_CnName">{$v.goods.hk_title}</p>
 						<p class="goods_score clearfix">
-							<span class="goods_score1">WE</span>
-							<span class="goods_score2">96</span>
+							{volist name="$v.goods.score_data" id="val"}
+							<span class="goods_score1">{$val.mechanism}</span>
+							<span class="goods_score2">{$val.score_num}</span>
+							{/volist}
 						</p>
 						<p class="goods_price">
-							<span class="price_after">HK$ 8888</span>
-							<span class="price_before">HK$ 9999</span>
+							<span class="price_after">HK$ {$v.goods.price}</span>
+							<span class="price_before">HK$ {$v.goods.storeprice}</span>
 						</p>
 					</div>
 					<div class="goods_notice clearfix">
-						<span class="goods_num f_left">1 item</span>
-						<span class="order_time f_right">Your order from 19/07/2017</span>
+						<span class="goods_num f_left">{$v.total_num} item</span>
+						<span class="order_time f_right">Your order from {$v.create_time}</span>
 					</div>
 				</li>
+				{/volist}
 			</ul>
 			
 		</div>
@@ -67,7 +71,7 @@
 				<li>
 					<div class="goods_img_left">
 						<div class="goods_imgs">
-							<img src="{$v.iname}"/>
+							<img src="__SRC__{$v.iname}"/>
 						</div>
 					</div>
 					<div class="goods_desc_right">
@@ -95,5 +99,5 @@
 		<div class="goods_content3">暂定</div>
 	
 	</div>
-	{js href="/public/shop/js/shop_cart.js"}
+	{js href="__PUBLIC__/shop/js/shop_cart.js"}
 {/block}
